@@ -24,14 +24,6 @@ if !(isServer) exitWith
 
 diag_log text format ["[ZCP]: Giving server some time to boot."];
 
-/*
-// This code is NECESSARY for spawning persistent vehicles. DO NOT REMOVE THIS CODE UNLESS YOU KNOW WHAT YOU ARE DOING
-if !("isKnownAccount:DMS_PersistentVehicle" call ExileServer_system_database_query_selectSingleField) then
-{
-	"createAccount:DMS_PersistentVehicle:DMS_PersistentVehicle" call ExileServer_system_database_query_fireAndForget;
-};
-*/
-
 ZCP_MapCenterPos =  [8500,8500];
 ZCP_MapRadius = 8500;
 

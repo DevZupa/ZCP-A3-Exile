@@ -1,6 +1,6 @@
 # ZCP-A3-Exile
 
-Install info @ [ZCP @ Exile forums](https://www.exilemod.com)
+Install info @ [ZCP @ Exile forums](http://www.exilemod.com/topic/12116-release-official-zcp-zupas-capture-points/)
 
 
 
