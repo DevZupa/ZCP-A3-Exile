@@ -1,7 +1,19 @@
 # ZCP-A3-Exile
 
-This is not a finished version and does not contain any constructions.
+Install info @ [ZCP @ Exile forums](https://www.exilemod.com)
 
-Putting this in your code will not work out of the box.
 
-It's only here to clarify code to people
+
+### BE filters
+
+These are kicks based on what i encountered:
+
+on the line of 'isPlayer' add
+```
+!="if (isPlayer _this) then {}"
+```
+
+on the line of 'units' add
+```
+!="if (count units group _this>1) then"
+```
