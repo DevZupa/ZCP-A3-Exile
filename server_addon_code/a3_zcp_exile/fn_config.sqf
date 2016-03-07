@@ -292,7 +292,7 @@ if(ZCP_dev) then {
 };
 
 /* Do not change this*/
-ZCP_Version = "ZCP_Exile_1.0";
+ZCP_Version = "ZCP_Exile_1.0.1";
 ZCP_Data = [];
 ZCP_Bases = [];
 ZCP_MissionCounter = 0;
