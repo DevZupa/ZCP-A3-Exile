@@ -25,7 +25,6 @@ ZCP_Min_AI_Amount = 4; // Min ammount of AI at a ZCP
 ZCP_Random_AI_Max = 8; // so min 4 and max 12 (4+8) AI
 
 ZCP_CapTime = 300; // Seconds to cap an area uncontested
-ZCP_CapRadius = 60; // Meter radius of the capture circle around the first object.
 ZCP_MinWaitTime = 120; // seconds to wait to spawn a new capturepoint when 1 was capped.
 ZCP_MaxWaitTime = 120; // random between 0 and THIS number added to the ZCP_MinWaitTime to counter spawning points at the same time
 ZCP_BaseCleanupDelay = 120; // seconds to wait to delete a captured base.
@@ -60,8 +59,8 @@ ZCP_CapPoints = [ // [name,[x,y,z],reward, varname,index, spanwnAI, isStatic]
 ZCP_MaxMissions = count ZCP_CapPoints; // Amount of cap points at the same time.
 
 // For every spawned mission,
-ZCP_CapBases = [ // located in capbases folder
-	"base1.sqf"
+ZCP_CapBases = [ // located in capbases folder [filename, capradius]
+	["base1.sqf", 60]
 ];
 
 ZCP_TerrainGradient = 40; // Max meter terrain gradient ( height difference)
@@ -79,9 +78,11 @@ ZCP_SpawnZoneMarkerTypes =			[							// If you're using custom spawn zone marker
 
 
 /* These are arma 3 colors, look up the color naming if you are going to change this */
-ZCP_FreeColor = "ColorIndependent"; // uncontested marker color
+ZCP_FreeColor = "ColorIndependent"; // uncontested marker color -> also correct size
 ZCP_CappedColor = "ColorCivilian"; // uncontested + capping color
 ZCP_ContestColor = "ColorOPFOR"; // contested + capping color
+ZCP_BackgroundColor = "ColorWhite"; // Color to get attention on the map, if zoomed out this will be bigger then the cap circle which is the normal size.
+ZCP_MissionMarkerWinDotTime = 120; // Seconds to show a marker after a capped point. Change to 0 to disable!
 
 ZCP_DisableVehicleReward = false; // Because it doesnt save without changing epoch code.
 
@@ -285,7 +286,6 @@ ZCP_DMS_DEBUG = false;
 
 if(ZCP_dev) then {
 	ZCP_CapTime = 20;
-	ZCP_CapRadius = 60;
 	ZCP_MinWaitTime = 10;
 	ZCP_MaxWaitTime = 1;
 	ZCP_BaseCleanupDelay = 1;
