@@ -48,6 +48,13 @@ ZCP_FlyHeight = 150; // Height of the flying plane;
 
 ZCP_UseSpecificNamesForCappers = true; // Use the player name, if false it say 'A player'
 
+ZCP_RewardWeightForRandomChoice = [ // How does this work ( 6 + 3 + 5 + 2 = 16)
+	["Poptabs", 6],																					// 6/16 = 37.50 %
+	["BuildBox", 3],																				// 3/16 = 18.75 %
+	["WeaponBox", 5],																				// 5/16 = 31.25 %
+	["Vehicle", 2]																					// 2/16 = 12.50 %
+];
+
 // Server will keep as many missions up as ZCP_MaxMissions, And they will be randomly choosen from the following list
 // Location is ignored if not using static points. just put [0,0,0] then. activate static buy using isStatic = true
 // valid rewards -> Random, Poptabs, Vehicle, Buildingbox, WeaponBox
