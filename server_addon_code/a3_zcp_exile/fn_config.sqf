@@ -296,4 +296,4 @@ ZCP_Version = "ZCP_Exile_1.0";
 ZCP_Data = [];
 ZCP_Bases = [];
 ZCP_MissionCounter = 0;
-ZCP_DMS_MagRange = DMS_MaximumMagCount - DMS_MinimumMagCount;
+ZCP_DMS_MagRange = ZCP_DMS_MaximumMagCount - ZCP_DMS_MinimumMagCount;
