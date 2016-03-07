@@ -1,5 +1,12 @@
-private ["_i","_safepos","_validspot","_position"];
-_safepos		= [ZCP_MapCenterPos,0,ZCP_MapRadius,ZCP_MinDistanceFromObject,0,ZCP_TerrainGradient,0];
+private ["_i","_safepos","_validspot","_position","_baseRadius","_distanceFromObjects"];
+_baseRadius = _this select 0;
+_distanceFromObjects = ZCP_MinDistanceFromObject;
+
+if(_baseRadius > _distanceFromObjects) then {
+	_distanceFromObjects = _baseRadius;
+};
+
+_safepos		= [ZCP_MapCenterPos, 0, ZCP_MapRadius, _distanceFromObjects, 0, ZCP_TerrainGradient, 0];
 _validspot 	= false;
 while{!_validspot} do {
 	sleep 1;
@@ -17,13 +24,13 @@ while{!_validspot} do {
 		// DMS code, Credits -> DMS
 		{
 			// Check for nearby spawn points
-			if ((ZCP_SpawnZoneDistance>0) && {((markertype _x) in ZCP_SpawnZoneMarkerTypes) && {((getMarkerPos _x) distance2D _position)<=ZCP_SpawnZoneDistance}}) then
+			if ((ZCP_SpawnZoneDistance>0) && {((markertype _x) in ZCP_SpawnZoneMarkerTypes) && {((getMarkerPos _x) distance2D _position) <= ZCP_SpawnZoneDistance}}) then
 			{
 					_validspot = false;
 			};
 
 			// Check for nearby trader zones
-			if ((ZCP_TradeZoneDistance>0) && {((markertype _x) in ZCP_TraderZoneMarkerTypes) && {((getMarkerPos _x) distance2D _position)<=ZCP_TradeZoneDistance}}) then
+			if ((ZCP_TradeZoneDistance>0) && {((markertype _x) in ZCP_TraderZoneMarkerTypes) && {((getMarkerPos _x) distance2D _position) <= ZCP_TradeZoneDistance}}) then
 			{
 					_validspot = false;
 			};

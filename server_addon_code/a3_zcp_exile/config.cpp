@@ -28,7 +28,8 @@ class CfgFunctions {
 			class cleanupBase {};
 			class initCPData {};
 			class giveReward {};
-			class keepMarker {};
+			class createMarker {};
+			class createWinMarker {};
 			class createBase {};
 			class airbomb {};
 			class airstrike {};
@@ -37,6 +38,7 @@ class CfgFunctions {
 			class spawnCrate {};
 			class fillCrate {};
 			class selectMagazine {};
+			class removeMarker {};
 		};
 	};
 };

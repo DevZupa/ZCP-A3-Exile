@@ -15,6 +15,7 @@ _ZCP_baseObjects = [];
 		_obj setVectorDirAndUp (_x select 3);
 	};
 	_nil = _ZCP_baseObjects pushBack _obj;
+	uiSleep 0.1;
 
 }count _this;
 
