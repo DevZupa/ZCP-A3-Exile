@@ -15,11 +15,11 @@
 
 private["_currentCapper","_ZCP_continue","_ZCP_flag","_currentGroup","_ZCP_name","_ZCP_baseFile","_ZCP_baseClasses",
 "_ZCP_lastOwnerChange","_proximityList","_ZCP_baseObjects","_theFlagPos","_theFlagX","_theFlagY","_XChange","_YChange",
-"_ZCP_currentCapper","_ZCP_previousCapper","_ZCP_currentGroup","_ZCP_wasContested","_finishText","_markers"
+"_ZCP_currentCapper","_ZCP_previousCapper","_ZCP_currentGroup","_ZCP_wasContested","_finishText","_markers","_ZCP_base",
 "_ZCP_ContestStartTime","_ZCP_index","_capturePosition","_randomTime","_changedReward","_ZCP_Halfway","_ZCP_min"
 ];
 
-_randomTime = (floor random  ZCP_MaxWaitTime) + ZCP_MinWaitTime ;
+_randomTime = (floor random  ZCP_MaxWaitTime) + ZCP_MinWaitTime;
 
 _capturePosition = [0,0,0];
 _ZCP_name = _this select 0;
@@ -35,6 +35,10 @@ _capturePosition = [0,0,0];
 _ZCP_name = _this select 0;
 _ZCP_index = _this select 4;
 
+_ZCP_base = ZCP_CapBases call BIS_fnc_selectRandom;
+_ZCP_baseFile = format["x\addons\ZCP\capbases\%1", _ZCP_base select 0];
+_ZCP_baseRadius = _ZCP_base select 1;
+
 if(_this select 6)then{
 	_capturePosition = _this select 1;
 	diag_log text format ["[ZCP]: %1 :Spawning static on %2",_ZCP_name,_capturePosition];
@@ -43,9 +47,6 @@ if(_this select 6)then{
 	diag_log text format ["[ZCP]: %1 :Spawning dynamic on %2",_ZCP_name,_capturePosition];
 };
 
-_ZCP_base = format["x\addons\ZCP\capbases\%1",(ZCP_CapBases call BIS_fnc_selectRandom)];
-_ZCP_baseFile = _ZCP_base select 0;
-_ZCP_baseRadius = _ZCP_base select 1;
 _ZCP_baseClasses = call compile preprocessFileLineNumbers _ZCP_baseFile;
 _ZCP_baseObjects = [];
 _theFlagPos = (_ZCP_baseClasses select 0) select 1;
@@ -75,6 +76,7 @@ if(count _ZCP_baseObjects != 0)then{
 	_ZCP_continue = true;
 	_ZCP_Halfway = false;
 	_ZCP_min = false;
+	_ZCP_isCapping = false;
 
 	_ZCP_CapStartTime = 0;
 	_ZCP_ContestStartTime = 0;
@@ -83,7 +85,7 @@ if(count _ZCP_baseObjects != 0)then{
 
 	_ZCP_needReset = false;
 
-	_markers = [_this, _ZCP_baseRadius, []] spawn ZCP_fnc_createMarker;
+	_markers = [_this, _ZCP_baseRadius, []] call ZCP_fnc_createMarker;
 
 	while{_ZCP_continue}do{
 			_proximityList = [];
@@ -98,13 +100,12 @@ if(count _ZCP_baseObjects != 0)then{
 				// no one inside so reset everything
 				if(_ZCP_needReset) then {
 					(ZCP_Data select _ZCP_index) set[1,0];
-					_markers = [_this, _ZCP_baseRadius, [_markers]] spawn ZCP_fnc_createMarker;
+					_markers = [_this, _ZCP_baseRadius, _markers] call ZCP_fnc_createMarker;
 					_ZCP_isCapping = false;
 					_ZCP_currentCapper = objNull;
 					_ZCP_previousCapper = objNull;
 					_ZCP_currentGroup = grpNull;
 					_ZCP_wasContested = false;
-					_ZCP_isCapping = false;
 					_ZCP_Halfway = false;
 					_ZCP_min = false;
 					_ZCP_CapStartTime = 0;
@@ -114,11 +115,13 @@ if(count _ZCP_baseObjects != 0)then{
 				}
 			}else{
 				// people inside so capping! maybe contested??
+				if(!_ZCP_isCapping) then {
+					(ZCP_Data select _ZCP_index) set[1,1]; // to set marker to capping
+				};
 				_ZCP_isCapping = true;
 				_ZCP_needReset = true;
 				if(_ZCP_previousCapper in _proximityList)then{
 					_ZCP_currentCapper = _ZCP_previousCapper;
-					(ZCP_Data select _ZCP_index) set[1,1]; // to set marker to capping
 				}else{
 					_ZCP_wasContested = false;
 					_ZCP_isContested = false;
@@ -136,6 +139,8 @@ if(count _ZCP_baseObjects != 0)then{
 					if(ZCP_UseSpecificNamesForCappers) then {
 						_capperName = name _ZCP_currentCapper;
 					};
+
+					_markers = [_this, _ZCP_baseRadius, _markers] call ZCP_fnc_createMarker;
 
 					PV_ZCP_zupastic = ["ZCP",[format["%2 is capping %1. %3m left.",_ZCP_name,_capperName,(ZCP_CapTime / 60)]],'ZCP_Capping'];
 					publicVariable "PV_ZCP_zupastic";
@@ -158,25 +163,28 @@ if(count _ZCP_baseObjects != 0)then{
 				if(!_ZCP_wasContested && _ZCP_isContested)then{
 					_ZCP_ContestStartTime = diag_tickTime;
 					_ZCP_wasContested = true;
-					_markers = [_this, _ZCP_baseRadius, [_markers]] spawn ZCP_fnc_createMarker;
+					(ZCP_Data select _ZCP_index) set[1,2]; // to set marker to contested
+					_markers = [_this, _ZCP_baseRadius, _markers] call ZCP_fnc_createMarker;
 				};
 
 				// set contest end timer
 				if(!_ZCP_isContested && _ZCP_wasContested) then {
 					_ZCP_ContestEndTime = diag_tickTime;
 					_ZCP_ContestTotalTime = _ZCP_ContestTotalTime + (_ZCP_ContestEndTime - _ZCP_ContestStartTime);
-					_markers = [_this, _ZCP_baseRadius, [_markers]] spawn ZCP_fnc_createMarker;
+					(ZCP_Data select _ZCP_index) set[1,1]; // to set marker to capping
+					_markers = [_this, _ZCP_baseRadius, _markers] call ZCP_fnc_createMarker;
 				};
 
 				// TSM Wonned #Kappa
 				if( !_ZCP_isContested && (diag_tickTime - _ZCP_ContestTotalTime - _ZCP_CapStartTime >  ZCP_CapTime ) ) then {
 						_ZCP_continue = false;
 						//Capper Won, loop will break
-						[_this, _ZCP_baseRadius, [_markers]] spawn ZCP_fnc_createWinMarker;
+						[_this, _ZCP_baseRadius, _markers] call ZCP_fnc_createWinMarker;
 				};
 
 				// only when not contested
 				if (!_ZCP_isContested) then {
+					(ZCP_Data select _ZCP_index) set[1,1]; // to set marker to capped
 					// 50% mark
 					if(!_ZCP_Halfway && _ZCP_CapStartTime != 0 && (diag_tickTime - _ZCP_ContestTotalTime - _ZCP_CapStartTime) >  (ZCP_CapTime / 2))then{
 						_capperName = 'A player';

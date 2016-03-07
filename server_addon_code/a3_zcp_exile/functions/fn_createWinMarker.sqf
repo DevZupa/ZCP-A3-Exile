@@ -4,14 +4,14 @@ _captureObject = _this select 0;
 _capRadius 		= _this select 1;
 _previousMarkers = _this select 2;
 
-_previousMarkers call ZCP_fnc_removeMarker;
+[_previousMarkers] call ZCP_fnc_removeMarker;
 
 if(ZCP_MissionMarkerWinDotTime > 0) then {
   _position		= _captureObject select 1;
   _name 			= _captureObject select 0;
   _mission 		= _captureObject select 3;
 
-  _attentionMarker = createMarker [str(_mission) + "capped" + str(random 10), _position];
+  _attentionMarker = createMarker [format['%1capped%2',_mission,random 10], _position];
   _attentionMarker 		setMarkerType "hd_destroy";
   _attentionMarker 		setMarkerColor ZCP_BackgroundColor;
   _attentionMarker 		setMarkerText "Captured point";

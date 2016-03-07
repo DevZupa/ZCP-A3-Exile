@@ -63,7 +63,7 @@ ZCP_CapBases = [ // located in capbases folder [filename, capradius]
 	["base1.sqf", 60]
 ];
 
-ZCP_TerrainGradient = 40; // Max meter terrain gradient ( height difference)
+ZCP_TerrainGradient = 60; // Max meter terrain gradient ( height difference)
 ZCP_MinDistanceFromObject = 60; // Missions needs an open spot. You can lower it but it might collide with other objects ( not always a problem)
 
 // Same as DMS -> Credits DMS

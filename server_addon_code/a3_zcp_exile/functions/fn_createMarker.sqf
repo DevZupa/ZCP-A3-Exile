@@ -9,12 +9,14 @@ _name 			= _captureObject select 0;
 _mission 		= _captureObject select 3;
 _index 			= _captureObject select 4;
 
-_attentionMarker = createMarker [str(_mission) + "area", _position];
+[_previousMarkers] call ZCP_fnc_removeMarker;
+
+_attentionMarker = createMarker [format['%1area',_mission], _position];
 _attentionMarker 		setMarkerShape "ELLIPSE";
 _attentionMarker 		setMarkerColor ZCP_BackgroundColor;
 _attentionMarker 		setMarkerBrush "Solid";
 _attentionMarker 		setMarkerSize [_capRadius * 3,_capRadius * 3];
-_marker 		= createMarker [str(_mission), _position];
+_marker 		= createMarker [format['%1',_mission], _position];
 if((ZCP_Data select _index) select 1 == 1)then{
 	_marker 		setMarkerColor ZCP_CappedColor;
 }
@@ -29,11 +31,11 @@ _marker 		setMarkerShape "ELLIPSE";
 _marker 		setMarkerBrush "Solid";
 _marker 		setMarkerSize [_capRadius,_capRadius];
 _marker 		setMarkerText _name;
-_dot 			= createMarker [str(_mission) + "dot", _position];
+_dot 			= createMarker [format['%1dot',_mission], _position];
 _dot 			setMarkerColor "ColorBlack";
 _dot 			setMarkerType "hd_flag";
 _dot 			setMarkerText _name;
 
-_previousMarkers call ZCP_fnc_removeMarker;
-_newMarkers = [_attentionMarker, _marker, _dot];
+_newMarkers = [   format['%1area',_mission]     ,      format['%1',_mission]       , format['%1dot',_mission]     ];
+
 _newMarkers
