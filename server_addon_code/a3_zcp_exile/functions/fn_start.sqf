@@ -122,9 +122,9 @@ if(count _ZCP_baseObjects != 0)then{
 				};
 				_ZCP_isCapping = true;
 				_ZCP_needReset = true;
-				if(_ZCP_previousCapper in _proximityList)then{
+				if(_ZCP_previousCapper in _proximityList && alive _ZCP_previousCapper)then{
 					_ZCP_currentCapper = _ZCP_previousCapper;
-				}else{
+				} else {
 					_ZCP_wasContested = false;
 					_ZCP_isContested = false;
 					_ZCP_Halfway = false;
@@ -146,7 +146,7 @@ if(count _ZCP_baseObjects != 0)then{
 
 					_markers = [_this, _ZCP_baseRadius, _markers] call ZCP_fnc_createMarker;
 
-					['Notification', ["ZCP",[format[[1] call ZCP_fnc_translate, _ZCP_name, _capperName,(ZCP_CapTime / 60)]],'ZCP_Capping']] call ZCP_fnc_showNotification;;
+					['Notification', ["ZCP",[format[[1] call ZCP_fnc_translate, _ZCP_name, _capperName,(ZCP_CapTime / 60)]],'ZCP_Capping']] call ZCP_fnc_showNotification;
 
 				};
 
@@ -169,6 +169,9 @@ if(count _ZCP_baseObjects != 0)then{
 					_ZCP_wasContested = true;
 					(ZCP_Data select _ZCP_index) set[1,2]; // to set marker to contested
 					_markers = [_this, _ZCP_baseRadius, _markers] call ZCP_fnc_createMarker;
+					{
+						['PersonalNotification', ["ZCP",[format[[13] call ZCP_fnc_translate]],'ZCP_Capping'], _x] call ZCP_fnc_showNotification;
+					} count _proximityList;
 				};
 
 				// set contest end timer
@@ -177,6 +180,9 @@ if(count _ZCP_baseObjects != 0)then{
 					_ZCP_ContestTotalTime = _ZCP_ContestTotalTime + (_ZCP_ContestEndTime - _ZCP_ContestStartTime);
 					(ZCP_Data select _ZCP_index) set[1,1]; // to set marker to capping
 					_markers = [_this, _ZCP_baseRadius, _markers] call ZCP_fnc_createMarker;
+					{
+						['PersonalNotification', ["ZCP",[format[[14] call ZCP_fnc_translate]],'ZCP_Capping'], _x] call ZCP_fnc_showNotification;
+					} count _proximityList;
 				};
 
 				// TSM Wonned #Kappa

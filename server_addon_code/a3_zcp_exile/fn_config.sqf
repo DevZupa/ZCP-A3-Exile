@@ -314,7 +314,9 @@ ZCP_Translations = [ // ['original','original in your language'] the %1 %2 and s
 	['Reputation', 'Reputation'], // Reputation
 	['Group Reputation', 'Group Reputation'], // Group reputation
 	['Package delivered, eyes on the sky!', 'Package delivered, eyes on the sky!'], // Package delivered, eyes on the sky!
-	['Package delivered, eyes on the sky! Poptabs on bank!', 'Package delivered, eyes on the sky! Poptabs on bank!'] // Package delivered, eyes on the sky! Poptabs on bank!
+	['Package delivered, eyes on the sky! Poptabs on bank!', 'Package delivered, eyes on the sky! Poptabs on bank!'], // Package delivered, eyes on the sky! Poptabs on bank!
+	['Capture point is contested!', 'Capture point is contested!'], // Package delivered, eyes on the sky! Poptabs on bank!
+	['Capture point is contested is no longer contested!', 'Capture point is no longer contested!'] // Capture point is contested!
 ];
 
 ZCP_CurrentMod = "Exile"; // Exile, ( Epoch coming soon again)
