@@ -97,6 +97,8 @@ if(count _ZCP_baseObjects != 0)then{
 				};
 			}count (_capturePosition nearEntities["CAManBase",_ZCP_baseRadius]);
 
+			_proximityListMessage = _capturePosition nearEntities["CAManBase",_ZCP_baseRadius * 4]);
+
 			if(count(_proximityList) == 0) then{
 
 				// no one inside so reset everything
@@ -171,7 +173,7 @@ if(count _ZCP_baseObjects != 0)then{
 					_markers = [_this, _ZCP_baseRadius, _markers] call ZCP_fnc_createMarker;
 					{
 						['PersonalNotification', ["ZCP",[format[[13] call ZCP_fnc_translate]],'ZCP_Capping'], _x] call ZCP_fnc_showNotification;
-					} count _proximityList;
+					} count _proximityListMessage;
 				};
 
 				// set contest end timer
@@ -182,7 +184,8 @@ if(count _ZCP_baseObjects != 0)then{
 					_markers = [_this, _ZCP_baseRadius, _markers] call ZCP_fnc_createMarker;
 					{
 						['PersonalNotification', ["ZCP",[format[[14] call ZCP_fnc_translate]],'ZCP_Capping'], _x] call ZCP_fnc_showNotification;
-					} count _proximityList;
+					} count _proximityListMessage;
+					_ZCP_wasContested = false;
 				};
 
 				// TSM Wonned #Kappa
