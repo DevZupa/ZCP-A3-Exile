@@ -14,7 +14,7 @@ if(ZCP_MissionMarkerWinDotTime > 0) then {
   _attentionMarker = createMarker [format['%1capped%2',_mission,random 10], _position];
   _attentionMarker 		setMarkerType "hd_destroy";
   _attentionMarker 		setMarkerColor ZCP_BackgroundColor;
-  _attentionMarker 		setMarkerText "Captured point";
+  _attentionMarker 		setMarkerText ([8] call ZCP_fnc_translate);
 
   [ZCP_MissionMarkerWinDotTime, {deleteMarker _this;}, _attentionMarker, false] call ExileServer_system_thread_addTask;
 };

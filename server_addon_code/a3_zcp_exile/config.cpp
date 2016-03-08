@@ -39,6 +39,8 @@ class CfgFunctions {
 			class fillCrate {};
 			class selectMagazine {};
 			class removeMarker {};
+			class translate {};
+			class showNotification {};
 		};
 	};
 };

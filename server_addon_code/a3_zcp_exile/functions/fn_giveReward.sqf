@@ -30,7 +30,7 @@ switch (_reward) do {
 
 		format["setAccountScore:%1:%2", _playerScore,getPlayerUID _ZCP_currentCapper] call ExileServer_system_database_query_fireAndForget;
 
-		[_ZCP_currentCapper, "showFragRequest", [[[format ["ZCP Reputation"],_awardToGive]]]] call ExileServer_system_network_send_to;
+		['Reputation',[_ZCP_currentCapper, "showFragRequest", [[[format ["ZCP %1", [9] call ZCP_fnc_translate],_awardToGive]]]]] call ZCP_fnc_showNotification;
 
 		ExileClientPlayerScore = _playerScore;
 		(owner _ZCP_currentCapper) publicVariableClient "ExileClientPlayerScore";
@@ -54,7 +54,7 @@ switch (_reward) do {
 						(owner _x) publicVariableClient "ExileClientPlayerScore";
 						ExileClientPlayerScore = nil;
 
-						[_x, "showFragRequest", [[[format ["ZCP Group Reputation"],ZCP_ReputationRewardForGroup]]]] call ExileServer_system_network_send_to;
+						['Reputation', [_x, "showFragRequest", [[[format ["ZCP %1", [10] call ZCP_fnc_translate],ZCP_ReputationRewardForGroup]]]]] call ZCP_fnc_showNotification;
 					}
 				}count (units _capperGroup);
 			};
@@ -74,10 +74,9 @@ switch (_reward) do {
 
 		format["setAccountMoney:%1:%2", _playerMoney, (getPlayerUID _ZCP_currentCapper)] call ExileServer_system_database_query_fireAndForget;
 
-		PV_ZCP_zupastic = ["ZCP",[format["Package delivered, eyes on the sky! Poptabs on bank!"]], 'ZCP_Capped'];
-		owner _ZCP_currentCapper publicVariableClient "PV_ZCP_zupastic";
+		['PersonalNotification', ["ZCP",[format[[12] call ZCP_fnc_translate]], 'ZCP_Capped'], _ZCP_currentCapper] call ZCP_fnc_showNotification;
 
-		[_ZCP_currentCapper, "moneyReceivedRequest", [str _playerMoney, format ["ZCP Poptabs reward"]]] call ExileServer_system_network_send_to;
+		['Money',[_ZCP_currentCapper, "moneyReceivedRequest", [str _playerMoney, format ["ZCP Poptabs reward"]]]] call ZCP_fnc_showNotification;
 
 		[_capturePosition,'FoodBox'] spawn ZCP_fnc_spawnCrate;
 
@@ -90,7 +89,7 @@ switch (_reward) do {
 
 		[_capturePosition,'BuildBox'] spawn ZCP_fnc_spawnCrate;
 
-		PV_ZCP_zupastic = ["ZCP",[format["Package delivered, eyes on the sky!"]], 'ZCP_Capped'];
+		PV_ZCP_zupastic = ["ZCP",[format[[11] call ZCP_fnc_translate]], 'ZCP_Capped'];
 		owner _ZCP_currentCapper publicVariableClient "PV_ZCP_zupastic";
 
 		diag_log format ["[ZCP]: %1 won %2, received a buildbox.",name _ZCP_currentCapper,_ZCP_name];
@@ -103,8 +102,8 @@ switch (_reward) do {
 
 		[_capturePosition, 'WeaponBox'] spawn ZCP_fnc_spawnCrate;
 
-		PV_ZCP_zupastic = ["ZCP",[format["Package delivered, eyes on the sky!"]], 'ZCP_Capped'];
-		owner _ZCP_currentCapper publicVariableClient "PV_ZCP_zupastic";
+		['PersonalNotification',["ZCP",[format[[11] call ZCP_fnc_translate]], 'ZCP_Capped'], _ZCP_currentCapper] call ZCP_fnc_showNotification;
+
 		diag_log text format ["[ZCP]: %1 won %2, received a weaponbox.",name _ZCP_currentCapper,_ZCP_name];
 
 		_this set[3, "Reputation"];
@@ -134,8 +133,8 @@ switch (_reward) do {
 			_vehicle setPos [_capturePosition select 0,_capturePosition select 1,150];
 			_vehicle call ZCP_fnc_paraDrop;
 
-			PV_ZCP_zupastic = ["ZCP",[format["Package delivered, eyes on the sky!"]], 'ZCP_Capped'];
-			owner _ZCP_currentCapper publicVariableClient "PV_ZCP_zupastic";
+			['PersonalNotification', ["ZCP",[format[[11] call ZCP_fnc_translate]], 'ZCP_Capped'], _ZCP_currentCapper] call ZCP_fnc_showNotification;
+
 			diag_log text format ["[ZCP]: %1 won %2, received a %3.",name _ZCP_currentCapper,_ZCP_name, _vehicleClass];
 
 			_this set[3, "Reputation"];
@@ -144,7 +143,7 @@ switch (_reward) do {
 	};
 	case "Random" : {
 		private ['_rewardType'];
-		_rewardType = ["Vehicle", "WeaponBox", "BuildBox","Poptabs"] call BIS_fnc_selectRandom;
+		_rewardType = ZCP_RandomReward call BIS_fnc_selectRandom;
 		_this set[3, _rewardType];
 		_this call ZCP_fnc_giveReward;
 	};

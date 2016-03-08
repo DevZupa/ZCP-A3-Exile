@@ -48,6 +48,18 @@ ZCP_FlyHeight = 150; // Height of the flying plane;
 
 ZCP_UseSpecificNamesForCappers = true; // Use the player name, if false it say 'A player'
 
+ZCP_RewardWeightForRandomChoice = [
+	["Poptabs", 6],
+	["BuildBox", 3],
+	["WeaponBox", 5],
+	["Vehicle", 2]
+];
+// How does this work ( 6 + 3 + 5 + 2 = 16)
+// 6/16 = 37.50 %
+// 3/16 = 18.75 %
+// 5/16 = 31.25 %
+// 2/16 = 12.50 %
+
 // Server will keep as many missions up as ZCP_MaxMissions, And they will be randomly choosen from the following list
 // Location is ignored if not using static points. just put [0,0,0] then. activate static buy using isStatic = true
 // valid rewards -> Random, Poptabs, Vehicle, Buildingbox, WeaponBox
@@ -66,7 +78,12 @@ ZCP_CapBases = [ // located in capbases folder [filename, capradius]
 ZCP_TerrainGradient = 60; // Max meter terrain gradient ( height difference)
 ZCP_MinDistanceFromObject = 60; // Missions needs an open spot. You can lower it but it might collide with other objects ( not always a problem)
 
+ZCP_Blacklist = [ // [ [x,y,z], radius ];
+	[[-999,-999,0] , 500],
+	[[-999,-999,0] , 500]
+];
 // Same as DMS -> Credits DMS
+ZCP_DistanceBetweenMissions = 500;
 ZCP_SpawnZoneDistance = 500;
 ZCP_TradeZoneDistance = 500;
 ZCP_TraderZoneMarkerTypes =			[							// If you're using custom trader markers, make sure you define them here. CASE SENSITIVE!!!
@@ -284,6 +301,26 @@ ZCP_VehicleReward = ZCP_DMS_TransportTrucks;
 ZCP_DMS_DEBUG = false;
 
 
+ZCP_Translations = [ // ['original','original in your language'] the %1 %2 and so on are Variables!
+	['%1 capbase set up. Capture for %2 min!' , '%1 capbase set up. Capture for %2 min!'], // ZCP Alpha capbase set up. Capture for 10 min!
+	['%2 is capping %1. %3min left!' , '%2 is capping %1. %3min left!'], // Zupa is capping ZCP alpha, 5min left.
+	['A player' , 'A player'], // A player
+	['%1 is 50%4 captured by %2. %3min left!', '%1 is 50%4 captured by %2. %3min left!'], // ZCP Alpha is 50% captured by Zupa/A player. 2min left!
+	['%1 is almost captured by %2. 60s left!', '%1 is almost captured by %2. 60s left!'], // ZCP Alpha is almost captured by Zupa/A player. 60s left!
+	['%1 is captured. %2.', '%1 is captured. %2.'], // ZCP Alpha is captured. (%2 is on of the 2 following translations, so leave the variable there!
+	['Bombing in %1s!', 'Bombing in %1s!'], // Bombing in 600s
+	['Cleanup in %1s!', 'Cleanup in %1s!'], // Cleanup in 600s
+	['Captured point', 'Captured point'], // Captured point
+	['Reputation', 'Reputation'], // Reputation
+	['Group Reputation', 'Group Reputation'], // Group reputation
+	['Package delivered, eyes on the sky!', 'Package delivered, eyes on the sky!'], // Package delivered, eyes on the sky!
+	['Package delivered, eyes on the sky! Poptabs on bank!', 'Package delivered, eyes on the sky! Poptabs on bank!'], // Package delivered, eyes on the sky! Poptabs on bank!
+	['Capture point is contested!', 'Capture point is contested!'], // Package delivered, eyes on the sky! Poptabs on bank!
+	['Capture point is contested is no longer contested!', 'Capture point is no longer contested!'] // Capture point is contested!
+];
+
+ZCP_CurrentMod = "Exile"; // Exile, ( Epoch coming soon again)
+
 if(ZCP_dev) then {
 	ZCP_CapTime = 20;
 	ZCP_MinWaitTime = 10;
@@ -292,8 +329,9 @@ if(ZCP_dev) then {
 };
 
 /* Do not change this*/
-ZCP_Version = "ZCP_Exile_1.0.1";
+ZCP_Version = "ZCP_Exile_1.0.2";
 ZCP_Data = [];
 ZCP_Bases = [];
 ZCP_MissionCounter = 0;
 ZCP_DMS_MagRange = ZCP_DMS_MaximumMagCount - ZCP_DMS_MinimumMagCount;
+diag_log format["ZCP: Config loaded succesfull"];
