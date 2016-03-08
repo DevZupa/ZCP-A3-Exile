@@ -65,8 +65,8 @@ if(_this select 5) then {
 if(count _ZCP_baseObjects != 0)then{
 
 	ZCP_Bases set [_ZCP_index , _ZCP_baseObjects];
-	PV_ZCP_zupastic = ["ZCP",[format["%1 capbase set up. Capture for %2 min!",_ZCP_name, (ZCP_CapTime / 60)]],"ZCP_Init"];
-	publicVariable "PV_ZCP_zupastic";
+
+	['Notification', ["ZCP",[format[[0] call ZCP_fnc_translate, _ZCP_name, (ZCP_CapTime / 60)]],"ZCP_Init"]] call ZCP_fnc_showNotification;
 
 	_ZCP_currentCapper = objNull;
 	_ZCP_previousCapper = objNull;
@@ -135,15 +135,17 @@ if(count _ZCP_baseObjects != 0)then{
 
 					(ZCP_Data select _ZCP_index) set[1,1];
 
-					_capperName = 'A player';
+					_capperName = '';
 					if(ZCP_UseSpecificNamesForCappers) then {
 						_capperName = name _ZCP_currentCapper;
+					} else {
+						_capperName = [2] call ZCP_fnc_translate;
 					};
 
 					_markers = [_this, _ZCP_baseRadius, _markers] call ZCP_fnc_createMarker;
 
-					PV_ZCP_zupastic = ["ZCP",[format["%2 is capping %1. %3m left.",_ZCP_name,_capperName,(ZCP_CapTime / 60)]],'ZCP_Capping'];
-					publicVariable "PV_ZCP_zupastic";
+					['Notification', ["ZCP",[format[[1] call ZCP_fnc_translate, _ZCP_name, _capperName,(ZCP_CapTime / 60)]],'ZCP_Capping']] call ZCP_fnc_showNotification;;
+
 				};
 
 				// to set the market to contested.
@@ -187,23 +189,27 @@ if(count _ZCP_baseObjects != 0)then{
 					(ZCP_Data select _ZCP_index) set[1,1]; // to set marker to capped
 					// 50% mark
 					if(!_ZCP_Halfway && _ZCP_CapStartTime != 0 && (diag_tickTime - _ZCP_ContestTotalTime - _ZCP_CapStartTime) >  (ZCP_CapTime / 2))then{
-						_capperName = 'A player';
+						_capperName = '';
 						if(ZCP_UseSpecificNamesForCappers) then {
 							_capperName = name _ZCP_currentCapper;
+						} else {
+							_capperName = [2] call ZCP_fnc_translate;
 						};
-						PV_ZCP_zupastic = ["ZCP",[format["%1 is 50%4 captured by %2. %3min left",_ZCP_name,_capperName,(ZCP_CapTime / 2 / 60),"%"]], 'ZCP_Capping'];
-						publicVariable "PV_ZCP_zupastic";
+
+						['Notification', ["ZCP",[format[[3] call ZCP_fnc_translate ,_ZCP_name,_capperName,(ZCP_CapTime / 2 / 60),"%"]], 'ZCP_Capping']] call ZCP_fnc_showNotification;
 						_ZCP_Halfway = true;
 					};
 
 					// 1 min mark
 					if(!_ZCP_min && _ZCP_CapStartTime != 0 && (diag_tickTime - _ZCP_ContestTotalTime - _ZCP_CapStartTime) >  (ZCP_CapTime - 60))then{
-						_capperName = 'A player';
+						_capperName = '';
 						if(ZCP_UseSpecificNamesForCappers) then {
 							_capperName = name _ZCP_currentCapper;
+						} else {
+							_capperName = [2] call ZCP_fnc_translate;
 						};
-						PV_ZCP_zupastic = ["ZCP",[format["%1 is almost captured by %2. 60s left.",_ZCP_name,_capperName]], 'ZCP_Capping'];
-						publicVariable "PV_ZCP_zupastic";
+
+						["ZCP",[format[[4] call ZCP_fnc_translate, _ZCP_name, _capperName]], 'ZCP_Capping'] call ZCP_fnc_showNotification;
 						_ZCP_min = true;
 					};
 				} else {
@@ -219,14 +225,13 @@ if(count _ZCP_baseObjects != 0)then{
 
 	if(ZCP_CleanupBase)then{
 				if(ZCP_CleanupBaseWithAIBomber)then{
-					_finishText = format ['Bombing in %1s.',ZCP_BaseCleanupDelay];
+					_finishText = format [[6] call ZCP_fnc_translate,ZCP_BaseCleanupDelay];
 				}else{
-					_finishText = format ['Cleanup in %1s.',ZCP_BaseCleanupDelay];
+					_finishText = format [[7] call ZCP_fnc_translate,ZCP_BaseCleanupDelay];
 				};
 	};
 
-	PV_ZCP_zupastic = ["ZCP",[format["%1 is captured. %2.",_ZCP_name,_finishText]], 'ZCP_Capped'];
-	publicVariable "PV_ZCP_zupastic";
+	['Notification', ["ZCP",[format[[5] call ZCP_fnc_translate,_ZCP_name,_finishText]], 'ZCP_Capped']] call ZCP_fnc_showNotification;
 	[_ZCP_currentCapper,_ZCP_name,_capturePosition,_this select 2] call ZCP_fnc_giveReward;
 	(ZCP_Data select _ZCP_index) set[0,false];
 	(ZCP_Data select _ZCP_index) set[1,0];

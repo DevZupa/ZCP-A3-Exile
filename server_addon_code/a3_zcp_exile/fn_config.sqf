@@ -291,6 +291,23 @@ ZCP_VehicleReward = ZCP_DMS_TransportTrucks;
 ZCP_DMS_DEBUG = false;
 
 
+ZCP_Translations = [ // ['original','original in your language'] the %1 %2 and so on are Variables!
+	['%1 capbase set up. Capture for %2 min!' , '%1 capbase set up. Capture for %2 min!'], // ZCP Alpha capbase set up. Capture for 10 min!
+	['%2 is capping %1. %3min left!' , '%2 is capping %1. %3min left!'], // Zupa is capping ZCP alpha, 5min left.
+	['A player' , 'A player'], // A player
+	['%1 is 50%4 captured by %2. %3min left!', '%1 is 50%4 captured by %2. %3min left!'], // ZCP Alpha is 50% captured by Zupa/A player. 2min left!
+	['%1 is almost captured by %2. 60s left!', '%1 is almost captured by %2. 60s left!'], // ZCP Alpha is almost captured by Zupa/A player. 60s left!
+	['%1 is captured. %2.', '%1 is captured. %2.'], // ZCP Alpha is captured. (%2 is on of the 2 following translations, so leave the variable there!
+	['Bombing in %1s!', 'Bombing in %1s!'], // Bombing in 600s
+	['Cleanup in %1s!', 'Cleanup in %1s!'], // Cleanup in 600s
+	['Captured point', 'Captured point'], // Captured point
+	['Reputation', 'Reputation'], // Reputation
+	['Group Reputation', 'Group Reputation'] // Group reputation
+];
+
+
+ZCP_CurrentMod = "Exile"; // Exile, Epoch
+
 if(ZCP_dev) then {
 	ZCP_CapTime = 20;
 	ZCP_MinWaitTime = 10;

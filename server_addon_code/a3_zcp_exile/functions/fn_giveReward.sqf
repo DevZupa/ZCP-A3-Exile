@@ -30,7 +30,7 @@ switch (_reward) do {
 
 		format["setAccountScore:%1:%2", _playerScore,getPlayerUID _ZCP_currentCapper] call ExileServer_system_database_query_fireAndForget;
 
-		[_ZCP_currentCapper, "showFragRequest", [[[format ["ZCP Reputation"],_awardToGive]]]] call ExileServer_system_network_send_to;
+		['Reputation',[_ZCP_currentCapper, "showFragRequest", [[[format ["ZCP %1", [9] call ZCP_fnc_translate],_awardToGive]]]]] call ZCP_fnc_showNotification;
 
 		ExileClientPlayerScore = _playerScore;
 		(owner _ZCP_currentCapper) publicVariableClient "ExileClientPlayerScore";
@@ -54,7 +54,7 @@ switch (_reward) do {
 						(owner _x) publicVariableClient "ExileClientPlayerScore";
 						ExileClientPlayerScore = nil;
 
-						[_x, "showFragRequest", [[[format ["ZCP Group Reputation"],ZCP_ReputationRewardForGroup]]]] call ExileServer_system_network_send_to;
+						['Reputation', [_x, "showFragRequest", [[[format ["ZCP %1", [10] call ZCP_fnc_translate],ZCP_ReputationRewardForGroup]]]]] call ZCP_fnc_showNotification;
 					}
 				}count (units _capperGroup);
 			};
