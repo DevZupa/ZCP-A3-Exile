@@ -20,6 +20,20 @@ while{!_validspot} do {
 		_validspot = false;
 		};
 	};
+	if(_validspot) then {
+		{
+			if ( (_x select 2) select 0 != -99999 && _position distance2D (_x select 2) < ZCP_DistanceBetweenMissions) then {
+					_validspot = false;
+			};
+		} count ZCP_Data;
+  };
+	if(_validspot) then {
+		{
+			if ( _position distance2D (_x select 0) < (_x select 1)) then {
+					_validspot = false;
+			};
+		} count ZCP_Blacklist;
+  };
 	if(_validspot ) then {
 		// DMS code, Credits -> DMS
 		{

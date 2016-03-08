@@ -72,5 +72,14 @@ ZCP_MapCenterPos set [2,0];
 diag_log text format ["[ZCP]: Initiate Zupa's Capture Points"];
 call ZCP_fnc_config;
 call ZCP_fnc_initCPData;
+
+ZCP_RandomReward = [];
+
+{
+	for "_i" from 0 to ((_x select 1) - 1) do {
+		_nil = ZCP_RandomReward pushBack (_x select 0);
+	};
+}count ZCP_RewardWeightForRandomChoice;
+
 [] spawn ZCP_fnc_missionLooper;
 diag_log text format ["[ZCP]: Capture Points is fully running."];

@@ -18,7 +18,7 @@
 // Being first in the zone starts the timer.
 // Holding a zone  gives you a reward after x Min.
 
-ZCP_dev = false; // Devmode for shorter development capture times
+ZCP_dev = true; // Devmode for shorter development capture times
 
 ZCP_DMS_doIUseDMS = true; // Use DMS to spawn AI IF CapturePoint has spawnAI = true
 ZCP_Min_AI_Amount = 4; // Min ammount of AI at a ZCP
@@ -48,12 +48,17 @@ ZCP_FlyHeight = 150; // Height of the flying plane;
 
 ZCP_UseSpecificNamesForCappers = true; // Use the player name, if false it say 'A player'
 
-ZCP_RewardWeightForRandomChoice = [ // How does this work ( 6 + 3 + 5 + 2 = 16)
-	["Poptabs", 6],																					// 6/16 = 37.50 %
-	["BuildBox", 3],																				// 3/16 = 18.75 %
-	["WeaponBox", 5],																				// 5/16 = 31.25 %
-	["Vehicle", 2]																					// 2/16 = 12.50 %
+ZCP_RewardWeightForRandomChoice = [
+	["Poptabs", 6],
+	["BuildBox", 3],
+	["WeaponBox", 5],
+	["Vehicle", 2]
 ];
+// How does this work ( 6 + 3 + 5 + 2 = 16)
+// 6/16 = 37.50 %
+// 3/16 = 18.75 %
+// 5/16 = 31.25 %
+// 2/16 = 12.50 %
 
 // Server will keep as many missions up as ZCP_MaxMissions, And they will be randomly choosen from the following list
 // Location is ignored if not using static points. just put [0,0,0] then. activate static buy using isStatic = true
@@ -73,7 +78,12 @@ ZCP_CapBases = [ // located in capbases folder [filename, capradius]
 ZCP_TerrainGradient = 60; // Max meter terrain gradient ( height difference)
 ZCP_MinDistanceFromObject = 60; // Missions needs an open spot. You can lower it but it might collide with other objects ( not always a problem)
 
+ZCP_Blacklist = [ // [ [x,y,z], radius ];
+	[[-999,-999,0] , 500],
+	[[-999,-999,0] , 500]
+];
 // Same as DMS -> Credits DMS
+ZCP_DistanceBetweenMissions = 500;
 ZCP_SpawnZoneDistance = 500;
 ZCP_TradeZoneDistance = 500;
 ZCP_TraderZoneMarkerTypes =			[							// If you're using custom trader markers, make sure you define them here. CASE SENSITIVE!!!
@@ -302,11 +312,12 @@ ZCP_Translations = [ // ['original','original in your language'] the %1 %2 and s
 	['Cleanup in %1s!', 'Cleanup in %1s!'], // Cleanup in 600s
 	['Captured point', 'Captured point'], // Captured point
 	['Reputation', 'Reputation'], // Reputation
-	['Group Reputation', 'Group Reputation'] // Group reputation
+	['Group Reputation', 'Group Reputation'], // Group reputation
+	['Package delivered, eyes on the sky!', 'Package delivered, eyes on the sky!'], // Package delivered, eyes on the sky!
+	['Package delivered, eyes on the sky! Poptabs on bank!', 'Package delivered, eyes on the sky! Poptabs on bank!'] // Package delivered, eyes on the sky! Poptabs on bank!
 ];
 
-
-ZCP_CurrentMod = "Exile"; // Exile, Epoch
+ZCP_CurrentMod = "Exile"; // Exile, ( Epoch coming soon again)
 
 if(ZCP_dev) then {
 	ZCP_CapTime = 20;
@@ -316,8 +327,9 @@ if(ZCP_dev) then {
 };
 
 /* Do not change this*/
-ZCP_Version = "ZCP_Exile_1.0.1";
+ZCP_Version = "ZCP_Exile_1.0.2";
 ZCP_Data = [];
 ZCP_Bases = [];
 ZCP_MissionCounter = 0;
 ZCP_DMS_MagRange = ZCP_DMS_MaximumMagCount - ZCP_DMS_MinimumMagCount;
+diag_log format["ZCP: Config loaded succesfull"];

@@ -41,11 +41,13 @@ _ZCP_baseRadius = _ZCP_base select 1;
 
 if(_this select 6)then{
 	_capturePosition = _this select 1;
+
 	diag_log text format ["[ZCP]: %1 :Spawning static on %2",_ZCP_name,_capturePosition];
 }else{
 	_capturePosition = [_ZCP_baseRadius] call ZCP_fnc_findPosition;
 	diag_log text format ["[ZCP]: %1 :Spawning dynamic on %2",_ZCP_name,_capturePosition];
 };
+(ZCP_Data select _ZCP_index) set[2,_capturePosition];
 
 _ZCP_baseClasses = call compile preprocessFileLineNumbers _ZCP_baseFile;
 _ZCP_baseObjects = [];
@@ -235,6 +237,7 @@ if(count _ZCP_baseObjects != 0)then{
 	[_ZCP_currentCapper,_ZCP_name,_capturePosition,_this select 2] call ZCP_fnc_giveReward;
 	(ZCP_Data select _ZCP_index) set[0,false];
 	(ZCP_Data select _ZCP_index) set[1,0];
+	(ZCP_Data select _ZCP_index) set[2,[-99999,0,0]];
 	ZCP_MissionCounter = ZCP_MissionCounter - 1;
 	diag_log format["[ZCP]: %1 will be cleaned up in %2s and ended.",_ZCP_name, ZCP_BaseCleanupDelay];
 	[] spawn ZCP_fnc_missionLooper;
