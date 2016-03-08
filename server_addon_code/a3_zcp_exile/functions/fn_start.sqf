@@ -97,7 +97,7 @@ if(count _ZCP_baseObjects != 0)then{
 				};
 			}count (_capturePosition nearEntities["CAManBase",_ZCP_baseRadius]);
 
-			_proximityListMessage = _capturePosition nearEntities["CAManBase",_ZCP_baseRadius * 4]);
+			_proximityListMessage = _capturePosition nearEntities["CAManBase",_ZCP_baseRadius * 4];
 
 			if(count(_proximityList) == 0) then{
 
