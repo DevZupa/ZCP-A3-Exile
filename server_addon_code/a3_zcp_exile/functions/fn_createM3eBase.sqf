@@ -4,7 +4,7 @@ _ZCP_baseObjects = [];
 _ZCP_baseClasses = call compile preprocessFileLineNumbers (_this select 0);
 
 _capturePosition = _this select 1;
-_theFlagPos = (_this select 0) select 1;
+_theFlagPos = (_ZCP_baseClasses select 0) select 1;
 _theFlagX = _theFlagPos select 0;
 _theFlagY = _theFlagPos select 1;
 _XChange = _capturePosition select 0;

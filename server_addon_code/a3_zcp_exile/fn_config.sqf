@@ -18,7 +18,7 @@
 // Being first in the zone starts the timer.
 // Holding a zone  gives you a reward after x Min.
 
-ZCP_dev = false; // Devmode for shorter development capture times
+ZCP_dev = true; // Devmode for shorter development capture times
 
 ZCP_DMS_doIUseDMS = true; // Use DMS to spawn AI IF CapturePoint has spawnAI = true
 ZCP_Min_AI_Amount = 4; // Min ammount of AI at a ZCP
@@ -85,7 +85,7 @@ ZCP_CapBases = [ // located in capbases folder [filename, capradius, buildeditor
 	["xcam_milPoint.sqf", 50, "xcam"]
 ];
 
-ZCP_TerrainGradient = 60; // Max meter terrain gradient ( height difference)
+ZCP_TerrainGradient = 10; // Max meter terrain gradient ( height difference)
 ZCP_MinDistanceFromObject = 60; // Missions needs an open spot. You can lower it but it might collide with other objects ( not always a problem)
 
 ZCP_Blacklist = [ // [ [x,y,z], radius ];
@@ -96,6 +96,7 @@ ZCP_Blacklist = [ // [ [x,y,z], radius ];
 ZCP_DistanceBetweenMissions = 500;
 ZCP_SpawnZoneDistance = 500;
 ZCP_TradeZoneDistance = 500;
+ZCP_DistanceFromWater = 100;
 ZCP_TraderZoneMarkerTypes =			[							// If you're using custom trader markers, make sure you define them here. CASE SENSITIVE!!!
 										"ExileTraderZone"
 									];

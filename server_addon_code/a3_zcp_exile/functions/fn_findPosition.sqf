@@ -16,7 +16,7 @@ while{!_validspot} do {
 		_validspot = false;
 	};
 	if(_validspot ) then {
-		if ([_position,10] call ZCP_fnc_nearWater) then {
+		if ([_position, ZCP_DistanceFromWater] call ZCP_fnc_nearWater) then {
 		_validspot = false;
 		};
 	};

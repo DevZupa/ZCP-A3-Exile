@@ -1,17 +1,17 @@
-private['_theFlagPos','_theFlagX','_theFlagY','_XChange','_YChange','_ZCP_baseObjects'];
+private['_theFlagPos','_theFlagX','_theFlagY','_XChange','_YChange','_ZCP_baseObjects','_ZCP_baseClasses'];
 _ZCP_baseObjects = [];
+_ZCP_baseClasses = call compile preprocessFileLineNumbers (_this select 0);
+_capturePosition = _this select 1;
+_theFlagPos =  call compile ((_ZCP_baseClasses select 0) select 1);
+_theFlagX = _theFlagPos select 0;
+_theFlagY = _theFlagPos select 1;
+_XChange = _capturePosition select 0;
+_YChange = _capturePosition select 1;
 
-_theFlagPos = [];
-_theFlagX = 0;
-_theFlagY = 0;
-_XChange = 0;
-_YChange = 0;
-
-_obj = objNull;_dat = [];_adString = "CAN_COLLIDE";
-_cString =
 {
-  private['_newPos', '_pos', '_obj' ];
-	_obj = createVehicle [(_dat select 0), [0,0,0], [], 0, _adString];
+  private['_newPos', '_pos', '_obj', '_dat'];
+  _dat = _x;
+	_obj = createVehicle [(_dat select 0), [0,0,0], [], 0, "CAN_COLLIDE"];
 	if((_dat select 4) == 0) then {_obj enableSimulation false};
 	if((_dat select 8) == 0) then {_obj allowDamage false};
 	_obj setdir (_dat select 2);
@@ -30,8 +30,6 @@ _cString =
 	if(count (_dat select 6) > 0) then {{call _x} foreach (_dat select 6)};
 
   _nil = _ZCP_baseObjects pushBack _obj;
-};
-
-call compile preprocessFileLineNumbers _ZCP_baseFile;
+} count _ZCP_baseClasses;
 
 _ZCP_baseObjects
