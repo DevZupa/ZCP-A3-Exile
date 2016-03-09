@@ -35,13 +35,20 @@ _capturePosition = [0,0,0];
 _ZCP_name = _this select 0;
 _ZCP_index = _this select 4;
 
-_ZCP_base = ZCP_CapBases call BIS_fnc_selectRandom;
-_ZCP_baseFile = format["x\addons\ZCP\capbases\%1", _ZCP_base select 0];
-_ZCP_baseRadius = _ZCP_base select 1;
+_ZCP_baseFile = '';
+_ZCP_baseRadius = 0;
+
+if (_this select 7 == 'Random') then {
+	_ZCP_base = ZCP_CapBases call BIS_fnc_selectRandom;
+	_ZCP_baseFile = format["x\addons\ZCP\capbases\%1", _ZCP_base select 0];
+	_ZCP_baseRadius = _ZCP_base select 1;
+} else {
+	_ZCP_baseFile = format["x\addons\ZCP\capbases\%1", _this select 7];
+	_ZCP_baseRadius = _this select 8;
+};
 
 if(_this select 6)then{
 	_capturePosition = _this select 1;
-
 	diag_log text format ["[ZCP]: %1 :Spawning static on %2",_ZCP_name,_capturePosition];
 }else{
 	_capturePosition = [_ZCP_baseRadius] call ZCP_fnc_findPosition;

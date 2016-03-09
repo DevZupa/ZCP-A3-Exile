@@ -5,7 +5,7 @@ _capRadius = _this select 1;
 if(ZCP_DMS_doIUseDMS) then {
   if (isNil "DMS_Version") exitWith {
     ZCP_DMS_doIUseDMS = false;
-    diag_log "You're an idiot";
+    diag_log "[ZCP]: You're an idiot";
   };
 
   _ammountAI = ZCP_Min_AI_Amount + (floor random ZCP_Random_AI_Max);
@@ -15,5 +15,5 @@ if(ZCP_DMS_doIUseDMS) then {
   _group setBehaviour "AWARE";
   _group setCombatMode "RED";
 } else {
-  diag_log format ['No ai system chosen'];
+  diag_log format ['[ZCP]: No ai system chosen'];
 };

@@ -41,6 +41,12 @@ class CfgFunctions {
 			class removeMarker {};
 			class translate {};
 			class showNotification {};
+			class rewardReputation {};
+			class rewardPoptabs {};
+			class rewardBuildingBox {};
+			class rewardSurvivalBox {};
+			class rewardVehicle {};
+			class rewardWeaponBox {};
 		};
 	};
 };

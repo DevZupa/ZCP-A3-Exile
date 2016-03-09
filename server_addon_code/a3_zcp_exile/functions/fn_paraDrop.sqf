@@ -8,7 +8,6 @@ _para setPos getPos _this;
 _paras =  [_para];
 _this attachTo [_para, [0,2,0]];
 {
-    diag_log "Attaching Parachut";
     _p = createVehicle [_class, [0,0,0], [], 0, "FLY"];
     _paras set [count _paras, _p];
     _p attachTo [_para, [0,0,0]];
