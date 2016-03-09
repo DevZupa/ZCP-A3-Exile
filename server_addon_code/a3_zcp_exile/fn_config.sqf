@@ -48,10 +48,12 @@ ZCP_FlyHeight = 150; // Height of the flying plane;
 
 ZCP_UseSpecificNamesForCappers = true; // Use the player name, if false it say 'A player'
 
+ZCP_giveSurvivalBoxWithPoptabsReward = true;
 ZCP_RewardWeightForRandomChoice = [
-	["Poptabs", 6],
+	["Poptabs", 5],
 	["BuildBox", 3],
 	["WeaponBox", 5],
+	["SurvivalBox", 1],
 	["Vehicle", 2]
 ];
 // How does this work ( 6 + 3 + 5 + 2 = 16)
@@ -60,12 +62,16 @@ ZCP_RewardWeightForRandomChoice = [
 // 5/16 = 31.25 %
 // 2/16 = 12.50 %
 
-// Server will keep as many missions up as ZCP_MaxMissions, And they will be randomly choosen from the following list
+// Server will keep as many missions up as ZCP_MaxMissions, And they will be randomly chosen from the following list
 // Location is ignored if not using static points. just put [0,0,0] then. activate static buy using isStatic = true
 // valid rewards -> Random, Poptabs, Vehicle, Buildingbox, WeaponBox
-ZCP_CapPoints = [ // [name,[x,y,z],reward, varname,index, spanwnAI, isStatic]
-	["ZCP Alpha",[0,0,0],"Random","alpha",0, true, false] ,
-	["ZCP Bravo",[0,0,0],"Random","beta",1, true, false]
+// baseFile -> Random or the basefile name. Random will chose from ZCP_CapBases
+// capradius -> 0 for Random, real number for Static base files.
+ZCP_CapPoints = [ // [name,[x,y,z],reward, unique varname,index, spanwnAI, isStatic, baseFile, capradius]
+	["ZCP Alpha",[0,0,0],"Random","alpha",0, true, false, 'Random', 0] ,
+	["ZCP Bravo",[0,0,0],"Random","beta",1, true, false, 'Random', 0]
+	// ["ZCP Charlie",[0,0,0],"Random","charlie",2, true, true, 'staticBase1,sqf', 60]
+	// ["ZCP Delta",[0,0,0],"Random","delta",3, true, false, 'staticBase2.sqf', 100]
 ];
 
 ZCP_MaxMissions = count ZCP_CapPoints; // Amount of cap points at the same time.

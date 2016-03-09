@@ -14,7 +14,6 @@ clearBackpackCargoGlobal _box;
 clearItemCargoGlobal _box;
 switch (_type) do {
     case 'BuildBox': {
-      diag_log format['%1', _type];
       [
         _box,
         [
@@ -26,7 +25,6 @@ switch (_type) do {
       ]call ZCP_fnc_fillCrate;
     };
     case 'WeaponBox': {
-      diag_log format['%1', _type];
       private["_loot","_random"];
       _loot = [
         6 + (floor random 10),		// Weapons
@@ -39,8 +37,7 @@ switch (_type) do {
         ZCP_DMS_RareLootChance
       ]call ZCP_fnc_fillCrate;
     };
-    case 'FoodBox': {
-      diag_log format['%1', _type];
+    case 'SurvivalBox': {
       private["_loot","_random"];
       _loot = [
         1,		// Weapons
@@ -54,7 +51,6 @@ switch (_type) do {
       ]call ZCP_fnc_fillCrate;
     };
     default {
-      diag_log format['Default: %1', _type];
-      	[_box,'WeaponBox'] call ZCP_fnc_fillBox;
+      [_box,'WeaponBox'] call ZCP_fnc_fillBox;
     };
 };

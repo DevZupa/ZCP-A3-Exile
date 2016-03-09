@@ -42,6 +42,12 @@ class CfgFunctions {
 			class translate {};
 			class showNotification {};
 			class createXcamBase {};
+			class rewardReputation {};
+			class rewardPoptabs {};
+			class rewardBuildingBox {};
+			class rewardSurvivalBox {};
+			class rewardVehicle {};
+			class rewardWeaponBox {};
 		};
 	};
 };
