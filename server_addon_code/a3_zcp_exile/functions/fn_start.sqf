@@ -16,7 +16,7 @@
 private["_currentCapper","_ZCP_continue","_ZCP_flag","_currentGroup","_ZCP_name","_ZCP_baseFile","_ZCP_baseClasses",
 "_ZCP_lastOwnerChange","_proximityList","_ZCP_baseObjects","_theFlagPos","_theFlagX","_theFlagY","_XChange","_YChange",
 "_ZCP_currentCapper","_ZCP_previousCapper","_ZCP_currentGroup","_ZCP_wasContested","_finishText","_markers","_ZCP_base",
-"_ZCP_ContestStartTime","_ZCP_index","_capturePosition","_randomTime","_changedReward","_ZCP_Halfway","_ZCP_min"
+"_ZCP_ContestStartTime","_ZCP_index","_capturePosition","_randomTime","_changedReward","_ZCP_Halfway","_ZCP_min","_baseType"
 ];
 
 _randomTime = (floor random  ZCP_MaxWaitTime) + ZCP_MinWaitTime;
@@ -49,16 +49,19 @@ if(_this select 6)then{
 };
 (ZCP_Data select _ZCP_index) set[2,_capturePosition];
 
-_ZCP_baseClasses = call compile preprocessFileLineNumbers _ZCP_baseFile;
-_ZCP_baseObjects = [];
-_theFlagPos = (_ZCP_baseClasses select 0) select 1;
-_theFlagX = _theFlagPos select 0;
-_theFlagY = _theFlagPos select 1;
-_XChange = _capturePosition select 0;
-_YChange = _capturePosition select 1;
-_this set [1,_capturePosition];
+_baseType = _ZCP_base select 2; // m3e or xcam
 
-_ZCP_baseObjects = _ZCP_baseClasses call ZCP_fnc_createBase;
+_ZCP_baseObjects = [];
+switch (_baseType) do {
+  case ('m3e'): {
+		_ZCP_baseObjects = [_ZCP_baseFile, _capturePosition] call ZCP_fnc_createM3eBase;
+  };
+	case ('xcam'): {
+	  _ZCP_baseObjects = [_ZCP_baseFile, _capturePosition] call ZCP_fnc_createXcamBase;
+	};
+};
+
+_this set [1,_capturePosition];
 
 if(_this select 5) then {
 	[_capturePosition, _ZCP_baseRadius] call ZCP_fnc_spawnAI;

@@ -71,8 +71,12 @@ ZCP_CapPoints = [ // [name,[x,y,z],reward, varname,index, spanwnAI, isStatic]
 ZCP_MaxMissions = count ZCP_CapPoints; // Amount of cap points at the same time.
 
 // For every spawned mission,
-ZCP_CapBases = [ // located in capbases folder [filename, capradius]
-	["base1.sqf", 60]
+// buildeditor currenty supported -> m3e, xcam
+ZCP_CapBases = [ // located in capbases folder [filename, capradius, buildeditor]
+	["m3e_base1.sqf", 60, "m3e"],
+	["m3e_smallBase1.sqf", 40, "m3e"],
+	["m3e_village.sqf", 50, "m3e"],
+	["xcam_milPoint.sqf", 50, "xcam"]
 ];
 
 ZCP_TerrainGradient = 60; // Max meter terrain gradient ( height difference)
