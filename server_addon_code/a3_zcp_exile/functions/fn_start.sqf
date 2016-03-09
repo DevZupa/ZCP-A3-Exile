@@ -220,7 +220,7 @@ if(count _ZCP_baseObjects != 0)then{
 							_capperName = [2] call ZCP_fnc_translate;
 						};
 
-						["ZCP",[format[[4] call ZCP_fnc_translate, _ZCP_name, _capperName]], 'ZCP_Capping'] call ZCP_fnc_showNotification;
+						['Notification', ["ZCP",[format[[4] call ZCP_fnc_translate, _ZCP_name, _capperName]], 'ZCP_Capping']] call ZCP_fnc_showNotification;
 						_ZCP_min = true;
 					};
 				} else {
