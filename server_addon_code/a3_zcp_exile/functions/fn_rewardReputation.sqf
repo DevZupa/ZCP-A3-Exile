@@ -1,4 +1,4 @@
-private['_awardToGive','_playerScore','_ZCP_currentCapper','_ZCP_name','_capturePosition',''];
+private['_awardToGive','_playerScore','_ZCP_currentCapper','_ZCP_name','_capturePosition'];
 
 _ZCP_currentCapper = _this select 0;
 _ZCP_name = _this select 1;

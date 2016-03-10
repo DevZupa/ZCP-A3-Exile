@@ -18,7 +18,7 @@ if !(isServer) exitWith
 {
 	for "_i" from 0 to 99 do
 	{
-		diag_log "Not a fucking server CUNT";
+		diag_log "[ZCP]: Not a server";
 	};
 };
 
@@ -66,7 +66,6 @@ switch (toLower worldName) do
 	};
 };
 
-// Since we use primarily ATL
 ZCP_MapCenterPos set [2,0];
 
 diag_log text format ["[ZCP]: Initiate Zupa's Capture Points"];
