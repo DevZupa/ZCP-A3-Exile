@@ -1,11 +1,13 @@
-private['_capturePosition','_ZCP_currentCapper','_ZCP_name',"_vehicle","_vehicleClass","_cfg","_name"];
+private['_capturePosition','_ZCP_currentCapper','_ZCP_name',"_vehicle","_vehicleClass","_cfg","_name","_captureRadius"];
 
 _ZCP_currentCapper = _this select 0;
 _ZCP_name = _this select 1;
 _capturePosition = _this select 2;
+_captureRadius = _this select 4;
 
 if(ZCP_DisableVehicleReward)then{
-  [_ZCP_currentCapper,_ZCP_name,_capturePosition,"Random"] call ZCP_fnc_giveReward;
+	_this set[3, "Random"];
+  _this call ZCP_fnc_giveReward;
 }else{
   _vehicleClass = ZCP_VehicleReward call BIS_fnc_selectRandom;
   _cfg  = (configFile >>  "CfgVehicles" >>  _vehicleClass);
@@ -22,7 +24,7 @@ if(ZCP_DisableVehicleReward)then{
   clearBackpackCargoGlobal _vehicle;
   clearItemCargoGlobal _vehicle;
   _vehicle setDir random 360;
-  _vehicle setPos [_capturePosition select 0,_capturePosition select 1,150];
+  _vehicle setPos [(_capturePosition select 0) + _captureRadius ,(_capturePosition select 1) + _captureRadius, 150];
   _vehicle call ZCP_fnc_paraDrop;
 
   ['PersonalNotification', ["ZCP",[format[[11] call ZCP_fnc_translate]], 'ZCP_Capped'], _ZCP_currentCapper] call ZCP_fnc_showNotification;

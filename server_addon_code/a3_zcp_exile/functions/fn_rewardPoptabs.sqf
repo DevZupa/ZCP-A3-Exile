@@ -22,7 +22,7 @@ format["setAccountMoney:%1:%2", _playerMoney, (getPlayerUID _ZCP_currentCapper)]
 
 if(ZCP_giveSurvivalBoxWithPoptabsReward) then {
   _this set [3, "SurvivalBox"];
-  _this set [4, true];
+  _this set [5, true];
   _this call ZCP_fnc_giveReward;
   diag_log format ["[ZCP]: %1 won %2, received %3 Poptabs and a Survivalbox.",name _ZCP_currentCapper,_ZCP_name,_awardToGive];
 } else {

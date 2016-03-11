@@ -259,7 +259,7 @@ if(count _ZCP_baseObjects != 0)then{
 	};
 
 	['Notification', ["ZCP",[format[[5] call ZCP_fnc_translate,_ZCP_name,_finishText]], 'ZCP_Capped']] call ZCP_fnc_showNotification;
-	[_ZCP_currentCapper,_ZCP_name,_capturePosition,_this select 2] call ZCP_fnc_giveReward;
+	[_ZCP_currentCapper,_ZCP_name,_capturePosition,_this select 2, _ZCP_baseRadius] call ZCP_fnc_giveReward;
 	(ZCP_Data select _ZCP_index) set[0,false];
 	(ZCP_Data select _ZCP_index) set[1,0];
 	(ZCP_Data select _ZCP_index) set[2,[-99999,0,0]];
