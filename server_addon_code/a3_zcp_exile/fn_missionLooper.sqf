@@ -26,7 +26,7 @@ while {ZCP_MissionCounter < ZCP_MaxMissions} do
 		};
 	};
 	(ZCP_Data select (_ZCP_randomMission select 4)) set[0,true];
-	diag_log text format ["[ZCP]: No %1 initiated.",_ZCP_randomMission select 1];
+	diag_log text format ["[ZCP]: %1 initiated.",_ZCP_randomMission select 3];
 	_ZCP_randomMission spawn ZCP_fnc_start;
 	ZCP_MissionCounter = ZCP_MissionCounter + 1;
 };

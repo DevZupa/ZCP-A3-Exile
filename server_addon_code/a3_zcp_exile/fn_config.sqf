@@ -18,7 +18,7 @@
 // Being first in the zone starts the timer.
 // Holding a zone  gives you a reward after x Min.
 
-ZCP_dev = false; // Devmode for shorter development capture times
+ZCP_dev = true; // Devmode for shorter development capture times
 
 ZCP_DMS_doIUseDMS = true; // Use DMS to spawn AI IF CapturePoint has spawnAI = true
 ZCP_Min_AI_Amount = 4; // Min ammount of AI at a ZCP
@@ -48,10 +48,12 @@ ZCP_FlyHeight = 150; // Height of the flying plane;
 
 ZCP_UseSpecificNamesForCappers = true; // Use the player name, if false it say 'A player'
 
+ZCP_giveSurvivalBoxWithPoptabsReward = true;
 ZCP_RewardWeightForRandomChoice = [
-	["Poptabs", 6],
+	["Poptabs", 5],
 	["BuildBox", 3],
 	["WeaponBox", 5],
+	["SurvivalBox", 1],
 	["Vehicle", 2]
 ];
 // How does this work ( 6 + 3 + 5 + 2 = 16)
@@ -60,22 +62,32 @@ ZCP_RewardWeightForRandomChoice = [
 // 5/16 = 31.25 %
 // 2/16 = 12.50 %
 
-// Server will keep as many missions up as ZCP_MaxMissions, And they will be randomly choosen from the following list
+// Server will keep as many missions up as ZCP_MaxMissions, And they will be randomly chosen from the following list
 // Location is ignored if not using static points. just put [0,0,0] then. activate static buy using isStatic = true
 // valid rewards -> Random, Poptabs, Vehicle, Buildingbox, WeaponBox
-ZCP_CapPoints = [ // [name,[x,y,z],reward, varname,index, spanwnAI, isStatic]
-	["ZCP Alpha",[0,0,0],"Random","alpha",0, true, false] ,
-	["ZCP Bravo",[0,0,0],"Random","beta",1, true, false]
+// baseFile -> Random or the basefile name. Random will chose from ZCP_CapBases
+// capradius -> 0 for Random, real number for Static base files.
+ZCP_CapPoints = [ // [name,[x,y,z],reward, unique varname,index, spanwnAI, isStatic, baseFile, capradius, baseFileType, max terrainGradient ( only used if it has staticbaseFile)]
+	["ZCP Alpha",[0,0,0],"Random","alpha",0, true, false, 'Random', 0, 'Random', 2] ,
+	["ZCP Bravo",[0,0,0],"Random","beta",1, true, false, 'Random', 0, 'Random', 2]
+	// example -> ["ZCP Charlie",[3598,5888,0],"Random","charlie",2, true, true, 'm3e_base1.sqf', 60, 'm3e', 10]    // A base on always the same location with always the same base
+	// example -> ["ZCP Delta",[0,0,0],"Random","delta",3, true, false, 'xcam_milPoint.sqf', 100, 'xcam', 15] 			// A base on random location with always the same base
+	// example -> ["ZCP Echo",[1455,8888,0],"Random","echo",4, true, true, 'Random', 0, 'Random', 10] 					// A base on on always the same location with a random base
+	// example -> ["ZCP Foxtrot",[0,0,0],"Random","foxtrot",5, true, false, 'Random', 0, 'Random', 10] 					// Random base on random location
 ];
 
 ZCP_MaxMissions = count ZCP_CapPoints; // Amount of cap points at the same time.
 
 // For every spawned mission,
-ZCP_CapBases = [ // located in capbases folder [filename, capradius]
-	["base1.sqf", 60]
+// buildeditor currenty supported -> m3e, xcam
+ZCP_CapBases = [ // located in capbases folder [filename, capradius, buildeditor, max terraingradient (if not overwritten by staticbasefile)]
+	["m3e_base1.sqf", 60, "m3e", 10],
+	["m3e_smallBase1.sqf", 40, "m3e", 5],
+	["m3e_village.sqf", 50, "m3e", 2],
+	["xcam_milPoint.sqf", 50, "xcam", 5]
 ];
 
-ZCP_TerrainGradient = 60; // Max meter terrain gradient ( height difference)
+// ZCP_TerrainGradient = 10; // Now defined per base or overwritten when using staticbaseFile for a cappoint
 ZCP_MinDistanceFromObject = 60; // Missions needs an open spot. You can lower it but it might collide with other objects ( not always a problem)
 
 ZCP_Blacklist = [ // [ [x,y,z], radius ];
@@ -86,6 +98,7 @@ ZCP_Blacklist = [ // [ [x,y,z], radius ];
 ZCP_DistanceBetweenMissions = 500;
 ZCP_SpawnZoneDistance = 500;
 ZCP_TradeZoneDistance = 500;
+ZCP_DistanceFromWater = 100;
 ZCP_TraderZoneMarkerTypes =			[							// If you're using custom trader markers, make sure you define them here. CASE SENSITIVE!!!
 										"ExileTraderZone"
 									];

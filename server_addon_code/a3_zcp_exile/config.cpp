@@ -30,7 +30,7 @@ class CfgFunctions {
 			class giveReward {};
 			class createMarker {};
 			class createWinMarker {};
-			class createBase {};
+			class createM3eBase {};
 			class airbomb {};
 			class airstrike {};
 			class fly {};
@@ -41,6 +41,13 @@ class CfgFunctions {
 			class removeMarker {};
 			class translate {};
 			class showNotification {};
+			class createXcamBase {};
+			class rewardReputation {};
+			class rewardPoptabs {};
+			class rewardBuildingBox {};
+			class rewardSurvivalBox {};
+			class rewardVehicle {};
+			class rewardWeaponBox {};
 		};
 	};
 };

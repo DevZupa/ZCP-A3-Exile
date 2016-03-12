@@ -16,7 +16,8 @@
 private["_currentCapper","_ZCP_continue","_ZCP_flag","_currentGroup","_ZCP_name","_ZCP_baseFile","_ZCP_baseClasses",
 "_ZCP_lastOwnerChange","_proximityList","_ZCP_baseObjects","_theFlagPos","_theFlagX","_theFlagY","_XChange","_YChange",
 "_ZCP_currentCapper","_ZCP_previousCapper","_ZCP_currentGroup","_ZCP_wasContested","_finishText","_markers","_ZCP_base",
-"_ZCP_ContestStartTime","_ZCP_index","_capturePosition","_randomTime","_changedReward","_ZCP_Halfway","_ZCP_min"
+"_ZCP_ContestStartTime","_ZCP_index","_capturePosition","_randomTime","_changedReward","_ZCP_Halfway","_ZCP_min","_baseType",
+"_terrainGradient","_ZCP_baseRadius"
 ];
 
 _randomTime = (floor random  ZCP_MaxWaitTime) + ZCP_MinWaitTime;
@@ -35,30 +36,45 @@ _capturePosition = [0,0,0];
 _ZCP_name = _this select 0;
 _ZCP_index = _this select 4;
 
-_ZCP_base = ZCP_CapBases call BIS_fnc_selectRandom;
-_ZCP_baseFile = format["x\addons\ZCP\capbases\%1", _ZCP_base select 0];
-_ZCP_baseRadius = _ZCP_base select 1;
+_ZCP_baseFile = '';
+_ZCP_baseRadius = 0;
+_baseType = '';
+_terrainGradient = 20;
+
+if (_this select 7 == 'Random') then {
+	_ZCP_base = ZCP_CapBases call BIS_fnc_selectRandom;
+	_ZCP_baseFile = format["x\addons\ZCP\capbases\%1", _ZCP_base select 0];
+	_ZCP_baseRadius = _ZCP_base select 1;
+	_baseType = _ZCP_base select 2; // m3e or xcam
+	_terrainGradient = _ZCP_base select 3;
+} else {
+	_ZCP_baseFile = format["x\addons\ZCP\capbases\%1", _this select 7];
+	_ZCP_baseRadius = _this select 8;
+	_baseType = _this select 9; // m3e or xcam
+	_terrainGradient = _this select 10;
+};
 
 if(_this select 6)then{
 	_capturePosition = _this select 1;
-
 	diag_log text format ["[ZCP]: %1 :Spawning static on %2",_ZCP_name,_capturePosition];
 }else{
-	_capturePosition = [_ZCP_baseRadius] call ZCP_fnc_findPosition;
+	_capturePosition = [_ZCP_baseRadius, _terrainGradient] call ZCP_fnc_findPosition;
 	diag_log text format ["[ZCP]: %1 :Spawning dynamic on %2",_ZCP_name,_capturePosition];
 };
+
 (ZCP_Data select _ZCP_index) set[2,_capturePosition];
 
-_ZCP_baseClasses = call compile preprocessFileLineNumbers _ZCP_baseFile;
 _ZCP_baseObjects = [];
-_theFlagPos = (_ZCP_baseClasses select 0) select 1;
-_theFlagX = _theFlagPos select 0;
-_theFlagY = _theFlagPos select 1;
-_XChange = _capturePosition select 0;
-_YChange = _capturePosition select 1;
-_this set [1,_capturePosition];
+switch (_baseType) do {
+  case ('m3e'): {
+		_ZCP_baseObjects = [_ZCP_baseFile, _capturePosition] call ZCP_fnc_createM3eBase;
+  };
+	case ('xcam'): {
+	  _ZCP_baseObjects = [_ZCP_baseFile, _capturePosition] call ZCP_fnc_createXcamBase;
+	};
+};
 
-_ZCP_baseObjects = _ZCP_baseClasses call ZCP_fnc_createBase;
+_this set [1,_capturePosition];
 
 if(_this select 5) then {
 	[_capturePosition, _ZCP_baseRadius] call ZCP_fnc_spawnAI;
@@ -243,7 +259,7 @@ if(count _ZCP_baseObjects != 0)then{
 	};
 
 	['Notification', ["ZCP",[format[[5] call ZCP_fnc_translate,_ZCP_name,_finishText]], 'ZCP_Capped']] call ZCP_fnc_showNotification;
-	[_ZCP_currentCapper,_ZCP_name,_capturePosition,_this select 2] call ZCP_fnc_giveReward;
+	[_ZCP_currentCapper,_ZCP_name,_capturePosition,_this select 2, _ZCP_baseRadius] call ZCP_fnc_giveReward;
 	(ZCP_Data select _ZCP_index) set[0,false];
 	(ZCP_Data select _ZCP_index) set[1,0];
 	(ZCP_Data select _ZCP_index) set[2,[-99999,0,0]];
