@@ -19,7 +19,7 @@ _ZCP_baseObjects = _this;
 
 _center = _ZCP_baseObjects select 0;
 
-_positionOrigin = [1] call ZCP_fnc_findPosition;
+_positionOrigin = [1,100] call ZCP_fnc_findPosition;
 
 if (round (random 1) > 0) then {
 	_positionOrigin set [0, 10];

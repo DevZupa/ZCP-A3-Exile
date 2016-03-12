@@ -1,13 +1,14 @@
-private ["_i","_safepos","_validspot","_position","_baseRadius","_distanceFromObjects", "_terrainGradient"];
+private ["_i","_safepos","_validspot","_position","_baseRadius","_distanceFromObjects", "_terrainGradientPos"];
 _baseRadius = _this select 0;
-_terrainGradient = _this select 1;
+_terrainGradientPos = _this select 1;
 _distanceFromObjects = ZCP_MinDistanceFromObject;
 
 if(_baseRadius > _distanceFromObjects) then {
 	_distanceFromObjects = _baseRadius;
 };
 
-_safepos		= [ZCP_MapCenterPos, 0, ZCP_MapRadius, _distanceFromObjects, 0, _terrainGradient, 0];
+_safepos		= [ZCP_MapCenterPos, 0, ZCP_MapRadius, _distanceFromObjects, 0, _terrainGradientPos, 0];
+diag_log _safepos;
 _validspot 	= false;
 while{!_validspot} do {
 	sleep 1;

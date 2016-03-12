@@ -23,7 +23,7 @@ switch (_reward) do {
 		_this call ZCP_fnc_rewardPoptabs;
 	};
 	case "BuildBox" : {
-		_this call ZCP_fnc_rewardBuildBox;
+		_this call ZCP_fnc_rewardBuildingBox;
 	};
 	case "SurvivalBox" : {
 		_this call ZCP_fnc_rewardSurvivalBox;
