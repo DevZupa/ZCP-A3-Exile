@@ -1,8 +1,23 @@
-private["_box","_type","_pos"];
+private["_box","_type","_pos", "_boxType"];
 _pos = _this select 0;
 _type = _this select 1;
 
-_box = "Box_IND_AmmoVeh_F" createVehicle [0,0,150];
+switch (_type) do {
+    case 'BuildBox': {
+      _boxType = ZCP_BuildingBox;
+    };
+    case 'WeaponBox': {
+      _boxType = ZCP_WeaponBox;
+    };
+    case 'SurvivalBox': {
+      _boxType = ZCP_SurvivalBox;
+    };
+    default {
+      _boxType = ZCP_WeaponBox;
+    };
+};
+
+_box = _boxType createVehicle [0,0,150];
 _box allowDamage false;
 _box setDir random 360;
 _box setPos [_pos select 0,_pos select 1,150];

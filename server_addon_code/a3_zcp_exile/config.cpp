@@ -42,12 +42,15 @@ class CfgFunctions {
 			class translate {};
 			class showNotification {};
 			class createXcamBase {};
+			class createEdenConvertedBase {};
 			class rewardReputation {};
 			class rewardPoptabs {};
 			class rewardBuildBox {};
 			class rewardSurvivalBox {};
 			class rewardVehicle {};
 			class rewardWeaponBox {};
+			class createVirtualCircle {};
+			class changeCircleColor {};
 		};
 	};
 };

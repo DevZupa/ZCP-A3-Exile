@@ -17,7 +17,7 @@ private["_currentCapper","_ZCP_continue","_ZCP_flag","_currentGroup","_ZCP_name"
 "_ZCP_lastOwnerChange","_proximityList","_ZCP_baseObjects","_theFlagPos","_theFlagX","_theFlagY","_XChange","_YChange",
 "_ZCP_currentCapper","_ZCP_previousCapper","_ZCP_currentGroup","_ZCP_wasContested","_finishText","_markers","_ZCP_base",
 "_ZCP_ContestStartTime","_ZCP_index","_capturePosition","_randomTime","_changedReward","_ZCP_Halfway","_ZCP_min","_baseType",
-"_terrainGradient","_ZCP_baseRadius"
+"_terrainGradient","_ZCP_baseRadius","_circle"
 ];
 
 _randomTime = (floor random  ZCP_MaxWaitTime) + ZCP_MinWaitTime;
@@ -72,6 +72,15 @@ switch (_baseType) do {
 	case ('xcam'): {
 	  _ZCP_baseObjects = [_ZCP_baseFile, _capturePosition] call ZCP_fnc_createXcamBase;
 	};
+	case ('EdenConverted'): {
+	  _ZCP_baseObjects = [_ZCP_baseFile, _capturePosition] call ZCP_fnc_createEdenConvertedBase;
+	};
+};
+
+_circle = [];
+
+if(ZCP_createVirtualCircle) then {
+	_circle = [_capturePosition, _ZCP_baseRadius ] call ZCP_fnc_createVirtualCircle;
 };
 
 _this set [1,_capturePosition];
@@ -108,10 +117,10 @@ if(count _ZCP_baseObjects != 0)then{
 	while{_ZCP_continue}do{
 			_proximityList = [];
 			{
-				if(isPlayer _x && alive _x)then{
+				if(isPlayer _x && alive _x && (_x distance2D _capturePosition) <= _ZCP_baseRadius)then{
 					_nil =  _proximityList pushBack _x;
 				};
-			}count (_capturePosition nearEntities["CAManBase",_ZCP_baseRadius]);
+			}count (_capturePosition nearEntities["CAManBase", _ZCP_baseRadius * 2]);
 
 			_proximityListMessage = _capturePosition nearEntities["CAManBase",_ZCP_baseRadius * 4];
 
@@ -121,6 +130,7 @@ if(count _ZCP_baseObjects != 0)then{
 				if(_ZCP_needReset) then {
 					(ZCP_Data select _ZCP_index) set[1,0];
 					_markers = [_this, _ZCP_baseRadius, _markers] call ZCP_fnc_createMarker;
+					[_circle, 'none'] call ZCP_fnc_changeCircleColor;
 					_ZCP_isCapping = false;
 					_ZCP_currentCapper = objNull;
 					_ZCP_previousCapper = objNull;
@@ -138,6 +148,7 @@ if(count _ZCP_baseObjects != 0)then{
 				if(!_ZCP_isCapping) then {
 					(ZCP_Data select _ZCP_index) set[1,1]; // to set marker to capping
 				};
+
 				_ZCP_isCapping = true;
 				_ZCP_needReset = true;
 				if(_ZCP_previousCapper in _proximityList && alive _ZCP_previousCapper)then{
@@ -163,6 +174,7 @@ if(count _ZCP_baseObjects != 0)then{
 					};
 
 					_markers = [_this, _ZCP_baseRadius, _markers] call ZCP_fnc_createMarker;
+					[_circle, 'capping'] call ZCP_fnc_changeCircleColor;
 
 					['Notification', ["ZCP",[format[[1] call ZCP_fnc_translate, _ZCP_name, _capperName,(ZCP_CapTime / 60)]],'ZCP_Capping']] call ZCP_fnc_showNotification;
 
@@ -187,6 +199,7 @@ if(count _ZCP_baseObjects != 0)then{
 					_ZCP_wasContested = true;
 					(ZCP_Data select _ZCP_index) set[1,2]; // to set marker to contested
 					_markers = [_this, _ZCP_baseRadius, _markers] call ZCP_fnc_createMarker;
+					[_circle, 'contested'] call ZCP_fnc_changeCircleColor;
 					{
 						['PersonalNotification', ["ZCP",[format[[13] call ZCP_fnc_translate]],'ZCP_Capping'], _x] call ZCP_fnc_showNotification;
 					} count _proximityListMessage;
@@ -198,6 +211,7 @@ if(count _ZCP_baseObjects != 0)then{
 					_ZCP_ContestTotalTime = _ZCP_ContestTotalTime + (_ZCP_ContestEndTime - _ZCP_ContestStartTime);
 					(ZCP_Data select _ZCP_index) set[1,1]; // to set marker to capping
 					_markers = [_this, _ZCP_baseRadius, _markers] call ZCP_fnc_createMarker;
+					[_circle, 'capping'] call ZCP_fnc_changeCircleColor;
 					{
 						['PersonalNotification', ["ZCP",[format[[14] call ZCP_fnc_translate]],'ZCP_Capping'], _x] call ZCP_fnc_showNotification;
 					} count _proximityListMessage;
@@ -214,6 +228,7 @@ if(count _ZCP_baseObjects != 0)then{
 				// only when not contested
 				if (!_ZCP_isContested) then {
 					(ZCP_Data select _ZCP_index) set[1,1]; // to set marker to capped
+					[_circle, 'capping'] call ZCP_fnc_changeCircleColor;
 					// 50% mark
 					if(!_ZCP_Halfway && _ZCP_CapStartTime != 0 && (diag_tickTime - _ZCP_ContestTotalTime - _ZCP_CapStartTime) >  (ZCP_CapTime / 2))then{
 						_capperName = '';
@@ -266,6 +281,9 @@ if(count _ZCP_baseObjects != 0)then{
 	ZCP_MissionCounter = ZCP_MissionCounter - 1;
 	diag_log format["[ZCP]: %1 will be cleaned up in %2s and ended.",_ZCP_name, ZCP_BaseCleanupDelay];
 	[] spawn ZCP_fnc_missionLooper;
+	if(ZCP_createVirtualCircle) then {
+		_circle call ZCP_fnc_cleanupBase;
+	};
 	if(ZCP_CleanupBase)then{
         uiSleep ZCP_BaseCleanupDelay;
         if(ZCP_CleanupBaseWithAIBomber)then{
