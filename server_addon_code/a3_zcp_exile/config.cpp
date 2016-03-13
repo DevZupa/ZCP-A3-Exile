@@ -44,7 +44,7 @@ class CfgFunctions {
 			class createXcamBase {};
 			class rewardReputation {};
 			class rewardPoptabs {};
-			class rewardBuildingBox {};
+			class rewardBuildBox {};
 			class rewardSurvivalBox {};
 			class rewardVehicle {};
 			class rewardWeaponBox {};
