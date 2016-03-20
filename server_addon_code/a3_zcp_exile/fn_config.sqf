@@ -67,9 +67,9 @@ ZCP_RewardWeightForRandomChoice = [
 // valid rewards -> Random, Poptabs, Vehicle, Buildingbox, WeaponBox
 // baseFile -> Random or the basefile name. Random will chose from ZCP_CapBases
 // capradius -> 0 for Random, real number for Static base files.
-ZCP_CapPoints = [ // [name,[x,y,z],reward, unique varname,index, spanwnAI, isStatic, baseFile, capradius, baseFileType, max terrainGradient ( only used if it has staticbaseFile)]
-	["ZCP Alpha",[0,0,0],"Random","alpha",0, true, false, 'Random', 0, 'Random', 2] ,
-	["ZCP Bravo",[0,0,0],"Random","beta",1, true, false, 'Random', 0, 'Random', 2]
+ZCP_CapPoints = [ // [name,[x,y,z],reward, unique varname,index, spanwnAI, isStatic, baseFile, capradius, baseFileType, max terrainGradient ( only used if it has staticbaseFile), distancefromojects( only used if it has staticbaseFile)]
+	["ZCP Alpha",[0,0,0],"Random","alpha",0, true, false, 'Random', 0, 'Random', 40, 40] ,
+	["ZCP Bravo",[0,0,0],"Random","beta",1, true, false, 'Random', 0, 'Random', 40, 40]
 	// example -> ["ZCP Charlie",[3598,5888,0],"Random","charlie",2, true, true, 'm3e_base1.sqf', 60, 'm3e', 10]    // A base on always the same location with always the same base
 	// example -> ["ZCP Delta",[0,0,0],"Random","delta",3, true, false, 'xcam_milPoint.sqf', 100, 'xcam', 15] 			// A base on random location with always the same base
 	// example -> ["ZCP Echo",[1455,8888,0],"Random","echo",4, true, true, 'Random', 0, 'Random', 10] 					// A base on on always the same location with a random base
@@ -80,21 +80,21 @@ ZCP_MaxMissions = count ZCP_CapPoints; // Amount of cap points at the same time.
 
 // For every spawned mission,
 // buildeditor currenty supported -> m3e, xcam
-ZCP_CapBases = [ // located in capbases folder [filename, capradius, buildeditor, max terraingradient (if not overwritten by staticbasefile)]
-	["m3e_base1.sqf", 60, "m3e", 3],
-	["m3e_smallBase1.sqf", 40, "m3e", 3],
-	["m3e_village.sqf", 50, "m3e", 2],
-	["xcam_milPoint.sqf", 50, "xcam", 5],
-	["ec_audacity.sqf", 30, "EdenConverted", 5],
-	["ec_bravery.sqf", 35, "EdenConverted", 5],
-	["ec_courage.sqf", 25, "EdenConverted", 5],
-	["ec_defiance.sqf", 20, "EdenConverted", 5],
-	["ec_endurance.sqf", 20, "EdenConverted", 5],
-	["ec_fortitude.sqf", 25, "EdenConverted", 5]
+ZCP_CapBases = [ // located in capbases folder [filename, capradius, buildeditor, max terraingradient (if not overwritten by staticbasefile), radius of open space for it to spawn base]
+	["m3e_base1.sqf", 60, "m3e", 40, 60],
+	["m3e_smallBase1.sqf", 40, "m3e", 40, 40],
+	["m3e_village.sqf", 50, "m3e", 20, 50],
+	["xcam_milPoint.sqf", 50, "xcam", 30, 50],
+	["ec_audacity.sqf", 30, "EdenConverted", 40, 30],
+	["ec_bravery.sqf", 35, "EdenConverted", 40, 35],
+	["ec_courage.sqf", 25, "EdenConverted", 40, 25],
+	["ec_defiance.sqf", 20, "EdenConverted", 40, 20],
+	["ec_endurance.sqf", 20, "EdenConverted", 40, 20],
+	["ec_fortitude.sqf", 25, "EdenConverted", 40, 25]
 ];
 
 // ZCP_TerrainGradient = 10; // Now defined per base or overwritten when using staticbaseFile for a cappoint
-ZCP_MinDistanceFromObject = 60; // Missions needs an open spot. You can lower it but it might collide with other objects ( not always a problem)
+//ZCP_MinDistanceFromObject = 60; // now defined per base.
 
 
 ZCP_Blacklist = [ // [ [x,y,z], radius ];

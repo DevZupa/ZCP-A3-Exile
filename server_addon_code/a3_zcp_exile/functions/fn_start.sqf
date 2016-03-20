@@ -17,7 +17,7 @@ private["_currentCapper","_ZCP_continue","_ZCP_flag","_currentGroup","_ZCP_name"
 "_ZCP_lastOwnerChange","_proximityList","_ZCP_baseObjects","_theFlagPos","_theFlagX","_theFlagY","_XChange","_YChange",
 "_ZCP_currentCapper","_ZCP_previousCapper","_ZCP_currentGroup","_ZCP_wasContested","_finishText","_markers","_ZCP_base",
 "_ZCP_ContestStartTime","_ZCP_index","_capturePosition","_randomTime","_changedReward","_ZCP_Halfway","_ZCP_min","_baseType",
-"_terrainGradient","_ZCP_baseRadius","_circle"
+"_terrainGradient","_ZCP_baseRadius","_circle","_openRadius"
 ];
 
 _randomTime = (floor random  ZCP_MaxWaitTime) + ZCP_MinWaitTime;
@@ -40,6 +40,7 @@ _ZCP_baseFile = '';
 _ZCP_baseRadius = 0;
 _baseType = '';
 _terrainGradient = 20;
+_openRadius = 60;
 
 if (_this select 7 == 'Random') then {
 	_ZCP_base = ZCP_CapBases call BIS_fnc_selectRandom;
@@ -47,18 +48,20 @@ if (_this select 7 == 'Random') then {
 	_ZCP_baseRadius = _ZCP_base select 1;
 	_baseType = _ZCP_base select 2; // m3e or xcam
 	_terrainGradient = _ZCP_base select 3;
+	_openRadius = _ZCP_base select 3;
 } else {
 	_ZCP_baseFile = format["x\addons\ZCP\capbases\%1", _this select 7];
 	_ZCP_baseRadius = _this select 8;
 	_baseType = _this select 9; // m3e or xcam
 	_terrainGradient = _this select 10;
+	_openRadius = _ZCP_base select 11;
 };
 
 if(_this select 6)then{
 	_capturePosition = _this select 1;
 	diag_log text format ["[ZCP]: %1 :Spawning static on %2",_ZCP_name,_capturePosition];
 }else{
-	_capturePosition = [_ZCP_baseRadius, _terrainGradient] call ZCP_fnc_findPosition;
+	_capturePosition = [_openRadius, _terrainGradient] call ZCP_fnc_findPosition;
 	diag_log text format ["[ZCP]: %1 :Spawning dynamic on %2",_ZCP_name,_capturePosition];
 };
 
@@ -287,7 +290,7 @@ if(count _ZCP_baseObjects != 0)then{
 	if(ZCP_CleanupBase)then{
         uiSleep ZCP_BaseCleanupDelay;
         if(ZCP_CleanupBaseWithAIBomber)then{
-            _ZCP_baseObjects call ZCP_fnc_airstrike;
+            [_ZCP_baseObjects, _capturePosition] call ZCP_fnc_airstrike;
         }else{
             _ZCP_baseObjects call ZCP_fnc_cleanupBase;
         };

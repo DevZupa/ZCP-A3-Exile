@@ -15,20 +15,17 @@
 private ['_ZCP_baseObjects','_center','_positionOrigin','_positionTarget','_unitPilot'
 ,'_unitGroup','_ang','_plane','_wayPoint2','_wayPoint3'
 ];
-_ZCP_baseObjects = _this;
 
-_center = _ZCP_baseObjects select 0;
+_ZCP_baseObjects = _this select 0;
+_positionTarget = _this select 1;
 
-_positionOrigin = [1,100] call ZCP_fnc_findPosition;
+_positionOrigin = [random (ZCP_MapRadius * 2), random (ZCP_MapRadius * 2), 500];
 
 if (round (random 1) > 0) then {
 	_positionOrigin set [0, 10];
 } else {
 	_positionOrigin set [1, 10];
 };
-_positionOrigin set [2, 1000];
-
-_positionTarget = getPos _center;
 
 _positionTarget set [2, ZCP_FlyHeight];
 
@@ -41,12 +38,13 @@ _unitGroup allowFleeing 0;
 
 _planeType = ZCP_CleanupAIVehicleClasses call BIS_fnc_selectRandom;
 
-_plane = createVehicle [_planeType, [_positionOrigin select 0,_positionOrigin select 1,1000], [], 0, "FLY"];
+_plane = createVehicle [_planeType, _positionOrigin, [], 0, "FLY"];
 _plane setVariable ["ExileIsPersistent", false];
 _plane setFuel 1;
 _plane call ExileServer_system_simulationMonitor_addVehicle;
 
 _plane setPosASL [getPosATL _plane select 0, getPosATL _plane select 1, ZCP_FlyHeight + 300];
+_plane setDir _ang;
 [_plane,_ang] call ZCP_fnc_fly;
 
 _unitPilot = _unitGroup createUnit ["i_g_soldier_unarmed_f",[(_positionOrigin select 0) + 30,(_positionOrigin select 1)+30,0],[],1, "Form"];
@@ -79,11 +77,11 @@ _plane flyInHeight ZCP_FlyHeight;
 
 _positionOrigin set [2, ZCP_FlyHeight];
 
-_wayPoint2 = group _plaNE addWaypoint [_positionTarget, 0];
+_wayPoint2 = group _plane addWaypoint [_positionTarget, 0];
 _wayPoint2 setWaypointSpeed "FULL";
 _wayPoint2 setWaypointType "MOVE";
 
-_positionOrigin set [2, (ZCP_FlyHeight + 100)];
+_positionOrigin set [2, ZCP_FlyHeight];
 
 _wayPoint3 = group _plane addWaypoint [_positionOrigin ,0];
 _wayPoint3 setWaypointSpeed "FULL";
@@ -97,8 +95,6 @@ waitUntil { UIsleep 2; isNull _plane || currentWaypoint group _plane == 2};
 // diag_log format["[ZCP-Debug]: %1:isNull _unitPilot, %2:isNull _plane, %3:!(alive _plane)",isNull _unitPilot, isNull _plane, !(alive _plane)];
 
 _ZCP_baseObjects call ZCP_fnc_airbomb;
-
-_plane flyInHeight (ZCP_FlyHeight + 100);
 
 // diag_log format['[ZCP-Debug]: Waypoint %1', currentWaypoint group _plane];
 

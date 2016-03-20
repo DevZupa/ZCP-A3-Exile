@@ -72,6 +72,8 @@ diag_log text format ["[ZCP]: Initiate Zupa's Capture Points"];
 call ZCP_fnc_config;
 call ZCP_fnc_initCPData;
 
+diag_log text format ["[ZCP]: World: %1 | Center: %2 | Radius: %3", toLower worldName, ZCP_MapCenterPos, ZCP_MapRadius];
+
 ZCP_RandomReward = [];
 
 {
