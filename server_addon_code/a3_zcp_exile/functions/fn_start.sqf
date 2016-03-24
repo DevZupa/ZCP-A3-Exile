@@ -48,7 +48,7 @@ if (_this select 7 == 'Random') then {
 	_ZCP_baseRadius = _ZCP_base select 1;
 	_baseType = _ZCP_base select 2; // m3e or xcam
 	_terrainGradient = _ZCP_base select 3;
-	_openRadius = _ZCP_base select 3;
+	_openRadius = _ZCP_base select 4;
 } else {
 	_ZCP_baseFile = format["x\addons\ZCP\capbases\%1", _this select 7];
 	_ZCP_baseRadius = _this select 8;
