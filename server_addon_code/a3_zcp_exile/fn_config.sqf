@@ -20,7 +20,7 @@
 
 ZCP_dev = false; // Devmode for shorter development capture times
 
-ZCP_DMS_doIUseDMS = true; // Use DMS to spawn AI IF CapturePoint has spawnAI = true
+ZCP_AI_Type = 'FUMS'; // NONE | DMS | FUMS
 ZCP_Min_AI_Amount = 4; // Min ammount of AI at a ZCP
 ZCP_Random_AI_Max = 8; // so min 4 and max 12 (4+8) AI
 
