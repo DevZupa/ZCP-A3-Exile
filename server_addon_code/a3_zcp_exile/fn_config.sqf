@@ -118,6 +118,7 @@ ZCP_DistanceBetweenMissions = 500;
 ZCP_SpawnZoneDistance = 500;
 ZCP_TradeZoneDistance = 500;
 ZCP_DistanceFromWater = 100;
+ZCP_DistanceFromPlayers = 200;
 ZCP_TraderZoneMarkerTypes =			[							// If you're using custom trader markers, make sure you define them here. CASE SENSITIVE!!!
 										"ExileTraderZone"
 									];

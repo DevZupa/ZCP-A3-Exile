@@ -29,6 +29,14 @@ while{!_validspot} do {
   };
 	if(_validspot) then {
 		{
+			if ( _position distance2D _x < ZCP_DistanceFromPlayers) then {
+					_validspot = false;
+					//diag_log format['[ZCP]: %1 to close to a player called %2', _position, name _x];
+			};
+		} count allPlayers;
+	};
+	if(_validspot) then {
+		{
 			if ( _position distance2D (_x select 0) < (_x select 1)) then {
 					_validspot = false;
 					//diag_log format['[ZCP]: %1 to close to bloacklist %2', _position, _x];
