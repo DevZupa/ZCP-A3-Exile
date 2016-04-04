@@ -82,5 +82,6 @@ ZCP_RandomReward = [];
 	};
 }count ZCP_RewardWeightForRandomChoice;
 
-[] spawn ZCP_fnc_missionLooper;
 diag_log text format ["[ZCP]: Capture Points is fully running."];
+uiSleep ZCP_ServerStartWaitTime;
+[] spawn ZCP_fnc_missionLooper;
