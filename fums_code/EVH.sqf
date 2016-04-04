@@ -29,10 +29,10 @@
         };
 
         _group = createGroup RESISTANCE;
-        _group = [_group,_spawnpos, _units,_themeIndex ] call FuMS_fnc_HC_msnCtrl_Spawn_CreateGroup;
+        _group = [_group,_ZCP_AI_position, _units,_themeIndex ] call FuMS_fnc_HC_msnCtrl_Spawn_CreateGroup;
 
         _group setBehaviour "SAFE";
         _group setCombatMode "YELLOW";
 
-    [_group, _ZCP_AI_position, _ZCP_AI_radius] call bis_fnc_taskPatrol;
+        [_group, _ZCP_AI_position, _ZCP_AI_radius] call bis_fnc_taskPatrol;
 };
