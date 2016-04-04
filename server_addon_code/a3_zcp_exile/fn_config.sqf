@@ -25,6 +25,7 @@ ZCP_Min_AI_Amount = 4; // Min ammount of AI at a ZCP
 ZCP_Random_AI_Max = 8; // so min 4 and max 12 (4+8) AI
 
 ZCP_CapTime = 300; // Seconds to cap an area uncontested
+ZCP_ServerStartWaitTime = 120;
 ZCP_MinWaitTime = 120; // seconds to wait to spawn a new capturepoint when 1 was capped.
 ZCP_MaxWaitTime = 120; // random between 0 and THIS number added to the ZCP_MinWaitTime to counter spawning points at the same time
 ZCP_BaseCleanupDelay = 180; // seconds to wait to delete a captured base.
