@@ -22,8 +22,6 @@ if !(isServer) exitWith
 	};
 };
 
-diag_log text format ["[ZCP]: Giving server some time to boot."];
-
 ZCP_MapCenterPos =  [8500,8500];
 ZCP_MapRadius = 8500;
 
@@ -83,5 +81,6 @@ ZCP_RandomReward = [];
 }count ZCP_RewardWeightForRandomChoice;
 
 diag_log text format ["[ZCP]: Capture Points is fully running."];
+diag_log text format ["[ZCP]: Waiting %1s for first mission.", ZCP_ServerStartWaitTime];
 uiSleep ZCP_ServerStartWaitTime;
 [] spawn ZCP_fnc_missionLooper;

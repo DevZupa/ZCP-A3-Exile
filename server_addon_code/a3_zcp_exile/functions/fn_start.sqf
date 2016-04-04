@@ -26,7 +26,9 @@ _capturePosition = [0,0,0];
 _ZCP_name = _this select 0;
 _ZCP_index = _this select 4;
 
-uiSleep _randomTime;
+if(!((ZCP_Data select _ZCP_index) select 3)) then {
+	uiSleep _randomTime;
+};
 
 diag_log text format ["[ZCP]: Waiting for %1 players to be online.",ZCP_Minimum_Online_Players];
 waitUntil { uiSleep 60; count( playableUnits ) > ( ZCP_Minimum_Online_Players - 1 ) };
@@ -281,6 +283,7 @@ if(count _ZCP_baseObjects != 0)then{
 	(ZCP_Data select _ZCP_index) set[0,false];
 	(ZCP_Data select _ZCP_index) set[1,0];
 	(ZCP_Data select _ZCP_index) set[2,[-99999,0,0]];
+	(ZCP_Data select _ZCP_index) set[3,false];
 	ZCP_MissionCounter = ZCP_MissionCounter - 1;
 	diag_log format["[ZCP]: %1 will be cleaned up in %2s and ended.",_ZCP_name, ZCP_BaseCleanupDelay];
 	[] spawn ZCP_fnc_missionLooper;
