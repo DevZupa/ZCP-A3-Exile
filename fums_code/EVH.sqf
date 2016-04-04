@@ -23,9 +23,10 @@
 
         _types = ["Rifleman","LMG", "Sniper"];
 
+        for "_i" from 1 to _ZCP_AI_amount do
         {
             _units pushBack [1, _types call BIS_fnc_selectRandom];
-        }count _ZCP_AI_amount;
+        };
 
         _group = createGroup RESISTANCE;
         _group = [_group,_spawnpos, _units,_themeIndex ] call FuMS_fnc_HC_msnCtrl_Spawn_CreateGroup;
