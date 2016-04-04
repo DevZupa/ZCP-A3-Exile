@@ -28,11 +28,11 @@
             _units pushBack [1, _types call BIS_fnc_selectRandom];
         };
 
-        _group = createGroup RESISTANCE;
+        _group = createGroup EAST;
         _group = [_group,_ZCP_AI_position, _units,_themeIndex ] call FuMS_fnc_HC_msnCtrl_Spawn_CreateGroup;
 
         _group setBehaviour "SAFE";
         _group setCombatMode "YELLOW";
 
-        [_group, _ZCP_AI_position, _ZCP_AI_radius] call bis_fnc_taskPatrol;
+        [_group, _ZCP_AI_position, (_ZCP_AI_radius / 3 * 2) ] call AreaPatrol;
 };
