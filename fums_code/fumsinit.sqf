@@ -1,9 +1,10 @@
+// This code goes into the if of the fumsinit.sqf
 "FuMS_ZCP_Handler" addPublicVariableEventHandler
 {
         private['_ZCP_AI_position','_ZCP_AI_amount','_units', '_themeIndex', '_group', '_types'];
         _data = _this select 1;
 
-        diag_log format['[ZCP]: Received request.'];
+        diag_log format['[ZCP-HC]: Received request.'];
 
         _ZCP_AI_position = _data select 0;
         _ZCP_AI_amount = _data select 1;
@@ -11,7 +12,7 @@
 
         _themeIndex = 0;
 
-        diag_log format['[ZCP]: Spawning %1 AI.', _ZCP_AI_amount];
+        diag_log format['[ZCP-HC]: Spawning %1 AI.', _ZCP_AI_amount];
 
         {
             if ( (_x select 0) select 0 == 'SEM' ) then {

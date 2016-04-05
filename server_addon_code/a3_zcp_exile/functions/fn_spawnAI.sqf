@@ -6,7 +6,10 @@ switch (ZCP_AI_Type) do {
   case ('DMS'): {
     if (isNil "DMS_Version") exitWith {
       ZCP_DMS_doIUseDMS = false;
-      diag_log "[ZCP]: You're an idiot";
+      for "_i" from 0 to 99 do
+    	{
+    		  diag_log "[ZCP]: You're an idiot";
+    	};
     };
 
     _amountAI = ZCP_Min_AI_Amount + (floor random ZCP_Random_AI_Max);

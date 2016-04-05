@@ -14,13 +14,13 @@
 */
 
 // First person in the Cap zone is the capper (If he leaves, the closest on of the group is the new capper but time is reset!).
-// When multiple people are in the zone and not in the same group, the zone is contested.
+// When multiple people are in the zone and not in the same group, the zone is contested and the timer pauses
 // Being first in the zone starts the timer.
 // Holding a zone  gives you a reward after x Min.
 
 ZCP_dev = false; // Devmode for shorter development capture times
 
-ZCP_AI_Type = 'FUMS'; // NONE | DMS | FUMS
+ZCP_AI_Type = 'DMS'; // NONE | DMS | FUMS
 ZCP_Min_AI_Amount = 4; // Min ammount of AI at a ZCP
 ZCP_Random_AI_Max = 8; // so min 4 and max 12 (4+8) AI
 
@@ -104,10 +104,10 @@ ZCP_Blacklist = [ // [ [x,y,z], radius ];
 ];
 
 ZCP_createVirtualCircle = true;
-ZCP_changeCircleColor = false;
-ZCP_circleNeutralColor = "#(rgb,8,8,3)color(0,1,0,1)";
-ZCP_circleCappingColor = "#(rgb,8,8,3)color(0.70,0.11,0.70,1)";
-ZCP_circleContestedColor = "#(rgb,8,8,3)color(1,0,0,1)";
+
+ZCP_circleNeutralColor = "#(rgb,8,8,3)color(0,1,0,1)"; // green
+ZCP_circleCappingColor = "#(rgb,8,8,3)color(0,0,1,1)"; // blue
+ZCP_circleContestedColor = "#(rgb,8,8,3)color(1,0,0,1)"; // red
 
 //Boxtypes
 ZCP_SurvivalBox = "O_supplyCrate_F";
@@ -129,9 +129,9 @@ ZCP_SpawnZoneMarkerTypes =			[							// If you're using custom spawn zone marker
 
 
 /* These are arma 3 colors, look up the color naming if you are going to change this */
-ZCP_FreeColor = "ColorIndependent"; // uncontested marker color -> also correct size
-ZCP_CappedColor = "ColorCivilian"; // uncontested + capping color
-ZCP_ContestColor = "ColorOPFOR"; // contested + capping color
+ZCP_FreeColor = "ColorGreen"; // uncontested marker color -> also correct size
+ZCP_CappedColor = "ColorBlue"; // uncontested + capping color
+ZCP_ContestColor = "ColorRed"; // contested + capping color
 ZCP_BackgroundColor = "ColorWhite"; // Color to get attention on the map, if zoomed out this will be bigger then the cap circle which is the normal size.
 ZCP_MissionMarkerWinDotTime = 120; // Seconds to show a marker after a capped point. Change to 0 to disable!
 
@@ -365,7 +365,7 @@ if(ZCP_dev) then {
 /* Do not change this*/
 ZCP_Version = "ZCP_Exile_1.1";
 ZCP_Data = [];
-ZCP_Bases = [];
+ZCP_MissionTriggerData = [];
 ZCP_MissionCounter = 0;
 ZCP_DMS_MagRange = ZCP_DMS_MaximumMagCount - ZCP_DMS_MinimumMagCount;
 diag_log format["ZCP: Config loaded succesfull"];
