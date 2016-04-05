@@ -18,7 +18,7 @@
 // Being first in the zone starts the timer.
 // Holding a zone  gives you a reward after x Min.
 
-ZCP_dev = false; // Devmode for shorter development capture times
+ZCP_dev = true; // Devmode for shorter development capture times
 
 ZCP_AI_Type = 'DMS'; // NONE | DMS | FUMS
 ZCP_Min_AI_Amount = 4; // Min ammount of AI at a ZCP
@@ -69,7 +69,9 @@ ZCP_RewardWeightForRandomChoice = [
 // baseFile -> Random or the basefile name. Random will chose from ZCP_CapBases
 // capradius -> 0 for Random, real number for Static base files.
 ZCP_CapPoints = [ // [name,[x,y,z],reward, unique varname,index, spanwnAI, isStatic, baseFile, capradius, baseFileType, max terrainGradient ( only used if it has staticbaseFile), distancefromojects( only used if it has staticbaseFile)]
-	["ZCP Alpha",[0,0,0],"Random","alpha",0, true, false, 'Random', 0, 'Random', 40, 40] ,
+	["ZCP Alpha",[0,0,0],"Random","alpha",2, true, false, 'Random', 0, 'Random', 40, 40],
+	["ZCP Charlie",[0,0,0],"Random","alpha",2, true, false, 'Random', 0, 'Random', 40, 40],
+	["ZCP Delta",[0,0,0],"Random","alpha",2, true, false, 'Random', 0, 'Random', 40, 40],
 	["ZCP Bravo",[0,0,0],"Random","beta",1, true, false, 'Random', 0, 'Random', 40, 40]
 	// example -> ["ZCP Charlie",[3598,5888,0],"Random","charlie",2, true, true, 'm3e_base1.sqf', 60, 'm3e', 10]    // A base on always the same location with always the same base
 	// example -> ["ZCP Delta",[0,0,0],"Random","delta",3, true, false, 'xcam_milPoint.sqf', 100, 'xcam', 15] 			// A base on random location with always the same base
@@ -368,4 +370,4 @@ ZCP_Data = [];
 ZCP_MissionTriggerData = [];
 ZCP_MissionCounter = 0;
 ZCP_DMS_MagRange = ZCP_DMS_MaximumMagCount - ZCP_DMS_MinimumMagCount;
-diag_log format["ZCP: Config loaded succesfull"];
+diag_log format["[ZCP]: Config loaded succesfull"];
