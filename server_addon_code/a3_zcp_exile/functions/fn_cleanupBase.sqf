@@ -1,3 +1,3 @@
 {
-	deleteVehicle _x;
+	_nil = deleteVehicle _x;
 }count _this;

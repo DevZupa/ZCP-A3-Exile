@@ -8,12 +8,9 @@ private['_mission', '_trigger', '_index','_ZCP_recreateTrigger',
 "_ZCP_baseRadius","_circle","_openRadius"
 ];
 
-_trigger = _this select 0;
-_index = _this select 1;
+
+_index = _this select 0;
 _mission = ZCP_MissionTriggerData select _index;
-
-deleteVehicle _trigger;
-
 _originalThis = _mission select 0;
 _ZCP_name = _originalThis select 0;
 _ZCP_index = _originalThis select 4;
@@ -55,7 +52,7 @@ while{_ZCP_continue}do{
 
         (ZCP_Data select _ZCP_index) set[1,0];
 
-        _markers = [_originalThis, _ZCP_baseRadius, _markers] call ZCP_fnc_createMarker;
+        _markers = [_originalThis, _ZCP_baseRadius, _markers, _capturePosition] call ZCP_fnc_createMarker;
 
         [_circle, 'none'] call ZCP_fnc_changeCircleColor;
 
@@ -95,7 +92,7 @@ while{_ZCP_continue}do{
           _capperName = [2] call ZCP_fnc_translate;
         };
 
-        _markers = [_originalThis, _ZCP_baseRadius, _markers] call ZCP_fnc_createMarker;
+        _markers = [_originalThis, _ZCP_baseRadius, _markers, _capturePosition] call ZCP_fnc_createMarker;
         [_circle, 'capping'] call ZCP_fnc_changeCircleColor;
 
         ['Notification', ["ZCP",[format[[1] call ZCP_fnc_translate, _ZCP_name, _capperName,(ZCP_CapTime / 60)]],'ZCP_Capping']] call ZCP_fnc_showNotification;
@@ -120,7 +117,7 @@ while{_ZCP_continue}do{
         _ZCP_ContestStartTime = diag_tickTime;
         _ZCP_wasContested = true;
         (ZCP_Data select _ZCP_index) set[1,2]; // to set marker to contested
-        _markers = [_originalThis, _ZCP_baseRadius, _markers] call ZCP_fnc_createMarker;
+        _markers = [_originalThis, _ZCP_baseRadius, _markers, _capturePosition] call ZCP_fnc_createMarker;
         [_circle, 'contested'] call ZCP_fnc_changeCircleColor;
         {
           ['PersonalNotification', ["ZCP",[format[[13] call ZCP_fnc_translate]],'ZCP_Capping'], _x] call ZCP_fnc_showNotification;
@@ -132,7 +129,7 @@ while{_ZCP_continue}do{
         _ZCP_ContestEndTime = diag_tickTime;
         _ZCP_ContestTotalTime = _ZCP_ContestTotalTime + (_ZCP_ContestEndTime - _ZCP_ContestStartTime);
         (ZCP_Data select _ZCP_index) set[1,1]; // to set marker to capping
-        _markers = [_originalThis, _ZCP_baseRadius, _markers] call ZCP_fnc_createMarker;
+        _markers = [_originalThis, _ZCP_baseRadius, _markers, _capturePosition] call ZCP_fnc_createMarker;
         [_circle, 'capping'] call ZCP_fnc_changeCircleColor;
         {
           ['PersonalNotification', ["ZCP",[format[[14] call ZCP_fnc_translate]],'ZCP_Capping'], _x] call ZCP_fnc_showNotification;
@@ -144,7 +141,7 @@ while{_ZCP_continue}do{
       if( !_ZCP_isContested && (diag_tickTime - _ZCP_ContestTotalTime - _ZCP_CapStartTime >  ZCP_CapTime ) ) then {
           _ZCP_continue = false;
           //Capper Won, loop will break
-          [_originalThis, _ZCP_baseRadius, _markers] call ZCP_fnc_createWinMarker;
+          [_originalThis, _ZCP_baseRadius, _markers, _capturePosition] call ZCP_fnc_createWinMarker;
       };
 
       // only when not contested
@@ -212,11 +209,11 @@ if(!_ZCP_recreateTrigger) then {
   if(ZCP_CleanupBase)then{
         uiSleep ZCP_BaseCleanupDelay;
         if(ZCP_CleanupBaseWithAIBomber)then{
-            [_ZCP_baseObjects, _capturePosition] call ZCP_fnc_airstrike;
+            [_ZCP_baseObjects, _capturePosition, _ZCP_baseRadius] call ZCP_fnc_airstrike;
         }else{
             _ZCP_baseObjects call ZCP_fnc_cleanupBase;
+            [_capturePosition, _ZCP_baseRadius] call ZCP_fnc_deleteRuins;
+            [_capturePosition, _ZCP_baseRadius] call ZCP_fnc_deleteLoot;
         };
-        [_capturePosition] call ZCP_fnc_deleteRuins;
-        [_capturePosition] call ZCP_fnc_deleteLoot;
   };
 };

@@ -4,7 +4,7 @@
 *
 * @param
 */
-private ['_missionIndex', '_trigger', '_radius','_pos'];
+private ['_missionIndex', '_trigger', '_radius','_pos','_newData'];
 
 _missionIndex = _this select 0;
 _pos = _this select 1;
@@ -13,4 +13,4 @@ _radius = _this select 2;
 _trigger = createTrigger ["EmptyDetector", _pos];
 _trigger setTriggerArea [_radius, _radius, 45, false];
 _trigger setTriggerActivation ["GUER", "PRESENT", false];
-_trigger setTriggerStatements ["this", format['[_this, %1] call ZCP_fnc_monitorMission;', _missionIndex], ""];
+_trigger setTriggerStatements ["this", format['deleteVehicle thisTrigger; [%1] spawn ZCP_fnc_monitorMission;', _missionIndex], ""];

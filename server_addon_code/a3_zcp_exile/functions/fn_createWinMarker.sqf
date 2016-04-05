@@ -7,7 +7,7 @@ _previousMarkers = _this select 2;
 [_previousMarkers] call ZCP_fnc_removeMarker;
 
 if(ZCP_MissionMarkerWinDotTime > 0) then {
-  _position		= _captureObject select 1;
+  _position		= _this select 3;
   _name 			= _captureObject select 0;
   _mission 		= _captureObject select 3;
 

@@ -34,10 +34,6 @@ diag_log text format ["[ZCP]: Waiting for %1 players to be online.",ZCP_Minimum_
 waitUntil { uiSleep 60; count( playableUnits ) > ( ZCP_Minimum_Online_Players - 1 ) };
 diag_log text format ["[ZCP]: %1 players reached, starting %2.",ZCP_Minimum_Online_Players, _ZCP_name];
 
-_capturePosition = [0,0,0];
-_ZCP_name = _this select 0;
-_ZCP_index = _this select 4;
-
 _ZCP_baseFile = '';
 _ZCP_baseRadius = 0;
 _baseType = '';
@@ -56,7 +52,7 @@ if (_this select 7 == 'Random') then {
 	_ZCP_baseRadius = _this select 8;
 	_baseType = _this select 9; // m3e or xcam
 	_terrainGradient = _this select 10;
-	_openRadius = _ZCP_base select 11;
+	_openRadius = _this select 11;
 };
 
 if(_this select 6)then{
@@ -68,6 +64,8 @@ if(_this select 6)then{
 };
 
 (ZCP_Data select _ZCP_index) set[2,_capturePosition];
+
+diag_log format['ZCP - Debug: %1',(ZCP_Data select _ZCP_index) select 2 ];
 
 _ZCP_baseObjects = [];
 switch (_baseType) do {
@@ -88,8 +86,6 @@ if(ZCP_createVirtualCircle) then {
 	_circle = [_capturePosition, _ZCP_baseRadius ] call ZCP_fnc_createVirtualCircle;
 };
 
-_this set [1,_capturePosition];
-
 if(_this select 5) then {
 	[_capturePosition, _ZCP_baseRadius] call ZCP_fnc_spawnAI;
 };
@@ -98,7 +94,7 @@ if(count _ZCP_baseObjects != 0)then{
 
 	['Notification', ["ZCP",[format[[0] call ZCP_fnc_translate, _ZCP_name, (ZCP_CapTime / 60)]],"ZCP_Init"]] call ZCP_fnc_showNotification;
 
-	_markers = [_this, _ZCP_baseRadius, []] call ZCP_fnc_createMarker;
+	_markers = [_this, _ZCP_baseRadius, [], _capturePosition] call ZCP_fnc_createMarker;
 	// creat trigger
 	ZCP_MissionTriggerData set [_ZCP_index, [_this, _ZCP_baseObjects, _capturePosition, _ZCP_baseRadius, _markers, _circle]];
 	[_ZCP_index, _capturePosition, _ZCP_baseRadius] call ZCP_fnc_createTrigger;
