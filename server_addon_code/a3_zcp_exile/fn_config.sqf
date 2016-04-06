@@ -86,21 +86,21 @@ ZCP_CapPoints = [ // [name,[x,y,z],reward, unique varname,index, spanwnAI, isSta
 		true, // use Waves of AI to attack the base when a player is capping
 		[ // array of waves of AI ()
 			[
-				50, // procentage of the cap time to start attack (50 = 50% of the total captime)
+				10, // procentage of the cap time to start attack (50 = 50% of the total captime)
 				3, // Amount of AI units in a group
 				2, // Amount of AI groups
 				400, // distance in meter form ZCP for the ai to spawn
 				true, // true -> groundspawn, false -> parachute
-				false // true -> all groups from 1 random location, false -> all groups from their own random location
+				true // false -> all groups from 1 random location, true -> all groups from their own random location
 			],
 			[
-				80, // procentage of the cap time to start attack (50 = 50% of the total captime)
+				50, // procentage of the cap time to start attack (50 = 50% of the total captime)
 				2, // Amount of AI units in a group
 				4, // Amount of AI groups
 				400, // distance in meter form ZCP for the ai to spawn
 				true, // true -> groundspawn, false -> parachute
-				false // true -> all groups from 1 random location, false -> all groups from their own random location
-			],
+				false // false -> all groups from 1 random location, true -> all groups from their own random location
+			]
 		]
 	]
 	// example -> ["ZCP Charlie",[3598,5888,0],"Random","charlie",2, true, true, 'm3e_base1.sqf', 60, 'm3e', 10]    // A base on always the same location with always the same base

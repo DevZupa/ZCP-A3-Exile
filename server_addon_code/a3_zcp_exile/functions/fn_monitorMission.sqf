@@ -22,6 +22,8 @@ _circle = _mission select 5;
 
 _missionCapTime = _originalThis select 12;
 
+diag_log format['ZCP: _missionCapTime=%1', _missionCapTime ];
+
 _useWaves = _originalThis select 13;
 _waveData = [];
 _nextWave = [];
@@ -32,7 +34,8 @@ if (_useWaves) then {
   _totalWaves = count _waveData;
   if(count _waveData > 0) then {
     _currentWaveIndex = 0;
-    _nextWave = _waveData select 0;
+    _nextWave = _waveData select _currentWaveIndex;
+    diag_log format['ZCP: _nextWave=%1', _nextWave ];
     _nextWaveTimer = (_nextWave select 0) / 100 * _missionCapTime;
   };
 };
@@ -198,6 +201,7 @@ while{_ZCP_continue}do{
           _currentWaveIndex = _currentWaveIndex + 1;
           if(_currentWaveIndex < _totalWaves) then {
             _nextWave = _waveData select _currentWaveIndex;
+            diag_log format['ZCP: _nextWave = %1', _nextWave];
             _nextWaveTimer = (_nextWave select 0) / 100 * _missionCapTime;
           } else {
             _nextWaveTimer = _missionCapTime * 2; // never gets to this.
