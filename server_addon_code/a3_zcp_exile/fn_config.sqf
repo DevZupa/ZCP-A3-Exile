@@ -24,7 +24,7 @@ ZCP_AI_Type = 'DMS'; // NONE | DMS | FUMS
 ZCP_Min_AI_Amount = 4; // Min ammount of AI at a ZCP
 ZCP_Random_AI_Max = 8; // so min 4 and max 12 (4+8) AI
 
-ZCP_CapTime = 300; // Seconds to cap an area uncontested
+// ZCP_CapTime = 300; // Now defined for each mission seperate
 ZCP_ServerStartWaitTime = 120;
 ZCP_MinWaitTime = 120; // seconds to wait to spawn a new capturepoint when 1 was capped.
 ZCP_MaxWaitTime = 120; // random between 0 and THIS number added to the ZCP_MinWaitTime to counter spawning points at the same time
@@ -69,10 +69,40 @@ ZCP_RewardWeightForRandomChoice = [
 // baseFile -> Random or the basefile name. Random will chose from ZCP_CapBases
 // capradius -> 0 for Random, real number for Static base files.
 ZCP_CapPoints = [ // [name,[x,y,z],reward, unique varname,index, spanwnAI, isStatic, baseFile, capradius, baseFileType, max terrainGradient ( only used if it has staticbaseFile), distancefromojects( only used if it has staticbaseFile)]
-	["ZCP Alpha",[0,0,0],"Random","alpha",2, true, false, 'Random', 0, 'Random', 40, 40],
-	["ZCP Charlie",[0,0,0],"Random","alpha",2, true, false, 'Random', 0, 'Random', 40, 40],
-	["ZCP Delta",[0,0,0],"Random","alpha",2, true, false, 'Random', 0, 'Random', 40, 40],
-	["ZCP Bravo",[0,0,0],"Random","beta",1, true, false, 'Random', 0, 'Random', 40, 40]
+	[
+		"ZCP Alpha", // name
+		[0,0,0], // [x,y,z] if using static location
+		"Random", // Reward -> Random, Poptabs, Vehicle, Buildingbox, WeaponBox
+		"alpha", // unique varname
+		2, // unique index
+		true, // spawnAI on start
+		false, // isStatic location ( if true it will take the location specified earlier)
+		'Random', // baseFile -> Random or the name of the sqf file
+		0, // capradius of you use a specific static basefile.
+		'Random', // baseFileType -> the editor where the base was build in: m3e , EdenConverted, xcam , Random (for Random base)
+		40, // max terrainGradient -> when specific static basefile is used
+		40, // distancefromojects -> when specific static basefile is used
+		300, // captime in seconds for this mission
+		true, // use Waves of AI to attack the base when a player is capping
+		[ // array of waves of AI ()
+			[
+				50, // procentage of the cap time to start attack (50 = 50% of the total captime)
+				3, // Amount of AI units in a group
+				2, // Amount of AI groups
+				400, // distance in meter form ZCP for the ai to spawn
+				true, // true -> groundspawn, false -> parachute
+				false // true -> all groups from 1 random location, false -> all groups from their own random location
+			],
+			[
+				80, // procentage of the cap time to start attack (50 = 50% of the total captime)
+				2, // Amount of AI units in a group
+				4, // Amount of AI groups
+				400, // distance in meter form ZCP for the ai to spawn
+				true, // true -> groundspawn, false -> parachute
+				false // true -> all groups from 1 random location, false -> all groups from their own random location
+			],
+		]
+	]
 	// example -> ["ZCP Charlie",[3598,5888,0],"Random","charlie",2, true, true, 'm3e_base1.sqf', 60, 'm3e', 10]    // A base on always the same location with always the same base
 	// example -> ["ZCP Delta",[0,0,0],"Random","delta",3, true, false, 'xcam_milPoint.sqf', 100, 'xcam', 15] 			// A base on random location with always the same base
 	// example -> ["ZCP Echo",[1455,8888,0],"Random","echo",4, true, true, 'Random', 0, 'Random', 10] 					// A base on on always the same location with a random base
@@ -357,17 +387,6 @@ ZCP_Translations = [ // ['original','original in your language'] the %1 %2 and s
 
 ZCP_CurrentMod = "Exile"; // Exile, ( Epoch coming soon again)
 
-if(ZCP_dev) then {
-	ZCP_CapTime = 20;
-	ZCP_MinWaitTime = 10;
-	ZCP_MaxWaitTime = 1;
-	ZCP_BaseCleanupDelay = 1;
-};
-
 /* Do not change this*/
-ZCP_Version = "ZCP_Exile_1.1";
-ZCP_Data = [];
-ZCP_MissionTriggerData = [];
-ZCP_MissionCounter = 0;
-ZCP_DMS_MagRange = ZCP_DMS_MaximumMagCount - ZCP_DMS_MinimumMagCount;
 diag_log format["[ZCP]: Config loaded succesfull"];
+ZCP_ConfigLoaded = true;

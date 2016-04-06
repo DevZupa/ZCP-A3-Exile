@@ -56,6 +56,7 @@ class CfgFunctions {
 			class deleteLoot {};
 			class deleteRuins {};
 			class monitorMission {};
+			class waveAI {};
 
 
 		};

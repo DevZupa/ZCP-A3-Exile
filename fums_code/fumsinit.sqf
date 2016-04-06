@@ -2,9 +2,14 @@
 "FuMS_ZCP_Handler" addPublicVariableEventHandler
 {
         private['_ZCP_AI_position','_ZCP_AI_amount','_units', '_themeIndex', '_group', '_types'];
-        _data = _this select 1;
+        _transferedData = _this select 1;
 
         diag_log format['[ZCP-HC]: Received request.'];
+
+        _type = _transferedData select 0;
+        _data = _transferedData select 1;
+
+        if(_type == 'Normal') then {
 
         _ZCP_AI_position = _data select 0;
         _ZCP_AI_amount = _data select 1;
@@ -36,4 +41,5 @@
         _group setCombatMode "YELLOW";
 
         [_group, _ZCP_AI_position, (_ZCP_AI_radius / 3 * 2) ] call AreaPatrol;
+      };
 };

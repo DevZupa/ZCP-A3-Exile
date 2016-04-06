@@ -25,9 +25,13 @@ _randomTime = (floor random  ZCP_MaxWaitTime) + ZCP_MinWaitTime;
 _capturePosition = [0,0,0];
 _ZCP_name = _this select 0;
 _ZCP_index = _this select 4;
+_missionCapTime = _this select 12;
 
 if(!((ZCP_Data select _ZCP_index) select 3)) then {
 	uiSleep _randomTime;
+} else {
+	_firstRandomTime = floor random 60;
+	uiSleep _firstRandomTime;
 };
 
 diag_log text format ["[ZCP]: Waiting for %1 players to be online.",ZCP_Minimum_Online_Players];
@@ -92,7 +96,7 @@ if(_this select 5) then {
 
 if(count _ZCP_baseObjects != 0)then{
 
-	['Notification', ["ZCP",[format[[0] call ZCP_fnc_translate, _ZCP_name, (ZCP_CapTime / 60)]],"ZCP_Init"]] call ZCP_fnc_showNotification;
+	['Notification', ["ZCP",[format[[0] call ZCP_fnc_translate, _ZCP_name, (_missionCapTime / 60)]],"ZCP_Init"]] call ZCP_fnc_showNotification;
 
 	_markers = [_this, _ZCP_baseRadius, [], _capturePosition] call ZCP_fnc_createMarker;
 	// creat trigger

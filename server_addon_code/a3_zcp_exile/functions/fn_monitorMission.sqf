@@ -5,7 +5,7 @@ private['_mission', '_trigger', '_index','_ZCP_recreateTrigger',
 "_ZCP_lastOwnerChange","_proximityList","_ZCP_baseObjects",
 "_ZCP_currentCapper","_ZCP_previousCapper","_ZCP_currentGroup","_ZCP_wasContested","_finishText","_markers","_ZCP_base",
 "_ZCP_ContestStartTime","_ZCP_index","_capturePosition","_changedReward","_ZCP_Halfway","_ZCP_min",
-"_ZCP_baseRadius","_circle","_openRadius"
+"_ZCP_baseRadius","_circle","_openRadius","_totalWaves",'_useWaves','_waveData','_nextWave','_nextWaveTimer','_currentWaveIndex'
 ];
 
 
@@ -19,6 +19,23 @@ _capturePosition = _mission select 2;
 _ZCP_baseRadius = _mission select 3;
 _markers = _mission select 4;
 _circle = _mission select 5;
+
+_missionCapTime = _originalThis select 12;
+
+_useWaves = _originalThis select 13;
+_waveData = [];
+_nextWave = [];
+_nextWaveTimer = 99999999999;
+_currentWaveIndex = -1;
+if (_useWaves) then {
+  _waveData = _originalThis select 14;
+  _totalWaves = count _waveData;
+  if(count _waveData > 0) then {
+    _currentWaveIndex = 0;
+    _nextWave = _waveData select 0;
+    _nextWaveTimer = (_nextWave select 0) / 100 * _missionCapTime;
+  };
+};
 
 _ZCP_currentCapper = objNull;
 _ZCP_previousCapper = objNull;
@@ -95,7 +112,7 @@ while{_ZCP_continue}do{
         _markers = [_originalThis, _ZCP_baseRadius, _markers, _capturePosition] call ZCP_fnc_createMarker;
         [_circle, 'capping'] call ZCP_fnc_changeCircleColor;
 
-        ['Notification', ["ZCP",[format[[1] call ZCP_fnc_translate, _ZCP_name, _capperName,(ZCP_CapTime / 60)]],'ZCP_Capping']] call ZCP_fnc_showNotification;
+        ['Notification', ["ZCP",[format[[1] call ZCP_fnc_translate, _ZCP_name, _capperName,(_missionCapTime / 60)]],'ZCP_Capping']] call ZCP_fnc_showNotification;
 
       };
 
@@ -138,7 +155,7 @@ while{_ZCP_continue}do{
       };
 
       // TSM Wonned #Kappa
-      if( !_ZCP_isContested && (diag_tickTime - _ZCP_ContestTotalTime - _ZCP_CapStartTime >  ZCP_CapTime ) ) then {
+      if( !_ZCP_isContested && (diag_tickTime - _ZCP_ContestTotalTime - _ZCP_CapStartTime >  _missionCapTime ) ) then {
           _ZCP_continue = false;
           //Capper Won, loop will break
           [_originalThis, _ZCP_baseRadius, _markers, _capturePosition] call ZCP_fnc_createWinMarker;
@@ -149,7 +166,7 @@ while{_ZCP_continue}do{
         (ZCP_Data select _ZCP_index) set[1,1]; // to set marker to capped
         [_circle, 'capping'] call ZCP_fnc_changeCircleColor;
         // 50% mark
-        if(!_ZCP_Halfway && _ZCP_CapStartTime != 0 && (diag_tickTime - _ZCP_ContestTotalTime - _ZCP_CapStartTime) >  (ZCP_CapTime / 2))then{
+        if(!_ZCP_Halfway && _ZCP_CapStartTime != 0 && (diag_tickTime - _ZCP_ContestTotalTime - _ZCP_CapStartTime) >  (_missionCapTime / 2))then{
           _capperName = '';
           if(ZCP_UseSpecificNamesForCappers) then {
             _capperName = name _ZCP_currentCapper;
@@ -157,12 +174,12 @@ while{_ZCP_continue}do{
             _capperName = [2] call ZCP_fnc_translate;
           };
 
-          ['Notification', ["ZCP",[format[[3] call ZCP_fnc_translate ,_ZCP_name,_capperName,(ZCP_CapTime / 2 / 60),"%"]], 'ZCP_Capping']] call ZCP_fnc_showNotification;
+          ['Notification', ["ZCP",[format[[3] call ZCP_fnc_translate ,_ZCP_name,_capperName,(_missionCapTime / 2 / 60),"%"]], 'ZCP_Capping']] call ZCP_fnc_showNotification;
           _ZCP_Halfway = true;
         };
 
         // 1 min mark
-        if(!_ZCP_min && _ZCP_CapStartTime != 0 && (diag_tickTime - _ZCP_ContestTotalTime - _ZCP_CapStartTime) >  (ZCP_CapTime - 60))then{
+        if(!_ZCP_min && _ZCP_CapStartTime != 0 && (diag_tickTime - _ZCP_ContestTotalTime - _ZCP_CapStartTime) >  (_missionCapTime - 60))then{
           _capperName = '';
           if(ZCP_UseSpecificNamesForCappers) then {
             _capperName = name _ZCP_currentCapper;
@@ -173,6 +190,20 @@ while{_ZCP_continue}do{
           ['Notification', ["ZCP",[format[[4] call ZCP_fnc_translate, _ZCP_name, _capperName]], 'ZCP_Capping']] call ZCP_fnc_showNotification;
           _ZCP_min = true;
         };
+
+        // wave check
+
+        if( (diag_tickTime - _ZCP_ContestTotalTime - _ZCP_CapStartTime) >  _nextWaveTimer ) then {
+          [_nextWave, _capturePosition] call ZCP_fnc_waveAI;
+          _currentWaveIndex = _currentWaveIndex + 1;
+          if(_currentWaveIndex < _totalWaves) then {
+            _nextWave = _waveData select _currentWaveIndex;
+            _nextWaveTimer = (_nextWave select 0) / 100 * _missionCapTime;
+          } else {
+            _nextWaveTimer = _missionCapTime * 2; // never gets to this.
+          };
+        };
+
       } else {
         _ZCP_wasContested = true;
       };
