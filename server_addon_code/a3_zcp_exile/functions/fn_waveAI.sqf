@@ -4,13 +4,13 @@
 *
 */
 private['_unitsPerGroup','_amountOfGroups','_distanceFromZCP','_useGroundSpawn',
-'_useRandomGroupLocations','_spawnAIPos','_capturePosition'
+'_useRandomGroupLocations','_spawnAIPos','_capturePosition','_waveData'
 ];
 
 switch (ZCP_AI_Type) do {
   case ('DMS'): {
     _waveData = _this select 0;
-    _unitsPerGroup = _waveData select 1;
+    _unitsPerGroup = ,'_waveData' select 1;
     _amountOfGroups = _waveData select 2;
     _distanceFromZCP = _waveData select 3;
 
@@ -19,18 +19,35 @@ switch (ZCP_AI_Type) do {
 
     _capturePosition = _this select 1;
 
-    _spawnAIPos = [_capturePosition, (_distanceFromZCP - 50), (_distanceFromZCP + 50), 1, 0, 9999, 0]; call BIS_fnc_findSafePos;
-
-    _firstRun = true;
+    _spawnAIPos = [_capturePosition, (_distanceFromZCP - 50), (_distanceFromZCP + 50), 1, 0, 9999, 0] call BIS_fnc_findSafePos;
 
     for "_i" from 1 to _amountOfGroups do {
-      if(!_firstRun && _useRandomGroupLocations) then {
-        _spawnAIPos = [_capturePosition, (_distanceFromZCP - 50), (_distanceFromZCP + 50), 1, 0, 9999, 0]; call BIS_fnc_findSafePos;
+      private['_attackWP','_group'];
+      if(_useRandomGroupLocations) then {
+        _spawnAIPos = [_capturePosition, (_distanceFromZCP - 50), (_distanceFromZCP + 50), 1, 0, 9999, 0] call BIS_fnc_findSafePos;
+      };
+
+      if(_useGroundSpawn) then {
+        _spawnAIPos set [2, 0];
+      }else {
+        _spawnAIPos set [2, 150];
       };
 
       _group = [_spawnAIPos, _unitsPerGroup, "moderate", "random", "bandit"] call DMS_fnc_SpawnAIGroup;
+
       _group setBehaviour "COMBAT";
       _group setCombatMode "RED";
+
+      uiSleep 2;
+
+      _attackWP = _group addWaypoint [_capturePosition, 5];
+      _attackWP setWaypointType "MOVE";
+      _attackWP setWaypointSpeed "NORMAL";
+      _attackWP setWaypointBehaviour "COMBAT";
+
+      _group setCurrentWaypoint _attackWP;
+
+      diag_log format['ZCP: %1 created on %2 ->', _attackWP,_capturePosition, currentWaypoint _group];
     };
   };
   case ('FUMS'): {
