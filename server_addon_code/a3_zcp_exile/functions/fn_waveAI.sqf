@@ -10,12 +10,11 @@ private['_unitsPerGroup','_amountOfGroups','_distanceFromZCP','_useGroundSpawn',
 switch (ZCP_AI_Type) do {
   case ('DMS'): {
     _waveData = _this select 0;
-    _unitsPerGroup = ,'_waveData' select 1;
+    _unitsPerGroup = _waveData select 1;
     _amountOfGroups = _waveData select 2;
     _distanceFromZCP = _waveData select 3;
 
-    _useGroundSpawn = _waveData select 4;
-    _useRandomGroupLocations = _waveData select 5;
+    _useRandomGroupLocations = _waveData select 4;
 
     _capturePosition = _this select 1;
 
@@ -27,27 +26,13 @@ switch (ZCP_AI_Type) do {
         _spawnAIPos = [_capturePosition, (_distanceFromZCP - 50), (_distanceFromZCP + 50), 1, 0, 9999, 0] call BIS_fnc_findSafePos;
       };
 
-      if(_useGroundSpawn) then {
-        _spawnAIPos set [2, 0];
-      }else {
-        _spawnAIPos set [2, 150];
-      };
+      _spawnAIPos set [2, 0];
 
-      _group = [_spawnAIPos, _unitsPerGroup, "moderate", "random", "bandit"] call DMS_fnc_SpawnAIGroup;
-
-      _group setBehaviour "COMBAT";
-      _group setCombatMode "RED";
+      _group = [_spawnAIPos, _unitsPerGroup, "moderate", "random", EAST] call ZCP_fnc_createDMSGroup;
 
       uiSleep 2;
 
-      _attackWP = _group addWaypoint [_capturePosition, 5];
-      _attackWP setWaypointType "MOVE";
-      _attackWP setWaypointSpeed "NORMAL";
-      _attackWP setWaypointBehaviour "COMBAT";
-
-      _group setCurrentWaypoint _attackWP;
-
-      diag_log format['ZCP: %1 created on %2 ->', _attackWP,_capturePosition, currentWaypoint _group];
+      [_group, _capturePosition] call ZCP_fnc_createWaypoint;
     };
   };
   case ('FUMS'): {

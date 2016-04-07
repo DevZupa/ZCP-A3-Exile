@@ -57,7 +57,9 @@ class CfgFunctions {
 			class deleteRuins {};
 			class monitorMission {};
 			class waveAI {};
-
+			class createDMSSoldier {};
+			class createDMSGroup {};
+			class createWaypoint {};
 
 		};
 	};

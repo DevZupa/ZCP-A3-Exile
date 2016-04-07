@@ -1,7 +1,7 @@
 // This code goes into the if of the fumsinit.sqf
 "FuMS_ZCP_Handler" addPublicVariableEventHandler
 {
-        private['_ZCP_AI_position','_ZCP_AI_amount','_units', '_themeIndex', '_group', '_types'];
+        private['_ZCP_AI_position','_ZCP_AI_amount','_ZCP_AI_radius','_units', '_themeIndex', '_group', '_types','_themeIndex','_type','_transferedData','_data'];
         _transferedData = _this select 1;
 
         diag_log format['[ZCP-HC]: Received request.'];
@@ -41,5 +41,9 @@
         _group setCombatMode "YELLOW";
 
         [_group, _ZCP_AI_position, (_ZCP_AI_radius / 3 * 2) ] call AreaPatrol;
+      };
+
+      if(_type == 'Wave') then {
+        diag_log format['[ZCP]: FUMS ZCP Wave needs implementing.'];
       };
 };
