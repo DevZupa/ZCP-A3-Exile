@@ -18,7 +18,7 @@
 // Being first in the zone starts the timer.
 // Holding a zone  gives you a reward after x Min.
 
-ZCP_dev = true; // Devmode for shorter development capture times
+ZCP_dev = false; // Devmode for shorter development capture times
 
 ZCP_AI_Type = 'DMS'; // NONE | DMS | FUMS
 ZCP_Min_AI_Amount = 4; // Min ammount of AI at a ZCP
@@ -75,24 +75,67 @@ ZCP_CapPoints = [
 		[0,0,0], // [x,y,z] if using static location
 		"Random", // Reward -> Random, Poptabs, Vehicle, Buildingbox, WeaponBox
 		"alpha", // unique varname
-		2, // unique index
+		0, // unique index
 		true, // spawnAI on start
 		false, // isStatic location ( if true it will take the location specified earlier)
 		'Random', // baseFile -> Random or the name of the sqf file
 		0, // capradius of you use a specific static basefile.
 		'Random', // baseFileType -> the editor where the base was build in: m3e , EdenConverted, xcam , Random (for Random base)
-		40, // max terrainGradient -> when specific static basefile is used
+		999, // max terrainGradient -> when specific static basefile is used
 		40, // distancefromojects -> when specific static basefile is used
 		300, // captime in seconds for this mission
 		true, // use Waves of AI to attack the base when a player is capping
 		[ // array of waves of AI ()
 			[
-				10, // procentage of the cap time to start attack (50 = 50% of the total captime)
+				15, // procentage of the cap time to start attack (50 = 50% of the total captime)
 				3, // Amount of AI units in a group
 				2, // Amount of AI groups
 				200, // distance in meter form ZCP for the ai to spawn
 				true // false -> all groups from 1 random location, true -> all groups from their own random location
-			],
+			]
+			,
+			[
+				45, // procentage of the cap time to start attack (50 = 50% of the total captime)
+				3, // Amount of AI units in a group
+				3, // Amount of AI groups
+				200, // distance in meter form ZCP for the ai to spawn
+				false // false -> all groups from 1 random location, true -> all groups from their own random location
+			]
+			,
+			[
+				60, // procentage of the cap time to start attack (50 = 50% of the total captime)
+				2, // Amount of AI units in a group
+				4, // Amount of AI groups
+				200, // distance in meter form ZCP for the ai to spawn
+				true // false -> all groups from 1 random location, true -> all groups from their own random location
+			]
+		]
+	]
+	,
+	[
+		"ZCP Bravo", // name
+		[0,0,0], // [x,y,z] if using static location
+		"Random", // Reward -> Random, Poptabs, Vehicle, Buildingbox, WeaponBox
+		"bravo", // unique varname
+		1, // unique index
+		true, // spawnAI on start
+		false, // isStatic location ( if true it will take the location specified earlier)
+		'Random', // baseFile -> Random or the name of the sqf file
+		0, // capradius of you use a specific static basefile.
+		'Random', // baseFileType -> the editor where the base was build in: m3e , EdenConverted, xcam , Random (for Random base)
+		999, // max terrainGradient -> when specific static basefile is used
+		40, // distancefromojects -> when specific static basefile is used
+		300, // captime in seconds for this mission
+		true, // use Waves of AI to attack the base when a player is capping
+		[ // array of waves of AI ()
+			[
+				20, // procentage of the cap time to start attack (50 = 50% of the total captime)
+				3, // Amount of AI units in a group
+				2, // Amount of AI groups
+				200, // distance in meter form ZCP for the ai to spawn
+				true // false -> all groups from 1 random location, true -> all groups from their own random location
+			]
+			,
 			[
 				50, // procentage of the cap time to start attack (50 = 50% of the total captime)
 				2, // Amount of AI units in a group
@@ -102,6 +145,7 @@ ZCP_CapPoints = [
 			]
 		]
 	]
+	// the examples are old examples: u can see how the static location or static base file work. But don't use them like this because they miss data.
 	// example -> ["ZCP Charlie",[3598,5888,0],"Random","charlie",2, true, true, 'm3e_base1.sqf', 60, 'm3e', 10]    // A base on always the same location with always the same base
 	// example -> ["ZCP Delta",[0,0,0],"Random","delta",3, true, false, 'xcam_milPoint.sqf', 100, 'xcam', 15] 			// A base on random location with always the same base
 	// example -> ["ZCP Echo",[1455,8888,0],"Random","echo",4, true, true, 'Random', 0, 'Random', 10] 					// A base on on always the same location with a random base
@@ -113,22 +157,23 @@ ZCP_MaxMissions = count ZCP_CapPoints; // Amount of cap points at the same time.
 // For every spawned mission,
 // buildeditor currenty supported -> m3e, xcam
 ZCP_CapBases = [ // located in capbases folder [filename, capradius, buildeditor, max terraingradient (if not overwritten by staticbasefile), radius of open space for it to spawn base]
-	["m3e_base1.sqf", 60, "m3e", 40, 60],
-	["m3e_village.sqf", 50, "m3e", 20, 50],
-	["xcam_milPoint.sqf", 50, "xcam", 30, 50],
-	["ec_audacity.sqf", 30, "EdenConverted", 40, 30],
-	["ec_bravery.sqf", 35, "EdenConverted", 40, 35],
-	["ec_courage.sqf", 25, "EdenConverted", 40, 25],
-	["ec_defiance.sqf", 20, "EdenConverted", 40, 20],
-	["ec_endurance.sqf", 20, "EdenConverted", 40, 20],
-	["ec_fortitude.sqf", 25, "EdenConverted", 40, 25]
+	["m3e_base1.sqf", 60, "m3e", 90, 60],
+	["m3e_village.sqf", 50, "m3e", 90, 50],
+	["xcam_milPoint.sqf", 50, "xcam", 90, 50],
+	["ec_audacity.sqf", 30, "EdenConverted", 90, 30],
+	["ec_bravery.sqf", 35, "EdenConverted", 90, 35],
+	["ec_courage.sqf", 25, "EdenConverted", 90, 25],
+	["ec_defiance.sqf", 20, "EdenConverted", 90, 20],
+	["ec_endurance.sqf", 20, "EdenConverted", 90, 20],
+	["ec_fortitude.sqf", 25, "EdenConverted", 90, 25]
 ];
 
-// ZCP_TerrainGradient = 10; // Now defined per base or overwritten when using staticbaseFile for a cappoint
+// ZCP_TerrainGradient = 10; // Now defined per base or overwritten when using staticbaseFile for a cappoint	=
 //ZCP_MinDistanceFromObject = 60; // now defined per base.
 
 
 ZCP_Blacklist = [ // [ [x,y,z], radius ];
+	[[23644,18397,0] , 1200],
 	[[-999,-999,0] , 500],
 	[[-999,-999,0] , 500]
 ];
