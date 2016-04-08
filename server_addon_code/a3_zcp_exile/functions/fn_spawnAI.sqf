@@ -31,7 +31,7 @@ switch (ZCP_AI_Type) do {
 
     _amountAI = ZCP_Min_AI_Amount + (floor random ZCP_Random_AI_Max);
     diag_log format['[ZCP]: Requesting %1 AI soldiers.', _amountAI];
-    FuMS_ZCP_Handler = ['Normal',_capturePosition, _amountAI, _capRadius];
+    FuMS_ZCP_Handler = ['Normal',[_capturePosition, _amountAI, _capRadius]];
 
     {
       diag_log format['[ZCP]: Sending request to client %1', owner _x];
