@@ -23,6 +23,7 @@ ZCP_dev = true; // Devmode for shorter development capture times
 ZCP_AI_Type = 'DMS'; // NONE | DMS | FUMS
 ZCP_Min_AI_Amount = 4; // Min ammount of AI at a ZCP
 ZCP_Random_AI_Max = 8; // so min 4 and max 12 (4+8) AI
+ZCP_MessagePlayersBeforeWaves = true; // True -> Inform for an icoming wave of AI, false is not inform the players inside.
 
 // ZCP_CapTime = 300; // Now defined for each mission seperate
 ZCP_ServerStartWaitTime = 120;
@@ -113,7 +114,6 @@ ZCP_MaxMissions = count ZCP_CapPoints; // Amount of cap points at the same time.
 // buildeditor currenty supported -> m3e, xcam
 ZCP_CapBases = [ // located in capbases folder [filename, capradius, buildeditor, max terraingradient (if not overwritten by staticbasefile), radius of open space for it to spawn base]
 	["m3e_base1.sqf", 60, "m3e", 40, 60],
-	["m3e_smallBase1.sqf", 40, "m3e", 40, 40],
 	["m3e_village.sqf", 50, "m3e", 20, 50],
 	["xcam_milPoint.sqf", 50, "xcam", 30, 50],
 	["ec_audacity.sqf", 30, "EdenConverted", 40, 30],
@@ -380,7 +380,8 @@ ZCP_Translations = [ // ['original','original in your language'] the %1 %2 and s
 	['Package delivered, eyes on the sky!', 'Package delivered, eyes on the sky!'], // Package delivered, eyes on the sky!
 	['Package delivered, eyes on the sky! Poptabs on bank!', 'Package delivered, eyes on the sky! Poptabs on bank!'], // Package delivered, eyes on the sky! Poptabs on bank!
 	['Capture point is contested!', 'Capture point is contested!'], // Package delivered, eyes on the sky! Poptabs on bank!
-	['Capture point is contested is no longer contested!', 'Capture point is no longer contested!'] // Capture point is contested!
+	['Capture point is contested is no longer contested!', 'Capture point is no longer contested!'], // Capture point is contested!
+	['AI Wave incoming to retake %1.', 'AI Wave incoming to retake %1.'] // Capture point is contested!
 ];
 
 ZCP_CurrentMod = "Exile"; // Exile, ( Epoch coming soon again)

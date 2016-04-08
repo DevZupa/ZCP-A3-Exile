@@ -196,13 +196,17 @@ while{_ZCP_continue}do{
         if( (diag_tickTime - _ZCP_ContestTotalTime - _ZCP_CapStartTime) >  _nextWaveTimer ) then {
           [_nextWave, _capturePosition] spawn ZCP_fnc_waveAI;
           _currentWaveIndex = _currentWaveIndex + 1;
+          if (ZCP_MessagePlayersBeforeWaves && ZCP_AI_Type != 'NONE') then {
+              {
+                ['PersonalNotification', ["ZCP",[format[[15] call ZCP_fnc_translate, _ZCP_name]],'ZCP_Capping'], _x] call ZCP_fnc_showNotification;
+              } count _proximityListMessage;
+          };
           if(_currentWaveIndex < _totalWaves) then {
             _nextWave = _waveData select _currentWaveIndex;
             _nextWaveTimer = ((_nextWave select 0) / 100) * _missionCapTime;
           } else {
-            _nextWaveTimer = _missionCapTime * 2; // never gets to this.
+            _nextWaveTimer = _missionCapTime * 10;
           };
-          diag_log format['[ZCP]: Timer changed to %1', _nextWaveTimer];
         };
 
       } else {

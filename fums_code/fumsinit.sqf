@@ -43,7 +43,7 @@
       };
 
       if(_type == 'Wave') then {
-        diag_log format['[ZCP]: FUMS ZCP Wave needs implementing.'];
+        diag_log format['[ZCP]: FUMS ZCP Wave'];
 
         _waveData = _data select 0;
         _unitsPerGroup = _waveData select 1;

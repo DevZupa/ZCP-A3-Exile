@@ -1,4 +1,4 @@
-private['_groupAI','_spawnAIPos','_difficulty','_class','_unitAI','_posAI'];
+private['_groupAI','_spawnAIPos','_difficulty','_class','_unitAI','_posAI','_dummyGroupEast'];
 
 
 _groupAI = _this select 0;
@@ -7,7 +7,7 @@ _difficulty = _this select 2;
 _class = _this select 3;
 _unarmed = false;
 
-diag_log format['ZCP: creating soldier %1 %2 %3 %4',_groupAI,_spawnAIPos,_difficulty,_class];
+//diag_log format['ZCP: creating soldier %1 %2 %3 %4',_groupAI,_spawnAIPos,_difficulty,_class];
 
 _difficulty =
 	switch (toLower _difficulty) do
@@ -39,9 +39,13 @@ _difficulty =
 	};
 
 _posAI = [_spawnAIPos, 0, 20, 1, 0, 9999, 0] call BIS_fnc_findSafePos;
-_unitAI = _groupAI createUnit ['O_G_Soldier_F', _posAI, [], 0,"FORM"];
+
+_dummyGroupEast = createGroup east;
+
+_unitAI = _dummyGroupEast createUnit ['O_G_Soldier_F', _posAI, [], 0,"FORM"];
 
 [_unitAI] joinSilent _groupAI;
+deleteGroup _dummyGroupEast;
 _unitAI allowFleeing 0;
 
 // Remove existing gear

@@ -1,5 +1,7 @@
 private["_nil"];
 
+EAST setFriend[EAST,1];
+
 if(ZCP_dev) then {
 	ZCP_MinWaitTime = 10;
 	ZCP_MaxWaitTime = 1;
