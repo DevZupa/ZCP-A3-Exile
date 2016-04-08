@@ -22,8 +22,6 @@ _circle = _mission select 5;
 
 _missionCapTime = _originalThis select 12;
 
-diag_log format['ZCP: _missionCapTime=%1', _missionCapTime ];
-
 _useWaves = _originalThis select 13;
 _waveData = [];
 _nextWave = [];
@@ -32,11 +30,10 @@ _currentWaveIndex = -1;
 if (_useWaves) then {
   _waveData = _originalThis select 14;
   _totalWaves = count _waveData;
-  if(count _waveData > 0) then {
+  if(_totalWaves > 0) then {
     _currentWaveIndex = 0;
     _nextWave = _waveData select _currentWaveIndex;
-    diag_log format['ZCP: _nextWave=%1', _nextWave ];
-    _nextWaveTimer = (_nextWave select 0) / 100 * _missionCapTime;
+    _nextWaveTimer = ((_nextWave select 0) / 100) * _missionCapTime;
   };
 };
 
@@ -197,15 +194,15 @@ while{_ZCP_continue}do{
         // wave check
 
         if( (diag_tickTime - _ZCP_ContestTotalTime - _ZCP_CapStartTime) >  _nextWaveTimer ) then {
-          [_nextWave, _capturePosition] call ZCP_fnc_waveAI;
+          [_nextWave, _capturePosition] spawn ZCP_fnc_waveAI;
           _currentWaveIndex = _currentWaveIndex + 1;
           if(_currentWaveIndex < _totalWaves) then {
             _nextWave = _waveData select _currentWaveIndex;
-            diag_log format['ZCP: _nextWave = %1', _nextWave];
-            _nextWaveTimer = (_nextWave select 0) / 100 * _missionCapTime;
+            _nextWaveTimer = ((_nextWave select 0) / 100) * _missionCapTime;
           } else {
             _nextWaveTimer = _missionCapTime * 2; // never gets to this.
           };
+          diag_log format['[ZCP]: Timer changed to %1', _nextWaveTimer];
         };
 
       } else {

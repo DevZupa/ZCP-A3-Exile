@@ -21,18 +21,18 @@ switch (ZCP_AI_Type) do {
     _spawnAIPos = [_capturePosition, (_distanceFromZCP - 50), (_distanceFromZCP + 50), 1, 0, 9999, 0] call BIS_fnc_findSafePos;
 
     for "_i" from 1 to _amountOfGroups do {
-      private['_attackWP','_group'];
+      private['_attackWP','_groupOfAI'];
       if(_useRandomGroupLocations) then {
         _spawnAIPos = [_capturePosition, (_distanceFromZCP - 50), (_distanceFromZCP + 50), 1, 0, 9999, 0] call BIS_fnc_findSafePos;
       };
 
       _spawnAIPos set [2, 0];
 
-      _group = [_spawnAIPos, _unitsPerGroup, "moderate", "random", EAST] call ZCP_fnc_createDMSGroup;
+      _groupOfAI = [_spawnAIPos, _unitsPerGroup, "moderate", "random", EAST] call ZCP_fnc_createDMSGroup;
 
       uiSleep 2;
 
-      [_group, _capturePosition] call ZCP_fnc_createWaypoint;
+      [_groupOfAI, _capturePosition] call ZCP_fnc_createWaypoint;
     };
   };
   case ('FUMS'): {

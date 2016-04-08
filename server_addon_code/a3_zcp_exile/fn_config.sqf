@@ -68,7 +68,7 @@ ZCP_RewardWeightForRandomChoice = [
 // valid rewards -> Random, Poptabs, Vehicle, Buildingbox, WeaponBox
 // baseFile -> Random or the basefile name. Random will chose from ZCP_CapBases
 // capradius -> 0 for Random, real number for Static base files.
-ZCP_CapPoints = [ // [name,[x,y,z],reward, unique varname,index, spanwnAI, isStatic, baseFile, capradius, baseFileType, max terrainGradient ( only used if it has staticbaseFile), distancefromojects( only used if it has staticbaseFile)]
+ZCP_CapPoints = [
 	[
 		"ZCP Alpha", // name
 		[0,0,0], // [x,y,z] if using static location
@@ -89,14 +89,14 @@ ZCP_CapPoints = [ // [name,[x,y,z],reward, unique varname,index, spanwnAI, isSta
 				10, // procentage of the cap time to start attack (50 = 50% of the total captime)
 				3, // Amount of AI units in a group
 				2, // Amount of AI groups
-				400, // distance in meter form ZCP for the ai to spawn
+				200, // distance in meter form ZCP for the ai to spawn
 				true // false -> all groups from 1 random location, true -> all groups from their own random location
 			],
 			[
 				50, // procentage of the cap time to start attack (50 = 50% of the total captime)
 				2, // Amount of AI units in a group
-				4, // Amount of AI groups
-				400, // distance in meter form ZCP for the ai to spawn
+				3, // Amount of AI groups
+				200, // distance in meter form ZCP for the ai to spawn
 				false // false -> all groups from 1 random location, true -> all groups from their own random location
 			]
 		]

@@ -4,6 +4,7 @@ if(ZCP_dev) then {
 	ZCP_MinWaitTime = 10;
 	ZCP_MaxWaitTime = 1;
 	ZCP_BaseCleanupDelay = 1;
+	ZCP_ServerStartWaitTime = 20;
 };
 
 ZCP_Version = "ZCP_Exile_2";

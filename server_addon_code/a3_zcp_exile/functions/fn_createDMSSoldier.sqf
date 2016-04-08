@@ -1,9 +1,13 @@
-private['_groupAI','_spawnAIPos','_difficulty','_solierType','_unitAI','_posAI'];
+private['_groupAI','_spawnAIPos','_difficulty','_class','_unitAI','_posAI'];
+
 
 _groupAI = _this select 0;
 _spawnAIPos = _this select 1;
 _difficulty = _this select 2;
-_solierType = _this select 3;
+_class = _this select 3;
+_unarmed = false;
+
+diag_log format['ZCP: creating soldier %1 %2 %3 %4',_groupAI,_spawnAIPos,_difficulty,_class];
 
 _difficulty =
 	switch (toLower _difficulty) do
@@ -147,7 +151,7 @@ if !(_class in DMS_ai_SupportedClasses) exitWith
 			};
 		};
 
-		// In case spawn position is water
+		/*// In case spawn position is water
 		if (DMS_ai_enable_water_equipment && {surfaceIsWater _pos}) then
 		{
 			removeHeadgear _unitAI;
@@ -156,7 +160,7 @@ if !(_class in DMS_ai_SupportedClasses) exitWith
 			_unitAI addVest "V_RebreatherIA";
 			_unitAI addGoggles "G_Diving";
 			[_unitAI, "arifle_SDAR_F", 4 + floor(random 3), "20Rnd_556x45_UW_mag"] call BIS_fnc_addWeapon;
-		};
+		};*/
 
 		_pistols = missionNamespace getVariable [format ["DMS_%1_pistols",_class],[]];
 		if !(_pistols isEqualTo []) then
@@ -190,5 +194,5 @@ if (_difficulty=="hardcore") then
 	} forEach ["SUPPRESSION", "AIMINGERROR"];
 };
 
-_unit setCustomAimCoef (missionNamespace getVariable [format["DMS_AI_AimCoef_%1",_difficulty], 0.7]);
-_unit enableStamina (missionNamespace getVariable [format["DMS_AI_EnableStamina_%1",_difficulty], true]);
+_unitAI setCustomAimCoef (missionNamespace getVariable [format["DMS_AI_AimCoef_%1",_difficulty], 0.7]);
+_unitAI enableStamina (missionNamespace getVariable [format["DMS_AI_EnableStamina_%1",_difficulty], true]);

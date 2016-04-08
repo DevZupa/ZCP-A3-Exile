@@ -1,4 +1,4 @@
-private['_group',"_capturePosition","_amountAI","_capRadius",'_message','_client','_headlessClients'];
+private['_group',"_capturePosition","_amountAI","_capRadius",'_message','_client','_headlessClients','_holdWP'];
 _capturePosition = _this select 0;
 _capRadius = _this select 1;
 
@@ -14,10 +14,16 @@ switch (ZCP_AI_Type) do {
 
     _amountAI = ZCP_Min_AI_Amount + (floor random ZCP_Random_AI_Max);
     // Posted on forums by second_coming;
-    _group = [_capturePosition, _amountAI, "moderate", "random", "bandit"] call DMS_fnc_SpawnAIGroup;
-    [_group, _capturePosition, _capRadius] call bis_fnc_taskPatrol;
-    _group setBehaviour "SAFE";
+    _group = [_capturePosition, _amountAI, "moderate", "random", EAST] call ZCP_fnc_createDMSGroup;
+
+    _group setBehaviour "AWARE";
     _group setCombatMode "YELLOW";
+
+    _holdWP = _group addWaypoint [_capturePosition, 5];
+    _holdWP setWaypointType "HOLD";
+    _holdWP setWaypointSpeed "NORMAL";
+    _holdWP setWaypointBehaviour "COMBAT";
+
   };
   case ('FUMS'): {
     diag_log format['[ZCP]: Calling FUMS AI.'];

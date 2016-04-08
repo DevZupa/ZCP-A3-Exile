@@ -5,12 +5,12 @@ _dificulty = _this select 2;
 _solierType = _this select 3;
 _side = _this select 4;
 
-_groupAI createGroup EAST;
+_groupAI = createGroup _side;
 _groupAI setBehaviour "COMBAT";
 _groupAI setCombatMode "RED";
 
-for "_j" from 1 to _unitsPerGroup do {
-  [_spawnAIPos, _dificulty, _solierType] call ZCP_fnc_createDMSSoldier;
+for "_i" from 1 to _unitsPerGroup do {
+  [_groupAI, _spawnAIPos, _dificulty, _solierType] call ZCP_fnc_createDMSSoldier;
 };
 
 _groupAI selectLeader ((units _groupAI) select 0);
