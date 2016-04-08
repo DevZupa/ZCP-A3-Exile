@@ -8,6 +8,7 @@ class CfgPatches {
 };
 class CfgFunctions {
 	class zcp {
+		tag = "ZCP";
 		class main {
 			file = "x\addons\ZCP";
 			class startZCP
@@ -51,6 +52,15 @@ class CfgFunctions {
 			class rewardWeaponBox {};
 			class createVirtualCircle {};
 			class changeCircleColor {};
+			class createTrigger {};
+			class deleteLoot {};
+			class deleteRuins {};
+			class monitorMission {};
+			class waveAI {};
+			class createDMSSoldier {};
+			class createDMSGroup {};
+			class createWaypoint {};
+
 		};
 	};
 };

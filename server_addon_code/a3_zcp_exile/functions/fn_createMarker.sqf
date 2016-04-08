@@ -4,7 +4,7 @@ _captureObject = _this select 0;
 _capRadius 		= _this select 1;
 _previousMarkers = _this select 2;
 
-_position		= _captureObject select 1;
+_position		= _this select 3;
 _name 			= _captureObject select 0;
 _mission 		= _captureObject select 3;
 _index 			= _captureObject select 4;

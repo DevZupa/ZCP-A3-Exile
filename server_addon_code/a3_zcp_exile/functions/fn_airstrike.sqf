@@ -12,12 +12,14 @@
 	────────║║
 	────────╚╝
 */
-private ['_ZCP_baseObjects','_center','_positionOrigin','_positionTarget','_unitPilot'
-,'_unitGroup','_ang','_plane','_wayPoint2','_wayPoint3'
+private ['_ZCP_baseObjects','_center','_positionOrigin','_positionTarget','_unitPilot','_capturePosition'
+,'_unitGroup','_ang','_plane','_wayPoint2','_wayPoint3','_ZCP_baseRadius'
 ];
 
 _ZCP_baseObjects = _this select 0;
 _positionTarget = _this select 1;
+_capturePosition = _this select 1;
+_ZCP_baseRadius = _this select 2;
 
 _positionOrigin = [random (ZCP_MapRadius * 2), random (ZCP_MapRadius * 2), 500];
 
@@ -94,7 +96,7 @@ waitUntil { UIsleep 2; isNull _plane || currentWaypoint group _plane == 2};
 // diag_log format['[ZCP-Debug]: Waypoint %1', currentWaypoint group _plane];
 // diag_log format["[ZCP-Debug]: %1:isNull _unitPilot, %2:isNull _plane, %3:!(alive _plane)",isNull _unitPilot, isNull _plane, !(alive _plane)];
 
-_ZCP_baseObjects call ZCP_fnc_airbomb;
+[_ZCP_baseObjects, _capturePosition, _ZCP_baseRadius] call ZCP_fnc_airbomb;
 
 // diag_log format['[ZCP-Debug]: Waypoint %1', currentWaypoint group _plane];
 
