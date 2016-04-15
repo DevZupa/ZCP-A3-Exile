@@ -73,9 +73,6 @@ while{_ZCP_continue}do{
 
         [_circle, 'none'] call ZCP_fnc_changeCircleColor;
 
-        ZCP_MissionTriggerData set [_ZCP_index, [_originalThis, _ZCP_baseObjects, _capturePosition, _ZCP_baseRadius, _markers, _circle]];
-      	[_ZCP_index, _capturePosition, _ZCP_baseRadius] call ZCP_fnc_createTrigger;
-
         _ZCP_recreateTrigger = true;
         _ZCP_continue = false;
 
@@ -218,7 +215,10 @@ while{_ZCP_continue}do{
   uiSleep 1;
 };
 
-if(!_ZCP_recreateTrigger) then {
+if(_ZCP_recreateTrigger) then {
+    ZCP_MissionTriggerData set [_ZCP_index, [_originalThis, _ZCP_baseObjects, _capturePosition, _ZCP_baseRadius, _markers, _circle]];
+  	[_ZCP_index, _capturePosition, _ZCP_baseRadius] call ZCP_fnc_createTrigger;
+} else {
   _finishText = '';
 
   if(ZCP_CleanupBase)then{
