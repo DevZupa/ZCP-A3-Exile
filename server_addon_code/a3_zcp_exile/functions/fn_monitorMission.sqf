@@ -2,7 +2,8 @@
 
 private['_mission', '_trigger', '_index','_ZCP_recreateTrigger',
 "_currentCapper","_ZCP_continue","_currentGroup","_ZCP_name",
-"_ZCP_lastOwnerChange","_proximityList","_ZCP_baseObjects",
+"_ZCP_lastOwnerChange","_proximityList","_ZCP_baseObjects", "_originalThis","_missionCapTime","_ZCP_isCapping","_finishText",
+"_ZCP_isCapping","_ZCP_ContestEndTime","_ZCP_ContestTotalTime","_proximityListMessage","_ZCP_isContested","_capperName",
 "_ZCP_currentCapper","_ZCP_previousCapper","_ZCP_currentGroup","_ZCP_wasContested","_finishText","_markers","_ZCP_base",
 "_ZCP_ContestStartTime","_ZCP_index","_capturePosition","_changedReward","_ZCP_Halfway","_ZCP_min",
 "_ZCP_baseRadius","_circle","_openRadius","_totalWaves",'_useWaves','_waveData','_nextWave','_nextWaveTimer','_currentWaveIndex'
@@ -40,7 +41,6 @@ if (_useWaves) then {
 _ZCP_currentCapper = objNull;
 _ZCP_previousCapper = objNull;
 _ZCP_currentGroup = objNull;
-_ZCP_ContestStartTime = 0;
 _ZCP_wasContested = false;
 _ZCP_continue = true;
 _ZCP_Halfway = false;
@@ -53,7 +53,9 @@ _ZCP_ContestEndTime = 0;
 _ZCP_ContestTotalTime = 0;
 
 _ZCP_recreateTrigger = false;
-
+_ZCP_isContested = false;
+_capperName = '';
+_finishText = '';
 
 while{_ZCP_continue}do{
     _proximityList = [];
@@ -72,9 +74,6 @@ while{_ZCP_continue}do{
         _markers = [_originalThis, _ZCP_baseRadius, _markers, _capturePosition] call ZCP_fnc_createMarker;
 
         [_circle, 'none'] call ZCP_fnc_changeCircleColor;
-
-        ZCP_MissionTriggerData set [_ZCP_index, [_originalThis, _ZCP_baseObjects, _capturePosition, _ZCP_baseRadius, _markers, _circle]];
-      	[_ZCP_index, _capturePosition, _ZCP_baseRadius] call ZCP_fnc_createTrigger;
 
         _ZCP_recreateTrigger = true;
         _ZCP_continue = false;
@@ -218,7 +217,10 @@ while{_ZCP_continue}do{
   uiSleep 1;
 };
 
-if(!_ZCP_recreateTrigger) then {
+if(_ZCP_recreateTrigger) then {
+    ZCP_MissionTriggerData set [_ZCP_index, [_originalThis, _ZCP_baseObjects, _capturePosition, _ZCP_baseRadius, _markers, _circle]];
+  	[_ZCP_index, _capturePosition, _ZCP_baseRadius] call ZCP_fnc_createTrigger;
+} else {
   _finishText = '';
 
   if(ZCP_CleanupBase)then{
