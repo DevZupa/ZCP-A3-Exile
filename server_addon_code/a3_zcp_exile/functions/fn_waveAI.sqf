@@ -16,6 +16,7 @@ switch (ZCP_AI_Type) do {
 
     _useRandomGroupLocations = _waveData select 4;
 
+
     _capturePosition = _this select 1;
 
     _spawnAIPos = [_capturePosition, (_distanceFromZCP - 50), (_distanceFromZCP + 50), 1, 0, 9999, 0] call BIS_fnc_findSafePos;
