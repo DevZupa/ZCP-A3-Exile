@@ -7,6 +7,8 @@ private['_unitsPerGroup','_amountOfGroups','_distanceFromZCP','_useGroundSpawn',
 '_useRandomGroupLocations','_spawnAIPos','_capturePosition','_waveData'
 ];
 
+
+
 switch (ZCP_AI_Type) do {
   case ('DMS'): {
     _waveData = _this select 0;
