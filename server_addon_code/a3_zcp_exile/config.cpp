@@ -44,6 +44,7 @@ class CfgFunctions {
 			class showNotification {};
 			class createXcamBase {};
 			class createEdenConvertedBase {};
+			class createM3eEdenBase {};
 			class rewardReputation {};
 			class rewardPoptabs {};
 			class rewardBuildBox {};
@@ -60,7 +61,7 @@ class CfgFunctions {
 			class createDMSSoldier {};
 			class createDMSGroup {};
 			class createWaypoint {};
-
+			class createSmokeScreen {};
 		};
 	};
 };

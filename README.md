@@ -18,6 +18,13 @@ on the line of 'units' add
 !="if (count units group _this>1) then"
 ```
 
+Credits to the following people:
+
+* JamieKG for Testing and XCAM Base.
+* Zombie for AlRayak testing and whining.
+* Ferry for 3 cap bases!
+* DMS for code usage!
+
 Changes in 2.1
 
 * Amount of starting AI is now defined per mission instead of global.

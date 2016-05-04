@@ -12,9 +12,9 @@
 	────────║║
 	────────╚╝
 */
+private['_middle'];
 
-
-if !(isServer) exitWith
+if (!isServer) exitWith
 {
 	for "_i" from 0 to 99 do
 	{

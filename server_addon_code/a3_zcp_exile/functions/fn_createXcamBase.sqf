@@ -1,35 +1,39 @@
-private['_theFlagPos','_theFlagX','_theFlagY','_XChange','_YChange','_ZCP_baseObjects','_ZCP_baseClasses'];
-_ZCP_baseObjects = [];
-_ZCP_baseClasses = call compile preprocessFileLineNumbers (_this select 0);
-_capturePosition = _this select 1;
-_theFlagPos =  call compile ((_ZCP_baseClasses select 0) select 1);
-_theFlagX = _theFlagPos select 0;
-_theFlagY = _theFlagPos select 1;
-_XChange = _capturePosition select 0;
-_YChange = _capturePosition select 1;
+private['_ZCP_CXB_theFlagPos','_ZCP_CXB_theFlagX','_ZCP_CXB_theFlagY','_ZCP_CXB_xChange','_ZCP_CXB_yChange','_ZCP_CXB_baseObjects','_ZCP_CXB_baseClasses','_ZCP_CXB_capturePosition'];
+_ZCP_CXB_baseObjects = [];
+_ZCP_CXB_baseClasses = call compile preprocessFileLineNumbers (_this select 0);
+_ZCP_CXB_capturePosition = _this select 1;
+_ZCP_CXB_theFlagPos =  call compile ((_ZCP_CXB_baseClasses select 0) select 1);
+_ZCP_CXB_theFlagX = _ZCP_CXB_theFlagPos select 0;
+_ZCP_CXB_theFlagY = _ZCP_CXB_theFlagPos select 1;
+_ZCP_CXB_xChange = _ZCP_CXB_capturePosition select 0;
+_ZCP_CXB_yChange = _ZCP_CXB_capturePosition select 1;
 
 {
-  private['_newPos', '_pos', '_obj', '_dat'];
-  _dat = _x;
-	_obj = createVehicle [(_dat select 0), [0,0,0], [], 0, "CAN_COLLIDE"];
-	if((_dat select 4) == 0) then {_obj enableSimulation false};
-	if((_dat select 8) == 0) then {_obj allowDamage false};
-	_obj setdir (_dat select 2);
-	_pos = call compile (_dat select 1);
-	_newPos = [((_pos select 0) - _theFlagX + _XChange), ((_pos select 1) - _theFlagY + _YChange),(_pos select 2)];
-	if((_dat select 3) == -100) then
+  private['_ZCP_CXB_newPos', '_ZCP_CXB_pos', '_ZCP_CXB_obj', '_ZCP_CXB_objData'];
+  _ZCP_CXB_objData = _x;
+	_ZCP_CXB_obj = createVehicle [(_ZCP_CXB_objData select 0), [0,0,0], [], 0, "CAN_COLLIDE"];
+	if((_ZCP_CXB_objData select 4) == 0) then {_ZCP_CXB_obj enableSimulation false};
+	if((_ZCP_CXB_objData select 8) == 0) then {_ZCP_CXB_obj allowDamage false};
+	_ZCP_CXB_obj setDir (_ZCP_CXB_objData select 2);
+	_ZCP_CXB_pos = call compile (_ZCP_CXB_objData select 1);
+	_ZCP_CXB_newPos = [((_ZCP_CXB_pos select 0) - _ZCP_CXB_theFlagX + _ZCP_CXB_xChange), ((_ZCP_CXB_pos select 1) - _ZCP_CXB_theFlagY + _ZCP_CXB_yChange),(_ZCP_CXB_pos select 2)];
+	if((_ZCP_CXB_objData select 3) == -100) then
 	{
-		_obj setposATL _newPos;
-		if((_dat select 5) == 0) then {_obj setVectorUp [0,0,1]} else {_obj setVectorUp (surfacenormal (getPosATL _obj))};
+		_ZCP_CXB_obj setPosATL _ZCP_CXB_newPos;
+		if((_ZCP_CXB_objData select 5) == 0) then {_ZCP_CXB_obj setVectorUp [0,0,1]} else {_ZCP_CXB_obj setVectorUp (surfacenormal (getPosATL _ZCP_CXB_obj))};
 	}
 	else
 	{
-		_obj setposworld _newPos;
-		[_obj,((_dat select 7) select 0),((_dat select 7) select 1)] call BIS_fnc_setPitchBank;
+		_ZCP_CXB_obj setPosWorld _ZCP_CXB_newPos;
+		[_ZCP_CXB_obj,((_ZCP_CXB_objData select 7) select 0),((_ZCP_CXB_objData select 7) select 1)] call BIS_fnc_setPitchBank;
 	};
-	if(count (_dat select 6) > 0) then {{call _x} foreach (_dat select 6)};
+	if(count(_ZCP_CXB_objData select 6) > 0) then {
+        {
+            call _x;
+        } forEach (_ZCP_CXB_objData select 6);
+	};
 
-  _nil = _ZCP_baseObjects pushBack _obj;
-} count _ZCP_baseClasses;
+  _nil = _ZCP_CXB_baseObjects pushBack _ZCP_CXB_obj;
+} count _ZCP_CXB_baseClasses;
 
-_ZCP_baseObjects
+_ZCP_CXB_baseObjects

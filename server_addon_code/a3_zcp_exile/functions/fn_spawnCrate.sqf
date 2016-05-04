@@ -1,36 +1,36 @@
-private["_box","_type","_pos", "_boxType"];
-_pos = _this select 0;
-_type = _this select 1;
+private["_ZCP_SC_box","_ZCP_SC_type","_ZCP_SC_pos", "_ZCP_SC_boxType","_ZCP_SC_loot"];
+_ZCP_SC_pos = _this select 0;
+_ZCP_SC_type = _this select 1;
 
-switch (_type) do {
+switch (_ZCP_SC_type) do {
     case 'BuildBox': {
-      _boxType = ZCP_BuildingBox;
+      _ZCP_SC_boxType = ZCP_BuildingBox;
     };
     case 'WeaponBox': {
-      _boxType = ZCP_WeaponBox;
+      _ZCP_SC_boxType = ZCP_WeaponBox;
     };
     case 'SurvivalBox': {
-      _boxType = ZCP_SurvivalBox;
+      _ZCP_SC_boxType = ZCP_SurvivalBox;
     };
     default {
-      _boxType = ZCP_WeaponBox;
+      _ZCP_SC_boxType = ZCP_WeaponBox;
     };
 };
 
-_box = _boxType createVehicle [0,0,150];
-_box allowDamage false;
-_box setDir random 360;
-_box setPos [_pos select 0,_pos select 1,150];
-_box call ZCP_fnc_paraDrop;
+_ZCP_SC_box = _ZCP_SC_boxType createVehicle [0,0,150];
+_ZCP_SC_box allowDamage false;
+_ZCP_SC_box setDir random 360;
+_ZCP_SC_box setPos [_ZCP_SC_pos select 0,_ZCP_SC_pos select 1,150];
+_ZCP_SC_box call ZCP_fnc_paraDrop;
 
-clearWeaponCargoGlobal _box;
-clearMagazineCargoGlobal _box;
-clearBackpackCargoGlobal _box;
-clearItemCargoGlobal _box;
-switch (_type) do {
+clearWeaponCargoGlobal _ZCP_SC_box;
+clearMagazineCargoGlobal _ZCP_SC_box;
+clearBackpackCargoGlobal _ZCP_SC_box;
+clearItemCargoGlobal _ZCP_SC_box;
+switch (_ZCP_SC_type) do {
     case 'BuildBox': {
       [
-        _box,
+        _ZCP_SC_box,
         [
           1 + floor random 3,		// Weapons
           [10 + (floor random 15),DMS_BoxBuildingSupplies],		// Items
@@ -40,32 +40,30 @@ switch (_type) do {
       ]call ZCP_fnc_fillCrate;
     };
     case 'WeaponBox': {
-      private["_loot","_random"];
-      _loot = [
+      _ZCP_SC_loot = [
         6 + (floor random 10),		// Weapons
         4 + (floor random 4) ,		// Items
         1 + (floor random 2) 		// Backpacks
       ];
       [
-        _box,
-        _loot,
+        _ZCP_SC_box,
+        _ZCP_SC_loot,
         ZCP_DMS_RareLootChance
       ]call ZCP_fnc_fillCrate;
     };
     case 'SurvivalBox': {
-      private["_loot","_random"];
-      _loot = [
+      _ZCP_SC_loot = [
         1,		// Weapons
         [10 + (floor random 10), ZCP_DMS_BoxSurvivalSupplies ],		// Items
         1		// Backpacks
       ];
       [
-        _box,
-        _loot,
+        _ZCP_SC_box,
+        _ZCP_SC_loot,
         ZCP_DMS_RareLootChance
       ]call ZCP_fnc_fillCrate;
     };
     default {
-      [_box,'WeaponBox'] call ZCP_fnc_fillBox;
+      [_ZCP_SC_box,'WeaponBox'] call ZCP_fnc_fillBox;
     };
 };
