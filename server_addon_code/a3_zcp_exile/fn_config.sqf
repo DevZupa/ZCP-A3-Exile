@@ -55,7 +55,7 @@ ZCP_BomberCanDestroyMapBuildings = false; // if true damage of the bombs are app
 
 ZCP_UseSpecificNamesForCappers = true; // Use the player name, if false it says 'A player'
 
-ZCP_giveSurvivalBoxWithPoptabsReward = true;
+// ZCP_giveSurvivalBoxWithPoptabsReward = true; not used anymore. You can now define multiple rewards per mission.
 ZCP_RewardWeightForRandomChoice = [
 	["Poptabs", 5],
 	["BuildBox", 3],
@@ -177,10 +177,6 @@ ZCP_CapBases = [ // located in capbases folder [filename, capradius, buildeditor
 	["ec_endurance.sqf", 20, "EdenConverted", 90, 20],
 	["ec_fortitude.sqf", 25, "EdenConverted", 90, 25]
 ];
-
-// ZCP_TerrainGradient = 10; // Now defined per base or overwritten when using staticbaseFile for a cappoint	=
-//ZCP_MinDistanceFromObject = 60; // now defined per base.
-
 
 ZCP_Blacklist = [ // [ [x,y,z], radius ];
 	[[23644,18397,0] , 1200], // altis saltlake
