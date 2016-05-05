@@ -60,10 +60,10 @@ if (_ZCP_S_baseConfig == 'Random') then {
     _ZCP_S_terrainGradient = _ZCP_S_base select 3;
     _ZCP_S_openRadius = _ZCP_S_base select 4;
 } else {
-    _ZCP_S_baseFile = format["x\addons\ZCP\capbases\%1", _this select 7];
+    _ZCP_S_baseFile = format["x\addons\ZCP\capbases\%1", _ZCP_S_baseConfig];
     _ZCP_S_baseRadius = _this select 8;
     {
-        if (_x select 2 == _this select 7) then {
+        if (_x select 0 == _ZCP_S_baseConfig) then {
             _ZCP_S_base = _x;
         };
     }forEach ZCP_CapBases;
@@ -74,13 +74,13 @@ if (_ZCP_S_baseConfig == 'Random') then {
         _ZCP_S_baseRadius = _ZCP_S_base select 1;
     };
 
-    _ZCP_S_terrainGradient = _this select 10;
+    _ZCP_S_terrainGradient = _this select 9;
 
     if(_ZCP_S_terrainGradient == -1) then {
          _ZCP_S_terrainGradient = _ZCP_S_base select 3;
     };
 
-    _ZCP_S_openRadius = _this select 11;
+    _ZCP_S_openRadius = _this select 10;
 
     if(_ZCP_S_openRadius == -1) then {
          _ZCP_S_openRadius = _ZCP_S_base select 4;

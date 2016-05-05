@@ -130,7 +130,7 @@ ZCP_CapPoints = [
         ["Random","Random","Reputation"], // Reward -> Random, Poptabs, Vehicle, Buildingbox, WeaponBox , BigWeaponBox, SniperWeaponBox (2)
         "beta", // unique varname -> this gets checked and fixed automaticly on server start ( so don't really worry about it ).
         1, // unique index -> this gets checked and fixed automaticly on server start ( so don't really worry about it ).
-        true, // spawnAI on start of the missions ( NEEDS AI system for this ) (5)
+        false, // spawnAI on start of the missions ( NEEDS AI system for this ) (5)
         true, // isStatic location ( if true it will take the location specified earlier) (6)
         'Random', // baseFile -> Random ( from Capbases array- OR the name of the sqf file OR array of basefiles to choose from ( eg: ["m3e_base1.sqf","m3e_village.sqf"], )
         -1, // capradius if you use a specific static basefile. -> put -1 if you want to use the corresponding one from the ZCP_Capbasses array).
