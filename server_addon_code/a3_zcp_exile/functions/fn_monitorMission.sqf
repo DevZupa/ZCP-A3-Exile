@@ -21,7 +21,7 @@ _ZCP_MM_baseRadius = _ZCP_MM_mission select 3;
 _ZCP_MM_markers = _ZCP_MM_mission select 4;
 _ZCP_MM_circle = _ZCP_MM_mission select 5;
 
-_ZCP_MM_missionCapTime = _ZCP_MM_originalThis select 12;
+_ZCP_MM_missionCapTime = _ZCP_MM_originalThis select 11;
 
 _ZCP_MM_useWaves = _ZCP_MM_originalThis select 17;
 _ZCP_MM_waveData = [];
@@ -160,7 +160,7 @@ while{_ZCP_MM_continueLoop}do{
       if( !_ZCP_MM_isContested && (diag_tickTime - _ZCP_MM_contestTotalTime - _ZCP_MM_capStartTime >  _ZCP_MM_missionCapTime ) ) then {
           _ZCP_MM_continueLoop = false;
           //Capper Won, loop will break
-          [_ZCP_MM_originalThis, _ZCP_MM_markers] call ZCP_fnc_createWinMarker;
+          [_ZCP_MM_originalThis, _ZCP_MM_markers, _ZCP_MM_capturePosition] call ZCP_fnc_createWinMarker;
       };
 
       // only when not contested

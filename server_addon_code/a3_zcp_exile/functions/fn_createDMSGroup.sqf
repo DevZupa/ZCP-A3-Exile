@@ -5,6 +5,8 @@ _ZCP_CDG_dificulty = _this select 2;
 _ZCP_CDG_solierType = _this select 3;
 _ZCP_CDG_side = _this select 4;
 
+diag_log format['ZCP: Spawning %1 AI for cappoint.', _ZCP_CDG_unitsPerGroup];
+
 _ZCP_CDG_groupAI = createGroup _ZCP_CDG_side;
 _ZCP_CDG_groupAI setBehaviour "COMBAT";
 _ZCP_CDG_groupAI setCombatMode "RED";

@@ -20,7 +20,8 @@ switch (ZCP_AI_Type) do {
     if(_ZCP_SA_maxAI - _ZCP_SA_minAI > 0) then {
        _ZCP_SA_amountAI = _ZCP_SA_minAI + (floor random (_ZCP_SA_maxAI - _ZCP_SA_minAI));
     };
-    // Posted on forums by second_coming;
+
+   // Posted on forums by second_coming;
     _ZCP_SA_group = [_ZCP_SA_capturePosition, _ZCP_SA_amountAI, "moderate", "random", EAST] call ZCP_fnc_createDMSGroup;
 
     _ZCP_SA_group setBehaviour "AWARE";

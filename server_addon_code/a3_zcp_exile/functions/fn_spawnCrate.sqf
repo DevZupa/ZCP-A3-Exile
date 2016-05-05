@@ -27,6 +27,9 @@ clearWeaponCargoGlobal _ZCP_SC_box;
 clearMagazineCargoGlobal _ZCP_SC_box;
 clearBackpackCargoGlobal _ZCP_SC_box;
 clearItemCargoGlobal _ZCP_SC_box;
+
+// You can add extra types here by coping a 'case' and it's content and giving it a unique name
+
 switch (_ZCP_SC_type) do {
     case 'BuildBox': {
       [
@@ -41,7 +44,7 @@ switch (_ZCP_SC_type) do {
     };
     case 'WeaponBox': {
       _ZCP_SC_loot = [
-        6 + (floor random 10),		// Weapons
+        6 + (floor random 5),		// Weapons
         4 + (floor random 4) ,		// Items
         1 + (floor random 2) 		// Backpacks
       ];
@@ -51,6 +54,25 @@ switch (_ZCP_SC_type) do {
         ZCP_DMS_RareLootChance
       ]call ZCP_fnc_fillCrate;
     };
+      case 'SniperWeaponBox': {
+          [
+            "Sniper",
+            _ZCP_SC_loot,
+            ZCP_DMS_RareLootChance
+          ]call ZCP_fnc_fillCrate;
+        };
+    case 'BigWeaponBox': {
+          _ZCP_SC_loot = [
+            10 + (floor random 10),		// Weapons
+            4 + (floor random 4) ,		// Items
+            2 + (floor random 2) 		// Backpacks
+          ];
+          [
+            _ZCP_SC_box,
+            _ZCP_SC_loot,
+            ZCP_DMS_RareLootChance
+          ]call ZCP_fnc_fillCrate;
+        };
     case 'SurvivalBox': {
       _ZCP_SC_loot = [
         1,		// Weapons
@@ -67,3 +89,7 @@ switch (_ZCP_SC_type) do {
       [_ZCP_SC_box,'WeaponBox'] call ZCP_fnc_fillBox;
     };
 };
+
+
+
+["ec_audacity.sqf","ec_bravery.sqf","ec_courage.sqf", "ec_defiance.sqf","ec_endurance.sqf","ec_fortitude.sqf","m3e_exoBase1.sqf","m3e_exoBase2.sqf","m3e_exoBase3.sqf"]

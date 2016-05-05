@@ -91,7 +91,7 @@ if (_ZCP_S_baseConfig == 'Random') then {
 if(_this select 6)then{ // is static location config
     _ZCP_S_StaticConfig = _this select 1;
 
-    if( !(typeName _ZCP_S_StaticConfig select 0) == 'ARRAY') then {
+    if( !(typeName (_ZCP_S_StaticConfig select 0) == 'ARRAY')) then {
         _ZCP_S_StaticConfig = [_ZCP_S_StaticConfig];
     };
 
@@ -99,6 +99,7 @@ if(_this select 6)then{ // is static location config
 	diag_log text format ["[ZCP]: %1 :Spawning static on %2",_ZCP_S_capPointName,_ZCP_S_capturePosition];
 }else{
 	_ZCP_S_capturePosition = [_ZCP_S_openRadius, _ZCP_S_terrainGradient] call ZCP_fnc_findPosition;
+
 	diag_log text format ["[ZCP]: %1 :Spawning dynamic on %2",_ZCP_S_capPointName,_ZCP_S_capturePosition];
 };
 

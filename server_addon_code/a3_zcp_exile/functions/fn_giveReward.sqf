@@ -23,7 +23,7 @@ if (typeName _ZCP_GR_reward == "STRING") then {
 
 if (typeName _ZCP_GR_reward == "ARRAY") then {
     {
-        switch (_x) do {
+        switch (_x) do { // add extra cases here and in spawnCrate.sqf
             case "Reputation" : {
                 _this call ZCP_fnc_rewardReputation;
             };
@@ -31,13 +31,19 @@ if (typeName _ZCP_GR_reward == "ARRAY") then {
                 _this call ZCP_fnc_rewardPoptabs;
             };
             case "BuildBox" : {
-                _this call ZCP_fnc_rewardBuildBox;
+                [_this, _x] call ZCP_fnc_rewardBox;
             };
             case "SurvivalBox" : {
-                _this call ZCP_fnc_rewardSurvivalBox;
+                [_this, _x] call ZCP_fnc_rewardBox;
             };
             case "WeaponBox" : {
-                _this call ZCP_fnc_rewardWeaponBox;
+                [_this, _x] call ZCP_fnc_rewardBox;
+            };
+             case "BigWeaponBox" : {
+                    [_this, _x] call ZCP_fnc_rewardBox;
+            };
+             case "SniperWeaponBox" : {
+                    [_this, _x] call ZCP_fnc_rewardBox;
             };
             case "Vehicle" : {
                 _this call ZCP_fnc_rewardVehicle;

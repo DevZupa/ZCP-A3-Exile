@@ -47,10 +47,8 @@ class CfgFunctions {
 			class createM3eEdenBase {};
 			class rewardReputation {};
 			class rewardPoptabs {};
-			class rewardBuildBox {};
-			class rewardSurvivalBox {};
 			class rewardVehicle {};
-			class rewardWeaponBox {};
+			class rewardBox {};
 			class createVirtualCircle {};
 			class changeCircleColor {};
 			class createTrigger {};
