@@ -28,6 +28,8 @@ _ZCP_AB_baseObjects call ZCP_fnc_cleanupBase;
 [_ZCP_AB_capturePosition, _ZCP_AB_baseRadius] call ZCP_fnc_deleteRuins;
 [_ZCP_AB_capturePosition, _ZCP_AB_baseRadius] call ZCP_fnc_deleteLoot;
 
+uiSleep 20;
+
 if (!ZCP_BomberCanDestroyMapBuildings) then {
     {
         if( !isNull _x) then {
