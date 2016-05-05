@@ -174,6 +174,11 @@ ZCP_DistanceFromWater = 100;
 ZCP_DistanceFromPlayers = 200;
 ZCP_DistanceFromBaseObjects = 100;
 
+ZCP_CONFIG_BaseObjectsClasses = [
+                                    'Exile_Construction_Abstract_Physics',
+                                     'Exile_Construction_Abstract_Static'
+                                 ];
+
 
 ZCP_TraderZoneMarkerTypes =			[							// If you're using custom trader markers, make sure you define them here. CASE SENSITIVE!!!
 										"ExileTraderZone"

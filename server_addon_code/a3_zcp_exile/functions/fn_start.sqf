@@ -88,7 +88,7 @@ if (_ZCP_S_baseConfig == 'Random') then {
 };
 
 
-if(_this select 6)then{
+if(_this select 6)then{ // is static location config
     _ZCP_S_StaticConfig = _this select 1;
 
     if( !(typeName _ZCP_S_StaticConfig select 0) == 'ARRAY') then {

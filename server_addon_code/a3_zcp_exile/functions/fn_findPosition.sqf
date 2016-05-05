@@ -61,6 +61,13 @@ while{!_ZCP_FP_validspot} do {
 			};
 		} forEach allMapMarkers;
 	};
+	if (_ZCP_FP_validspot) then {
+	    diag_log format['ZCP: buildables close'];
+        if (count (_ZCP_FP_position nearObjects [near ZCP_CONFIG_BaseObjectsClasses, ZCP_DistanceFromBaseObjects] > 0) then {
+            _ZCP_FP_validspot = false;
+        };
+    };
+
 };
 _ZCP_FP_position set [2, 0];
 _ZCP_FP_position
