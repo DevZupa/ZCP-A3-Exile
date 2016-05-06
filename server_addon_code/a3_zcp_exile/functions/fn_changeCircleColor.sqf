@@ -1,18 +1,18 @@
-private ['_radius','_type','_location','_dir','_object','_objs'];
-_objs = _this select 0;
-_type = _this select 1;
+private ['_ZCP_CCC_colorType','_ZCP_CCC_circleObjects','_ZCP_CCC_color'];
+_ZCP_CCC_circleObjects = _this select 0;
+_ZCP_CCC_colorType = _this select 1;
 
-_color = ZCP_circleNeutralColor;
+_ZCP_CCC_color = ZCP_circleNeutralColor;
 
-switch (_type) do {
+switch (_ZCP_CCC_colorType) do {
     case ("capping"): {
-        _color = ZCP_circleCappingColor;
+        _ZCP_CCC_color = ZCP_circleCappingColor;
     };
     case ("contested"): {
-        _color = ZCP_circleContestedColor;
+        _ZCP_CCC_color = ZCP_circleContestedColor;
     };
 };
 
 {
-  _x setObjectTextureGlobal [0,_color];
-}count _objs;
+  _x setObjectTextureGlobal [0,_ZCP_CCC_color];
+}count _ZCP_CCC_circleObjects;

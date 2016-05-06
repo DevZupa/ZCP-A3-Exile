@@ -1,20 +1,18 @@
-private["_position","_missiondata","_name","_index","_mission","_type","_marker","_dot","_capRadius","_attentionMarker","_captureObject","_previousMarkers"];
+private["_ZCP_CWM_position","_ZCP_CWM_mission","_ZCP_CWM_attentionMarker","_ZCP_CWM_captureObject","_ZCP_CWM_previousMarkers"];
 
-_captureObject = _this select 0;
-_capRadius 		= _this select 1;
-_previousMarkers = _this select 2;
+_ZCP_CWM_captureObject = _this select 0;
+_ZCP_CWM_previousMarkers = _this select 1;
 
-[_previousMarkers] call ZCP_fnc_removeMarker;
+[_ZCP_CWM_previousMarkers] call ZCP_fnc_removeMarker;
 
 if(ZCP_MissionMarkerWinDotTime > 0) then {
-  _position		= _this select 3;
-  _name 			= _captureObject select 0;
-  _mission 		= _captureObject select 3;
+  _ZCP_CWM_position		= _this select 2;
+  _ZCP_CWM_mission 		= _ZCP_CWM_captureObject select 3;
 
-  _attentionMarker = createMarker [format['%1capped%2',_mission,random 10], _position];
-  _attentionMarker 		setMarkerType "hd_destroy";
-  _attentionMarker 		setMarkerColor ZCP_BackgroundColor;
-  _attentionMarker 		setMarkerText ([8] call ZCP_fnc_translate);
+  _ZCP_CWM_attentionMarker = createMarker [format['%1capped%2',_ZCP_CWM_mission,random 10], _ZCP_CWM_position];
+  _ZCP_CWM_attentionMarker 		setMarkerType "hd_destroy";
+  _ZCP_CWM_attentionMarker 		setMarkerColor ZCP_BackgroundColor;
+  _ZCP_CWM_attentionMarker 		setMarkerText ([8] call ZCP_fnc_translate);
 
-  [ZCP_MissionMarkerWinDotTime, {deleteMarker _this;}, _attentionMarker, false] call ExileServer_system_thread_addTask;
+  [ZCP_MissionMarkerWinDotTime, {deleteMarker _this;}, _ZCP_CWM_attentionMarker, false] call ExileServer_system_thread_addTask;
 };

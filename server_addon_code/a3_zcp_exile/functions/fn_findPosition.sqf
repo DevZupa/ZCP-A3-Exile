@@ -1,66 +1,74 @@
-private ["_i","_safepos","_validspot","_position","_baseRadius","_distanceFromObjects", "_terrainGradientPos"];
-_distanceFromObjects = _this select 0;
-_terrainGradientPos = _this select 1;
+private ["_ZCP_FP_safepos","_ZCP_FP_validspot","_ZCP_FP_position","_baseRadius","_ZCP_FP_distanceFromObjects", "_ZCP_FP_terrainGradientPos"];
+_ZCP_FP_distanceFromObjects = _this select 0;
+_ZCP_FP_terrainGradientPos = _this select 1;
 
-_safepos		= [ZCP_MapCenterPos, 0, ZCP_MapRadius, _distanceFromObjects, 0, _terrainGradientPos, 0];
-//diag_log format['[ZCP]: %1 selected | Objectdistance: %2 | Gradient: %3', _safepos, _distanceFromObjects, _terrainGradientPos];
-_validspot 	= false;
-while{!_validspot} do {
+_ZCP_FP_safepos		= [ZCP_MapCenterPos, 0, ZCP_MapRadius, _ZCP_FP_distanceFromObjects, 0, _ZCP_FP_terrainGradientPos, 0];
+//diag_log format['[ZCP]: %1 selected | Objectdistance: %2 | Gradient: %3', _ZCP_FP_safepos, _ZCP_FP_distanceFromObjects, _ZCP_FP_terrainGradientPos];
+_ZCP_FP_validspot 	= false;
+while{!_ZCP_FP_validspot} do {
 	sleep 1;
-	_position 	= _safepos call BIS_fnc_findSafePos;
-	_validspot	= true;
-	if (_position call ZCP_fnc_inDebug) then {
-		_validspot = false;
-		//diag_log format['[ZCP]: %1 in debug', _position];
+	_ZCP_FP_position 	= _ZCP_FP_safepos call BIS_fnc_findSafePos;
+	_ZCP_FP_validspot	= true;
+	if (_ZCP_FP_position call ZCP_fnc_inDebug) then {
+		_ZCP_FP_validspot = false;
+		//diag_log format['[ZCP]: %1 in debug', _ZCP_FP_position];
 	};
-	if(_validspot ) then {
-		if ([_position, ZCP_DistanceFromWater] call ZCP_fnc_nearWater) then {
-		_validspot = false;
-		//diag_log format['[ZCP]: %1 to close to water (%2 meter)', _position, ZCP_DistanceFromWater];
+	if(_ZCP_FP_validspot ) then {
+		if ([_ZCP_FP_position, ZCP_DistanceFromWater] call ZCP_fnc_nearWater) then {
+		_ZCP_FP_validspot = false;
+		//diag_log format['[ZCP]: %1 to close to water (%2 meter)', _ZCP_FP_position, ZCP_DistanceFromWater];
 		};
 	};
-	if(_validspot) then {
+	if(_ZCP_FP_validspot) then {
 		{
-			if ( (_x select 2) select 0 != -99999 && _position distance2D (_x select 2) < ZCP_DistanceBetweenMissions) then {
-					_validspot = false;
-					//diag_log format['[ZCP]: %1 to close to other mission', _position];
+			if ( (_x select 2) select 0 != -99999 && _ZCP_FP_position distance2D (_x select 2) < ZCP_DistanceBetweenMissions) then {
+					_ZCP_FP_validspot = false;
+					//diag_log format['[ZCP]: %1 to close to other mission', _ZCP_FP_position];
 			};
 		} count ZCP_Data;
   };
-	if(_validspot) then {
+	if(_ZCP_FP_validspot) then {
 		{
-			if ( _position distance2D _x < ZCP_DistanceFromPlayers) then {
-					_validspot = false;
-					//diag_log format['[ZCP]: %1 to close to a player called %2', _position, name _x];
+			if ( _ZCP_FP_position distance2D _x < ZCP_DistanceFromPlayers) then {
+					_ZCP_FP_validspot = false;
+					//diag_log format['[ZCP]: %1 to close to a player called %2', _ZCP_FP_position, name _x];
 			};
 		} count allPlayers;
 	};
-	if(_validspot) then {
+	if(_ZCP_FP_validspot) then {
 		{
-			if ( _position distance2D (_x select 0) < (_x select 1)) then {
-					_validspot = false;
-					//diag_log format['[ZCP]: %1 to close to bloacklist %2', _position, _x];
+			if ( _ZCP_FP_position distance2D (_x select 0) < (_x select 1)) then {
+					_ZCP_FP_validspot = false;
+					//diag_log format['[ZCP]: %1 to close to bloacklist %2', _ZCP_FP_position, _x];
 			};
 		} count ZCP_Blacklist;
   };
-	if(_validspot ) then {
+	if(_ZCP_FP_validspot ) then {
 		// DMS code, Credits -> DMS
 		{
 			// Check for nearby spawn points
-			if ((ZCP_SpawnZoneDistance>0) && {((markertype _x) in ZCP_SpawnZoneMarkerTypes) && {((getMarkerPos _x) distance2D _position) <= ZCP_SpawnZoneDistance}}) then
+			if ((ZCP_SpawnZoneDistance>0) && {((markertype _x) in ZCP_SpawnZoneMarkerTypes) && {((getMarkerPos _x) distance2D _ZCP_FP_position) <= ZCP_SpawnZoneDistance}}) then
 			{
-					_validspot = false;
-					//diag_log format['[ZCP]: %1 to close to spanwzone %2 meter', _position, ZCP_SpawnZoneDistance];
+					_ZCP_FP_validspot = false;
+					//diag_log format['[ZCP]: %1 to close to spanwzone %2 meter', _ZCP_FP_position, ZCP_SpawnZoneDistance];
 			};
 
 			// Check for nearby trader zones
-			if ((ZCP_TradeZoneDistance>0) && {((markertype _x) in ZCP_TraderZoneMarkerTypes) && {((getMarkerPos _x) distance2D _position) <= ZCP_TradeZoneDistance}}) then
+			if ((ZCP_TradeZoneDistance>0) && {((markertype _x) in ZCP_TraderZoneMarkerTypes) && {((getMarkerPos _x) distance2D _ZCP_FP_position) <= ZCP_TradeZoneDistance}}) then
 			{
-					_validspot = false;
-					//diag_log format['[ZCP]: %1 to close to traderzone %2 meter', _position, ZCP_TradeZoneDistance];
+					_ZCP_FP_validspot = false;
+					//diag_log format['[ZCP]: %1 to close to traderzone %2 meter', _ZCP_FP_position, ZCP_TradeZoneDistance];
 			};
 		} forEach allMapMarkers;
 	};
+	if (_ZCP_FP_validspot) then {
+	    diag_log format['ZCP: buildables close, finding new position'];
+	    _ZCP_FP_Buidlings =  nearestObjects [_ZCP_FP_position, ZCP_CONFIG_BaseObjectsClasses, ZCP_DistanceFromBaseObjects];
+        if (count _ZCP_FP_Buidlings > 0) then {
+            _ZCP_FP_validspot = false;
+        };
+    };
+
 };
-_position set [2, 0];
-_position
+_ZCP_FP_position set [2, 0];
+_ZCP_FP_position
