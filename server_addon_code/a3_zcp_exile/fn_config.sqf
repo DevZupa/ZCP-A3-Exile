@@ -33,8 +33,6 @@ ZCP_MinWaitTime = 120; // seconds to wait to spawn a new capturepoint when 1 was
 ZCP_MaxWaitTime = 120; // random between 0 and THIS number added to the ZCP_MinWaitTime to counter spawning points at the same time
 ZCP_BaseCleanupDelay = 180; // seconds to wait to delete a captured base.
 
-ZCP_Minimum_Online_Players = 0; // Amount of players to be online before it allows to spawn capture points. !!! O = always
-
 ZCP_RewardRelativeToPlayersOnline = true; // This will recalculate the crypto reward according the amount of online players.
 ZCP_PoptabReward = 25; // Poptab reward for capping per player online. ( When poptab reward is selected or randomly chosen ).
 ZCP_MinPoptabReward = 1000; // Poptabreward is added to this number
@@ -195,7 +193,18 @@ ZCP_CapPoints = [
 ];
 
 
-ZCP_MaxMissions = 2; // Amount of cap points at the same time. You can change this to a number
+ZCP_MaxMissions = 2; // Amount of cap points at the same time when ZCP_MaxMissionsRelativeToPlayers = false
+
+ZCP_Minimum_Online_Players = 0; // Amount of players to be online before it allows to spawn a capture point. !!! O = always
+
+ZCP_MaxMissionsRelativeToPlayers = true; // ZCP_MaxMissions will be ignored if true. ZCP_RelativeMaxMissions will be used
+ZCP_RelativeMaxMissions = [
+    //[ min players,  amount of cappoints],
+    [5, 1],
+    [15, 2],
+    [40, 3],
+    [65, 4]
+];
 
 // For every spawned mission,
 // buildeditor currenty supported -> m3e, xcam, EdenConverted ( THis is exported as terrainbuilder and converted with my site), m3eEden

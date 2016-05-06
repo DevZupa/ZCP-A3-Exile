@@ -13,8 +13,21 @@
 	────────╚╝
 */
 
-private["_ZCP_ML_randomMission"];
-while {ZCP_MissionCounter < ZCP_MaxMissions} do
+private["_ZCP_ML_randomMission","_ZCP_ML_maxMissions","_ZCP_ML_players"];
+
+_ZCP_ML_maxMissions = ZCP_MaxMissions;
+
+if (ZCP_MaxMissionsRelativeToPlayers) then {
+    _ZCP_ML_maxMissions = 1;
+    _ZCP_ML_players = count playableUnits;
+    {
+        if (_x select 0 > _ZCP_ML_players) then {
+            _ZCP_ML_maxMissions = _x select 1;
+        };
+    }forEach ZCP_RelativeMaxMissions;
+};
+
+while {ZCP_MissionCounter < _ZCP_ML_maxMissions} do
 {
 	_ZCP_ML_randomMission = nil;
 	while{ isNil "_ZCP_ML_randomMission" } do
