@@ -123,13 +123,13 @@ ZCP_CapPoints = [
 	]
 	,
     [
-        "ZCP Beta", // name (0)
+        "ZCP Bravo", // name (0)
         [[10000,10000,0],[10000,10000,0]], // [[x,y,z],[x,y,z]] if using static location (1)
         ["Random","Random","Reputation"], // Reward -> Random, Poptabs, Vehicle, Buildingbox, WeaponBox , BigWeaponBox, SniperWeaponBox (2)
         "beta", // unique varname -> this gets checked and fixed automaticly on server start ( so don't really worry about it ).
         1, // unique index -> this gets checked and fixed automaticly on server start ( so don't really worry about it ).
-        false, // spawnAI on start of the missions ( NEEDS AI system for this ) (5)
-        true, // isStatic location ( if true it will take the location specified earlier) (6)
+        true, // spawnAI on start of the missions ( NEEDS AI system for this ) (5)
+        false, // isStatic location ( if true it will take the location specified earlier) (6)
         'Random', // baseFile -> Random ( from Capbases array- OR the name of the sqf file OR array of basefiles to choose from ( eg: ["m3e_base1.sqf","m3e_village.sqf"], )
         -1, // capradius if you use a specific static basefile. -> put -1 if you want to use the corresponding one from the ZCP_Capbasses array).
         -1, // max terrainGradient -> when specific static basefile is used (9) -> put -1 if you want to use the corresponding one from the ZCP_Capbasses array).
@@ -164,7 +164,7 @@ ZCP_CapPoints = [
         "ZCP Charlie", // name (0)
         [[10000,10000,0],[10000,10000,0]], // [[x,y,z],[x,y,z]] if using static location (1)
         ["Random","Random","Reputation"], // Reward -> Random, Poptabs, Vehicle, Buildingbox, WeaponBox, BigWeaponBox, SniperWeaponBox (2)
-        "carhlie", // unique varname -> this gets checked and fixed automaticly on server start ( so don't really worry about it ).
+        "charlie", // unique varname -> this gets checked and fixed automaticly on server start ( so don't really worry about it ).
         2, // unique index -> this gets checked and fixed automaticly on server start ( so don't really worry about it ).
         true, // spawnAI on start of the missions ( NEEDS AI system for this ) (5)
         false, // isStatic location ( if true it will take the location specified earlier) (6)
@@ -205,7 +205,7 @@ ZCP_RelativeMaxMissions = [
     [40, 3],
     [65, 4]
 ];
-ZCP_SecondsPlayers = 600; // seconds for loop check if the server holds more players now (and spawn extra cappoints). ( 600 = every 10 minuts)
+ZCP_SecondsCheckPlayers = 600; // seconds for loop check if the server holds more players now (and spawn extra cappoints). ( 600 = every 10 minuts)
 
 // For every spawned mission,
 // buildeditor currenty supported -> m3e, xcam, EdenConverted ( THis is exported as terrainbuilder and converted with my site), m3eEden

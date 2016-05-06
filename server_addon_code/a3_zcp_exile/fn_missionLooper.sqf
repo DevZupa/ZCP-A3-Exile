@@ -19,12 +19,13 @@ _ZCP_ML_maxMissions = ZCP_MaxMissions;
 
 if (ZCP_MaxMissionsRelativeToPlayers) then {
     _ZCP_ML_maxMissions = 1;
-    _ZCP_ML_players = count playableUnits;
+    _ZCP_ML_players = count allPlayers;
     {
-        if (_x select 0 > _ZCP_ML_players) then {
+        if (_x select 0 < _ZCP_ML_players) then {
             _ZCP_ML_maxMissions = _x select 1;
         };
-    }forEach ZCP_RelativeMaxMissions;
+    }forEach ZCP_RelativeMaxMissions ;
+    diag_log format['ZCP:%1 online, will spawn %2 missions in total.', _ZCP_ML_players, _ZCP_ML_maxMissions];
 };
 
 while {ZCP_MissionCounter < _ZCP_ML_maxMissions} do

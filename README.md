@@ -38,4 +38,5 @@ on the line of 'units' add
 * Option to disable damage when bombing is happening on map and build objects ( people and vehicles still die ).
 * Added minimum distance check to Exile buildables
 * Multiple static locations can be passed to 1 cappoint to be chosen randomly from the list.
+* 3 New bases by eXo
 * Amount of cappoints can now be relative to the amount of players online ( checks every x minuts ( default 10 minuts)
