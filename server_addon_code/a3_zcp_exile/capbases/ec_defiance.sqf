@@ -1,19 +1,5 @@
 private["_objs"];
 
-
-
- /**
-{
-     private ["_obj","_pos","_nil","_newPos"];
-     _obj = createVehicle [_x select 0, [0,0,0], [], 0, "CAN_COLLIDE"];
-     _pos = [_x select 1, _x select 2, 0 ];
-     _newPos = [((_pos select 0) - _theFlagX + _XChange), ((_pos select 1) - _theFlagY + _YChange),(_pos select 2)];
-     _obj setDir (_x select 3);
-     _obj setPos _newPos;
-     _nil = _ZCP_baseObjects pushBack _obj;
-}count (_ZCP_baseClasses);
-**/
-
  // For ZCP use as type "EdenConverted"
 _objs = [
 ["Mast_F",202221.171875,685.509521,0,-0,-0,1,4.999969],

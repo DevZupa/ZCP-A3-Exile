@@ -1,41 +1,43 @@
-private["_position","_missiondata","_name","_index","_mission","_type","_marker","_dot","_capRadius","_attentionMarker","_captureObject","_previousMarkers","_newMarkers"];
+private["_ZCP_CM_position","_ZCP_CM_name","_ZCP_CM_index","_ZCP_CM_mission","_ZCP_CM_marker","_ZCP_CM_dot",
+"_ZCP_CM_capRadius","_ZCP_CM_attentionMarker",
+"_ZCP_CM_captureObject","_ZCP_CM_previousMarkers","_ZCP_CM_newMarkers"];
 
-_captureObject = _this select 0;
-_capRadius 		= _this select 1;
-_previousMarkers = _this select 2;
+_ZCP_CM_captureObject = _this select 0;
+_ZCP_CM_capRadius 		= _this select 1;
+_ZCP_CM_previousMarkers = _this select 2;
 
-_position		= _this select 3;
-_name 			= _captureObject select 0;
-_mission 		= _captureObject select 3;
-_index 			= _captureObject select 4;
+_ZCP_CM_position		= _this select 3;
+_ZCP_CM_name 			= _ZCP_CM_captureObject select 0;
+_ZCP_CM_mission 		= _ZCP_CM_captureObject select 3;
+_ZCP_CM_index 			= _ZCP_CM_captureObject select 4;
 
-[_previousMarkers] call ZCP_fnc_removeMarker;
+[_ZCP_CM_previousMarkers] call ZCP_fnc_removeMarker;
 
-_attentionMarker = createMarker [format['%1area',_mission], _position];
-_attentionMarker 		setMarkerShape "ELLIPSE";
-_attentionMarker 		setMarkerColor ZCP_BackgroundColor;
-_attentionMarker 		setMarkerBrush "Solid";
-_attentionMarker 		setMarkerSize [_capRadius * 3,_capRadius * 3];
-_marker 		= createMarker [format['%1',_mission], _position];
-if((ZCP_Data select _index) select 1 == 1)then{
-	_marker 		setMarkerColor ZCP_CappedColor;
+_ZCP_CM_attentionMarker = createMarker [format['%1area',_ZCP_CM_mission], _ZCP_CM_position];
+_ZCP_CM_attentionMarker 		setMarkerShape "ELLIPSE";
+_ZCP_CM_attentionMarker 		setMarkerColor ZCP_BackgroundColor;
+_ZCP_CM_attentionMarker 		setMarkerBrush "Solid";
+_ZCP_CM_attentionMarker 		setMarkerSize [_ZCP_CM_capRadius * 3,_ZCP_CM_capRadius * 3];
+_ZCP_CM_marker 		= createMarker [format['%1',_ZCP_CM_mission], _ZCP_CM_position];
+if((ZCP_Data select _ZCP_CM_index) select 1 == 1)then{
+	_ZCP_CM_marker 		setMarkerColor ZCP_CappedColor;
 }
 else{
-	if((ZCP_Data select _index) select 1 == 2)then{
-		_marker 		setMarkerColor ZCP_ContestColor;
+	if((ZCP_Data select _ZCP_CM_index) select 1 == 2)then{
+		_ZCP_CM_marker 		setMarkerColor ZCP_ContestColor;
 	}else{
-		_marker 		setMarkerColor ZCP_FreeColor;
+		_ZCP_CM_marker 		setMarkerColor ZCP_FreeColor;
 	};
 };
-_marker 		setMarkerShape "ELLIPSE";
-_marker 		setMarkerBrush "Solid";
-_marker 		setMarkerSize [_capRadius,_capRadius];
-_marker 		setMarkerText _name;
-_dot 			= createMarker [format['%1dot',_mission], _position];
-_dot 			setMarkerColor "ColorBlack";
-_dot 			setMarkerType "hd_flag";
-_dot 			setMarkerText _name;
+_ZCP_CM_marker 		setMarkerShape "ELLIPSE";
+_ZCP_CM_marker 		setMarkerBrush "Solid";
+_ZCP_CM_marker 		setMarkerSize [_ZCP_CM_capRadius,_ZCP_CM_capRadius];
+_ZCP_CM_marker 		setMarkerText _ZCP_CM_name;
+_ZCP_CM_dot 			= createMarker [format['%1dot',_ZCP_CM_mission], _ZCP_CM_position];
+_ZCP_CM_dot 			setMarkerColor "ColorBlack";
+_ZCP_CM_dot 			setMarkerType "hd_flag";
+_ZCP_CM_dot 			setMarkerText _ZCP_CM_name;
 
-_newMarkers = [   format['%1area',_mission]     ,      format['%1',_mission]       , format['%1dot',_mission]     ];
+_ZCP_CM_newMarkers = [format['%1area',_ZCP_CM_mission], format['%1',_ZCP_CM_mission], format['%1dot',_ZCP_CM_mission]];
 
-_newMarkers
+_ZCP_CM_newMarkers

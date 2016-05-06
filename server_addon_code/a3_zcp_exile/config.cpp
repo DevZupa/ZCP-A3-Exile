@@ -44,12 +44,11 @@ class CfgFunctions {
 			class showNotification {};
 			class createXcamBase {};
 			class createEdenConvertedBase {};
+			class createM3eEdenBase {};
 			class rewardReputation {};
 			class rewardPoptabs {};
-			class rewardBuildBox {};
-			class rewardSurvivalBox {};
 			class rewardVehicle {};
-			class rewardWeaponBox {};
+			class rewardBox {};
 			class createVirtualCircle {};
 			class changeCircleColor {};
 			class createTrigger {};
@@ -60,7 +59,7 @@ class CfgFunctions {
 			class createDMSSoldier {};
 			class createDMSGroup {};
 			class createWaypoint {};
-
+			class createSmokeScreen {};
 		};
 	};
 };
