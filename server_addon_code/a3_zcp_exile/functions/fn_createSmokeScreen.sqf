@@ -12,7 +12,7 @@ uiSleep _ZCP_CVC_waitTime;
 for '_i' from 0 to 360 step (360 / _ZCP_CVC_radius * 2) do
 {
   _ZCP_CVC_location = [(_ZCP_CVC_center select 0) + ((cos _i) * _ZCP_CVC_newRadius), (_ZCP_CVC_center select 1) + ((sin _i) * _ZCP_CVC_newRadius),0];
-  _nil = "ARTY_SmokeShellWhite" createVehicle _ZCP_CVC_location;
+  _nil = "smokeShell" createVehicle _ZCP_CVC_location;
 };
 
 
