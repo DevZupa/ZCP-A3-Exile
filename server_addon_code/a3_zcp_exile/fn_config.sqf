@@ -205,6 +205,7 @@ ZCP_RelativeMaxMissions = [
     [40, 3],
     [65, 4]
 ];
+ZCP_SecondsPlayers = 600; // seconds for loop check if the server holds more players now (and spawn extra cappoints). ( 600 = every 10 minuts)
 
 // For every spawned mission,
 // buildeditor currenty supported -> m3e, xcam, EdenConverted ( THis is exported as terrainbuilder and converted with my site), m3eEden
