@@ -22,6 +22,8 @@ ZCP_dev = false; // Devmode for shorter development capture times
 
 ZCP_AI_Type = 'DMS'; // NONE | DMS | FUMS
 
+ZCP_AI_useLaunchersChance = 25; // %
+
 // ZCP_Min_AI_Amount = 4; Not used anymore
 // ZCP_Random_AI_Max = 8; Not used anymore
 
@@ -157,7 +159,11 @@ ZCP_CapPoints = [
                 200, // distance in meter form ZCP for the ai to spawn
                 false // false -> all groups from 1 random location, true -> all groups from their own random location
             ]
-        ]
+        ],
+        1,
+        2,
+        1,
+        1
     ]
     ,
     [

@@ -9,12 +9,12 @@ Install info @ [ZCP @ Exile forums](http://www.exilemod.com/topic/12116-release-
 These are kicks based on what i encountered:
 
 on the line of 'isPlayer' add
-```
+```sqf
 !="if (isPlayer _this) then {}"
 ```
 
 on the line of 'units' add
-```
+```sqf
 !="if (count units group _this>1) then"
 ```
 
@@ -23,7 +23,7 @@ on the line of 'units' add
 * JamieKG for Testing and XCAM Base.
 * Zombie for AlRayak testing and whining.
 * Ferry for 3 cap bases!
-* DMS for code usage!
+* DMS (Eraser, Defent) for code usage!
 
 #### Changes in 2.1
 
