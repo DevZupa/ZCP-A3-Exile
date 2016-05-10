@@ -1,6 +1,11 @@
+uiSleep ZCP_AI_killAIAfterMissionCompletionTimer;
 {
-    if( !isNull _x && alive _x) then
+    private['_y'];
+    _y = _x;
     {
-	     _x setDamage 1;
-	};
-}count (units _this);
+        if( !isNull _x && alive _x) then
+        {
+             _x setDamage 1;
+        };
+    }count (units _y);
+}forEach _this;

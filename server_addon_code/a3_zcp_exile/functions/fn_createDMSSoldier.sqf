@@ -200,3 +200,11 @@ if (_ZCP_CDS_difficulty=="hardcore") then
 
 _ZCP_CDS_unitAI setCustomAimCoef (missionNamespace getVariable [format["DMS_AI_AimCoef_%1",_ZCP_CDS_difficulty], 0.7]);
 _ZCP_CDS_unitAI enableStamina (missionNamespace getVariable [format["DMS_AI_EnableStamina_%1",_ZCP_CDS_difficulty], true]);
+
+_ZCP_CDS_unitAI addRating 10000;
+
+_ZCP_CDS_unitAI setVariable ["DMS_AISpawnTime", time];
+_ZCP_CDS_unitAI setVariable ["DMS_AI_Side", "bandit"];
+_ZCP_CDS_unitAI setVariable ["DMS_AI_Type", "Soldier"];
+_ZCP_CDS_unitAI setVariable ["DMS_AISpawnPos",_ZCP_CDS_spawnAIPos];
+_ZCP_CDS_unitAI setVariable ["DMS_LastAIDistanceCheck",time];

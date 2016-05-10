@@ -1,29 +1,12 @@
-private['_ZCP_CDG_minDefenderLaunchers','_ZCP_CDG_launchers','_ZCP_CDG_minWaveLaunchers','_ZCP_CDG_aiType','_ZCP_CDG_spawnAIPos','_ZCP_CDG_unitsPerGroup','_ZCP_CDG_dificulty',
-'_ZCP_CDG_solierType','_ZCP_CDG_side', '_ZCP_CDG_groupAI','_ZCP_CDG_launcherType','_ZCP_CDG_maxDefenderLaunchers','_ZCP_CDG_maxWaveLaunchers'];
+private['_ZCP_CDG_minLaunchers','_ZCP_CDG_aiType','_ZCP_CDG_spawnAIPos','_ZCP_CDG_unitsPerGroup','_ZCP_CDG_dificulty',
+'_ZCP_CDG_solierType','_ZCP_CDG_side', '_ZCP_CDG_groupAI','_ZCP_CDG_launcherType','_ZCP_CDG_maxLaunchers'];
 _ZCP_CDG_spawnAIPos = _this select 0;
 _ZCP_CDG_unitsPerGroup = _this select 1;
 _ZCP_CDG_dificulty = _this select 2;
 _ZCP_CDG_solierType = _this select 3;
 _ZCP_CDG_side = _this select 4;
-_ZCP_CDG_minDefenderLaunchers = _this select 5;
-_ZCP_CDG_maxDefenderLaunchers = _this select 6;
-_ZCP_CDG_minWaveLaunchers = _this select 7;
-_ZCP_CDG_maxWaveLaunchers = _this select 8;
-_ZCP_CDG_aiType = _this select 9;
-
-_ZCP_CDG_minLaunchers = 0;
-_ZCP_CDG_maxLaunchers = 0;
-
-switch (_ZCP_CDG_aiType) do {
-    case 'WAVE': {
-        _ZCP_CDG_minLaunchers = _ZCP_CDG_minWaveLaunchers;
-        _ZCP_CDG_maxLaunchers = _ZCP_CDG_maxWaveLaunchers;
-    };
-    case 'DEFEND': {
-        _ZCP_CDG_minLaunchers = _ZCP_CDG_minDefenderLaunchers;
-        _ZCP_CDG_maxLaunchers = _ZCP_CDG_maxDefenderLaunchers;
-    };
-};
+_ZCP_CDG_minLaunchers = _this select 5;
+_ZCP_CDG_maxLaunchers = _this select 6;
 
 diag_log format['ZCP: Spawning %1 AI for cappoint.', _ZCP_CDG_unitsPerGroup];
 
@@ -67,8 +50,5 @@ if (_ZCP_CDG_minLaunchers > 0) then
 };
 
 _ZCP_CDG_groupAI selectLeader ((units _ZCP_CDG_groupAI) select 0);
-_ZCP_CDG_groupAI setFormation "WEDGE";
-_ZCP_CDG_groupAI setBehaviour "COMBAT";
-_ZCP_CDG_groupAI setCombatMode "RED";
 
 _ZCP_CDG_groupAI

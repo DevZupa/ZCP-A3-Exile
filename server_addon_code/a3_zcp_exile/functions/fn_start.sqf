@@ -18,7 +18,8 @@ private["_currentCapper","_ZCP_continue","_ZCP_flag","_currentGroup","_ZCP_S_cap
 "_ZCP_currentCapper","_ZCP_previousCapper","_ZCP_currentGroup","_ZCP_wasContested","_finishText","_ZCP_S_markers","_ZCP_S_base",
 "_ZCP_ContestStartTime","_ZCP_S_capPointIndex","_ZCP_S_capturePosition","_ZCP_S_randomTime","_changedReward","_ZCP_Halfway","_ZCP_min","_ZCP_S_baseType",
 "_ZCP_S_terrainGradient","_ZCP_S_baseRadius","_ZCP_S_circle","_ZCP_S_openRadius","_ZCP_S_baseConfig","_ZCP_S_missionCapTime"
-,"_ZCP_S_StaticConfig"];
+,"_ZCP_S_StaticConfig",'_ZCP_S_ai'
+];
 
 _ZCP_S_randomTime = (floor random  ZCP_MaxWaitTime) + ZCP_MinWaitTime;
 
@@ -45,6 +46,7 @@ _ZCP_S_terrainGradient = 20;
 _ZCP_S_openRadius = 60;
 
 _ZCP_S_base = [];
+_ZCP_S_ai = [];
 
 _ZCP_S_baseConfig = _this select 7;
 
@@ -130,7 +132,7 @@ if(ZCP_createVirtualCircle) then {
 };
 
 if(_this select 5) then {
-	[_ZCP_S_capturePosition, _ZCP_S_baseRadius, _this select 12, _this select 13] call ZCP_fnc_spawnAI;
+	_ZCP_S_ai = [_ZCP_S_capturePosition, _ZCP_S_baseRadius, _this select 12, _this select 13, _this select 19, _this select 20] call ZCP_fnc_spawnAI;
 };
 
 if(count _ZCP_S_baseObjects != 0)then{
@@ -139,7 +141,7 @@ if(count _ZCP_S_baseObjects != 0)then{
 
 	_ZCP_S_markers = [_this, _ZCP_S_baseRadius, [], _ZCP_S_capturePosition] call ZCP_fnc_createMarker;
 	// creat trigger
-	ZCP_MissionTriggerData set [_ZCP_S_capPointIndex, [_this, _ZCP_S_baseObjects, _ZCP_S_capturePosition, _ZCP_S_baseRadius, _ZCP_S_markers, _ZCP_S_circle]];
+	ZCP_MissionTriggerData set [_ZCP_S_capPointIndex, [_this, _ZCP_S_baseObjects, _ZCP_S_capturePosition, _ZCP_S_baseRadius, _ZCP_S_markers, _ZCP_S_circle, _ZCP_S_ai]];
 	[_ZCP_S_capPointIndex, _ZCP_S_capturePosition, _ZCP_S_baseRadius] call ZCP_fnc_createTrigger;
 
 }else{

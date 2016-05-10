@@ -1,9 +1,13 @@
-private['_ZCP_SA_minAI','_ZCP_SA_maxAI','_ZCP_SA_group',"_ZCP_SA_capturePosition","_ZCP_SA_amountAI","_ZCP_SA_capRadius",'_message','_client','_ZCP_SA_headlessClients','_ZCP_SA_holdWP'];
+private['_ZCP_SA_minAI','_ZCP_SA_maxAI','_ZCP_SA_group',"_ZCP_SA_capturePosition","_ZCP_SA_amountAI","_ZCP_SA_capRadius",'_message','_client','_ZCP_SA_headlessClients','_ZCP_SA_holdWP','_ZCP_SA_minLaunchers','_ZCP_SA_maxLaunchers'];
 
 _ZCP_SA_capturePosition = _this select 0;
 _ZCP_SA_capRadius = _this select 1;
 _ZCP_SA_minAI = _this select 2;
 _ZCP_SA_maxAI = _this select 3;
+_ZCP_SA_minLaunchers = _this select 4;
+_ZCP_SA_maxLaunchers = _this select 5;
+
+_ZCP_SA_ai = [];
 
 switch (ZCP_AI_Type) do {
   case ('DMS'): {
@@ -22,7 +26,7 @@ switch (ZCP_AI_Type) do {
     };
 
    // Posted on forums by second_coming;
-    _ZCP_SA_group = [_ZCP_SA_capturePosition, _ZCP_SA_amountAI, "moderate", "random", EAST] call ZCP_fnc_createDMSGroup;
+    _ZCP_SA_group = [_ZCP_SA_capturePosition, _ZCP_SA_amountAI, "moderate", "random", EAST, _ZCP_SA_minLaunchers, _ZCP_SA_maxLaunchers] call ZCP_fnc_createDMSGroup;
 
     _ZCP_SA_group setBehaviour "AWARE";
     _ZCP_SA_group setCombatMode "YELLOW";
@@ -30,7 +34,9 @@ switch (ZCP_AI_Type) do {
     _ZCP_SA_holdWP = _ZCP_SA_group addWaypoint [_ZCP_SA_capturePosition, 5];
     _ZCP_SA_holdWP setWaypointType "HOLD";
     _ZCP_SA_holdWP setWaypointSpeed "NORMAL";
-    _ZCP_SA_holdWP setWaypointBehaviour "COMBAT";
+    _ZCP_SA_holdWP setWaypointBehaviour "AWARE";
+
+    _ZCP_S_ai pushBack _ZCP_SA_group;
 
   };
   case ('FUMS'): {
@@ -54,3 +60,5 @@ switch (ZCP_AI_Type) do {
         diag_log format ['[ZCP]: No ai system chosen'];
   };
 };
+
+_ZCP_S_ai
