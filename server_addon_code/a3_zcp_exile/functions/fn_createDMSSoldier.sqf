@@ -40,13 +40,10 @@ _ZCP_CDS_difficulty =
 
 _ZCP_CDS_posAI = [_ZCP_CDS_spawnAIPos, 0, 20, 1, 0, 9999, 0] call BIS_fnc_findSafePos;
 
-_ZCP_CDS_dummyGroupEast = createGroup east;
-
-_ZCP_CDS_unitAI = _ZCP_CDS_dummyGroupEast createUnit ['O_G_Soldier_F', _ZCP_CDS_posAI, [], 0,"FORM"];
-
-[_ZCP_CDS_unitAI] joinSilent _ZCP_CDS_groupAI;
-deleteGroup _ZCP_CDS_dummyGroupEast;
+_ZCP_CDS_unitAI = _ZCP_CDS_groupAI createUnit ['O_Soldier_F', _ZCP_CDS_posAI, [], 0,"FORM"];
 _ZCP_CDS_unitAI allowFleeing 0;
+[_ZCP_CDS_unitAI] joinSilent _ZCP_CDS_groupAI;
+
 
 // Remove existing gear
 {_ZCP_CDS_unitAI removeWeaponGlobal _x;} 	forEach (weapons _ZCP_CDS_unitAI);

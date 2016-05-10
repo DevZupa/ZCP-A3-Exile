@@ -6,7 +6,7 @@ private['_ZCP_MM_mission', '_ZCP_MM_missionIndex','_ZCP_MM_recreateTrigger','_ZC
 "_ZCP_MM_contestEndTime","_ZCP_MM_contestTotalTime","_ZCP_MM_proximityMessageList","_ZCP_MM_isContested","_ZCP_MM_capperName",
 "_ZCP_MM_currentCapper","_ZCP_MM_previousCapper","_ZCP_MM_currentGroup","_ZCP_MM_wasContested","_ZCP_MM_finishText","_ZCP_MM_markers",
 "_ZCP_MM_contestStartTime","_ZCP_MM_capIndex","_ZCP_MM_capturePosition","_ZCP_MM_Halfway","_ZCP_MM_oneMin","_ZCP_MM_capStartTime",
-"_ZCP_MM_baseRadius","_ZCP_MM_circle","_ZCP_MM_totalWaves",'_ZCP_MM_useWaves','_ZCP_MM_waveData','_ZCP_MM_nextWave'
+"_ZCP_MM_baseRadius","_ZCP_MM_circle","_ZCP_MM_totalWaves",'_ZCP_MM_useWaves','_ZCP_MM_waveData','_ZCP_MM_nextWave','_ZCP_MM_AI_NewGroups'
 ];
 
 
@@ -198,7 +198,8 @@ while{_ZCP_MM_continueLoop}do{
         // wave check
 
         if( (diag_tickTime - _ZCP_MM_contestTotalTime - _ZCP_MM_capStartTime) >  _ZCP_MM_nextWaveTimer ) then {
-          _ZCP_MM_AI_Groups = _ZCP_MM_AI_Groups + [_ZCP_MM_nextWave, _ZCP_MM_capturePosition, _ZCP_MM_originalThis select 21, _ZCP_MM_originalThis select 22] spawn ZCP_fnc_waveAI;
+          _ZCP_MM_AI_NewGroups = [_ZCP_MM_nextWave, _ZCP_MM_capturePosition, _ZCP_MM_originalThis select 21, _ZCP_MM_originalThis select 22] call ZCP_fnc_waveAI;
+          _ZCP_MM_AI_Groups = _ZCP_MM_AI_Groups + _ZCP_MM_AI_NewGroups;
           _ZCP_MM_currentWaveIndex = _ZCP_MM_currentWaveIndex + 1;
           if (ZCP_MessagePlayersBeforeWaves && ZCP_AI_Type != 'NONE') then {
               {
