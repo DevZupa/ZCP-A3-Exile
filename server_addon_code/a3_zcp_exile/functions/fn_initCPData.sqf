@@ -9,7 +9,7 @@ if(ZCP_dev) then {
 	ZCP_ServerStartWaitTime = 20;
 };
 
-ZCP_Version = "ZCP_Exile_2.1";
+ZCP_Version = "ZCP_Exile_2.2";
 ZCP_Data = [];
 ZCP_MissionTriggerData = [];
 ZCP_MissionCounter = 0;
