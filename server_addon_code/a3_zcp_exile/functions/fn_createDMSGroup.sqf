@@ -16,10 +16,11 @@ _ZCP_CDG_groupAI setVariable ["DMS_LockLocality",nil];
 _ZCP_CDG_groupAI setVariable ["DMS_SpawnedGroup",true];
 _ZCP_CDG_groupAI setVariable ["DMS_Group_Side", EAST];
 
-
 for "_i" from 1 to _ZCP_CDG_unitsPerGroup do {
   [_ZCP_CDG_groupAI, _ZCP_CDG_spawnAIPos, _ZCP_CDG_dificulty, _ZCP_CDG_solierType] call ZCP_fnc_createDMSSoldier;
 };
+
+_ZCP_CDG_groupAI selectLeader ((units _ZCP_CDG_groupAI) select 0);
 
 // An AI will definitely spawn with a launcher if you define type
 if (_ZCP_CDG_minLaunchers > 0) then
@@ -49,6 +50,6 @@ if (_ZCP_CDG_minLaunchers > 0) then
 	};
 };
 
-_ZCP_CDG_groupAI selectLeader ((units _ZCP_CDG_groupAI) select 0);
+
 
 _ZCP_CDG_groupAI
