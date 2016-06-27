@@ -1,9 +1,12 @@
 /*
 *   Creates a wave of ai attacking the zcp from 2 locations
 */
-private['_ZCP_WA_unitsPerGroup','_ZCP_WA_amountOfGroups','_ZCP_WA_distanceFromZCP','_useGroundSpawn',
-'_ZCP_WA_useRandomGroupLocations','_ZCP_WA_spawnAIPos','_ZCP_WA_capturePosition','_ZCP_WA_waveData'
+private['_ZCP_WA_unitsPerGroup','_ZCP_WA_amountOfGroups','_ZCP_WA_distanceFromZCP','_useGroundSpawn','_ZCP_WA_maxLaunchers',
+'_ZCP_WA_useRandomGroupLocations','_ZCP_WA_spawnAIPos','_ZCP_WA_capturePosition','_ZCP_WA_waveData','_ZCP_WA_minLaunchers',
+'_ZCP_WA_groups'
 ];
+
+_ZCP_WA_groups = [];
 
 switch (ZCP_AI_Type) do {
   case ('DMS'): {
@@ -13,6 +16,9 @@ switch (ZCP_AI_Type) do {
     _ZCP_WA_distanceFromZCP = _ZCP_WA_waveData select 3;
 
     _ZCP_WA_useRandomGroupLocations = _ZCP_WA_waveData select 4;
+
+    _ZCP_WA_minLaunchers = _this select 2;
+    _ZCP_WA_maxLaunchers = _this select 3;
 
     _ZCP_WA_capturePosition = _this select 1;
 
@@ -26,11 +32,15 @@ switch (ZCP_AI_Type) do {
 
       _ZCP_WA_spawnAIPos set [2, 0];
 
-      _ZCP_WA_groupOfAI = [_ZCP_WA_spawnAIPos, _ZCP_WA_unitsPerGroup, "moderate", "random", EAST] call ZCP_fnc_createDMSGroup;
+      _ZCP_WA_groupOfAI = [_ZCP_WA_spawnAIPos, _ZCP_WA_unitsPerGroup, "moderate", "random", EAST, _ZCP_WA_minLaunchers, _ZCP_WA_maxLaunchers] call ZCP_fnc_createDMSGroup;
 
-      uiSleep 2;
+      _ZCP_WA_groupOfAI setFormation "WEDGE";
+      _ZCP_WA_groupOfAI setBehaviour "COMBAT";
+      _ZCP_WA_groupOfAI setCombatMode "RED";
 
       [_ZCP_WA_groupOfAI, _ZCP_WA_capturePosition] call ZCP_fnc_createWaypoint;
+
+       _ZCP_WA_groups pushBack _ZCP_WA_groupOfAI;
     };
   };
   case ('FUMS'): {
@@ -45,6 +55,8 @@ switch (ZCP_AI_Type) do {
     }count _ZCP_WA_headlessClients;
   };
   default {
-        diag_log format ['[ZCP]: No ai system chosen'];
+    diag_log format ['[ZCP]: No ai system chosen'];
   };
 };
+
+_ZCP_WA_groups

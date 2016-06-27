@@ -40,13 +40,10 @@ _ZCP_CDS_difficulty =
 
 _ZCP_CDS_posAI = [_ZCP_CDS_spawnAIPos, 0, 20, 1, 0, 9999, 0] call BIS_fnc_findSafePos;
 
-_ZCP_CDS_dummyGroupEast = createGroup east;
-
-_ZCP_CDS_unitAI = _ZCP_CDS_dummyGroupEast createUnit ['O_G_Soldier_F', _ZCP_CDS_posAI, [], 0,"FORM"];
-
-[_ZCP_CDS_unitAI] joinSilent _ZCP_CDS_groupAI;
-deleteGroup _ZCP_CDS_dummyGroupEast;
+_ZCP_CDS_unitAI = _ZCP_CDS_groupAI createUnit ['O_Soldier_F', _ZCP_CDS_posAI, [], 0,"FORM"];
 _ZCP_CDS_unitAI allowFleeing 0;
+[_ZCP_CDS_unitAI] joinSilent _ZCP_CDS_groupAI;
+
 
 // Remove existing gear
 {_ZCP_CDS_unitAI removeWeaponGlobal _x;} 	forEach (weapons _ZCP_CDS_unitAI);
@@ -200,3 +197,11 @@ if (_ZCP_CDS_difficulty=="hardcore") then
 
 _ZCP_CDS_unitAI setCustomAimCoef (missionNamespace getVariable [format["DMS_AI_AimCoef_%1",_ZCP_CDS_difficulty], 0.7]);
 _ZCP_CDS_unitAI enableStamina (missionNamespace getVariable [format["DMS_AI_EnableStamina_%1",_ZCP_CDS_difficulty], true]);
+
+_ZCP_CDS_unitAI addRating 10000;
+
+_ZCP_CDS_unitAI setVariable ["DMS_AISpawnTime", time];
+_ZCP_CDS_unitAI setVariable ["DMS_AI_Side", "bandit"];
+_ZCP_CDS_unitAI setVariable ["DMS_AI_Type", "Soldier"];
+_ZCP_CDS_unitAI setVariable ["DMS_AISpawnPos",_ZCP_CDS_spawnAIPos];
+_ZCP_CDS_unitAI setVariable ["DMS_LastAIDistanceCheck",time];

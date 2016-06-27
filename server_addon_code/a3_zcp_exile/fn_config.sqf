@@ -18,9 +18,14 @@
 // Being first in the zone starts the timer.
 // Holding a zone  gives you a reward after x Min.
 
-ZCP_dev = false; // Devmode for shorter development capture times
+ZCP_dev = true; // Devmode for shorter development capture times
 
 ZCP_AI_Type = 'DMS'; // NONE | DMS | FUMS
+
+ZCP_AI_useLaunchersChance = 25; // %Change to spawn Launcher on AI soldier ( never exeeds the MIN and MAX defined per cappoint).
+
+// Put the following to -1 to disable it.
+ZCP_AI_killAIAfterMissionCompletionTimer = 60; // AMounts of seconds before all ZCP AI get auto killed after a mission is completed. ( DMS only ).
 
 // ZCP_Min_AI_Amount = 4; Not used anymore
 // ZCP_Random_AI_Max = 8; Not used anymore
@@ -119,7 +124,11 @@ ZCP_CapPoints = [
 				200, // distance in meter form ZCP for the ai to spawn
 				true // false -> all groups from 1 random location, true -> all groups from their own random location
 			]
-		]
+		],
+		1, // Minimum amount of launchers for starting AI (19)
+        2, // Maximum amount of launchers for starting AI (20)
+        1, // Minimum amount of launchers for Wave AI (21)
+        1  // Maximum amount of launchers for Wave AI (22)
 	]
 	,
     [
@@ -157,7 +166,11 @@ ZCP_CapPoints = [
                 200, // distance in meter form ZCP for the ai to spawn
                 false // false -> all groups from 1 random location, true -> all groups from their own random location
             ]
-        ]
+        ],
+        1, // Minimum amount of launchers for starting AI
+        2, // Maximum amount of launchers for starting AI
+        1, // Minimum amount of launchers for Wave AI
+        1  // Maximum amount of launchers for Wave AI
     ]
     ,
     [
@@ -187,7 +200,11 @@ ZCP_CapPoints = [
                 200, // distance in meter form ZCP for the ai to spawn
                 true // false -> all groups from 1 random location, true -> all groups from their own random location
             ]
-        ]
+        ],
+        1, // Minimum amount of launchers for starting AI
+        2, // Maximum amount of launchers for starting AI
+        1, // Minimum amount of launchers for Wave AI
+        1  // Maximum amount of launchers for Wave AI
     ]
     // add more here if wanted
 ];
