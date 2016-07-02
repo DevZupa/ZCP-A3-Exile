@@ -161,7 +161,7 @@ if ((_lootValues isEqualType []) && {!((_lootValues select 1) isEqualType {})}) 
 				_weapon = [_weapon,1];
 			};
 			_crate addWeaponCargoGlobal _weapon;
-			if !(_ammo isEqualTo "Exile_Magazine_Swing") then
+			if !(_ammo in ["Exile_Magazine_Swing","Exile_Magazine_Boing","Exile_Magazine_Swoosh"]) then
 			{
 				_crate addItemCargoGlobal [_ammo, (ZCP_DMS_MinimumMagCount + floor(random ZCP_DMS_MagRange))];
 			};
