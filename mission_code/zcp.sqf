@@ -7,6 +7,4 @@
 	{
 		systemChat format["%1",_x];
 	}count _messageArrayNotification;
-
-	["Success", [_messageArrayNotification select 0]] call ExileClient_gui_notification_event_addNotification;
 };
