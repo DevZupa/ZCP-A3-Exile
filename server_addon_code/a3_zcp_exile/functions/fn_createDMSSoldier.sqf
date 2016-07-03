@@ -205,3 +205,23 @@ _ZCP_CDS_unitAI setVariable ["DMS_AI_Side", "bandit"];
 _ZCP_CDS_unitAI setVariable ["DMS_AI_Type", "Soldier"];
 _ZCP_CDS_unitAI setVariable ["DMS_AISpawnPos",_ZCP_CDS_spawnAIPos];
 _ZCP_CDS_unitAI setVariable ["DMS_LastAIDistanceCheck",time];
+
+// Set money/respect variables
+_ZCP_CDS_unitAI setVariable
+[
+	"DMS_AI_Money",
+	DMS_bandit_Soldier_MoneyGain
+];
+_ZCP_CDS_unitAI setVariable
+[
+	"DMS_AI_Respect",
+	DMS_bandit_Soldier_RepGain
+];
+
+// Not sure if you guys want the ZCP AI to spawn with money :p
+_ZCP_CDS_unitAI setVariable
+[
+	"ExileMoney",
+	0,
+	true
+];
