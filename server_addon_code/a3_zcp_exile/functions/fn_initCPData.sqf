@@ -10,7 +10,7 @@ if(ZCP_dev) then {
 	ZCP_AI_killAIAfterMissionCompletionTimer = 5;
 };
 
-ZCP_Version = "ZCP_Exile_2.2";
+ZCP_Version = "ZCP_Exile_3.0";
 ZCP_Data = [];
 ZCP_MissionTriggerData = [];
 ZCP_MissionCounter = 0;
