@@ -5,9 +5,9 @@ Topic @ [ZCP @ Exile forums](http://www.exilemod.com/topic/12116-release-officia
 #ZCP for Exile wiki
 
 ### Zupa's Capture Points
-> Latest version: 3.0
-> Latest update: 18 - 07 - 2016
-> [Changelog](https://github.com/DevZupa/ZCP-A3-Exile/wiki/Changelog)
+> Latest version: 3.0  
+> Latest update: 18 - 07 - 2016  
+> [Changelog](https://github.com/DevZupa/ZCP-A3-Exile/wiki/Changelog)  
 
 ##Table of content
 
