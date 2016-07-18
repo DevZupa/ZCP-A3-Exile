@@ -17,7 +17,7 @@ _ZCP_CDG_groupAI setVariable ["DMS_SpawnedGroup",true];
 _ZCP_CDG_groupAI setVariable ["DMS_Group_Side", EAST];
 
 for "_i" from 1 to _ZCP_CDG_unitsPerGroup do {
-  [_ZCP_CDG_groupAI, _ZCP_CDG_spawnAIPos, _ZCP_CDG_dificulty, _ZCP_CDG_solierType] call ZCP_fnc_createDMSSoldier;
+  private _zcp_unit = [_ZCP_CDG_groupAI, _ZCP_CDG_spawnAIPos, _ZCP_CDG_dificulty, _ZCP_CDG_solierType] call ZCP_fnc_createDMSSoldier;
 };
 
 _ZCP_CDG_groupAI selectLeader ((units _ZCP_CDG_groupAI) select 0);

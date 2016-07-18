@@ -18,9 +18,19 @@
 // Being first in the zone starts the timer.
 // Holding a zone  gives you a reward after x Min.
 
-ZCP_dev = true; // Devmode for shorter development capture times
+ZCP_dev = false; // Devmode for shorter development capture times
 
 ZCP_AI_Type = 'DMS'; // NONE | DMS | FUMS
+
+ZCP_useOldMessages = false;
+
+/*Exile Toasts Notification Settings*/
+ZCP_DMS_ExileToasts_Title_Size			= 22;						// Size for Client Exile Toasts  mission titles.
+ZCP_DMS_ExileToasts_Title_Font			= "puristaMedium";			// Font for Client Exile Toasts  mission titles.
+ZCP_DMS_ExileToasts_Message_Color		= "#FFFFFF";				// Exile Toasts color for "ExileToast" client notification type.
+ZCP_DMS_ExileToasts_Message_Size		= 19;						// Exile Toasts size for "ExileToast" client notification type.
+ZCP_DMS_ExileToasts_Message_Font		= "PuristaLight";			// Exile Toasts font for "ExileToast" client notification type.
+/*Exile Toasts Notification Settings*/
 
 ZCP_AI_useLaunchersChance = 25; // %Change to spawn Launcher on AI soldier ( never exeeds the MIN and MAX defined per cappoint).
 

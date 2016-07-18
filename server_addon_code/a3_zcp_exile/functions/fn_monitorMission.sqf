@@ -125,7 +125,7 @@ while{_ZCP_MM_continueLoop}do{
       _ZCP_MM_isContested = false;
       {
         if( _x != _ZCP_MM_currentCapper)then{
-          if( _ZCP_MM_currentGroup ==  grpNull || group _x != _ZCP_MM_currentGroup)then{
+          if( (_ZCP_MM_currentGroup isEqualTo ExileServerLoneWolfGroup || group _x != _ZCP_MM_currentGroup ) )then{
             (ZCP_Data select _ZCP_MM_capIndex) set[1,2];
             _ZCP_MM_isContested = true;
           };
