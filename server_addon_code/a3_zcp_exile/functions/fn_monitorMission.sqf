@@ -125,7 +125,7 @@ while{_ZCP_MM_continueLoop}do{
       _ZCP_MM_isContested = false;
       {
         if( _x != _ZCP_MM_currentCapper)then{
-          if( _ZCP_MM_currentGroup ==  grpNull || group _x != _ZCP_MM_currentGroup)then{
+          if( (_ZCP_MM_currentGroup isEqualTo ExileServerLoneWolfGroup || group _x != _ZCP_MM_currentGroup ) )then{
             (ZCP_Data select _ZCP_MM_capIndex) set[1,2];
             _ZCP_MM_isContested = true;
           };
@@ -240,7 +240,7 @@ if(_ZCP_MM_recreateTrigger) then {
   ['Notification', ["ZCP",[format[[5] call ZCP_fnc_translate,_ZCP_MM_name,_ZCP_MM_finishText]], 'ZCP_Capped']] call ZCP_fnc_showNotification;
   [_ZCP_MM_currentCapper,_ZCP_MM_name,_ZCP_MM_capturePosition,_ZCP_MM_originalThis select 2, _ZCP_MM_baseRadius] call ZCP_fnc_giveReward;
 
-  ['PersonalNotification', ["ZCP",[format[[11] call ZCP_fnc_translate]], 'ZCP_Capped'], _ZCP_MM_currentCapper] call ZCP_fnc_showNotification;
+  ['PersonalNotification', ["ZCP",[format[[11] call ZCP_fnc_translate]], 'ZCP_Init'], _ZCP_MM_currentCapper] call ZCP_fnc_showNotification;
 
   if (_ZCP_MM_originalThis select 14) then {
     [_ZCP_MM_capturePosition, _ZCP_MM_baseRadius, _ZCP_MM_originalThis select 15, _ZCP_MM_originalThis select 16] spawn ZCP_fnc_createSmokeScreen;

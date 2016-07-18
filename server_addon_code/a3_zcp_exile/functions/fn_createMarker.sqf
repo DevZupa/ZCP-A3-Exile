@@ -23,7 +23,7 @@ private _ZCP_CM_marker 			= createMarker [format['ZCP_CM_%1',_ZCP_CM_mission], _
 
 _ZCP_CM_marker setMarkerColor
 (
-	switch (ZCP_Data select _ZCP_CM_index) do
+	switch ( (ZCP_Data select _ZCP_CM_index) select 1 ) do
 	{
 	    case 1:
 		{
@@ -46,8 +46,7 @@ _ZCP_CM_marker 		setMarkerSize [_ZCP_CM_capRadius,_ZCP_CM_capRadius];
 _ZCP_CM_marker 		setMarkerText _ZCP_CM_name;
 
 private _ZCP_CM_dot 	= createMarker [format['ZCP_CM_dot_%1',_ZCP_CM_mission], _ZCP_CM_position];
-_ZCP_CM_dot 			setMarkerColor "ColorBlack";
-_ZCP_CM_dot 			setMarkerType "hd_flag";
-_ZCP_CM_dot 			setMarkerText _ZCP_CM_name;
+_ZCP_CM_dot 			setMarkerType "ExileMissionCapturePointIcon";
+_ZCP_CM_dot 			setMarkerText format["   %1",_ZCP_CM_name];
 
 [_ZCP_CM_attentionMarker, _ZCP_CM_marker, _ZCP_CM_dot]
