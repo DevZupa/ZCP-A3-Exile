@@ -7,18 +7,18 @@ Topic @ [ZCP @ Exile forums](http://www.exilemod.com/topic/12116-release-officia
 ### Zupa's Capture Points
 > Latest version: 3.0
 > Latest update: 18 - 07 - 2016
-> [Changelog](Changelog)
+> [Changelog](https://github.com/DevZupa/ZCP-A3-Exile/wiki/Changelog)
 
 ##Table of content
 
-1. [Description](Description)
-2. [Installation](Installation)
-3. [Battleye](Battleye)
-4. [Configuration](Configuration)
-5. [Bases](Bases)
-6. [Changelog](Changelog)
-7. [Updating](Updating)
-8. [Contributing](Contributing)
+1. [Description](https://github.com/DevZupa/ZCP-A3-Exile/wiki/Description)
+2. [Installation](https://github.com/DevZupa/ZCP-A3-Exile/wiki/Installation)
+3. [Battleye](https://github.com/DevZupa/ZCP-A3-Exile/wiki/Battleye)
+4. [Configuration](https://github.com/DevZupa/ZCP-A3-Exile/wiki/Configuration)
+5. [Bases](https://github.com/DevZupa/ZCP-A3-Exile/wiki/Bases)
+6. [Changelog](https://github.com/DevZupa/ZCP-A3-Exile/wiki/Changelog)
+7. [Updating](https://github.com/DevZupa/ZCP-A3-Exile/wiki/Updating)
+8. [Contributing](https://github.com/DevZupa/ZCP-A3-Exile/wiki/Contributing)
 
 ##Previous releases
 
