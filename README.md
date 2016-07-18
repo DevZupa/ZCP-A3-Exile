@@ -1,42 +1,36 @@
 # ZCP-A3-Exile
 
-Install info @ [ZCP @ Exile forums](http://www.exilemod.com/topic/12116-release-official-zcp-zupas-capture-points/)
+Topic @ [ZCP @ Exile forums](http://www.exilemod.com/topic/12116-release-official-zcp-zupas-capture-points/)
 
+#ZCP for Exile wiki
 
+### Zupa's Capture Points
+> Latest version: 3.0
+> Latest update: 18 - 07 - 2016
+> [Changelog](Changelog)
 
-### BE filters
+##Table of content
 
-These are kicks based on what i encountered:
+1. [Description](Description)
+2. [Installation](Installation)
+3. [Battleye](Battleye)
+4. [Configuration](Configuration)
+5. [Bases](Bases)
+6. [Changelog](Changelog)
+7. [Updating](Updating)
+8. [Contributing](Contributing)
 
-on the line of 'isPlayer' add
-```sqf
-!="if (isPlayer _this) then {}"
-```
+##Previous releases
 
-on the line of 'units' add
-```sqf
-!="if (count units group _this>1) then"
-```
+* [V2.1](https://github.com/DevZupa/ZCP-A3-Exile/releases/tag/V2.1)
+* [V2.0](https://github.com/DevZupa/ZCP-A3-Exile/releases/tag/V2.0)
+* [V1.1](https://github.com/DevZupa/ZCP-A3-Exile/releases/tag/V1.1)
+* [V1.0.2](https://github.com/DevZupa/ZCP-A3-Exile/releases/tag/V1.0.2)
+* [V1.0.1](https://github.com/DevZupa/ZCP-A3-Exile/releases/tag/V1.0.1)
+* [V1.0](https://github.com/DevZupa/ZCP-A3-Exile/releases/tag/V1.0)
 
-#### Credits to the following people:
-
+##Credits
 * JamieKG for Testing and XCAM Base.
 * Zombie for AlRayak testing and whining.
 * Ferry for 3 cap bases!
-* DMS (Eraser, Defent) for code usage!
-
-#### Changes in 2.1
-
-* Amount of starting AI is now defined per mission instead of global..
-* Code cleanup.
-* Fixed cappoint not being capable ( problem with non private variables ).
-* Allow multiple rewards for 1 mission.
-* Option to deploy smokescreen per missions after finishing it.
-* Option to pass list/array of basesfiles per mission (Instead of only Random or 1 basefile).
-* No longer need to define baseType in the Cappoints array. It will auto determine it from the cappbases array.
-* Add m3e export base support
-* Option to disable damage when bombing is happening on map and build objects ( people and vehicles still die ).
-* Added minimum distance check to Exile buildables
-* Multiple static locations can be passed to 1 cappoint to be chosen randomly from the list.
-* 3 New bases by eXo
-* Amount of cappoints can now be relative to the amount of players online ( checks every x minuts ( default 10 minuts)
+* [DMS](https://github.com/Defent/DMS_Exile) (Eraser, Defent) for code usage!
