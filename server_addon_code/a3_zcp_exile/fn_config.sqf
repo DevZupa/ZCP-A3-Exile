@@ -25,17 +25,17 @@ ZCP_AI_Type = 'DMS'; // NONE | DMS | FUMS
 ZCP_useOldMessages = false;
 
 /*Exile Toasts Notification Settings*/
-ZCP_DMS_ExileToasts_Title_Size			= 22;						// Size for Client Exile Toasts  mission titles.
+ZCP_DMS_ExileToasts_Title_Size			= 22;					// Size for Client Exile Toasts  mission titles.
 ZCP_DMS_ExileToasts_Title_Font			= "puristaMedium";			// Font for Client Exile Toasts  mission titles.
 ZCP_DMS_ExileToasts_Message_Color		= "#FFFFFF";				// Exile Toasts color for "ExileToast" client notification type.
-ZCP_DMS_ExileToasts_Message_Size		= 19;						// Exile Toasts size for "ExileToast" client notification type.
+ZCP_DMS_ExileToasts_Message_Size		= 19;					// Exile Toasts size for "ExileToast" client notification type.
 ZCP_DMS_ExileToasts_Message_Font		= "PuristaLight";			// Exile Toasts font for "ExileToast" client notification type.
 /*Exile Toasts Notification Settings*/
 
-ZCP_AI_useLaunchersChance = 25; // %Change to spawn Launcher on AI soldier ( never exeeds the MIN and MAX defined per cappoint).
+ZCP_AI_useLaunchersChance = 25; // %Change to spawn Launcher on AI soldier ( never exceeds the MIN and MAX defined per cappoint).
 
 // Put the following to -1 to disable it.
-ZCP_AI_killAIAfterMissionCompletionTimer = 60; // AMounts of seconds before all ZCP AI get auto killed after a mission is completed. ( DMS only ).
+ZCP_AI_killAIAfterMissionCompletionTimer = 60; // Amount of seconds before all ZCP AI get auto killed after a mission is completed. ( DMS only ).
 
 // ZCP_Min_AI_Amount = 4; Not used anymore
 // ZCP_Random_AI_Max = 8; Not used anymore
