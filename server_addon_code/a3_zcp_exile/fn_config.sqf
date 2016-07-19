@@ -111,7 +111,7 @@ ZCP_CapPoints = [
 		true, // use Waves of AI to attack the base when a player is capping (17)
 		[ // array of waves of AI () (18)
 			[
-				15, // procentage of the cap time to start attack (50 = 50% of the total captime)
+				15, // percentage of the cap time to start attack (50 = 50% of the total captime)
 				3, // Amount of AI units in a group
 				2, // Amount of AI groups
 				200, // distance in meter form ZCP for the ai to spawn
@@ -119,7 +119,7 @@ ZCP_CapPoints = [
 			]
 			,
 			[
-				45, // procentage of the cap time to start attack (50 = 50% of the total captime)
+				45, // percentage of the cap time to start attack (50 = 50% of the total captime)
 				3, // Amount of AI units in a group
 				3, // Amount of AI groups
 				200, // distance in meter form ZCP for the ai to spawn
@@ -127,7 +127,7 @@ ZCP_CapPoints = [
 			]
 			,
 			[
-				60, // procentage of the cap time to start attack (50 = 50% of the total captime)
+				60, // percentage of the cap time to start attack (50 = 50% of the total captime)
 				2, // Amount of AI units in a group
 				4, // Amount of AI groups
 				200, // distance in meter form ZCP for the ai to spawn
@@ -161,7 +161,7 @@ ZCP_CapPoints = [
         true, // use Waves of AI to attack the base when a player is capping (17)
         [ // array of waves of AI () (18)
             [
-                30, // procentage of the cap time to start attack (50 = 50% of the total captime)
+                30, // percentage of the cap time to start attack (50 = 50% of the total captime)
                 3, // Amount of AI units in a group
                 2, // Amount of AI groups
                 200, // distance in meter form ZCP for the ai to spawn
@@ -169,7 +169,7 @@ ZCP_CapPoints = [
             ]
             ,
             [
-                75, // procentage of the cap time to start attack (50 = 50% of the total captime)
+                75, // percentage of the cap time to start attack (50 = 50% of the total captime)
                 3, // Amount of AI units in a group
                 3, // Amount of AI groups
                 200, // distance in meter form ZCP for the ai to spawn
@@ -203,7 +203,7 @@ ZCP_CapPoints = [
         true, // use Waves of AI to attack the base when a player is capping (17)
         [ // array of waves of AI () (18)
             [
-                50, // procentage of the cap time to start attack (50 = 50% of the total captime)
+                50, // percentage of the cap time to start attack (50 = 50% of the total captime)
                 3, // Amount of AI units in a group
                 2, // Amount of AI groups
                 200, // distance in meter form ZCP for the ai to spawn
