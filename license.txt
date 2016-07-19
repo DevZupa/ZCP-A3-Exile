@@ -1,19 +1,3 @@
-Skip to content
-This repository
-Search
-Pull requests
-Issues
-Gist
- @Windmolders
- Watch 42
-  Star 41
- Fork 46 Defent/DMS_Exile
- Code  Issues 0  Pull requests 0  Wiki  Pulse  Graphs
-Branch: master Find file DMS_Exile/license.txt
-ce1b6c0  on Apr 1
-@eraser1 eraser1 Added License and Legal Restrictions
-1 contributor
-RawBlameHistory     111 lines (89 sloc)  14.9 KB
 Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International Public License
 
 By exercising the Licensed Rights (defined below), You accept and agree to be bound by the terms and conditions of this Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International Public License ("Public License"). To the extent this Public License may be interpreted as a contract, You are granted the Licensed Rights in consideration of Your acceptance of these terms and conditions, and the Licensor grants You such rights in consideration of benefits the Licensor receives from making the Licensed Material available under these terms and conditions.
