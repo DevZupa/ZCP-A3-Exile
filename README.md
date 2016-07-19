@@ -21,6 +21,7 @@ Topic @ [Exile forums](http://www.exilemod.com/topic/12116-release-official-zcp-
 6. [Changelog](https://github.com/DevZupa/ZCP-A3-Exile/wiki/Changelog)
 7. [Updating](https://github.com/DevZupa/ZCP-A3-Exile/wiki/Updating)
 8. [Contributing](https://github.com/DevZupa/ZCP-A3-Exile/wiki/Contributing)
+9. [License](https://github.com/DevZupa/ZCP-A3-Exile/blob/master/license.txt)
 
 ##Previous releases
 
@@ -32,7 +33,8 @@ Topic @ [Exile forums](http://www.exilemod.com/topic/12116-release-official-zcp-
 * [V1.0](https://github.com/DevZupa/ZCP-A3-Exile/releases/tag/V1.0)
 
 ##Credits
+* Eraser for code and info.
 * JamieKG for Testing and XCAM Base.
 * Zombie for AlRayak testing and whining.
-* Ferry for 3 cap bases!
-* [DMS](https://github.com/Defent/DMS_Exile) (Eraser, Defent) for code usage!
+* Ferry for 3 cap bases.
+* [DMS](https://github.com/Defent/DMS_Exile) (Eraser, Defent) for code usages.
