@@ -16,6 +16,7 @@ class CfgFunctions {
 				postInit = 1;
 			};
 			class config {};
+			class missions {};
 			class missionLooper {};
 
 		};

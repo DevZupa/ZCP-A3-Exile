@@ -38,7 +38,7 @@ _ZCP_CDS_difficulty =
 		};
 	};
 
-_ZCP_CDS_posAI = [_ZCP_CDS_spawnAIPos, 0, 20, 1, 0, 9999, 0] call BIS_fnc_findSafePos;
+_ZCP_CDS_posAI = _ZCP_CDS_spawnAIPos findEmptyPosition [0, 30, 'O_Soldier_F'];
 
 _ZCP_CDS_unitAI = _ZCP_CDS_groupAI createUnit ['O_Soldier_F', _ZCP_CDS_posAI, [], 0,"FORM"];
 _ZCP_CDS_unitAI allowFleeing 0;

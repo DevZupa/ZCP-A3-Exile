@@ -7,6 +7,16 @@ _ZCP_SA_maxAI = _this select 3;
 _ZCP_SA_minLaunchers = _this select 4;
 _ZCP_SA_maxLaunchers = _this select 5;
 
+params [
+    '_ZCP_SA_capturePosition',
+    '_ZCP_SA_capRadius',
+    '_ZCP_SA_minAI',
+    '_ZCP_SA_maxAI',
+    '_ZCP_SA_minLaunchers',
+    '_ZCP_SA_maxLaunchers',
+    '_ZCP_SA_difAI',
+];
+
 _ZCP_SA_ai = [];
 
 switch (ZCP_AI_Type) do {
@@ -26,10 +36,10 @@ switch (ZCP_AI_Type) do {
     };
 
    // Posted on forums by second_coming;
-    _ZCP_SA_group = [_ZCP_SA_capturePosition, _ZCP_SA_amountAI, "moderate", "random", EAST, _ZCP_SA_minLaunchers, _ZCP_SA_maxLaunchers] call ZCP_fnc_createDMSGroup;
+    _ZCP_SA_group = [_ZCP_SA_capturePosition, _ZCP_SA_amountAI, _ZCP_SA_difAI select 0, _ZCP_SA_difAI select 1, EAST, _ZCP_SA_minLaunchers, _ZCP_SA_maxLaunchers] call ZCP_fnc_createDMSGroup;
 
-    _ZCP_SA_group setBehaviour "AWARE";
-    _ZCP_SA_group setCombatMode "YELLOW";
+    _ZCP_SA_group setBehaviour "AWARE"; _ZCP_SA_difAI select 2
+    _ZCP_SA_group setCombatMode "YELLOW"; _ZCP_SA_difAI select 3
 
     // Remove all previous waypoints
     for "_i" from count (waypoints _ZCP_SA_group) to 1 step -1 do
