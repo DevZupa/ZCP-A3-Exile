@@ -56,8 +56,8 @@ switch (_ZCP_SC_type) do {
     };
       case 'SniperWeaponBox': {
           [
+             _ZCP_SC_box,
             "Sniper",
-            _ZCP_SC_loot,
             ZCP_DMS_RareLootChance
           ]call ZCP_fnc_fillCrate;
         };
