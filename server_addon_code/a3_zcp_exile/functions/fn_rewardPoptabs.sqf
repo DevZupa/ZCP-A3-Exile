@@ -25,4 +25,4 @@ _ZCP_RPT_currentCapper setVariable ["ExileMoney", _ZCP_RPT_playerMoney, true];
     ["SuccessTitleAndText", ["ZCP Poptabs Reward", _ZCP_RPT_awardToGive]]
 ] call ExileServer_system_network_send_to;
 
-diag_log format ["[ZCP]: %1 received %3 poptabs for %2.",name _ZCP_RPT_currentCapper,_ZCP_RPT_capName, _ZCP_RPT_awardToGive];
+diag_log text format ["[ZCP]: %1 received %3 poptabs for %2.",name _ZCP_RPT_currentCapper,_ZCP_RPT_capName, _ZCP_RPT_awardToGive];

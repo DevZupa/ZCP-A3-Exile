@@ -107,7 +107,7 @@ if(_this select 6)then{ // is static location config
 
 (ZCP_Data select _ZCP_S_capPointIndex) set[2,_ZCP_S_capturePosition];
 
-diag_log format['ZCP - Debug: %1',(ZCP_Data select _ZCP_S_capPointIndex) select 2 ];
+diag_log text format['ZCP - Debug: %1',(ZCP_Data select _ZCP_S_capPointIndex) select 2 ];
 
 _ZCP_S_baseObjects = [];
 switch (_ZCP_S_baseType) do {
@@ -131,8 +131,18 @@ if(ZCP_createVirtualCircle) then {
 	_ZCP_S_circle = [_ZCP_S_capturePosition, _ZCP_S_baseRadius ] call ZCP_fnc_createVirtualCircle;
 };
 
+private _ZCP_S_rewardObjects = [];
+
+if(_this select 25) then {
+	_ZCP_S_rewardObjects = [_this select 2 , _ZCP_S_capturePosition, _ZCP_S_baseRadius ] call ZCP_fnc_preCreateRewards;
+} else {
+    {
+        _nil = _ZCP_S_rewardObjects pushBack objNull;
+    }count (_this select 2);
+};
+
 if(_this select 5) then {
-	_ZCP_S_ai = [_ZCP_S_capturePosition, _ZCP_S_baseRadius, _this select 12, _this select 13, _this select 19, _this select 20] call ZCP_fnc_spawnAI;
+	_ZCP_S_ai = [_ZCP_S_capturePosition, _ZCP_S_baseRadius, _this select 12, _this select 13, _this select 19, _this select 20, _this select 23 ] call ZCP_fnc_spawnAI;
 };
 
 if(count _ZCP_S_baseObjects != 0)then{
@@ -140,10 +150,12 @@ if(count _ZCP_S_baseObjects != 0)then{
 	['Notification', ["ZCP",[format[[0] call ZCP_fnc_translate, _ZCP_S_capPointName, (_ZCP_S_missionCapTime / 60)]],"ZCP_Init"]] call ZCP_fnc_showNotification;
 
 	_ZCP_S_markers = [_this, _ZCP_S_baseRadius, [], _ZCP_S_capturePosition] call ZCP_fnc_createMarker;
+
+	diag_log _ZCP_S_rewardObjects;
 	// creat trigger
-	ZCP_MissionTriggerData set [_ZCP_S_capPointIndex, [_this, _ZCP_S_baseObjects, _ZCP_S_capturePosition, _ZCP_S_baseRadius, _ZCP_S_markers, _ZCP_S_circle, _ZCP_S_ai]];
+	ZCP_MissionTriggerData set [_ZCP_S_capPointIndex, [_this, _ZCP_S_baseObjects, _ZCP_S_capturePosition, _ZCP_S_baseRadius, _ZCP_S_markers, _ZCP_S_circle, _ZCP_S_ai, _ZCP_S_rewardObjects]];
 	[_ZCP_S_capPointIndex, _ZCP_S_capturePosition, _ZCP_S_baseRadius] call ZCP_fnc_createTrigger;
 
 }else{
-	diag_log format["[ZCP]: No correct Basefile found for %1", _ZCP_S_capPointName];
+	diag_log text format["[ZCP]: No correct Basefile found for %1", _ZCP_S_capPointName];
 };

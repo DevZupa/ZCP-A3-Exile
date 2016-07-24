@@ -1,13 +1,13 @@
-private['_ZCP_CDS_unarmed','_ZCP_CDS_groupAI','_ZCP_CDS_spawnAIPos','_ZCP_CDS_difficulty','_ZCP_CDS_soldierClass','_ZCP_CDS_unitAI','_ZCP_CDS_posAI','_ZCP_CDS_dummyGroupEast'];
+params[
+ '_ZCP_CDS_groupAI',
+ '_ZCP_CDS_spawnAIPos',
+ '_ZCP_CDS_difficulty',
+ '_ZCP_CDS_soldierClass',
+ '_ZCP_CDS_radius',
+ '_ZCP_CDS_dummyGroup'
+];
 
-
-_ZCP_CDS_groupAI = _this select 0;
-_ZCP_CDS_spawnAIPos = _this select 1;
-_ZCP_CDS_difficulty = _this select 2;
-_ZCP_CDS_soldierClass = _this select 3;
-_ZCP_CDS_unarmed = false;
-
-//diag_log format['ZCP: creating soldier %1 %2 %3 %4',_ZCP_CDS_groupAI,_ZCP_CDS_spawnAIPos,_ZCP_CDS_difficulty,_ZCP_CDS_soldierClass];
+private _ZCP_CDS_unarmed = false;
 
 _ZCP_CDS_difficulty =
 	switch (toLower _ZCP_CDS_difficulty) do
@@ -38,10 +38,18 @@ _ZCP_CDS_difficulty =
 		};
 	};
 
-_ZCP_CDS_posAI = _ZCP_CDS_spawnAIPos findEmptyPosition [0, 30, 'O_Soldier_F'];
+private _ZCP_CDS_posAI = _ZCP_CDS_spawnAIPos findEmptyPosition [0, _ZCP_CDS_radius, 'O_Soldier_F'];
 
-_ZCP_CDS_unitAI = _ZCP_CDS_groupAI createUnit ['O_Soldier_F', _ZCP_CDS_posAI, [], 0,"FORM"];
+_ZCP_CDS_unitAI = _dummyGroupEast createUnit ['O_Soldier_F', _ZCP_CDS_posAI, [], 0,"FORM"];
 _ZCP_CDS_unitAI allowFleeing 0;
+_ZCP_CDS_unitAI allowDamage false;
+
+_ZCP_CDS_unitAI disableAI "AUTOTARGET";
+_ZCP_CDS_unitAI disableAI "TARGET";
+_ZCP_CDS_unitAI disableAI "MOVE";
+
+[_ZCP_CDS_unitAI] joinSilent _ZCP_CDS_groupAI;
+
 
 
 // Remove existing gear
@@ -85,7 +93,7 @@ if !(DMS_ai_default_items isEqualTo []) then
 
 if !(_ZCP_CDS_soldierClass in DMS_ai_SupportedClasses) exitWith
 	{
-		diag_log format ["DMS ERROR :: DMS_SpawnAISoldier called with unsupported _ZCP_CDS_soldierClass: %1 | _this: %2",_ZCP_CDS_soldierClass,_this];
+		diag_log text format ["DMS ERROR :: DMS_SpawnAISoldier called with unsupported _ZCP_CDS_soldierClass: %1 | _this: %2",_ZCP_CDS_soldierClass,_this];
 		deleteVehicle _ZCP_CDS_unitAI;
 	};
 
@@ -225,7 +233,8 @@ _ZCP_CDS_unitAI setVariable
 	true
 ];
 
+uiSleep 0.5;
 
-[_ZCP_CDS_unitAI] joinSilent _ZCP_CDS_groupAI;
+
 
 _ZCP_CDS_unitAI

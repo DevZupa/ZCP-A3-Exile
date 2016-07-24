@@ -18,7 +18,7 @@ if (!isServer) exitWith
 {
 	for "_i" from 0 to 99 do
 	{
-		diag_log "[ZCP]: Not a server";
+		diag_log text format["[ZCP]: Not a server"];
 	};
 };
 
@@ -72,7 +72,7 @@ call ZCP_fnc_config;
 if ( isNil 'ZCP_ConfigLoaded' ) exitWith {
 	for "_i" from 0 to 99 do
 	{
-		diag_log "[ZCP]: Typo or missing symbol in config file!";
+		diag_log text format["[ZCP]: Typo or missing symbol in config file!"];
 	};
 };
 

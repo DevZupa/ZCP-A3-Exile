@@ -25,7 +25,7 @@ if (ZCP_MaxMissionsRelativeToPlayers) then {
             _ZCP_ML_maxMissions = _x select 1;
         };
     }forEach ZCP_RelativeMaxMissions ;
-    diag_log format['ZCP:%1 online, will spawn %2 missions in total.', _ZCP_ML_players, _ZCP_ML_maxMissions];
+    diag_log text format['ZCP:%1 online, will spawn %2 missions in total.', _ZCP_ML_players, _ZCP_ML_maxMissions];
 };
 
 while {ZCP_MissionCounter < _ZCP_ML_maxMissions} do

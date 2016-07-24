@@ -1,6 +1,8 @@
 private["_nil"];
 
-EAST setFriend[EAST,1];
+_nil = createCenter ZCP_CONFIG_AI_side;
+
+ZCP_CONFIG_AI_side setFriend[ZCP_CONFIG_AI_side,1];
 
 if(ZCP_dev) then {
 	ZCP_MinWaitTime = 10;
@@ -34,4 +36,4 @@ ZCP_RandomReward = [];
 	};
 } forEach ZCP_CapPoints;
 
-diag_log format['[ZCP]: CPdata: %1', ZCP_CapPoints];
+diag_log text format['[ZCP]: CPdata: %1', ZCP_CapPoints];

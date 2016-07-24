@@ -97,7 +97,7 @@ if (!(params
 {isNull _crate})
 exitWith
 {
-	diag_log format ["DMS ERROR :: Calling ZCP_fnc_fillCrate with invalid parameters: %1",_this];
+	diag_log text format ["DMS ERROR :: Calling ZCP_fnc_fillCrate with invalid parameters: %1",_this];
 };
 
 _crate hideObjectGlobal false;
@@ -218,7 +218,7 @@ else
 	]))
 	exitWith
 	{
-		diag_log format ["DMS ERROR :: Invalid ""_crateValues"" (%1) generated from _lootValues: %2",_crateValues,_lootValues];
+		diag_log text format ["DMS ERROR :: Invalid ""_crateValues"" (%1) generated from _lootValues: %2",_crateValues,_lootValues];
 	};
 
 	// Weapons

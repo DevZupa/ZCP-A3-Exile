@@ -62,6 +62,9 @@ class CfgFunctions {
 			class createWaypoint {};
 			class createSmokeScreen {};
 			class cleanupAI {};
+			class preCreateRewards {};
+			class preRewardBox {};
+			class preRewardVehicle {};
 		};
 	};
 };

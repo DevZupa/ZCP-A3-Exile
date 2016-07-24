@@ -1,6 +1,6 @@
 // start the loop while people are inside.
 
-private['_ZCP_MM_mission', '_ZCP_MM_missionIndex','_ZCP_MM_recreateTrigger','_ZCP_MM_AI_Groups',
+private['_ZCP_MM_mission','_ZCP_MM_recreateTrigger','_ZCP_MM_AI_Groups',
 "_ZCP_MM_continueLoop","_ZCP_MM_name",'_ZCP_MM_nextWaveTimer','_ZCP_MM_currentWaveIndex',
 "_ZCP_MM_proximityList","_ZCP_MM_baseObjects", "_ZCP_MM_originalThis","_ZCP_MM_missionCapTime","_ZCP_MM_isCapping",
 "_ZCP_MM_contestEndTime","_ZCP_MM_contestTotalTime","_ZCP_MM_proximityMessageList","_ZCP_MM_isContested","_ZCP_MM_capperName",
@@ -9,8 +9,10 @@ private['_ZCP_MM_mission', '_ZCP_MM_missionIndex','_ZCP_MM_recreateTrigger','_ZC
 "_ZCP_MM_baseRadius","_ZCP_MM_circle","_ZCP_MM_totalWaves",'_ZCP_MM_useWaves','_ZCP_MM_waveData','_ZCP_MM_nextWave','_ZCP_MM_AI_NewGroups'
 ];
 
+params[
+    "_ZCP_MM_missionIndex"
+];
 
-_ZCP_MM_missionIndex = _this select 0;
 _ZCP_MM_mission = ZCP_MissionTriggerData select _ZCP_MM_missionIndex;
 _ZCP_MM_originalThis = _ZCP_MM_mission select 0;
 _ZCP_MM_name = _ZCP_MM_originalThis select 0;
@@ -21,7 +23,17 @@ _ZCP_MM_baseRadius = _ZCP_MM_mission select 3;
 _ZCP_MM_markers = _ZCP_MM_mission select 4;
 _ZCP_MM_circle = _ZCP_MM_mission select 5;
 
+
 _ZCP_MM_AI_Groups = _ZCP_MM_mission select 6;
+private _ZCP_MM_rewardObjects = _ZCP_MM_mission select 7;
+
+diag_log _ZCP_MM_mission;
+
+diag_log _this;
+
+diag_log ZCP_MissionTriggerData;
+
+diag_log _ZCP_MM_rewardObjects;
 
 _ZCP_MM_missionCapTime = _ZCP_MM_originalThis select 11;
 
@@ -42,7 +54,7 @@ if (_ZCP_MM_useWaves) then {
 
 _ZCP_MM_currentCapper = objNull;
 _ZCP_MM_previousCapper = objNull;
-_ZCP_MM_currentGroup = objNull;
+_ZCP_MM_currentGroup = grpNull;
 _ZCP_MM_wasContested = false;
 _ZCP_MM_continueLoop = true;
 _ZCP_MM_Halfway = false;
@@ -64,15 +76,20 @@ _ZCP_MM_proximityMessageList = [];
 
 while{_ZCP_MM_continueLoop}do{
     _ZCP_MM_proximityList = [];
+    _ZCP_MM_proximityMessageList = [];
     {
       if(isPlayer _x && alive _x && (_x distance2D _ZCP_MM_capturePosition) <= _ZCP_MM_baseRadius)then{
         _nil =  _ZCP_MM_proximityList pushBack _x;
       };
     }count (_ZCP_MM_capturePosition nearEntities["CAManBase", _ZCP_MM_baseRadius * 2]);
 
-    _ZCP_MM_proximityMessageList = _ZCP_MM_capturePosition nearEntities["CAManBase",_ZCP_MM_baseRadius * 4];
+     {
+          if(isPlayer _x && alive _x )then{
+            _nil =  _ZCP_MM_proximityMessageList pushBack _x;
+          };
+      }count (_ZCP_MM_capturePosition nearEntities["CAManBase", _ZCP_MM_baseRadius * 4]);
 
-    if(count(_ZCP_MM_proximityList) == 0) then{
+    if(count(_ZCP_MM_proximityList) == 0) then {
 
         (ZCP_Data select _ZCP_MM_capIndex) set[1,0];
 
@@ -83,7 +100,7 @@ while{_ZCP_MM_continueLoop}do{
         _ZCP_MM_recreateTrigger = true;
         _ZCP_MM_continueLoop = false;
 
-    }else{
+    } else {
       // people inside so capping! maybe contested??
       if(!_ZCP_MM_isCapping) then {
         (ZCP_Data select _ZCP_MM_capIndex) set[1,1]; // to set marker to capping
@@ -94,18 +111,34 @@ while{_ZCP_MM_continueLoop}do{
       if(_ZCP_MM_previousCapper in _ZCP_MM_proximityList && alive _ZCP_MM_previousCapper)then{
         _ZCP_MM_currentCapper = _ZCP_MM_previousCapper;
       } else {
-        _ZCP_MM_wasContested = false;
-        _ZCP_MM_isContested = false;
-        _ZCP_MM_Halfway = false;
-        _ZCP_MM_oneMin = false;
-        _ZCP_MM_currentCapper = _ZCP_MM_proximityList select 0;
-        _ZCP_MM_capStartTime = diag_tickTime;
-        _ZCP_MM_contestStartTime = 0;
-        _ZCP_MM_contestEndTime = 0;
-        _ZCP_MM_contestTotalTime = 0;
+
+        private _ZCP_stillGroupMembersAlive = false;
+        private _ZCP_newGroupCapper = objNull;
+
+        {
+            if( (group _x) isEqualTo _ZCP_MM_currentGroup ) then {
+                _ZCP_stillGroupMembersAlive = true;
+                _ZCP_newGroupCapper = _x;
+            }
+        }count _ZCP_MM_proximityList;
+
+        if( !(_ZCP_MM_currentGroup isEqualTo ExileServerLoneWolfGroup) &&  _ZCP_stillGroupMembersAlive) then {
+            _ZCP_MM_currentCapper = _ZCP_newGroupCapper;
+        } else {
+            _ZCP_MM_wasContested = false;
+            _ZCP_MM_isContested = false;
+            _ZCP_MM_Halfway = false;
+            _ZCP_MM_oneMin = false;
+            _ZCP_MM_currentCapper = _ZCP_MM_proximityList select 0;
+            _ZCP_MM_capStartTime = diag_tickTime;
+            _ZCP_MM_contestStartTime = 0;
+            _ZCP_MM_contestEndTime = 0;
+            _ZCP_MM_contestTotalTime = 0;
+
+            ['Notification', ["ZCP",[format[[1] call ZCP_fnc_translate, _ZCP_MM_name, _ZCP_MM_capperName,(_ZCP_MM_missionCapTime / 60)]],'ZCP_Capping']] call ZCP_fnc_showNotification;
+        };
 
         (ZCP_Data select _ZCP_MM_capIndex) set[1,1];
-
         _ZCP_MM_capperName = '';
         if(ZCP_UseSpecificNamesForCappers) then {
           _ZCP_MM_capperName = name _ZCP_MM_currentCapper;
@@ -115,8 +148,6 @@ while{_ZCP_MM_continueLoop}do{
 
         _ZCP_MM_markers = [_ZCP_MM_originalThis, _ZCP_MM_baseRadius, _ZCP_MM_markers, _ZCP_MM_capturePosition] call ZCP_fnc_createMarker;
         [_ZCP_MM_circle, 'capping'] call ZCP_fnc_changeCircleColor;
-
-        ['Notification', ["ZCP",[format[[1] call ZCP_fnc_translate, _ZCP_MM_name, _ZCP_MM_capperName,(_ZCP_MM_missionCapTime / 60)]],'ZCP_Capping']] call ZCP_fnc_showNotification;
 
       };
 
@@ -198,13 +229,14 @@ while{_ZCP_MM_continueLoop}do{
         // wave check
 
         if( (diag_tickTime - _ZCP_MM_contestTotalTime - _ZCP_MM_capStartTime) >  _ZCP_MM_nextWaveTimer ) then {
-          _ZCP_MM_AI_NewGroups = [_ZCP_MM_nextWave, _ZCP_MM_capturePosition, _ZCP_MM_originalThis select 21, _ZCP_MM_originalThis select 22] call ZCP_fnc_waveAI;
+          _ZCP_MM_AI_NewGroups = [_ZCP_MM_nextWave, _ZCP_MM_capturePosition, _ZCP_MM_originalThis select 21, _ZCP_MM_originalThis select 22, _ZCP_MM_originalThis select 24] call ZCP_fnc_waveAI;
           _ZCP_MM_AI_Groups = _ZCP_MM_AI_Groups + _ZCP_MM_AI_NewGroups;
           _ZCP_MM_currentWaveIndex = _ZCP_MM_currentWaveIndex + 1;
           if (ZCP_MessagePlayersBeforeWaves && ZCP_AI_Type != 'NONE') then {
               {
                 ['PersonalNotification', ["ZCP",[format[[15] call ZCP_fnc_translate, _ZCP_MM_name]],'ZCP_Capping'], _x] call ZCP_fnc_showNotification;
               } count _ZCP_MM_proximityMessageList;
+              diag_log text format["ZCP - Wave - Message 1"];
           };
           if(_ZCP_MM_currentWaveIndex < _ZCP_MM_totalWaves) then {
             _ZCP_MM_nextWave = _ZCP_MM_waveData select _ZCP_MM_currentWaveIndex;
@@ -238,7 +270,7 @@ if(_ZCP_MM_recreateTrigger) then {
   };
 
   ['Notification', ["ZCP",[format[[5] call ZCP_fnc_translate,_ZCP_MM_name,_ZCP_MM_finishText]], 'ZCP_Capped']] call ZCP_fnc_showNotification;
-  [_ZCP_MM_currentCapper,_ZCP_MM_name,_ZCP_MM_capturePosition,_ZCP_MM_originalThis select 2, _ZCP_MM_baseRadius] call ZCP_fnc_giveReward;
+  [_ZCP_MM_currentCapper,_ZCP_MM_name,_ZCP_MM_capturePosition,_ZCP_MM_originalThis select 2, _ZCP_MM_baseRadius, _ZCP_MM_rewardObjects] call ZCP_fnc_giveReward;
 
   ['PersonalNotification', ["ZCP",[format[[11] call ZCP_fnc_translate]], 'ZCP_Init'], _ZCP_MM_currentCapper] call ZCP_fnc_showNotification;
 
@@ -256,7 +288,7 @@ if(_ZCP_MM_recreateTrigger) then {
   (ZCP_Data select _ZCP_MM_capIndex) set[3,false];
   ZCP_MissionTriggerData set [_ZCP_MM_capIndex, []];
   ZCP_MissionCounter = ZCP_MissionCounter - 1;
-  diag_log format["[ZCP]: %1 will be cleaned up in %2s and ended.",_ZCP_MM_name, ZCP_BaseCleanupDelay];
+  diag_log text format["[ZCP]: %1 will be cleaned up in %2s and ended.",_ZCP_MM_name, ZCP_BaseCleanupDelay];
   [] spawn ZCP_fnc_missionLooper;
   if (ZCP_createVirtualCircle) then {
     _ZCP_MM_circle call ZCP_fnc_cleanupBase;

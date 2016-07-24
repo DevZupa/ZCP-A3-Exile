@@ -18,7 +18,7 @@
 // Being first in the zone starts the timer.
 // Holding a zone  gives you a reward after x Min.
 
-ZCP_dev = false; // Devmode for shorter development capture times
+ZCP_dev = true; // Devmode for shorter development capture times
 
 ZCP_AI_Type = 'DMS'; // NONE | DMS | FUMS
 
@@ -134,12 +134,12 @@ ZCP_SurvivalBox = "O_supplyCrate_F";
 ZCP_BuildingBox = "O_CargoNet_01_ammo_F";
 ZCP_WeaponBox = "I_CargoNet_01_ammo_F";
 
+/* 3.1 new configs */
 ZCP_CONFIG_CheckForTerritory = false; // NEW -- Allow or dissalow spawning of cappoints in territories range.
 ZCP_CONFIG_TerritoryDistance = 500;  // NEW -- Range of the distance if true.
 
-ZCP_CONFIG_SpawnRewardsOnGround = false; //
-ZCP_CONFIG_SpawnRewardsBeforeMission = false; // Will be empty and filled on filled on completion. ( Only used when ZCP_CONFIG_SpawnRewardsOnGround = true )
-
+ZCP_CONFIG_AI_side = east; // The side where the AI is on.
+/* END NEW CONFIGS 3.1 */
 
 // Same as DMS -> Credits DMS
 ZCP_DistanceBetweenMissions = 500;
@@ -394,5 +394,5 @@ ZCP_CurrentMod = "Exile"; // Exile, ( Epoch coming soon again)
 
 /* Do not change this*/
 ZCP_CapPoints = call ZCP_fnc_missions;
-diag_log format["[ZCP]: Config loaded succesfull"];
+diag_log text format["[ZCP]: Config loaded succesfull"];
 ZCP_ConfigLoaded = true;
