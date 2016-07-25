@@ -5,6 +5,8 @@ params
 	"_ZCP_SC_preBox"
 ];
 
+diag_log text format['ZCP: object %1', _ZCP_SC_preBox ];
+
 private _ZCP_SC_box = _ZCP_SC_preBox;
 
 if(_ZCP_SC_box isEqualTo objNull) then {
@@ -20,8 +22,6 @@ if(_ZCP_SC_box isEqualTo objNull) then {
           _ZCP_SC_boxType = ZCP_SurvivalBox;
         };
     };
-
-
 
     _ZCP_SC_box = _ZCP_SC_boxType createVehicle [0,0,150];
     _ZCP_SC_box allowDamage false;
@@ -39,8 +39,6 @@ if(_ZCP_SC_box isEqualTo objNull) then {
     _smoke setPosATL (getPosATL _ZCP_SC_box);
     _smoke attachTo [_ZCP_SC_box,[0,0,0]];
 };
-
-
 
 // You can add extra types here by copying a 'case' and it's content and giving it a unique name
 

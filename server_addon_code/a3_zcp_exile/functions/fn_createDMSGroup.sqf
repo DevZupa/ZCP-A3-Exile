@@ -12,11 +12,6 @@ params[
 diag_log text format['ZCP: Spawning %1 AI for cappoint.', _ZCP_CDG_unitsPerGroup];
 
 private _ZCP_CDG_groupAI = createGroup _ZCP_CDG_side;
-
-_ZCP_CDG_groupAI setVariable ["DMS_LockLocality",nil];
-_ZCP_CDG_groupAI setVariable ["DMS_SpawnedGroup",true];
-_ZCP_CDG_groupAI setVariable ["DMS_Group_Side", toUpper format["%1",_ZCP_CDG_side]];
-
 private _ZCP_CDG_dummyGroupEast = createGroup _ZCP_CDS_side;
 
 for "_i" from 1 to _ZCP_CDG_unitsPerGroup do {
@@ -35,6 +30,11 @@ sleep 0.5;
 }count (units _ZCP_CDG_dummyGroupEast);
 
 _ZCP_CDG_groupAI selectLeader ((units _ZCP_CDG_groupAI) select 0);
+
+_ZCP_CDG_groupAI setVariable ["DMS_LockLocality", nil];
+_ZCP_CDG_groupAI setVariable ["DMS_SpawnedGroup", true];
+_ZCP_CDG_groupAI setVariable ["DMS_Group_Side", toUpper format["%1",_ZCP_CDG_side]];
+
 
 deleteGroup _ZCP_CDG_dummyGroupEast;
 
