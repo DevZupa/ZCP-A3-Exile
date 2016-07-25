@@ -17,24 +17,26 @@ _ZCP_CDG_groupAI setVariable ["DMS_LockLocality",nil];
 _ZCP_CDG_groupAI setVariable ["DMS_SpawnedGroup",true];
 _ZCP_CDG_groupAI setVariable ["DMS_Group_Side", toUpper format["%1",_ZCP_CDG_side]];
 
-private _dummyGroupEast = createGroup _ZCP_CDS_side;
+private _ZCP_CDG_dummyGroupEast = createGroup _ZCP_CDS_side;
 
 for "_i" from 1 to _ZCP_CDG_unitsPerGroup do {
-  private _ZCP_unit = [_ZCP_CDG_groupAI, _ZCP_CDG_spawnAIPos, _ZCP_CDG_dificulty, _ZCP_CDG_solierType, _ZCP_CDG_radius, _dummyGroupEast] call ZCP_fnc_createDMSSoldier;
-  sleep 0.5;
+  private _ZCP_unit = [_ZCP_CDG_groupAI, _ZCP_CDG_spawnAIPos, _ZCP_CDG_dificulty, _ZCP_CDG_solierType, _ZCP_CDG_radius, _ZCP_CDG_dummyGroupEast] call ZCP_fnc_createDMSSoldier;
 };
 
-deleteGroup _dummyGroupEast;
-
-_ZCP_CDG_groupAI selectLeader ((units _ZCP_CDG_groupAI) select 0);
+sleep 0.5;
 
 {
     _x allowDamage true;
     _x enableAI "AUTOTARGET";
     _x enableAI "TARGET";
     _x enableAI "MOVE";
+    [_x] joinSilent _ZCP_CDG_groupAI;
 
-}count (units _ZCP_CDG_groupAI);
+}count (units _ZCP_CDG_dummyGroupEast);
+
+_ZCP_CDG_groupAI selectLeader ((units _ZCP_CDG_groupAI) select 0);
+
+deleteGroup _ZCP_CDG_dummyGroupEast;
 
 // An AI will definitely spawn with a launcher if you define type
 if (_ZCP_CDG_minLaunchers > 0) then

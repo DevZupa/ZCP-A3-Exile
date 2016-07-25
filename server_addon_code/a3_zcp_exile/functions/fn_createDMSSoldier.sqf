@@ -40,17 +40,13 @@ _ZCP_CDS_difficulty =
 
 private _ZCP_CDS_posAI = _ZCP_CDS_spawnAIPos findEmptyPosition [0, _ZCP_CDS_radius, 'O_Soldier_F'];
 
-_ZCP_CDS_unitAI = _dummyGroupEast createUnit ['O_Soldier_F', _ZCP_CDS_posAI, [], 0,"FORM"];
+_ZCP_CDS_unitAI = _ZCP_CDS_dummyGroup createUnit ['O_Soldier_F', _ZCP_CDS_posAI, [], 0,"FORM"];
 _ZCP_CDS_unitAI allowFleeing 0;
 _ZCP_CDS_unitAI allowDamage false;
 
 _ZCP_CDS_unitAI disableAI "AUTOTARGET";
 _ZCP_CDS_unitAI disableAI "TARGET";
 _ZCP_CDS_unitAI disableAI "MOVE";
-
-[_ZCP_CDS_unitAI] joinSilent _ZCP_CDS_groupAI;
-
-
 
 // Remove existing gear
 {_ZCP_CDS_unitAI removeWeaponGlobal _x;} 	forEach (weapons _ZCP_CDS_unitAI);
@@ -225,16 +221,15 @@ _ZCP_CDS_unitAI setVariable
 	DMS_bandit_Soldier_RepGain
 ];
 
-// Not sure if you guys want the ZCP AI to spawn with money :p
+// Money on the AI's body.
 _ZCP_CDS_unitAI setVariable
 [
 	"ExileMoney",
-	0,
+	floor (random ZCP_CONFIG_MaxRandomAIMoney),
 	true
 ];
 
-uiSleep 0.5;
-
+uiSleep 0.1;
 
 
 _ZCP_CDS_unitAI

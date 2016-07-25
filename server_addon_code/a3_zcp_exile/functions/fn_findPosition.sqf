@@ -62,7 +62,7 @@ while{!_ZCP_FP_validspot} do {
 
 	if (_ZCP_FP_validspot) then {
 	  // is position in range of a territory?
-        if(ZCP_CONFIG_CheckForTerritory &&  ([_ZCP_FP_position, ZCP_CONFIG_TerritoryDistance] call ExileClient_util_world_isTerritoryInRange)) exitWith { _ZCP_FP_validspot = false; };
+        if(([_ZCP_FP_position, ZCP_CONFIG_TerritoryDistance] call ExileClient_util_world_isTerritoryInRange)) exitWith { _ZCP_FP_validspot = false; };
 
         // is position in range of a trader zone?
         if(([_ZCP_FP_position, ZCP_TradeZoneDistance] call ExileClient_util_world_isTraderZoneInRange)) exitWith { _ZCP_FP_validspot = false; };

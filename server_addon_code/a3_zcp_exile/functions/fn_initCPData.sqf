@@ -36,4 +36,6 @@ ZCP_RandomReward = [];
 	};
 } forEach ZCP_CapPoints;
 
+ZCP_Towns = nearestLocations [ZCP_MapCenterPos, ["NameVillage","NameCity","NameCityCapital"], ZCP_MapRadius];
+
 diag_log text format['[ZCP]: CPdata: %1', ZCP_CapPoints];
