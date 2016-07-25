@@ -121,6 +121,7 @@ while{_ZCP_MM_continueLoop}do{
 
         if( !(_ZCP_MM_currentGroup isEqualTo ExileServerLoneWolfGroup) &&  _ZCP_stillGroupMembersAlive) then {
             _ZCP_MM_currentCapper = _ZCP_newGroupCapper;
+            ['PersonalNotification', ["ZCP",[format[[17] call ZCP_fnc_translate, name _ZCP_MM_currentCapper]],'ZCP_Capping'],  _ZCP_MM_currentCapper] call ZCP_fnc_showNotification;
         } else {
             _ZCP_MM_wasContested = false;
             _ZCP_MM_isContested = false;

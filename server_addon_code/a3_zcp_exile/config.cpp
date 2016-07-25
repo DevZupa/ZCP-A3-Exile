@@ -17,6 +17,7 @@ class CfgFunctions {
 			};
 			class config {};
 			class missions {};
+			class translations {};
 			class missionLooper {};
 
 		};
@@ -65,6 +66,7 @@ class CfgFunctions {
 			class preCreateRewards {};
 			class preRewardBox {};
 			class preRewardVehicle {};
+			class getRandomCity {};
 		};
 	};
 };

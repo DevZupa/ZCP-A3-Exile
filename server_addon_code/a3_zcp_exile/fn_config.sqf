@@ -135,10 +135,18 @@ ZCP_BuildingBox = "O_CargoNet_01_ammo_F";
 ZCP_WeaponBox = "I_CargoNet_01_ammo_F";
 
 /* 3.1 new configs */
-ZCP_CONFIG_CheckForTerritory = false; // NEW -- Allow or dissalow spawning of cappoints in territories range.
-ZCP_CONFIG_TerritoryDistance = 500;  // NEW -- Range of the distance if true.
+ZCP_CONFIG_TerritoryDistance = 500;  // Distance from territories. ( 0 to disable )
 
 ZCP_CONFIG_AI_side = east; // The side where the AI is on.
+ZCP_CONFIG_MaxRandomAIMoney = 100; // Max poptabs on in AI it's inventory. ( Random between 0 -> this number ).
+
+// These are used when the cappoint is a city point.
+ZCP_CONFIG_CityCapSize = 50; // percentages of the city size for the capradius to be. (29 - 0)
+ZCP_CONFIG_CityDistanceToPlayer = 100; // distance for the town to be from a player ( From center town ) (29 - 1)
+ZCP_CONFIG_CityDistanceToTrader = 500; // distance for the town to be from a trader ( From center town ) (29 - 2)
+ZCP_CONFIG_CityDistanceToSpawn = 500; // distance for the town to be from a spawnpoint ( From center town ) (29 - 3)
+ZCP_CONFIG_CityDistanceToTerritory = 100; // distance for the town to be from a spawnpoint ( From center town ) (29 - 3)
+
 /* END NEW CONFIGS 3.1 */
 
 // Same as DMS -> Credits DMS
@@ -371,28 +379,12 @@ ZCP_VehicleReward = ZCP_DMS_TransportTrucks;
 ZCP_DMS_DEBUG = false;
 
 
-ZCP_Translations = [ // ['original','original in your language'] the %1 %2 and so on are Variables!
-	['%1 capbase set up. Capture for %2 min!' , '%1 capbase set up. Capture for %2 min!'], // ZCP Alpha capbase set up. Capture for 10 min!
-	['%2 is capping %1. %3min left!' , '%2 is capping %1. %3min left!'], // Zupa is capping ZCP alpha, 5min left.
-	['A player' , 'A player'], // A player
-	['%1 is 50%4 captured by %2. %3min left!', '%1 is 50%4 captured by %2. %3min left!'], // ZCP Alpha is 50% captured by Zupa/A player. 2min left!
-	['%1 is almost captured by %2. 60s left!', '%1 is almost captured by %2. 60s left!'], // ZCP Alpha is almost captured by Zupa/A player. 60s left!
-	['%1 is captured. %2.', '%1 is captured. %2.'], // ZCP Alpha is captured. (%2 is on of the 2 following translations, so leave the variable there!
-	['Bombing in %1s!', 'Bombing in %1s!'], // Bombing in 600s
-	['Cleanup in %1s!', 'Cleanup in %1s!'], // Cleanup in 600s
-	['Captured point', 'Captured point'], // Captured point
-	['Reputation', 'Reputation'], // Reputation
-	['Group Reputation', 'Group Reputation'], // Group reputation
-	['Package delivered, eyes on the sky!', 'Package delivered, eyes on the sky!'], // Package delivered, eyes on the sky!
-	['Package delivered, eyes on the sky! Poptabs on bank!', 'Package delivered, eyes on the sky! Poptabs on bank!'], // Package delivered, eyes on the sky! Poptabs on bank!
-	['Capture point is contested!', 'Capture point is contested!'], // Package delivered, eyes on the sky! Poptabs on bank!
-	['Capture point is contested is no longer contested!', 'Capture point is no longer contested!'], // Capture point is contested!
-	['AI Wave incoming to retake %1.', 'AI Wave incoming to retake %1.'] // Capture point is contested!
-];
+
 
 ZCP_CurrentMod = "Exile"; // Exile, ( Epoch coming soon again)
 
 /* Do not change this*/
 ZCP_CapPoints = call ZCP_fnc_missions;
+ZCP_Translations = call ZCP_fnc_translations;
 diag_log text format["[ZCP]: Config loaded succesfull"];
 ZCP_ConfigLoaded = true;

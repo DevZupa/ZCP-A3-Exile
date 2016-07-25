@@ -48,10 +48,6 @@ _ZCP_CDS_unitAI disableAI "AUTOTARGET";
 _ZCP_CDS_unitAI disableAI "TARGET";
 _ZCP_CDS_unitAI disableAI "MOVE";
 
-[_ZCP_CDS_unitAI] joinSilent _ZCP_CDS_groupAI;
-
-
-
 // Remove existing gear
 {_ZCP_CDS_unitAI removeWeaponGlobal _x;} 	forEach (weapons _ZCP_CDS_unitAI);
 {_ZCP_CDS_unitAI unlinkItem _x;} 			forEach (assignedItems _ZCP_CDS_unitAI);
@@ -225,16 +221,15 @@ _ZCP_CDS_unitAI setVariable
 	DMS_bandit_Soldier_RepGain
 ];
 
-// Not sure if you guys want the ZCP AI to spawn with money :p
+// Money on the AI's body.
 _ZCP_CDS_unitAI setVariable
 [
 	"ExileMoney",
-	0,
+	floor (random ZCP_CONFIG_MaxRandomAIMoney),
 	true
 ];
 
-uiSleep 0.5;
-
+uiSleep 0.1;
 
 
 _ZCP_CDS_unitAI
