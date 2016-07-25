@@ -6,7 +6,7 @@ private['_ZCP_MM_mission','_ZCP_MM_recreateTrigger','_ZCP_MM_AI_Groups',
 "_ZCP_MM_contestEndTime","_ZCP_MM_contestTotalTime","_ZCP_MM_proximityMessageList","_ZCP_MM_isContested","_ZCP_MM_capperName",
 "_ZCP_MM_currentCapper","_ZCP_MM_previousCapper","_ZCP_MM_currentGroup","_ZCP_MM_wasContested","_ZCP_MM_finishText","_ZCP_MM_markers",
 "_ZCP_MM_contestStartTime","_ZCP_MM_capIndex","_ZCP_MM_capturePosition","_ZCP_MM_Halfway","_ZCP_MM_oneMin","_ZCP_MM_capStartTime",
-"_ZCP_MM_baseRadius","_ZCP_MM_circle","_ZCP_MM_totalWaves",'_ZCP_MM_useWaves','_ZCP_MM_waveData','_ZCP_MM_nextWave','_ZCP_MM_AI_NewGroups'
+"_ZCP_MM_baseRadius","_ZCP_MM_circle","_ZCP_MM_totalWaves",'_ZCP_MM_useWaves','_ZCP_MM_waveData','_ZCP_MM_nextWave','_ZCP_MM_AI_NewGroups','_ZCP_MM_rewardObjects'
 ];
 
 params[
@@ -25,15 +25,12 @@ _ZCP_MM_circle = _ZCP_MM_mission select 5;
 
 
 _ZCP_MM_AI_Groups = _ZCP_MM_mission select 6;
-private _ZCP_MM_rewardObjects = _ZCP_MM_mission select 7;
 
-diag_log _ZCP_MM_mission;
+_ZCP_MM_rewardObjects = _ZCP_MM_mission select 7;
 
-diag_log _this;
-
-diag_log ZCP_MissionTriggerData;
-
-diag_log _ZCP_MM_rewardObjects;
+{
+    diag_log format['Misssion: %1 : %2', _forEachIndex, _x];
+}forEach _ZCP_MM_mission;
 
 _ZCP_MM_missionCapTime = _ZCP_MM_originalThis select 11;
 
@@ -236,7 +233,6 @@ while{_ZCP_MM_continueLoop}do{
               {
                 ['PersonalNotification', ["ZCP",[format[[15] call ZCP_fnc_translate, _ZCP_MM_name]],'ZCP_Capping'], _x] call ZCP_fnc_showNotification;
               } count _ZCP_MM_proximityMessageList;
-              diag_log text format["ZCP - Wave - Message 1"];
           };
           if(_ZCP_MM_currentWaveIndex < _ZCP_MM_totalWaves) then {
             _ZCP_MM_nextWave = _ZCP_MM_waveData select _ZCP_MM_currentWaveIndex;

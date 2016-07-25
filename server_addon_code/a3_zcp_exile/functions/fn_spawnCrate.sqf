@@ -36,8 +36,8 @@ if(_ZCP_SC_box isEqualTo objNull) then {
     _ZCP_SC_box call ZCP_fnc_paraDrop;
 } else {
     private _smoke = "smokeShellPurple" createVehicle getPosATL _ZCP_SC_box;
-    _smoke setPosATL (getPosATL _veh);
-    _smoke attachTo [_veh,[0,0,0]];
+    _smoke setPosATL (getPosATL _ZCP_SC_box);
+    _smoke attachTo [_ZCP_SC_box,[0,0,0]];
 };
 
 
