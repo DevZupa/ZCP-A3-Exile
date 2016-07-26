@@ -14,5 +14,7 @@ switch (_ZCP_CCC_colorType) do {
 };
 
 {
+  _x enableSimulation true;
   _x setObjectTextureGlobal [0,_ZCP_CCC_color];
+  _x enableSimulation false;
 }count _ZCP_CCC_circleObjects;

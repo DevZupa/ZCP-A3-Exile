@@ -113,8 +113,8 @@ ZCP_CapBases = [ // located in capbases folder [filename, capradius, buildeditor
 	["ec_endurance.sqf", 20, "EdenConverted", 90, 20],
 	["ec_fortitude.sqf", 25, "EdenConverted", 90, 25],
 	["m3e_exoBase1.sqf", 30, "m3e", 90, 50],
-    ["m3e_exoBase2.sqf", 30, "m3e", 90, 50],
-    ["m3e_exoBase3.sqf", 35, "m3e", 90, 50]
+  ["m3e_exoBase2.sqf", 30, "m3e", 90, 50],
+  ["m3e_exoBase3.sqf", 35, "m3e", 90, 50]
 ];
 
 ZCP_Blacklist = [ // [ [x,y,z], radius ];
@@ -146,6 +146,10 @@ ZCP_CONFIG_CityDistanceToPlayer = 100; // distance for the town to be from a pla
 ZCP_CONFIG_CityDistanceToTrader = 500; // distance for the town to be from a trader ( From center town ) (29 - 2)
 ZCP_CONFIG_CityDistanceToSpawn = 500; // distance for the town to be from a spawnpoint ( From center town ) (29 - 3)
 ZCP_CONFIG_CityDistanceToTerritory = 100; // distance for the town to be from a spawnpoint ( From center town ) (29 - 3)
+
+ZCP_CityBases = [
+
+];
 
 /* END NEW CONFIGS 3.1 */
 

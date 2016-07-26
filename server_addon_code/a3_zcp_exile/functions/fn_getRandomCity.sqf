@@ -6,18 +6,28 @@ params [
 
 private _ZCP_GRC_possibleTowns = [];
 
-if( count _ZCP_GRC_whitelist == 0) then {
-    _ZCP_GRC_possibleTowns = +ZCP_Towns;
-    _ZCP_GRC_possibleTowns = _ZCP_GRC_possibleTowns - _ZCP_GRC_blacklist;
+if( count _ZCP_GRC_whitelist == 0) then
+{
+    {
+        if(	!(text _x in _ZCP_GRC_blacklist)) then
+         {
+            _nil = _ZCP_GRC_possibleTowns pushBack _x;
+         }
+    }count ZCP_Towns;
 }
 else
 {
-    _ZCP_GRC_possibleTowns = _ZCP_GRC_whitelist;
+    {
+        if(	!(text _x in _ZCP_GRC_whitelist)) then
+         {
+            _nil = _ZCP_GRC_possibleTowns pushBack _x;
+         }
+    }count ZCP_Towns;
 };
 
 private _ZCP_GRC_isVallidTown = false;
 
-private _ZCP_GRC_town = '';
+private _ZCP_GRC_town = locationNull;
 
 while {_ZCP_GRC_isVallidTown} do
 {
@@ -38,3 +48,5 @@ while {_ZCP_GRC_isVallidTown} do
 
     sleep 1;
 }
+
+_ZCP_GRC_town

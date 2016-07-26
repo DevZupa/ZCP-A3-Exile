@@ -53,7 +53,8 @@ if (_ZCP_S_isCity) then
 {
     _ZCP_S_baseFile = '';
 }
-else {
+else
+{
     if (typeName _ZCP_S_baseConfig == "ARRAY") then
     {
         _ZCP_S_baseConfig = _ZCP_S_baseConfig call BIS_fnc_selectRandom;
@@ -99,18 +100,25 @@ else {
              _ZCP_S_openRadius = _ZCP_S_base select 4;
         };
     };
-}
+};
 
+private _ZCP_S_city = locationNull;
+
+private _ZCP_S_city_sizeX = nil;
+private _ZCP_S_city_sizeY = nil;
 
 if (_ZCP_S_isCity) then
 {
     _ZCP_S_city = [_this select 27, _this select 28] call _ZCP_fnc_getRandomCity;
 
+    _ZCP_S_city_sizeX = getNumber (configFile >> "CfgWorlds" >> worldName >> "Names" >> (text _ZCP_S_city) >> "radiusA");
+    _ZCP_S_city_sizeY = getNumber (configFile >> "CfgWorlds" >> worldName >> "Names" >> (text _ZCP_S_city) >> "radiusB");
 
+		_ZCP_S_city_sizeX = _ZCP_S_city_sizeX * ( ZCP_CONFIG_CityCapSize / 100 );
+		_ZCP_S_city_sizeY = _ZCP_S_city_sizeY * ( ZCP_CONFIG_CityCapSize / 100 );
 
-
-    diag_log text format ["[ZCP]: %1 :Spawning city on %2 -> %3",_ZCP_S_capPointName,_ZCP_S_capturePosition];
-    _ZCP_S_capturePosition
+    _ZCP_S_capturePosition = position _ZCP_S_city;
+		diag_log text format ["[ZCP]: %1 :Spawning city on %2 -> %3",_ZCP_S_capPointName,_ZCP_S_capturePosition, text _ZCP_S_city];
 }
 else
 {
@@ -131,7 +139,7 @@ else
 
         diag_log text format ["[ZCP]: %1 :Spawning dynamic on %2",_ZCP_S_capPointName,_ZCP_S_capturePosition];
     };
-}
+};
 
 (ZCP_Data select _ZCP_S_capPointIndex) set[2,_ZCP_S_capturePosition];
 
@@ -162,7 +170,7 @@ private _ZCP_S_circle = [];
 
 if(ZCP_createVirtualCircle) then
 {
-	_ZCP_S_circle = [_ZCP_S_capturePosition, _ZCP_S_baseRadius ] call ZCP_fnc_createVirtualCircle;
+	_ZCP_S_circle = [_ZCP_S_capturePosition, _ZCP_S_baseRadius, _ZCP_S_city_sizeX, _ZCP_S_city_sizeY ] call ZCP_fnc_createVirtualCircle;
 };
 
 private _ZCP_S_rewardObjects = [];
@@ -170,7 +178,8 @@ private _ZCP_S_rewardObjects = [];
 if(_ZCP_S_preCreateRewards) then
 {
 	_ZCP_S_rewardObjects = [_ZCP_S_rewards , _ZCP_S_capturePosition, _ZCP_S_baseRadius ] call ZCP_fnc_preCreateRewards;
-} else {
+} else
+{
     {
         _nil = _ZCP_S_rewardObjects pushBack objNull;
     }count (_ZCP_S_rewards);
@@ -181,18 +190,25 @@ if(_ZCP_S_spawnDefenderAI) then
 	_ZCP_S_ai = [_ZCP_S_capturePosition, _ZCP_S_baseRadius, _this select 12, _this select 13, _this select 19, _this select 20, _this select 23 ] call ZCP_fnc_spawnAI;
 };
 
+
 if(count _ZCP_S_baseObjects != 0) then
 {
 
 	['Notification', ["ZCP",[format[[0] call ZCP_fnc_translate, _ZCP_S_capPointName, (_ZCP_S_missionCapTime / 60)]],"ZCP_Init"]] call ZCP_fnc_showNotification;
 
-	private _ZCP_S_markers = [_this, _ZCP_S_baseRadius, [], _ZCP_S_capturePosition] call ZCP_fnc_createMarker;
+	private _ZCP_S_markers = [_this, _ZCP_S_baseRadius, [], _ZCP_S_capturePosition, _ZCP_S_city_sizeX, _ZCP_S_city_sizeY ] call ZCP_fnc_createMarker;
 
-	ZCP_MissionTriggerData set [_ZCP_S_capPointIndex, [_this, _ZCP_S_baseObjects, _ZCP_S_capturePosition, _ZCP_S_baseRadius, _ZCP_S_markers, _ZCP_S_circle, _ZCP_S_ai, _ZCP_S_rewardObjects]];
-	[_ZCP_S_capPointIndex, _ZCP_S_capturePosition, _ZCP_S_baseRadius] call ZCP_fnc_createTrigger;
+	ZCP_MissionTriggerData set [_ZCP_S_capPointIndex, [_this, _ZCP_S_baseObjects, _ZCP_S_capturePosition, _ZCP_S_baseRadius, _ZCP_S_markers, _ZCP_S_circle, _ZCP_S_ai, _ZCP_S_rewardObjects, _ZCP_S_city_sizeX, _ZCP_S_city_sizeY]];
+	[_ZCP_S_capPointIndex, _ZCP_S_capturePosition, _ZCP_S_baseRadius, _ZCP_S_city_sizeX, _ZCP_S_city_sizeY] call ZCP_fnc_createTrigger;
 
 }
 else
 {
-	diag_log text format["[ZCP]: No correct Basefile found for %1", _ZCP_S_capPointName];
+	diag_log text format["[ZCP]: No correct Basefile found for %1.", _ZCP_S_capPointName];
+
+    (ZCP_Data select _ZCP_S_capPointIndex) set[0,false];
+    (ZCP_Data select _ZCP_S_capPointIndex) set[1,0];
+    (ZCP_Data select _ZCP_S_capPointIndex) set[2,[-99999,0,0]];
+    (ZCP_Data select _ZCP_S_capPointIndex) set[3,false];
+    ZCP_MissionCounter = ZCP_MissionCounter - 1;
 };
