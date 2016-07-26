@@ -147,8 +147,10 @@ ZCP_CONFIG_CityDistanceToTrader = 500; // distance for the town to be from a tra
 ZCP_CONFIG_CityDistanceToSpawn = 500; // distance for the town to be from a spawnpoint ( From center town ) (29 - 3)
 ZCP_CONFIG_CityDistanceToTerritory = 100; // distance for the town to be from a spawnpoint ( From center town ) (29 - 3)
 
-ZCP_CityBases = [
-
+// bases must be located int he city folder. No flag needed. Flag is placed in center automaticly
+ZCP_CityBases = [  //
+	['cityname', ['filename.sqf', 'editor'],
+	['cityname2', ['filename2.sqf', 'editor2']
 ];
 
 /* END NEW CONFIGS 3.1 */
