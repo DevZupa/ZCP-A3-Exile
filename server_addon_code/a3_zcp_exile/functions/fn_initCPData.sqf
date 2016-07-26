@@ -38,4 +38,6 @@ ZCP_RandomReward = [];
 
 ZCP_Towns = nearestLocations [ZCP_MapCenterPos, ["NameVillage","NameCity","NameCityCapital"], ZCP_MapRadius];
 
+diag_log text format['[ZCP]: Towns: %1', ZCP_Towns];
+
 diag_log text format['[ZCP]: CPdata: %1', ZCP_CapPoints];

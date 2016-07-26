@@ -16,10 +16,11 @@ params[
 private _ZCP_CT_markerX = _ZCP_CT_cityX;
 private _ZCP_CT_markerY = _ZCP_CT_cityY;
 
-if( isNil _ZCP_CT_cityX || isNil _ZCP_CT_cityY ) then
+if( isNil '_ZCP_CT_cityX' || isNil '_ZCP_CT_cityY' ) then
 {
-    _ZCP_CT_markerX = _ZCP_CT_markerY = _ZCP_CT_radius;
-}
+    _ZCP_CT_markerX =  _ZCP_CT_radius;
+    _ZCP_CT_markerY = _ZCP_CT_radius;
+};
 
 private _ZCP_CT_trigger = createTrigger ["EmptyDetector", _ZCP_CT_pos];
 _ZCP_CT_trigger setTriggerArea [_ZCP_CT_markerX, _ZCP_CT_markerY, 45, false];

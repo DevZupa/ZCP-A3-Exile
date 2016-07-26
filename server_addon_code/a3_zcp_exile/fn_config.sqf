@@ -149,8 +149,8 @@ ZCP_CONFIG_CityDistanceToTerritory = 100; // distance for the town to be from a 
 
 // bases must be located int he city folder. No flag needed. Flag is placed in center automaticly
 ZCP_CityBases = [  //
-	['cityname', ['filename.sqf', 'editor'],
-	['cityname2', ['filename2.sqf', 'editor2']
+	['cityname', ['filename.sqf', 'editor']],
+	['cityname2', ['filename2.sqf', 'editor2']]
 ];
 
 /* END NEW CONFIGS 3.1 */

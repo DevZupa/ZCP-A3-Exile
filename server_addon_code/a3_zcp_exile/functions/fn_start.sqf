@@ -21,7 +21,7 @@ private _ZCP_S_preCreateRewards = _this select 25;
 private _ZCP_S_rewards = _this select 2;
 private _ZCP_S_spawnDefenderAI = _this select 5;
 private _ZCP_S_isStatic = _this select 6;
-private _ZCP_S_isCity = _this select 25;
+private _ZCP_S_isCity = _this select 26;
 
 private _ZCP_S_randomTime = (floor random  ZCP_MaxWaitTime) + ZCP_MinWaitTime;
 private _ZCP_S_capturePosition = [0,0,0];
@@ -56,16 +56,16 @@ diag_log text format ["[ZCP]: %1 players reached, starting %2.",ZCP_Minimum_Onli
 // Location if
 if (_ZCP_S_isCity) then
 {
-    _ZCP_S_city = [_this select 27, _this select 28] call _ZCP_fnc_getRandomCity;
+    _ZCP_S_city = [_this select 27, _this select 28] call ZCP_fnc_getRandomCity;
 
-    _ZCP_S_city_sizeX = getNumber (configFile >> "CfgWorlds" >> worldName >> "Names" >> (text _ZCP_S_city) >> "radiusA");
-    _ZCP_S_city_sizeY = getNumber (configFile >> "CfgWorlds" >> worldName >> "Names" >> (text _ZCP_S_city) >> "radiusB");
+    _ZCP_S_city_sizeX = getNumber (configFile >> "CfgWorlds" >> worldName >> "Names" >> (className   _ZCP_S_city) >> "radiusA");
+    _ZCP_S_city_sizeY = getNumber (configFile >> "CfgWorlds" >> worldName >> "Names" >> (className   _ZCP_S_city) >> "radiusB");
 
-		_ZCP_S_city_sizeX = _ZCP_S_city_sizeX * ( ZCP_CONFIG_CityCapSize / 100 );
-		_ZCP_S_city_sizeY = _ZCP_S_city_sizeY * ( ZCP_CONFIG_CityCapSize / 100 );
+		_ZCP_S_city_sizeX = floor(_ZCP_S_city_sizeX * ( ZCP_CONFIG_CityCapSize / 100 ));
+		_ZCP_S_city_sizeY = floor(_ZCP_S_city_sizeY * ( ZCP_CONFIG_CityCapSize / 100 ));
 
     _ZCP_S_capturePosition = position _ZCP_S_city;
-		diag_log text format ["[ZCP]: %1 :Spawning city on %2 -> %3",_ZCP_S_capPointName,_ZCP_S_capturePosition, text _ZCP_S_city];
+		diag_log text format ["[ZCP]: %1 :Spawning city on %2 -> %3 with x %4, y %5",_ZCP_S_capPointName,_ZCP_S_capturePosition, text _ZCP_S_city, _ZCP_S_city_sizeX, _ZCP_S_city_sizeY];
 }
 else
 {
@@ -94,14 +94,16 @@ else
 if (_ZCP_S_isCity) then
 {
     {
-			if(_x select 0 = text _ZCP_S_city) then
+			if((_x select 0) == (text _ZCP_S_city)) then
 				{
 						_ZCP_S_base = _x select 1;
 					  _ZCP_S_baseFile = format["x\addons\ZCP\city\%1", _ZCP_S_base select 0];
 						_ZCP_S_baseType = _ZCP_S_base select 1;
-						_ZCP_S_baseRadius = ( _ZCP_S_city_sizeX + _ZCP_S_city_sizeY ) / 2;
+
 				}
 		}count ZCP_CityBases;
+
+	_ZCP_S_baseRadius = floor (( _ZCP_S_city_sizeX + _ZCP_S_city_sizeY ) / 2);
 }
 else
 {
@@ -181,12 +183,14 @@ switch (_ZCP_S_baseType) do
 if (_ZCP_S_isCity) then
 	{
 			_nil = _ZCP_S_baseObjects pushBack (createVehicle ['Flag_Green_F', _ZCP_S_capturePosition, [], 0, 'CAN_COLLIDE']);
-	}
+	};
 
 private _ZCP_S_circle = [];
 
 if(ZCP_createVirtualCircle) then
 {
+	diag_log text format ["[ZCP]: %1 radius :Spawning city on %2 -> %3 with x %4, y %5",_ZCP_S_baseRadius,_ZCP_S_capturePosition, text _ZCP_S_city, _ZCP_S_city_sizeX, _ZCP_S_city_sizeY];
+
 	_ZCP_S_circle = [_ZCP_S_capturePosition, _ZCP_S_baseRadius, _ZCP_S_city_sizeX, _ZCP_S_city_sizeY ] call ZCP_fnc_createVirtualCircle;
 };
 

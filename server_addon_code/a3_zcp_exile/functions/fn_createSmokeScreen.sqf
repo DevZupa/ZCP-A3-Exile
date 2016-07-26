@@ -2,7 +2,7 @@ params[
   '_ZCP_CVC_center',
   '_ZCP_CVC_radius',
   '_ZCP_CVC_waitTime',
-  '_ZCP_CVC_extraRadius'
+  '_ZCP_CVC_extraRadius',
   '_ZCP_CVC_cityX',
   '_ZCP_CVC_cityY'
 ];
@@ -10,10 +10,11 @@ params[
 private _ZCP_CVC_radiusX = _ZCP_CVC_cityX;
 private _ZCP_CVC_radiusY = _ZCP_CVC_cityY;
 
-if( isNil _ZCP_CVC_cityX || isNil _ZCP_CVC_cityY ) then
+if( isNil '_ZCP_CVC_cityX' || isNil '_ZCP_CVC_cityY' ) then
 {
-    _ZCP_CVC_radiusX = _ZCP_CVC_radiusY = _ZCP_CVC_radius;
-}
+    _ZCP_CVC_radiusX =  _ZCP_CVC_radius;
+    _ZCP_CVC_radiusY =  _ZCP_CVC_radius;
+};
 
 private _ZCP_CVC_newRadiusX = _ZCP_CVC_radiusX + _ZCP_CVC_extraRadius;
 private _ZCP_CVC_newRadiusY = _ZCP_CVC_radiusY + _ZCP_CVC_extraRadius;

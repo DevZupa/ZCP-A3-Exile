@@ -5,7 +5,7 @@ params
 	"_ZCP_CM_previousMarkers",
 	"_ZCP_CM_position",
 	"_ZCP_CM_cityX",
-	"_ZCP_CM_cityY",
+	"_ZCP_CM_cityY"
 ];
 
 
@@ -16,10 +16,11 @@ private _ZCP_CM_index 			= _ZCP_CM_captureObject select 4;
 private _ZCP_CM_markerX = _ZCP_CM_cityX;
 private _ZCP_CM_markerY = _ZCP_CM_cityY;
 
-if( isNil _ZCP_CM_cityX || isNil _ZCP_CM_cityY ) then
+if( isNil '_ZCP_CM_cityX' || isNil '_ZCP_CM_cityY' ) then
 {
-    _ZCP_CM_markerX = _ZCP_CM_markerY = _ZCP_CM_capRadius;
-}
+    _ZCP_CM_markerX  = _ZCP_CM_capRadius;
+    _ZCP_CM_markerY  = _ZCP_CM_capRadius;
+};
 
 [_ZCP_CM_previousMarkers] call ZCP_fnc_removeMarker;
 

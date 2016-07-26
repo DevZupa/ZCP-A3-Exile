@@ -55,11 +55,11 @@
         1,  // Maximum amount of launchers for Wave AI (22)
         ["moderate","random","AWARE", "YELLOW"], // Defender AI settings ['DMS difficulty','DMS gear', 'Behaviour', 'CombatMode'] (23)
         ["moderate","random","AWARE", "YELLOW"], // Wave AI difficulty (24)
-        true // spawn rewards in the air after the mission, false -> prespawn them on the ground empty and fill them on completion. ( Boxes and Vechicles only ).
+        true, // spawn rewards in the air after the mission, false -> prespawn them on the ground empty and fill them on completion. ( Boxes and Vechicles only ).
 				true, // City mode. -> Takes a city/village from the map as cappoint and places a flag in the center ( No base file needed ). This ignores the position configs. (26)
-				['Georgetown'], // Blacklisted cities. There is a check for distance to traders/players/spawnpoints. (27)
-				['Georgetown'], // Whitelist. Leave empty to use ALL towns together with the black list. If something is in the whitelist. It will always choose from this array. (28)
-		]
+				[], // Blacklisted cities. There is a check for distance to traders/players/spawnpoints. (27)
+				[] // Whitelist. Leave empty to use ALL towns together with the black list. If something is in the whitelist. It will always choose from this array. (28)
+    ]
 	,
     [
         "ZCP Bravo", // name (0)
@@ -105,8 +105,8 @@
         ["moderate","random","AWARE", "YELLOW"], // Wave AI difficulty (24)
         false, // spawn rewards in the air after the mission, false -> prespawn them on the ground empty and fill them on completion. ( Boxes and Vechicles only ). (25)
         true, // City mode. -> Takes a city/village from the map as cappoint and places a flag in the center ( No base file needed ). This ignores the position configs. (26)
-        ['cityName'], // Blacklisted cities. There is a check for distance to traders/players/spawnpoints. (27)
-        [], // Whitelist. Leave empty to use ALL towns together with the black list. If something is in the whitelist. It will always choose from this array. (28)
+        [], // Blacklisted cities. There is a check for distance to traders/players/spawnpoints. (27)
+        [] // Whitelist. Leave empty to use ALL towns together with the black list. If something is in the whitelist. It will always choose from this array. (28)
       ]
 //    ,
 //    [
