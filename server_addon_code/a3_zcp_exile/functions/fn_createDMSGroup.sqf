@@ -21,12 +21,11 @@ for "_i" from 1 to _ZCP_CDG_unitsPerGroup do {
 sleep 0.5;
 
 {
+    [_x] joinSilent _ZCP_CDG_groupAI;
     _x allowDamage true;
     _x enableAI "AUTOTARGET";
     _x enableAI "TARGET";
     _x enableAI "MOVE";
-    [_x] joinSilent _ZCP_CDG_groupAI;
-
 }count (units _ZCP_CDG_dummyGroupEast);
 
 _ZCP_CDG_groupAI selectLeader ((units _ZCP_CDG_groupAI) select 0);
