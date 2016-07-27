@@ -15,7 +15,7 @@ private _ZCP_RPT_playerMoney = (_ZCP_RPT_currentCapper getVariable ["ExileMoney"
 _ZCP_RPT_currentCapper setVariable ["ExileMoney", _ZCP_RPT_playerMoney, true];
 
 // Poptabs should be automatically saved periodically
-//format["setAccountMoney:%1:%2", _ZCP_RPT_playerMoney, (getPlayerUID _ZCP_RPT_currentCapper)] call ExileServer_system_database_query_fireAndForget;
+format["setAccountMoney:%1:%2", _ZCP_RPT_playerMoney, (getPlayerUID _ZCP_RPT_currentCapper)] call ExileServer_system_database_query_fireAndForget;
 
 
 // send notification
