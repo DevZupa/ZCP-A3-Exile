@@ -61,3 +61,26 @@ _ZCP_CM_dot 			setMarkerType "ExileMissionCapturePointIcon";
 _ZCP_CM_dot 			setMarkerText format["   %1",_ZCP_CM_name];
 
 [_ZCP_CM_attentionMarker, _ZCP_CM_marker, _ZCP_CM_dot]
+
+
+
+
+
+//ZCP_Towns = nearestLocations [[15000,15000,0], ["NameVillage","NameCity","NameCityCapital"], 80000];
+//ZCP_markers = [];
+//{
+//	private _ZCP_S_city_sizeX = getNumber (configFile >> "CfgWorlds" >> worldName >> "Names" >> (className _x) >> "radiusA");
+//	private _ZCP_S_city_sizeY = getNumber (configFile >> "CfgWorlds" >> worldName >> "Names" >> (className _x) >> "radiusB");
+//	private _ZCP_CM_position = getArray (configFile >> "CfgWorlds" >> worldName >> "Names" >> (className  _x) >> "position");
+//
+//	private _ZCP_CM_marker 			= createMarker [format['ZCP_CM_%1', random 5000], _ZCP_CM_position];
+//	_ZCP_CM_marker 		setMarkerColor ZCP_CappedColor;
+//	_ZCP_CM_marker 		setMarkerShape "ELLIPSE";
+//	_ZCP_CM_marker 		setMarkerBrush "Solid";
+//	_ZCP_CM_marker 		setMarkerSize [_ZCP_S_city_sizeX,_ZCP_S_city_sizeY];
+//	_ZCP_CM_marker 		setMarkerText _ZCP_CM_name;
+//	private _ZCP_CM_dot 	= createMarker [format['ZCP_CM_dot_%1', random 5000], _ZCP_CM_position];
+//	_ZCP_CM_dot 			setMarkerType "ExileMissionCapturePointIcon";
+//	_nil = ZCP_markers pushBack _ZCP_CM_dot;
+//	_nil = ZCP_markers pushBack _ZCP_CM_marker;
+//}count ZCP_Towns;

@@ -100,12 +100,7 @@ else
 if(!_ZCP_S_locationFound) exitWith
 	{
 			diag_log text format["[ZCP]: No correct location found for %1.", _ZCP_S_capPointName];
-
-	    (ZCP_Data select _ZCP_S_capPointIndex) set[0,false];
-	    (ZCP_Data select _ZCP_S_capPointIndex) set[1,0];
-	    (ZCP_Data select _ZCP_S_capPointIndex) set[2,[-99999,0,0]];
-	    (ZCP_Data select _ZCP_S_capPointIndex) set[3,false];
-	    ZCP_MissionCounter = ZCP_MissionCounter - 1;
+			[_ZCP_S_capPointIndex] call ZCP_fnc_endMission;
 	};
 
 (ZCP_Data select _ZCP_S_capPointIndex) set[2,_ZCP_S_capturePosition];
@@ -250,10 +245,5 @@ if(count _ZCP_S_baseObjects != 0) then
 else
 {
 	diag_log text format["[ZCP]: No correct Basefile found for %1.", _ZCP_S_capPointName];
-
-    (ZCP_Data select _ZCP_S_capPointIndex) set[0,false];
-    (ZCP_Data select _ZCP_S_capPointIndex) set[1,0];
-    (ZCP_Data select _ZCP_S_capPointIndex) set[2,[-99999,0,0]];
-    (ZCP_Data select _ZCP_S_capPointIndex) set[3,false];
-    ZCP_MissionCounter = ZCP_MissionCounter - 1;
+	[_ZCP_S_capPointIndex] call ZCP_fnc_endMission;
 };

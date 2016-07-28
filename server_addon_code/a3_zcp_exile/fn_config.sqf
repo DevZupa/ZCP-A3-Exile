@@ -141,12 +141,12 @@ ZCP_CONFIG_AI_side = east; // The side where the AI is on.
 ZCP_CONFIG_MaxRandomAIMoney = 100; // Max poptabs on in AI it's inventory. ( Random between 0 -> this number ).
 
 // These are used when the cappoint is a city point.
-ZCP_CONFIG_CityCapSize = 50; // percentages of the city size for the capradius to be. (29 - 0)
-ZCP_CONFIG_CityDistanceToPlayer = 100; // distance for the town to be from a player ( From center town ) (29 - 1)
-ZCP_CONFIG_CityDistanceToTrader = 500; // distance for the town to be from a trader ( From center town ) (29 - 2)
-ZCP_CONFIG_CityDistanceToSpawn = 500; // distance for the town to be from a spawnpoint ( From center town ) (29 - 3)
-ZCP_CONFIG_CityDistanceToTerritory = 100; // distance for the town to be from a spawnpoint ( From center town ) (29 - 3)
-ZCP_CONFIG_CityDistanceToAI = 100; // distance for the town to be from other AI missions, patrols .. (29 - 4)
+ZCP_CONFIG_CityCapSize = 50; // percentages of the city size for the capradius to be.
+ZCP_CONFIG_CityDistanceToPlayer = 100; // distance for the town to be from a player ( From center town )
+ZCP_CONFIG_CityDistanceToTrader = 500; // distance for the town to be from a trader ( From center town )
+ZCP_CONFIG_CityDistanceToSpawn = 500; // distance for the town to be from a spawnpoint ( From center town )
+ZCP_CONFIG_CityDistanceToTerritory = 100; // distance for the town to be from a spawnpoint ( From center town ) 
+ZCP_CONFIG_CityDistanceToAI = 100; // distance for the town to be from other AI missions, patrols ..
 
 
 // bases must be located int he city folder. No flag needed. Flag is placed in center automaticly

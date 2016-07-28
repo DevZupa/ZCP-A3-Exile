@@ -7,7 +7,7 @@ private['_ZCP_MM_mission','_ZCP_MM_recreateTrigger','_ZCP_MM_AI_Groups',
 "_ZCP_MM_currentCapper","_ZCP_MM_previousCapper","_ZCP_MM_currentGroup","_ZCP_MM_wasContested","_ZCP_MM_finishText","_ZCP_MM_markers",
 "_ZCP_MM_contestStartTime","_ZCP_MM_capIndex","_ZCP_MM_capturePosition","_ZCP_MM_Halfway","_ZCP_MM_oneMin","_ZCP_MM_capStartTime",
 "_ZCP_MM_baseRadius","_ZCP_MM_circle","_ZCP_MM_totalWaves",'_ZCP_MM_useWaves','_ZCP_MM_waveData','_ZCP_MM_nextWave','_ZCP_MM_AI_NewGroups',
-'_ZCP_MM_rewardObjects','_ZCP_MM_city_sizeX','_ZCP_MM_city_sizeY'
+'_ZCP_MM_rewardObjects','_ZCP_MM_city_sizeX','_ZCP_MM_city_sizeY','_ZCP_MM_isCity'
 ];
 
 params[
@@ -28,6 +28,8 @@ _ZCP_MM_AI_Groups = _ZCP_MM_mission select 6;
 _ZCP_MM_rewardObjects = _ZCP_MM_mission select 7;
 _ZCP_MM_city_sizeX = _ZCP_MM_mission select 8;
 _ZCP_MM_city_sizeY = _ZCP_MM_mission select 9;
+
+_ZCP_MM_isCity = _ZCP_MM_originalThis select 26;
 
 {
     diag_log format['Misssion: %1 : %2', _forEachIndex, _x];
@@ -287,12 +289,8 @@ if(_ZCP_MM_recreateTrigger) then {
     _ZCP_MM_AI_Groups spawn ZCP_fnc_cleanupAI;
   };
 
-  (ZCP_Data select _ZCP_MM_capIndex) set[0,false];
-  (ZCP_Data select _ZCP_MM_capIndex) set[1,0];
-  (ZCP_Data select _ZCP_MM_capIndex) set[2,[-99999,0,0]];
-  (ZCP_Data select _ZCP_MM_capIndex) set[3,false];
-  ZCP_MissionTriggerData set [_ZCP_MM_capIndex, []];
-  ZCP_MissionCounter = ZCP_MissionCounter - 1;
+  [_ZCP_MM_capIndex] call ZCP_fnc_endMission;
+
   diag_log text format["[ZCP]: %1 will be cleaned up in %2s and ended.",_ZCP_MM_name, ZCP_BaseCleanupDelay];
   [] spawn ZCP_fnc_missionLooper;
   if (ZCP_createVirtualCircle) then {
