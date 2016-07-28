@@ -4,7 +4,28 @@ params[
 ];
 
 private _ZCP_RV_vehicleClass = ZCP_VehicleReward call BIS_fnc_selectRandom;
-private _ZCP_RV_posVehicle = _ZCP_RV_capturePosition findEmptyPosition [_ZCP_RV_captureRadius, _ZCP_RV_captureRadius * 2, _ZCP_RV_vehicleClass];
+private _ZCP_RV_posVehicle = [];
+
+if(_ZCP_RV_isCity) then
+  {
+     _ZCP_RV_posVehicle = _ZCP_RV_capturePosition findEmptyPosition [0, (_ZCP_RV_captureRadius * 2), _ZCP_RV_vehicleClass];
+
+     if(count _ZCP_RV_posVehicle < 1) then
+       {
+         _ZCP_RV_posVehicle = _ZCP_RV_capturePosition findEmptyPosition [0, (_ZCP_RV_captureRadius * 3), _ZCP_RV_vehicleClass];
+       };
+  }
+else
+  {
+     _ZCP_RV_posVehicle = _ZCP_RV_capturePosition findEmptyPosition [_ZCP_RV_captureRadius, _ZCP_RV_captureRadius * 2, _ZCP_RV_vehicleClass];
+  };
+
+if(count _ZCP_RV_posVehicle < 1) exitWith
+  {
+    // No safe pos found. SO return nullObject -> This will trigger a parachute vehicle.
+    objNull
+  };
+
 private _ZCP_RV_vehicle = _ZCP_RV_vehicleClass createVehicle _ZCP_RV_posVehicle;
 
 clearWeaponCargoGlobal _ZCP_RV_vehicle;
@@ -35,9 +56,3 @@ _ZCP_RV_vehicle setVariable ["ExileIsPersistent", false];
 _ZCP_RV_vehicle setVariable ["ExileIsSimulationMonitored", false];
 
 _ZCP_RV_vehicle
-
-
-
-
-
-

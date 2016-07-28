@@ -43,7 +43,9 @@ if(count _ZCP_GRC_possibleTowns > 0) then
 
             diag_log text format['[ZCP]: Trying town: %1', text _ZCP_GRC_town];
 
-            private _ZCP_GRC_position = position _ZCP_GRC_town;
+            private _ZCP_GRC_position = getArray (configFile >> "CfgWorlds" >> worldName >> "Names" >> (className  _ZCP_S_city) >> "position");
+
+            _ZCP_GRC_position set [2, 0];
 
             if(([_ZCP_GRC_position, ZCP_CONFIG_CityDistanceToTerritory] call ExileClient_util_world_isTerritoryInRange)) then { _ZCP_GRC_isInVallidTown = true; };
 
