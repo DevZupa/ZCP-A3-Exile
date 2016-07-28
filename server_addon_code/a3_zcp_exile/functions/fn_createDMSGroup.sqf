@@ -11,22 +11,28 @@ params[
 
 diag_log text format['ZCP: Spawning %1 AI for cappoint.', _ZCP_CDG_unitsPerGroup];
 
-private _ZCP_CDG_groupAI = createGroup _ZCP_CDG_side;
-private _ZCP_CDG_dummyGroup = createGroup _ZCP_CDS_side;
+private _ZCP_CDG_dummyGroup = createGroup _ZCP_CDG_side;
 
 for "_i" from 1 to _ZCP_CDG_unitsPerGroup do {
-  private _ZCP_unit = [_ZCP_CDG_groupAI, _ZCP_CDG_spawnAIPos, _ZCP_CDG_dificulty, _ZCP_CDG_solierType, _ZCP_CDG_radius, _ZCP_CDG_dummyGroup] call ZCP_fnc_createDMSSoldier;
+  private _ZCP_unit = [_ZCP_CDG_dummyGroup, _ZCP_CDG_spawnAIPos, _ZCP_CDG_dificulty, _ZCP_CDG_solierType, _ZCP_CDG_radius] call ZCP_fnc_createDMSSoldier;
 };
 
-sleep 0.5;
+sleep 0.2;
+
+private _ZCP_CDG_groupAI = createGroup _ZCP_CDG_side;
+
+sleep 0.2;
 
 {
     [_x] joinSilent _ZCP_CDG_groupAI;
+}count (units _ZCP_CDG_dummyGroup);
+
+{
     _x allowDamage true;
     _x enableAI "AUTOTARGET";
     _x enableAI "TARGET";
     _x enableAI "MOVE";
-}count (units _ZCP_CDG_dummyGroup);
+}count (units _ZCP_CDG_groupAI);
 
 _ZCP_CDG_groupAI selectLeader ((units _ZCP_CDG_groupAI) select 0);
 

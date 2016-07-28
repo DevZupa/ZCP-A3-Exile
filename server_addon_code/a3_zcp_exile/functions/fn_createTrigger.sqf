@@ -16,7 +16,7 @@ params[
 private _ZCP_CT_markerX = _ZCP_CT_cityX;
 private _ZCP_CT_markerY = _ZCP_CT_cityY;
 
-if( isNil '_ZCP_CT_cityX' || isNil '_ZCP_CT_cityY' ) then
+if( _ZCP_CT_cityX == 0 || _ZCP_CT_cityY == 0 ) then
 {
     _ZCP_CT_markerX =  _ZCP_CT_radius;
     _ZCP_CT_markerY = _ZCP_CT_radius;

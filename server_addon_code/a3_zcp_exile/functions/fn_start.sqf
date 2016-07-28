@@ -33,9 +33,11 @@ private _ZCP_S_openRadius = 60;
 private _ZCP_S_base = [];
 private _ZCP_S_ai = [];
 private _ZCP_S_city = locationNull;
-private _ZCP_S_city_sizeX = nil;
-private _ZCP_S_city_sizeY = nil;
+private _ZCP_S_city_sizeX = 0;
+private _ZCP_S_city_sizeY = 0;
 private _ZCP_S_baseObjects = [];
+
+private _ZCP_S_locationFound = true;
 
 if(!((ZCP_Data select _ZCP_S_capPointIndex) select 3)) then
 {
@@ -58,14 +60,19 @@ if (_ZCP_S_isCity) then
 {
     _ZCP_S_city = [_this select 27, _this select 28] call ZCP_fnc_getRandomCity;
 
-    _ZCP_S_city_sizeX = getNumber (configFile >> "CfgWorlds" >> worldName >> "Names" >> (className   _ZCP_S_city) >> "radiusA");
-    _ZCP_S_city_sizeY = getNumber (configFile >> "CfgWorlds" >> worldName >> "Names" >> (className   _ZCP_S_city) >> "radiusB");
+		if( !(isNull _ZCP_S_city) then
+			{
+				_ZCP_S_city_sizeX = getNumber (configFile >> "CfgWorlds" >> worldName >> "Names" >> (className   _ZCP_S_city) >> "radiusA");
+				_ZCP_S_city_sizeY = getNumber (configFile >> "CfgWorlds" >> worldName >> "Names" >> (className   _ZCP_S_city) >> "radiusB");
 
-		_ZCP_S_city_sizeX = floor(_ZCP_S_city_sizeX * ( ZCP_CONFIG_CityCapSize / 100 ));
-		_ZCP_S_city_sizeY = floor(_ZCP_S_city_sizeY * ( ZCP_CONFIG_CityCapSize / 100 ));
+				_ZCP_S_city_sizeX = floor(_ZCP_S_city_sizeX * ( ZCP_CONFIG_CityCapSize / 100 ));
+				_ZCP_S_city_sizeY = floor(_ZCP_S_city_sizeY * ( ZCP_CONFIG_CityCapSize / 100 ));
 
-    _ZCP_S_capturePosition = position _ZCP_S_city;
-		diag_log text format ["[ZCP]: %1 :Spawning city on %2 -> %3 with x %4, y %5",_ZCP_S_capPointName,_ZCP_S_capturePosition, text _ZCP_S_city, _ZCP_S_city_sizeX, _ZCP_S_city_sizeY];
+				_ZCP_S_capturePosition = position _ZCP_S_city;
+				diag_log text format ["[ZCP]: %1 :Spawning city on %2 -> %3 with x %4, y %5",_ZCP_S_capPointName,_ZCP_S_capturePosition, text _ZCP_S_city, _ZCP_S_city_sizeX, _ZCP_S_city_sizeY];
+			} else {
+				_ZCP_S_locationFound = false;
+			};
 }
 else
 {
@@ -87,6 +94,17 @@ else
         diag_log text format ["[ZCP]: %1 :Spawning dynamic on %2",_ZCP_S_capPointName,_ZCP_S_capturePosition];
     };
 };
+
+if(!_ZCP_S_locationFound) exitWith
+	{
+			diag_log text format["[ZCP]: No correct location found for %1.", _ZCP_S_capPointName];
+
+	    (ZCP_Data select _ZCP_S_capPointIndex) set[0,false];
+	    (ZCP_Data select _ZCP_S_capPointIndex) set[1,0];
+	    (ZCP_Data select _ZCP_S_capPointIndex) set[2,[-99999,0,0]];
+	    (ZCP_Data select _ZCP_S_capPointIndex) set[3,false];
+	    ZCP_MissionCounter = ZCP_MissionCounter - 1;
+	};
 
 (ZCP_Data select _ZCP_S_capPointIndex) set[2,_ZCP_S_capturePosition];
 
@@ -176,6 +194,10 @@ switch (_ZCP_S_baseType) do
     case ('m3eEden'):
     {
         _ZCP_S_baseObjects = [_ZCP_S_baseFile, _ZCP_S_capturePosition] call ZCP_fnc_createM3eEdenBase;
+    };
+		case ('m3eEdenCity'):
+    {
+        _ZCP_S_baseObjects = [_ZCP_S_baseFile, _ZCP_S_capturePosition] call ZCP_fnc_createM3eEdenCity;
     };
 };
 

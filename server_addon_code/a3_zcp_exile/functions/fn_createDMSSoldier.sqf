@@ -1,10 +1,9 @@
 params[
- '_ZCP_CDS_groupAI',
+ '_ZCP_CDS_dummyGroup',
  '_ZCP_CDS_spawnAIPos',
  '_ZCP_CDS_difficulty',
  '_ZCP_CDS_soldierClass',
- '_ZCP_CDS_radius',
- '_ZCP_CDS_dummyGroup'
+ '_ZCP_CDS_radius'
 ];
 
 private _ZCP_CDS_unarmed = false;

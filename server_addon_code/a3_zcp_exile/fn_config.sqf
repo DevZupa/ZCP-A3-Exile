@@ -146,6 +146,8 @@ ZCP_CONFIG_CityDistanceToPlayer = 100; // distance for the town to be from a pla
 ZCP_CONFIG_CityDistanceToTrader = 500; // distance for the town to be from a trader ( From center town ) (29 - 2)
 ZCP_CONFIG_CityDistanceToSpawn = 500; // distance for the town to be from a spawnpoint ( From center town ) (29 - 3)
 ZCP_CONFIG_CityDistanceToTerritory = 100; // distance for the town to be from a spawnpoint ( From center town ) (29 - 3)
+ZCP_CONFIG_CityDistanceToAI = 100; // distance for the town to be from other AI missions, patrols .. (29 - 4)
+
 
 // bases must be located int he city folder. No flag needed. Flag is placed in center automaticly
 ZCP_CityBases = [  //

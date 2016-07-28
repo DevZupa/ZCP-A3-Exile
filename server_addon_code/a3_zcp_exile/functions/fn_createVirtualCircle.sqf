@@ -10,7 +10,7 @@ private _ZCP_CVC_circleObjs = [];
 private _ZCP_CVC_radiusX = _ZCP_CVC_cityX;
 private _ZCP_CVC_radiusY = _ZCP_CVC_cityY;
 
-if( isNil '_ZCP_CVC_cityX' || isNil '_ZCP_CVC_cityY' ) then
+if( _ZCP_CVC_cityX == 0 || _ZCP_CVC_cityY == 0 ) then
 {
     _ZCP_CVC_radiusX = _ZCP_CVC_radius;
     _ZCP_CVC_radiusY = _ZCP_CVC_radius;

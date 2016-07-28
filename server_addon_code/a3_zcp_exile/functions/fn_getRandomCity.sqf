@@ -29,29 +29,41 @@ else
 
 diag_log text format['[ZCP]: Possible Towns: %1', _ZCP_GRC_possibleTowns];
 
-while { _ZCP_GRC_isInVallidTown } do
+if(count _ZCP_GRC_possibleTowns > 0) then
 {
-    _ZCP_GRC_isInVallidTown = false;
+    while
+        {
+        _ZCP_GRC_isInVallidTown
+        }
+    do
+        {
+            _ZCP_GRC_isInVallidTown = false;
 
-    _ZCP_GRC_town = _ZCP_GRC_possibleTowns call BIS_fnc_selectRandom;
+            _ZCP_GRC_town = _ZCP_GRC_possibleTowns call BIS_fnc_selectRandom;
 
-    diag_log text format['[ZCP]: Trying town: %1', text _ZCP_GRC_town];
+            diag_log text format['[ZCP]: Trying town: %1', text _ZCP_GRC_town];
 
-    private _ZCP_GRC_position = position _ZCP_GRC_town;
+            private _ZCP_GRC_position = position _ZCP_GRC_town;
 
-    if(([_ZCP_GRC_position, ZCP_CONFIG_CityDistanceToTerritory] call ExileClient_util_world_isTerritoryInRange)) then { _ZCP_GRC_isInVallidTown = true; };
+            if(([_ZCP_GRC_position, ZCP_CONFIG_CityDistanceToTerritory] call ExileClient_util_world_isTerritoryInRange)) then { _ZCP_GRC_isInVallidTown = true; };
 
-    // is position in range of a trader zone?
-    if(([_ZCP_GRC_position, ZCP_CONFIG_CityDistanceToTrader] call ExileClient_util_world_isTraderZoneInRange)) then { _ZCP_GRC_isInVallidTown = true; };
+            // is position in range of a trader zone?
+            if(([_ZCP_GRC_position, ZCP_CONFIG_CityDistanceToTrader] call ExileClient_util_world_isTraderZoneInRange)) then { _ZCP_GRC_isInVallidTown = true; };
 
-    // is position in range of a spawn zone?
-    if(([_ZCP_GRC_position, ZCP_CONFIG_CityDistanceToSpawn] call ExileClient_util_world_isSpawnZoneInRange)) then { _ZCP_GRC_isInVallidTown = true; };
+            // is position in range of a spawn zone?
+            if(([_ZCP_GRC_position, ZCP_CONFIG_CityDistanceToSpawn] call ExileClient_util_world_isSpawnZoneInRange)) then { _ZCP_GRC_isInVallidTown = true; };
 
-    // is position in range of a player?
-    if(([_ZCP_GRC_position, ZCP_CONFIG_CityDistanceToPlayer] call ExileClient_util_world_isAlivePlayerInRange)) then { _ZCP_GRC_isInVallidTown = true; };
+            // is position in range of a player?
+            if(([_ZCP_GRC_position, ZCP_CONFIG_CityDistanceToPlayer] call ExileClient_util_world_isAlivePlayerInRange)) then { _ZCP_GRC_isInVallidTown = true; };
 
-    sleep 1;
+            // is position is close to other AI:
+            if(count (_ZCP_GRC_position nearEntities ["O_recon_F", ZCP_CONFIG_CityDistanceToAI])  > 0 ) then { _ZCP_GRC_isInVallidTown = true; };
 
-};
+            sleep 1;
+
+        };
+}
+
+
 
 _ZCP_GRC_town
