@@ -60,7 +60,7 @@ if (_ZCP_S_isCity) then
 {
     _ZCP_S_city = [_this select 27, _this select 28] call ZCP_fnc_getRandomCity;
 
-		if( !(isNull _ZCP_S_city) then
+		if( !(isNull _ZCP_S_city)) then
 			{
 				_ZCP_S_city_sizeX = getNumber (configFile >> "CfgWorlds" >> worldName >> "Names" >> (className   _ZCP_S_city) >> "radiusA");
 				_ZCP_S_city_sizeY = getNumber (configFile >> "CfgWorlds" >> worldName >> "Names" >> (className   _ZCP_S_city) >> "radiusB");

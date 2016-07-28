@@ -57,13 +57,11 @@ if(count _ZCP_GRC_possibleTowns > 0) then
             if(([_ZCP_GRC_position, ZCP_CONFIG_CityDistanceToPlayer] call ExileClient_util_world_isAlivePlayerInRange)) then { _ZCP_GRC_isInVallidTown = true; };
 
             // is position is close to other AI:
-            if(count (_ZCP_GRC_position nearEntities ["O_recon_F", ZCP_CONFIG_CityDistanceToAI])  > 0 ) then { _ZCP_GRC_isInVallidTown = true; };
+            if( count (_ZCP_GRC_position nearEntities ["O_recon_F", ZCP_CONFIG_CityDistanceToAI])  > 0 ) then { _ZCP_GRC_isInVallidTown = true; };
 
             sleep 1;
 
         };
-}
-
-
+};
 
 _ZCP_GRC_town
