@@ -69,6 +69,9 @@ class CfgFunctions {
 			class getRandomCity {};
 			class createEdenConvertedCity {};
 			class endMission {};
+			class calculateCities {};
+			class getActualCityCenter {};
+			class getActualCitySize {};
 		};
 	};
 };

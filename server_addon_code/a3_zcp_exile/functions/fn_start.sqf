@@ -60,15 +60,15 @@ if (_ZCP_S_isCity) then
 {
     _ZCP_S_city = [_this select 27, _this select 28] call ZCP_fnc_getRandomCity;
 
-		if( !(isNull _ZCP_S_city)) then
+		if( count _ZCP_S_city > 0) then
 			{
-				_ZCP_S_city_sizeX = getNumber (configFile >> "CfgWorlds" >> worldName >> "Names" >> (className   _ZCP_S_city) >> "radiusA");
-				_ZCP_S_city_sizeY = getNumber (configFile >> "CfgWorlds" >> worldName >> "Names" >> (className   _ZCP_S_city) >> "radiusB");
+				_ZCP_S_city_sizeX = (_ZCP_S_city select 2) select 0;
+				_ZCP_S_city_sizeY = (_ZCP_S_city select 2) select 1;
 
 				_ZCP_S_city_sizeX = floor(_ZCP_S_city_sizeX * ( ZCP_CONFIG_CityCapSize / 100 ));
 				_ZCP_S_city_sizeY = floor(_ZCP_S_city_sizeY * ( ZCP_CONFIG_CityCapSize / 100 ));
 
-				_ZCP_S_capturePosition = getArray (configFile >> "CfgWorlds" >> worldName >> "Names" >> (className  _ZCP_S_city) >> "position");
+				_ZCP_S_capturePosition = _ZCP_S_city select 1;
 				_ZCP_S_capturePosition set [2,0];
 
 				diag_log text format ["[ZCP]: %1 :Spawning city on %2 -> %3 with x %4, y %5",_ZCP_S_capPointName,_ZCP_S_capturePosition, text _ZCP_S_city, _ZCP_S_city_sizeX, _ZCP_S_city_sizeY];

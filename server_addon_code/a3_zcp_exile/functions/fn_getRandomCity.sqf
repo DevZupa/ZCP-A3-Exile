@@ -6,25 +6,26 @@ params [
 
 private _ZCP_GRC_possibleTowns = [];
 private _ZCP_GRC_isInVallidTown = true;
-private _ZCP_GRC_town = locationNull;
+private _ZCP_GRC_town = [];
 
 if( count _ZCP_GRC_whitelist == 0) then
 {
     {
-        if(	!(text _x in _ZCP_GRC_blacklist)) then
+        private _town = _x select 0;
+        if(	!(text _town in _ZCP_GRC_blacklist)) then
          {
             _nil = _ZCP_GRC_possibleTowns pushBack _x;
          }
-    }count ZCP_Towns;
+    }count ZCP_TownsCalculated;
 }
 else
 {
     {
-        if(	(text _x in _ZCP_GRC_whitelist)) then
+        if(	(text _town in _ZCP_GRC_whitelist)) then
          {
             _nil = _ZCP_GRC_possibleTowns pushBack _x;
          }
-    }count ZCP_Towns;
+    }count ZCP_TownsCalculated;
 };
 
 diag_log text format['[ZCP]: Possible Towns: %1', _ZCP_GRC_possibleTowns];
@@ -43,7 +44,7 @@ if(count _ZCP_GRC_possibleTowns > 0) then
 
             diag_log text format['[ZCP]: Trying town: %1', text _ZCP_GRC_town];
 
-            private _ZCP_GRC_position = getArray (configFile >> "CfgWorlds" >> worldName >> "Names" >> (className  _ZCP_S_city) >> "position");
+            private _ZCP_GRC_position = _ZCP_GRC_town select 1;
 
             _ZCP_GRC_position set [2, 0];
 
