@@ -21,6 +21,7 @@ if( count _ZCP_GRC_whitelist == 0) then
 else
 {
     {
+        private _town = _x select 0;
         if(	(text _town in _ZCP_GRC_whitelist)) then
          {
             _nil = _ZCP_GRC_possibleTowns pushBack _x;
