@@ -25,6 +25,7 @@ Topic @ [Exile forums](http://www.exilemod.com/topic/12116-release-official-zcp-
 
 ##Previous releases
 
+* [V3.0](https://github.com/DevZupa/ZCP-A3-Exile/releases/tag/V3.0)
 * [V2.1](https://github.com/DevZupa/ZCP-A3-Exile/releases/tag/V2.1)
 * [V2.0](https://github.com/DevZupa/ZCP-A3-Exile/releases/tag/V2.0)
 * [V1.1](https://github.com/DevZupa/ZCP-A3-Exile/releases/tag/V1.1)
