@@ -20,6 +20,8 @@ ZCP_DMS_MagRange = ZCP_DMS_MaximumMagCount - ZCP_DMS_MinimumMagCount;
 
 ZCP_RandomReward = [];
 
+ZCP_Towns = call ZCP_fnc_cities;
+
 {
 	for "_i" from 0 to ((_x select 1) - 1) do {
 		_nil = ZCP_RandomReward pushBack (_x select 0);
@@ -34,10 +36,10 @@ ZCP_RandomReward = [];
 	if(ZCP_dev) then {
 		_x set [11, 60]; // dev time to 60 seconds
 	};
+
+	if (count ZCP_Towns < 1) then {
+	    _x set [26, false];
+	};
 } forEach ZCP_CapPoints;
-
-call ZCP_fnc_calculateCities;
-
-diag_log text format['[ZCP]: Towns: %1', ZCP_Towns];
 
 diag_log text format['[ZCP]: CPdata: %1', ZCP_CapPoints];

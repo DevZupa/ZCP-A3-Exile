@@ -17,6 +17,7 @@ class CfgFunctions {
 			};
 			class config {};
 			class missions {};
+			class cities {};
 			class translations {};
 			class missionLooper {};
 
@@ -69,9 +70,6 @@ class CfgFunctions {
 			class getRandomCity {};
 			class createEdenConvertedCity {};
 			class endMission {};
-			class calculateCities {};
-			class getActualCityCenter {};
-			class getActualCitySize {};
 		};
 	};
 };

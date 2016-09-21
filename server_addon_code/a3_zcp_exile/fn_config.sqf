@@ -138,6 +138,7 @@ ZCP_WeaponBox = "I_CargoNet_01_ammo_F";
 ZCP_CONFIG_TerritoryDistance = 500;  // Distance from territories. ( 0 to disable )
 
 ZCP_CONFIG_AI_side = east; // The side where the AI is on.
+ZCP_CONFIG_AI_soldierClass = 'O_G_Soldier_F'; // The class model for the soldier ( This needs to be a soldier from the AI faction! -> otherwise they shoot eachother on spawn)
 ZCP_CONFIG_MaxRandomAIMoney = 100; // Max poptabs on in AI it's inventory. ( Random between 0 -> this number ).
 
 // These are used when the cappoint is a city point.

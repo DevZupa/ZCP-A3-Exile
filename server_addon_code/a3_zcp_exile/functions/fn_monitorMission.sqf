@@ -28,6 +28,7 @@ _ZCP_MM_AI_Groups = _ZCP_MM_mission select 6;
 _ZCP_MM_rewardObjects = _ZCP_MM_mission select 7;
 _ZCP_MM_city_sizeX = _ZCP_MM_mission select 8;
 _ZCP_MM_city_sizeY = _ZCP_MM_mission select 9;
+_ZCP_MM_city = _ZCP_MM_mission select 10;
 
 _ZCP_MM_isCity = _ZCP_MM_originalThis select 26;
 
@@ -124,7 +125,7 @@ while{_ZCP_MM_continueLoop}do{
                 }
           }count _ZCP_MM_proximityList;
 
-          if( !(_ZCP_MM_currentGroup isEqualTo ExileServerLoneWolfGroup) &&  _ZCP_stillGroupMembersAlive) then
+          if( !(_ZCP_MM_currentGroup == grpNull) &&  _ZCP_stillGroupMembersAlive) then
             {
               _ZCP_MM_currentCapper = _ZCP_newGroupCapper;
               ['PersonalNotification', ["ZCP",[format[[17] call ZCP_fnc_translate, name _ZCP_MM_currentCapper]],'ZCP_Capping'],  _ZCP_MM_currentCapper] call ZCP_fnc_showNotification;
@@ -163,7 +164,7 @@ while{_ZCP_MM_continueLoop}do{
       {
         if( _x != _ZCP_MM_currentCapper)then
           {
-            if( _ZCP_MM_currentGroup isEqualTo ExileServerLoneWolfGroup || group _x != _ZCP_MM_currentGroup )then
+            if( _ZCP_MM_currentGroup == grpNull || group _x != _ZCP_MM_currentGroup )then
               {
                 (ZCP_Data select _ZCP_MM_capIndex) set[1,2];
                 _ZCP_MM_isContested = true;

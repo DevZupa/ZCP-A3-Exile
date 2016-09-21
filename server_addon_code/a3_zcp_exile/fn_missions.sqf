@@ -56,9 +56,8 @@
         ["moderate","random","AWARE", "YELLOW"], // Defender AI settings ['DMS difficulty','DMS gear', 'Behaviour', 'CombatMode'] (23)
         ["moderate","random","AWARE", "YELLOW"], // Wave AI difficulty (24)
         true, // spawn rewards in the air after the mission, false -> prespawn them on the ground empty and fill them on completion. ( Boxes and Vechicles only ).
-				true, // City mode. -> Takes a city/village from the map as cappoint and places a flag in the center ( No base file needed ). This ignores the position configs. (26)
-				[], // Blacklisted cities. There is a check for distance to traders/players/spawnpoints. (27)
-				[] // Whitelist. Leave empty to use ALL towns together with the black list. If something is in the whitelist. It will always choose from this array. (28)
+        true, // City mode. -> Takes a city/village from the map as cappoint and places a flag in the center ( No base file needed ). This ignores the position configs. (26)
+        true // Allow spawning of extra objects in the town if sqf file(s) is/are provided. (27)
     ]
 	,
     [
@@ -105,8 +104,7 @@
         ["moderate","random","AWARE", "YELLOW"], // Wave AI difficulty (24)
         false, // spawn rewards in the air after the mission, false -> prespawn them on the ground empty and fill them on completion. ( Boxes and Vechicles only ). (25)
         true, // City mode. -> Takes a city/village from the map as cappoint and places a flag in the center ( No base file needed ). This ignores the position configs. (26)
-        [], // Blacklisted cities. There is a check for distance to traders/players/spawnpoints. (27)
-        [] // Whitelist. Leave empty to use ALL towns together with the black list. If something is in the whitelist. It will always choose from this array. (28)
+        true // Allow spawning of extra objects in the town if sqf file(s) is/are provided. (27)
       ]
 //    ,
 //    [

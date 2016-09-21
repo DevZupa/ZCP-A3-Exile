@@ -13,3 +13,6 @@ ZCP_TownsCalculated = [];
   _ZCP_CM_marker setMarkerSize [_ZCP_CC_cityborder select 0,_ZCP_CC_cityborder select 1];
 
 } count ZCP_Towns;
+
+
+// Not use anymore. TODO delete.
