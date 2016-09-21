@@ -16,7 +16,7 @@ if( _ZCP_CVC_cityX == 0 || _ZCP_CVC_cityY == 0 ) then
     _ZCP_CVC_radiusY = _ZCP_CVC_radius;
 };
 
-diag_log text format['%1 %2 %3', _ZCP_CVC_radiusX , _ZCP_CVC_radiusY, _ZCP_CVC_radius];
+// diag_log text format['%1 %2 %3', _ZCP_CVC_radiusX , _ZCP_CVC_radiusY, _ZCP_CVC_radius];
 
 for '_i' from 0 to 360 step (150 / _ZCP_CVC_radius)*2 do
 {

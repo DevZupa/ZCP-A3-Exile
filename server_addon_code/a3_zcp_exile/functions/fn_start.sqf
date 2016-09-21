@@ -203,7 +203,7 @@ switch (_ZCP_S_baseType) do
     };
     case ('selfSpawn'):
     {
-        _ZCP_S_baseObjects = call preprocessFileLineNumbers _ZCP_S_baseFile;
+        _ZCP_S_baseObjects = call compile preprocessFileLineNumbers _ZCP_S_baseFile;
     };
 };
 

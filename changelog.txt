@@ -1,0 +1,9 @@
+- Capping is transferred to a group member in the cappoint when killed. Nothing will be reset.
+- Can now set extra AI options for Waves and Defenders.
+- More tries to prevent AI from shooting eachother. Thx Tobias for pointing the AI model out.
+- Fixed sniperbox.
+- Option to prespawn the reward boxes/vehicles on the ground. ( Empty until completion )
+- Global vehicle reward has been removed for coding reasons. Take them out manually from random array and mission array if wanted.
+- Fixed AI Wave messages showing more then once.
+- Now uses Exile checks for traders and spawnpoints.
+- City cappoints

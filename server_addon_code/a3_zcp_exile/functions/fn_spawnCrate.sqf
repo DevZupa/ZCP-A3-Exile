@@ -5,8 +5,6 @@ params
 	"_ZCP_SC_preBox"
 ];
 
-diag_log text format['ZCP: object %1', _ZCP_SC_preBox ];
-
 private _ZCP_SC_box = _ZCP_SC_preBox;
 
 if(_ZCP_SC_box isEqualTo objNull) then {

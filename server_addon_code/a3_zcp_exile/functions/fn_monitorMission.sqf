@@ -276,7 +276,7 @@ while{_ZCP_MM_continueLoop}do{
 };
 
 if(_ZCP_MM_recreateTrigger) then {
-    ZCP_MissionTriggerData set [_ZCP_MM_capIndex, [_ZCP_MM_originalThis, _ZCP_MM_baseObjects, _ZCP_MM_capturePosition, _ZCP_MM_baseRadius, _ZCP_MM_markers, _ZCP_MM_circle, _ZCP_MM_AI_Groups,_ZCP_MM_rewardObjects, _ZCP_MM_city_sizeX, _ZCP_MM_city_sizeY]];
+    ZCP_MissionTriggerData set [_ZCP_MM_capIndex, [_ZCP_MM_originalThis, _ZCP_MM_baseObjects, _ZCP_MM_capturePosition, _ZCP_MM_baseRadius, _ZCP_MM_markers, _ZCP_MM_circle, _ZCP_MM_AI_Groups,_ZCP_MM_rewardObjects, _ZCP_MM_city_sizeX, _ZCP_MM_city_sizeY, _ZCP_MM_city]];
   	[_ZCP_MM_capIndex, _ZCP_MM_capturePosition, _ZCP_MM_baseRadius, _ZCP_MM_city_sizeX, _ZCP_MM_city_sizeY] call ZCP_fnc_createTrigger;
 } else {
   _ZCP_MM_finishText = '';
