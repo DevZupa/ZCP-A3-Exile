@@ -15,7 +15,7 @@ if(count ZCP_Towns > 0) then
 
             // _ZCP_GRC_town = [ location, radius, name, (optional) basearray];
 
-            diag_log text format['[ZCP]: Trying town: %1', text _ZCP_GRC_town];
+            diag_log text format['[ZCP]: Trying town: %1',  _ZCP_GRC_town select 2];
 
             private _ZCP_GRC_position = _ZCP_GRC_town select 0;
 

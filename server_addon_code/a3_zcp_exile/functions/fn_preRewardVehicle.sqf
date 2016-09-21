@@ -1,6 +1,7 @@
 params[
     '_ZCP_RV_capturePosition',
-    '_ZCP_RV_captureRadius'
+    '_ZCP_RV_captureRadius',
+    '_ZCP_RV_isCity'
 ];
 
 private _ZCP_RV_vehicleClass = ZCP_VehicleReward call BIS_fnc_selectRandom;

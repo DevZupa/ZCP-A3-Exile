@@ -7,7 +7,7 @@ private['_ZCP_MM_mission','_ZCP_MM_recreateTrigger','_ZCP_MM_AI_Groups',
 "_ZCP_MM_currentCapper","_ZCP_MM_previousCapper","_ZCP_MM_currentGroup","_ZCP_MM_wasContested","_ZCP_MM_finishText","_ZCP_MM_markers",
 "_ZCP_MM_contestStartTime","_ZCP_MM_capIndex","_ZCP_MM_capturePosition","_ZCP_MM_Halfway","_ZCP_MM_oneMin","_ZCP_MM_capStartTime",
 "_ZCP_MM_baseRadius","_ZCP_MM_circle","_ZCP_MM_totalWaves",'_ZCP_MM_useWaves','_ZCP_MM_waveData','_ZCP_MM_nextWave','_ZCP_MM_AI_NewGroups',
-'_ZCP_MM_rewardObjects','_ZCP_MM_city_sizeX','_ZCP_MM_city_sizeY','_ZCP_MM_isCity'
+'_ZCP_MM_rewardObjects','_ZCP_MM_city_sizeX','_ZCP_MM_city_sizeY','_ZCP_MM_isCity','_ZCP_MM_city','_ZCP_MM_cityName'
 ];
 
 params[
@@ -32,9 +32,21 @@ _ZCP_MM_city = _ZCP_MM_mission select 10;
 
 _ZCP_MM_isCity = _ZCP_MM_originalThis select 26;
 
+// TO debug mission vars:
+//{
+//    diag_log format['Misssion: %1 : %2', _forEachIndex, _x];
+//}forEach _ZCP_MM_mission;
+
+_ZCP_MM_cityName = "";
+
+if(_ZCP_MM_isCity) then
 {
-    diag_log format['Misssion: %1 : %2', _forEachIndex, _x];
-}forEach _ZCP_MM_mission;
+    _ZCP_MM_cityName = _ZCP_MM_city select 2;
+
+    if(ZCP_CONFIG_UseCityName) then {
+        _ZCP_MM_name = _ZCP_MM_cityName;
+    };
+};
 
 _ZCP_MM_missionCapTime = _ZCP_MM_originalThis select 11;
 
@@ -94,7 +106,7 @@ while{_ZCP_MM_continueLoop}do{
 
         (ZCP_Data select _ZCP_MM_capIndex) set[1,0];
 
-        _ZCP_MM_markers = [_ZCP_MM_originalThis, _ZCP_MM_baseRadius, _ZCP_MM_markers, _ZCP_MM_capturePosition, _ZCP_MM_city_sizeX, _ZCP_MM_city_sizeY] call ZCP_fnc_createMarker;
+        _ZCP_MM_markers = [_ZCP_MM_originalThis, _ZCP_MM_baseRadius, _ZCP_MM_markers, _ZCP_MM_capturePosition, _ZCP_MM_city_sizeX, _ZCP_MM_city_sizeY, _ZCP_MM_cityName] call ZCP_fnc_createMarker;
 
         [_ZCP_MM_circle, 'none'] call ZCP_fnc_changeCircleColor;
 
@@ -153,7 +165,7 @@ while{_ZCP_MM_continueLoop}do{
             _ZCP_MM_capperName = [2] call ZCP_fnc_translate;
           };
 
-          _ZCP_MM_markers = [_ZCP_MM_originalThis, _ZCP_MM_baseRadius, _ZCP_MM_markers, _ZCP_MM_capturePosition, _ZCP_MM_city_sizeX, _ZCP_MM_city_sizeY] call ZCP_fnc_createMarker;
+          _ZCP_MM_markers = [_ZCP_MM_originalThis, _ZCP_MM_baseRadius, _ZCP_MM_markers, _ZCP_MM_capturePosition, _ZCP_MM_city_sizeX, _ZCP_MM_city_sizeY, _ZCP_MM_cityName] call ZCP_fnc_createMarker;
           [_ZCP_MM_circle, 'capping'] call ZCP_fnc_changeCircleColor;
 
         };
@@ -178,7 +190,7 @@ while{_ZCP_MM_continueLoop}do{
         _ZCP_MM_contestStartTime = diag_tickTime;
         _ZCP_MM_wasContested = true;
         (ZCP_Data select _ZCP_MM_capIndex) set[1,2]; // to set marker to contested
-        _ZCP_MM_markers = [_ZCP_MM_originalThis, _ZCP_MM_baseRadius, _ZCP_MM_markers, _ZCP_MM_capturePosition, _ZCP_MM_city_sizeX, _ZCP_MM_city_sizeY] call ZCP_fnc_createMarker;
+        _ZCP_MM_markers = [_ZCP_MM_originalThis, _ZCP_MM_baseRadius, _ZCP_MM_markers, _ZCP_MM_capturePosition, _ZCP_MM_city_sizeX, _ZCP_MM_city_sizeY, _ZCP_MM_cityName] call ZCP_fnc_createMarker;
         [_ZCP_MM_circle, 'contested'] call ZCP_fnc_changeCircleColor;
         {
           ['PersonalNotification', ["ZCP",[format[[13] call ZCP_fnc_translate]],'ZCP_Capping'], _x] call ZCP_fnc_showNotification;
@@ -190,7 +202,7 @@ while{_ZCP_MM_continueLoop}do{
         _ZCP_MM_contestEndTime = diag_tickTime;
         _ZCP_MM_contestTotalTime = _ZCP_MM_contestTotalTime + (_ZCP_MM_contestEndTime - _ZCP_MM_contestStartTime);
         (ZCP_Data select _ZCP_MM_capIndex) set[1,1]; // to set marker to capping
-        _ZCP_MM_markers = [_ZCP_MM_originalThis, _ZCP_MM_baseRadius, _ZCP_MM_markers, _ZCP_MM_capturePosition, _ZCP_MM_city_sizeX, _ZCP_MM_city_sizeY] call ZCP_fnc_createMarker;
+        _ZCP_MM_markers = [_ZCP_MM_originalThis, _ZCP_MM_baseRadius, _ZCP_MM_markers, _ZCP_MM_capturePosition, _ZCP_MM_city_sizeX, _ZCP_MM_city_sizeY, _ZCP_MM_cityName] call ZCP_fnc_createMarker;
         [_ZCP_MM_circle, 'capping'] call ZCP_fnc_changeCircleColor;
         {
           ['PersonalNotification', ["ZCP",[format[[14] call ZCP_fnc_translate]],'ZCP_Capping'], _x] call ZCP_fnc_showNotification;
@@ -283,7 +295,7 @@ if(_ZCP_MM_recreateTrigger) then {
   ['PersonalNotification', ["ZCP",[format[[11] call ZCP_fnc_translate]], 'ZCP_Init'], _ZCP_MM_currentCapper] call ZCP_fnc_showNotification;
 
   if (_ZCP_MM_originalThis select 14) then {
-    [_ZCP_MM_capturePosition, _ZCP_MM_baseRadius, _ZCP_MM_originalThis select 15, _ZCP_MM_originalThis select 16] spawn ZCP_fnc_createSmokeScreen;
+    [_ZCP_MM_capturePosition, _ZCP_MM_baseRadius, _ZCP_MM_originalThis select 15, _ZCP_MM_originalThis select 16, _ZCP_MM_city_sizeX, _ZCP_MM_city_sizeY] spawn ZCP_fnc_createSmokeScreen;
   };
 
   if(ZCP_AI_killAIAfterMissionCompletionTimer > -1) then {

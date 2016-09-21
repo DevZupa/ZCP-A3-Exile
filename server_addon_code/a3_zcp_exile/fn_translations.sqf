@@ -22,5 +22,6 @@
 	['Capture point is contested is no longer contested!', 'Capture point is no longer contested!'], // Capture point is contested! 14
 	['AI Wave incoming to retake %1.', 'AI Wave incoming to retake %1.'], // Capture point is contested! 15
 	['Group member died. You are now the capper.', 'Group member died. You are now the capper.'], // Group member died. You are now the capper.! 16
-	['Group member died. You are now the capper.', 'Group member died. You are now the capper.'] // Group member died. You are now the capper.! 17
+	['You received %1 poptabs.', 'You received %1 poptabs.'], //You received %1 poptabs. 17
+	['%1 is taken! Capture and hold for %2 min!', '%1 is taken! Capture and hold for %2 min!'] // %1 is taken! Capture and hold for %2 min! 18
 ]

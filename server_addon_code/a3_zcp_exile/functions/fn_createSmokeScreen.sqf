@@ -7,6 +7,8 @@ params[
   '_ZCP_CVC_cityY'
 ];
 
+diag_log format["Smoke: %1 - %2 - %3 - %4 - %5 - %6", _ZCP_CVC_center, _ZCP_CVC_radius ,_ZCP_CVC_waitTime, _ZCP_CVC_extraRadius, _ZCP_CVC_cityX, _ZCP_CVC_cityY ];
+
 private _ZCP_CVC_radiusX = _ZCP_CVC_cityX;
 private _ZCP_CVC_radiusY = _ZCP_CVC_cityY;
 

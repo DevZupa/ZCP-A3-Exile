@@ -15,7 +15,7 @@ switch (_ZCP_RV_boxType) do {
     };
 };
 
-private _ZCP_RV_posVehicle = _ZCP_RV_capturePosition findEmptyPosition [0, _ZCP_RV_captureRadius * 2, _ZCP_RV_boxTypeClass];
+private _ZCP_RV_posVehicle = _ZCP_RV_capturePosition findEmptyPosition [0, _ZCP_RV_captureRadius , _ZCP_RV_boxTypeClass];
 
 private _ZCP_RV_box = _ZCP_RV_boxTypeClass createVehicle _ZCP_RV_posVehicle;
 _ZCP_RV_box allowDamage false;

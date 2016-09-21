@@ -27,21 +27,6 @@ sleep 0.2;
     [_x] joinSilent _ZCP_CDG_groupAI;
 }count (units _ZCP_CDG_dummyGroup);
 
-{
-    _x allowDamage true;
-    _x enableAI "AUTOTARGET";
-    _x enableAI "TARGET";
-    _x enableAI "MOVE";
-}count (units _ZCP_CDG_groupAI);
-
-_ZCP_CDG_groupAI selectLeader ((units _ZCP_CDG_groupAI) select 0);
-
-_ZCP_CDG_groupAI setVariable ["DMS_LockLocality", nil];
-_ZCP_CDG_groupAI setVariable ["DMS_SpawnedGroup", true];
-_ZCP_CDG_groupAI setVariable ["DMS_Group_Side", toUpper format["%1",_ZCP_CDG_side]];
-
-
-deleteGroup _ZCP_CDG_dummyGroup;
 
 // An AI will definitely spawn with a launcher if you define type
 if (_ZCP_CDG_minLaunchers > 0) then
@@ -71,6 +56,19 @@ if (_ZCP_CDG_minLaunchers > 0) then
 	};
 };
 
+{
+    _x allowDamage true;
+    _x enableAI "AUTOTARGET";
+    _x enableAI "TARGET";
+    _x enableAI "MOVE";
+}count (units _ZCP_CDG_groupAI);
 
+_ZCP_CDG_groupAI selectLeader ((units _ZCP_CDG_groupAI) select 0);
+
+_ZCP_CDG_groupAI setVariable ["DMS_LockLocality", nil];
+_ZCP_CDG_groupAI setVariable ["DMS_SpawnedGroup", true];
+_ZCP_CDG_groupAI setVariable ["DMS_Group_Side", toUpper format["%1",_ZCP_CDG_side]];
+
+deleteGroup _ZCP_CDG_dummyGroup;
 
 _ZCP_CDG_groupAI

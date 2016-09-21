@@ -5,7 +5,8 @@ params
 	"_ZCP_CM_previousMarkers",
 	"_ZCP_CM_position",
 	"_ZCP_CM_cityX",
-	"_ZCP_CM_cityY"
+	"_ZCP_CM_cityY",
+	"_ZCP_CM_cityName"
 ];
 
 
@@ -20,7 +21,14 @@ if( _ZCP_CM_cityX == 0 || _ZCP_CM_cityY == 0 ) then
 {
     _ZCP_CM_markerX  = _ZCP_CM_capRadius;
     _ZCP_CM_markerY  = _ZCP_CM_capRadius;
-};
+}
+else
+{
+    if (ZCP_CONFIG_UseCityName) then
+    {
+        _ZCP_CM_name = format["%1 CP", _ZCP_CM_cityName];
+    };
+} ;
 
 [_ZCP_CM_previousMarkers] call ZCP_fnc_removeMarker;
 
@@ -65,13 +73,16 @@ _ZCP_CM_dot 			setMarkerText format["   %1",_ZCP_CM_name];
 
 
 
-
+//
 //ZCP_Towns = nearestLocations [[15000,15000,0], ["NameVillage","NameCity","NameCityCapital"], 80000];
 //ZCP_markers = [];
 //{
+//
 //	private _ZCP_S_city_sizeX = getNumber (configFile >> "CfgWorlds" >> worldName >> "Names" >> (className _x) >> "radiusA");
 //	private _ZCP_S_city_sizeY = getNumber (configFile >> "CfgWorlds" >> worldName >> "Names" >> (className _x) >> "radiusB");
 //	private _ZCP_CM_position = getArray (configFile >> "CfgWorlds" >> worldName >> "Names" >> (className  _x) >> "position");
+//
+//
 //
 //	private _ZCP_CM_marker 			= createMarker [format['ZCP_CM_%1', random 5000], _ZCP_CM_position];
 //	_ZCP_CM_marker 		setMarkerColor ZCP_CappedColor;

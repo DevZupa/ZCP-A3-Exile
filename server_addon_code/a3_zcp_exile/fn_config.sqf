@@ -142,19 +142,12 @@ ZCP_CONFIG_AI_soldierClass = 'O_G_Soldier_F'; // The class model for the soldier
 ZCP_CONFIG_MaxRandomAIMoney = 100; // Max poptabs on in AI it's inventory. ( Random between 0 -> this number ).
 
 // These are used when the cappoint is a city point.
-ZCP_CONFIG_CityCapSize = 100; // percentages of the city size for the capradius to be.
+ZCP_CONFIG_UseCityName = true; // Use City name CP for maker naming instead of ZCP alpha..
 ZCP_CONFIG_CityDistanceToPlayer = 100; // distance for the town to be from a player ( From center town )
 ZCP_CONFIG_CityDistanceToTrader = 500; // distance for the town to be from a trader ( From center town )
 ZCP_CONFIG_CityDistanceToSpawn = 500; // distance for the town to be from a spawnpoint ( From center town )
 ZCP_CONFIG_CityDistanceToTerritory = 100; // distance for the town to be from a spawnpoint ( From center town )
 ZCP_CONFIG_CityDistanceToAI = 100; // distance for the town to be from other AI missions, patrols ..
-
-
-// bases must be located int he city folder. No flag needed. Flag is placed in center automaticly
-ZCP_CityBases = [  //
-	['cityname', ['filename.sqf', 'editor']],
-	['cityname2', ['filename2.sqf', 'editor2']]
-];
 
 /* END NEW CONFIGS 3.1 */
 

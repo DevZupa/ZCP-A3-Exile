@@ -54,9 +54,9 @@ if(_ZCP_RV_preVechicle isEqualTo objNull) then {
     _ZCP_RV_preVechicle allowDamage true;
     _ZCP_RV_preVechicle lock false;
 
-     private _smoke = "smokeShellPurple" createVehicle getPosATL _ZCP_SC_box;
-    _smoke setPosATL (getPosATL _ZCP_SC_box);
-    _smoke attachTo [_ZCP_SC_box,[0,0,0]];
+     private _smoke = "smokeShellPurple" createVehicle getPosATL _ZCP_RV_preVechicle;
+    _smoke setPosATL (getPosATL _ZCP_RV_preVechicle);
+    _smoke attachTo [_ZCP_RV_preVechicle,[0,0,0]];
 
     _ZCP_RV_vehicleName = name _ZCP_RV_preVechicle;
 };
