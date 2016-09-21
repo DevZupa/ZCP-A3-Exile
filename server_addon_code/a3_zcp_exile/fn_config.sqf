@@ -85,139 +85,6 @@ ZCP_RewardWeightForRandomChoice = [
 // You can add extra types here if you want them in the random option.
 
 // Server will keep as many missions up as ZCP_MaxMissions, And they will be randomly chosen from the following list
-// Location is ignored if not using static points. just put [0,0,0] then. activate static buy using isStatic = true
-// valid rewards -> Random, Poptabs, Vehicle, Buildingbox, WeaponBox
-// baseFile -> Random or the basefile name. Random will chose from ZCP_CapBases
-// capradius -> 0 for Random, real number for Static base files.
-ZCP_CapPoints = [
-	[
-		"ZCP Alpha", // name (0)
-		[[10000,10000,0],[10000,10000,0]], // [[x,y,z],[x,y,z]] if using static location (1)
-		["Random","Random","Reputation"], // Reward -> Random, Poptabs, Vehicle, Buildingbox, WeaponBox , BigWeaponBox, SniperWeaponBox (2)
-		"alpha", // unique varname -> this gets checked and fixed automaticly on server start ( so don't really worry about it ).
-		0, // unique index -> this gets checked and fixed automaticly on server start ( so don't really worry about it ).
-		true, // spawnAI on start of the missions ( NEEDS AI system for this ) (5)
-		false, // isStatic location ( if true it will take the location specified earlier) (6)
-		["ec_audacity.sqf","ec_bravery.sqf","ec_courage.sqf", "ec_defiance.sqf","ec_endurance.sqf","ec_fortitude.sqf","m3e_exoBase1.sqf","m3e_exoBase2.sqf","m3e_exoBase3.sqf"], // baseFile -> Random OR the name of the sqf file OR array of basefiles to choose from ( eg: ["m3e_base1.sqf","m3e_village.sqf"], )
-		-1, // capradius if you use a specific static basefile. -> put -1 if you want to use the corresponding one from the ZCP_Capbasses array).
-		-1, // max terrainGradient -> when specific static basefile is used (9) -> put -1 if you want to use the corresponding one from the ZCP_Capbasses array).
-		-1, // distancefromojects -> when specific static basefile is used (10) -> put -1 if you want to use the corresponding one from the ZCP_Capbasses array).
-		300, // captime in seconds for this mission (11)
-		4, // Minimum amount of AI at the start of mission (12)
-        8, // Maximum amount of AI at start of mission ( If you want it to always be a number change MIN and MAX to the same number. )
-        true, // deploy smoke on the circle border when mission is finished (14)
-        0, // ammount of seconds to wait before deploying the smokescreen (15)
-        0, // ammount of meters outside the circle to place the smoke sources ( 0 is ON the circle border, 50 would be 50 meter outside the border)
-		true, // use Waves of AI to attack the base when a player is capping (17)
-		[ // array of waves of AI () (18)
-			[
-				15, // percentage of the cap time to start attack (50 = 50% of the total captime)
-				3, // Amount of AI units in a group
-				2, // Amount of AI groups
-				200, // distance in meter form ZCP for the ai to spawn
-				true // false -> all groups from 1 random location, true -> all groups from their own random location
-			]
-			,
-			[
-				45, // percentage of the cap time to start attack (50 = 50% of the total captime)
-				3, // Amount of AI units in a group
-				3, // Amount of AI groups
-				200, // distance in meter form ZCP for the ai to spawn
-				false // false -> all groups from 1 random location, true -> all groups from their own random location
-			]
-			,
-			[
-				60, // percentage of the cap time to start attack (50 = 50% of the total captime)
-				2, // Amount of AI units in a group
-				4, // Amount of AI groups
-				200, // distance in meter form ZCP for the ai to spawn
-				true // false -> all groups from 1 random location, true -> all groups from their own random location
-			]
-		],
-		1, // Minimum amount of launchers for starting AI (19)
-        2, // Maximum amount of launchers for starting AI (20)
-        1, // Minimum amount of launchers for Wave AI (21)
-        1  // Maximum amount of launchers for Wave AI (22)
-	]
-	,
-    [
-        "ZCP Bravo", // name (0)
-        [[10000,10000,0],[10000,10000,0]], // [[x,y,z],[x,y,z]] if using static location (1)
-        ["Random","Random","Reputation"], // Reward -> Random, Poptabs, Vehicle, Buildingbox, WeaponBox , BigWeaponBox, SniperWeaponBox (2)
-        "beta", // unique varname -> this gets checked and fixed automaticly on server start ( so don't really worry about it ).
-        1, // unique index -> this gets checked and fixed automaticly on server start ( so don't really worry about it ).
-        true, // spawnAI on start of the missions ( NEEDS AI system for this ) (5)
-        false, // isStatic location ( if true it will take the location specified earlier) (6)
-        'Random', // baseFile -> Random ( from Capbases array- OR the name of the sqf file OR array of basefiles to choose from ( eg: ["m3e_base1.sqf","m3e_village.sqf"], )
-        -1, // capradius if you use a specific static basefile. -> put -1 if you want to use the corresponding one from the ZCP_Capbasses array).
-        -1, // max terrainGradient -> when specific static basefile is used (9) -> put -1 if you want to use the corresponding one from the ZCP_Capbasses array).
-        -1, // distancefromojects -> when specific static basefile is used (10) -> put -1 if you want to use the corresponding one from the ZCP_Capbasses array).
-        300, // captime in seconds for this mission (11)
-        4, // Minimum amount of AI at the start of mission (12)
-        8, // Maximum amount of AI at start of mission ( If you want it to always be a number change MIN and MAX to the same number. )
-        true, // deploy smoke on the circle border when mission is finished (14)
-        20, // ammount of seconds to wait before deploying the smokescreen (15)
-        50, // ammount of meters outside the circle to place the smoke sources ( 0 is ON the circle border, 50 would be 50 meter outside the border)
-        true, // use Waves of AI to attack the base when a player is capping (17)
-        [ // array of waves of AI () (18)
-            [
-                30, // percentage of the cap time to start attack (50 = 50% of the total captime)
-                3, // Amount of AI units in a group
-                2, // Amount of AI groups
-                200, // distance in meter form ZCP for the ai to spawn
-                true // false -> all groups from 1 random location, true -> all groups from their own random location
-            ]
-            ,
-            [
-                75, // percentage of the cap time to start attack (50 = 50% of the total captime)
-                3, // Amount of AI units in a group
-                3, // Amount of AI groups
-                200, // distance in meter form ZCP for the ai to spawn
-                false // false -> all groups from 1 random location, true -> all groups from their own random location
-            ]
-        ],
-        1, // Minimum amount of launchers for starting AI
-        2, // Maximum amount of launchers for starting AI
-        1, // Minimum amount of launchers for Wave AI
-        1  // Maximum amount of launchers for Wave AI
-    ]
-    ,
-    [
-        "ZCP Charlie", // name (0)
-        [[10000,10000,0],[10000,10000,0]], // [[x,y,z],[x,y,z]] if using static location (1)
-        ["Random","Random","Reputation"], // Reward -> Random, Poptabs, Vehicle, Buildingbox, WeaponBox, BigWeaponBox, SniperWeaponBox (2)
-        "charlie", // unique varname -> this gets checked and fixed automaticly on server start ( so don't really worry about it ).
-        2, // unique index -> this gets checked and fixed automaticly on server start ( so don't really worry about it ).
-        true, // spawnAI on start of the missions ( NEEDS AI system for this ) (5)
-        false, // isStatic location ( if true it will take the location specified earlier) (6)
-        'Random', // baseFile -> Random ( from Capbases array- OR the name of the sqf file OR array of basefiles to choose from ( eg: ["m3e_base1.sqf","m3e_village.sqf"], )
-        -1, // capradius if you use a specific static basefile. -> put -1 if you want to use the corresponding one from the ZCP_Capbasses array).
-        -1, // max terrainGradient -> when specific static basefile is used (9) -> put -1 if you want to use the corresponding one from the ZCP_Capbasses array).
-        -1, // distancefromojects -> when specific static basefile is used (10) -> put -1 if you want to use the corresponding one from the ZCP_Capbasses array).
-        300, // captime in seconds for this mission (11)
-        4, // Minimum amount of AI at the start of mission (12)
-        8, // Maximum amount of AI at start of mission ( If you want it to always be a number change MIN and MAX to the same number. )
-        true, // deploy smoke on the circle border when mission is finished (14)
-        20, // ammount of seconds to wait before deploying the smokescreen (15)
-        50, // ammount of meters outside the circle to place the smoke sources ( 0 is ON the circle border, 50 would be 50 meter outside the border)
-        true, // use Waves of AI to attack the base when a player is capping (17)
-        [ // array of waves of AI () (18)
-            [
-                50, // percentage of the cap time to start attack (50 = 50% of the total captime)
-                3, // Amount of AI units in a group
-                2, // Amount of AI groups
-                200, // distance in meter form ZCP for the ai to spawn
-                true // false -> all groups from 1 random location, true -> all groups from their own random location
-            ]
-        ],
-        1, // Minimum amount of launchers for starting AI
-        2, // Maximum amount of launchers for starting AI
-        1, // Minimum amount of launchers for Wave AI
-        1  // Maximum amount of launchers for Wave AI
-    ]
-    // add more here if wanted
-];
-
 
 ZCP_MaxMissions = 2; // Amount of cap points at the same time when ZCP_MaxMissionsRelativeToPlayers = false
 
@@ -246,8 +113,8 @@ ZCP_CapBases = [ // located in capbases folder [filename, capradius, buildeditor
 	["ec_endurance.sqf", 20, "EdenConverted", 90, 20],
 	["ec_fortitude.sqf", 25, "EdenConverted", 90, 25],
 	["m3e_exoBase1.sqf", 30, "m3e", 90, 50],
-    ["m3e_exoBase2.sqf", 30, "m3e", 90, 50],
-    ["m3e_exoBase3.sqf", 35, "m3e", 90, 50]
+  ["m3e_exoBase2.sqf", 30, "m3e", 90, 50],
+  ["m3e_exoBase3.sqf", 35, "m3e", 90, 50]
 ];
 
 ZCP_Blacklist = [ // [ [x,y,z], radius ];
@@ -266,6 +133,23 @@ ZCP_circleContestedColor = "#(rgb,8,8,3)color(1,0,0,1)"; // red
 ZCP_SurvivalBox = "O_supplyCrate_F";
 ZCP_BuildingBox = "O_CargoNet_01_ammo_F";
 ZCP_WeaponBox = "I_CargoNet_01_ammo_F";
+
+/* 3.1 new configs */
+ZCP_CONFIG_TerritoryDistance = 500;  // Distance from territories. ( 0 to disable )
+
+ZCP_CONFIG_AI_side = east; // The side where the AI is on.
+ZCP_CONFIG_AI_soldierClass = 'O_G_Soldier_F'; // The class model for the soldier ( This needs to be a soldier from the AI faction! -> otherwise they shoot eachother on spawn)
+ZCP_CONFIG_MaxRandomAIMoney = 100; // Max poptabs on in AI it's inventory. ( Random between 0 -> this number ).
+
+// These are used when the cappoint is a city point.
+ZCP_CONFIG_UseCityName = true; // Use City name CP for maker naming instead of ZCP alpha..
+ZCP_CONFIG_CityDistanceToPlayer = 100; // distance for the town to be from a player ( From center town )
+ZCP_CONFIG_CityDistanceToTrader = 500; // distance for the town to be from a trader ( From center town )
+ZCP_CONFIG_CityDistanceToSpawn = 500; // distance for the town to be from a spawnpoint ( From center town )
+ZCP_CONFIG_CityDistanceToTerritory = 100; // distance for the town to be from a spawnpoint ( From center town )
+ZCP_CONFIG_CityDistanceToAI = 100; // distance for the town to be from other AI missions, patrols ..
+
+/* END NEW CONFIGS 3.1 */
 
 // Same as DMS -> Credits DMS
 ZCP_DistanceBetweenMissions = 500;
@@ -303,44 +187,44 @@ ZCP_DisableVehicleReward = false; // Because it doesnt save without changing epo
 ZCP_DMS_MinimumMagCount					= 2;						// Minimum number of magazines for weapons.
 ZCP_DMS_MaximumMagCount					= 4;						// Maximum number of magazines for weapons.
 ZCP_DMS_CrateCase_Sniper =				[							// If you pass "Sniper" in _lootValues, then it will spawn these weapons/items/backpacks
-										[
-											["Rangefinder",1],
-											["srifle_GM6_F",1],
-											["srifle_LRR_F",1],
-											["srifle_EBR_F",1],
-											["hgun_Pistol_heavy_01_F",1],
-											["hgun_PDW2000_F",1]
-										],
-										[
-											["ItemGPS",1],
-											["U_B_FullGhillie_ard",1],
-											["U_I_FullGhillie_lsh",1],
-											["U_O_FullGhillie_sard",1],
-											["U_O_GhillieSuit",1],
-											["V_PlateCarrierGL_blk",1],
-											["V_HarnessO_brn",1],
-											["Exile_Item_InstaDoc",3],
-											["Exile_Item_Surstromming_Cooked",5],
-											["Exile_Item_PlasticBottleFreshWater",5],
-											["optic_DMS",1],
-											["acc_pointer_IR",1],
-											["muzzle_snds_B",1],
-											["optic_LRPS",1],
-											["optic_MRD",1],
-											["muzzle_snds_acp",1],
-											["optic_Holosight_smg",1],
-											["muzzle_snds_L",1],
-											["5Rnd_127x108_APDS_Mag",3],
-											["7Rnd_408_Mag",3],
-											["20Rnd_762x51_Mag",5],
-											["11Rnd_45ACP_Mag",3],
-											["30Rnd_9x21_Mag",3]
-										],
-										[
-											["B_Carryall_cbr",1],
-											["B_Kitbag_mcamo",1]
-										]
-									];
+                                            [
+                                                ["Rangefinder",1],
+                                                ["srifle_GM6_F",1],
+                                                ["srifle_LRR_F",1],
+                                                ["srifle_EBR_F",1],
+                                                ["hgun_Pistol_heavy_01_F",1],
+                                                ["hgun_PDW2000_F",1]
+                                            ],
+                                            [
+                                                ["ItemGPS",1],
+                                                ["U_B_FullGhillie_ard",1],
+                                                ["U_I_FullGhillie_lsh",1],
+                                                ["U_O_FullGhillie_sard",1],
+                                                ["U_O_GhillieSuit",1],
+                                                ["V_PlateCarrierGL_blk",1],
+                                                ["V_HarnessO_brn",1],
+                                                ["Exile_Item_InstaDoc",3],
+                                                ["Exile_Item_Surstromming_Cooked",5],
+                                                ["Exile_Item_PlasticBottleFreshWater",5],
+                                                ["optic_DMS",1],
+                                                ["acc_pointer_IR",1],
+                                                ["muzzle_snds_B",1],
+                                                ["optic_LRPS",1],
+                                                ["optic_MRD",1],
+                                                ["muzzle_snds_acp",1],
+                                                ["optic_Holosight_smg",1],
+                                                ["muzzle_snds_L",1],
+                                                ["5Rnd_127x108_APDS_Mag",3],
+                                                ["7Rnd_408_Mag",3],
+                                                ["20Rnd_762x51_Mag",5],
+                                                ["11Rnd_45ACP_Mag",3],
+                                                ["30Rnd_9x21_Mag",3]
+                                            ],
+                                            [
+                                                ["B_Carryall_cbr",1],
+                                                ["B_Kitbag_mcamo",1]
+                                            ]
+                                        ];
 ZCP_DMS_BoxWeapons =					[							// List of weapons that can spawn in a crate
 										"Exile_Melee_Axe",
 										"arifle_Katiba_GL_F",
@@ -497,27 +381,12 @@ ZCP_VehicleReward = ZCP_DMS_TransportTrucks;
 ZCP_DMS_DEBUG = false;
 
 
-ZCP_Translations = [ // ['original','original in your language'] the %1 %2 and so on are Variables!
-	['%1 capbase set up. Capture for %2 min!' , '%1 capbase set up. Capture for %2 min!'], // ZCP Alpha capbase set up. Capture for 10 min!
-	['%2 is capping %1. %3min left!' , '%2 is capping %1. %3min left!'], // Zupa is capping ZCP alpha, 5min left.
-	['A player' , 'A player'], // A player
-	['%1 is 50%4 captured by %2. %3min left!', '%1 is 50%4 captured by %2. %3min left!'], // ZCP Alpha is 50% captured by Zupa/A player. 2min left!
-	['%1 is almost captured by %2. 60s left!', '%1 is almost captured by %2. 60s left!'], // ZCP Alpha is almost captured by Zupa/A player. 60s left!
-	['%1 is captured. %2.', '%1 is captured. %2.'], // ZCP Alpha is captured. (%2 is on of the 2 following translations, so leave the variable there!
-	['Bombing in %1s!', 'Bombing in %1s!'], // Bombing in 600s
-	['Cleanup in %1s!', 'Cleanup in %1s!'], // Cleanup in 600s
-	['Captured point', 'Captured point'], // Captured point
-	['Reputation', 'Reputation'], // Reputation
-	['Group Reputation', 'Group Reputation'], // Group reputation
-	['Package delivered, eyes on the sky!', 'Package delivered, eyes on the sky!'], // Package delivered, eyes on the sky!
-	['Package delivered, eyes on the sky! Poptabs on bank!', 'Package delivered, eyes on the sky! Poptabs on bank!'], // Package delivered, eyes on the sky! Poptabs on bank!
-	['Capture point is contested!', 'Capture point is contested!'], // Package delivered, eyes on the sky! Poptabs on bank!
-	['Capture point is contested is no longer contested!', 'Capture point is no longer contested!'], // Capture point is contested!
-	['AI Wave incoming to retake %1.', 'AI Wave incoming to retake %1.'] // Capture point is contested!
-];
+
 
 ZCP_CurrentMod = "Exile"; // Exile, ( Epoch coming soon again)
 
 /* Do not change this*/
-diag_log format["[ZCP]: Config loaded succesfull"];
+ZCP_CapPoints = call ZCP_fnc_missions;
+ZCP_Translations = call ZCP_fnc_translations;
+diag_log text format["[ZCP]: Config loaded succesfull"];
 ZCP_ConfigLoaded = true;

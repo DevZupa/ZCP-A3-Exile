@@ -16,6 +16,9 @@ class CfgFunctions {
 				postInit = 1;
 			};
 			class config {};
+			class missions {};
+			class cities {};
+			class translations {};
 			class missionLooper {};
 
 		};
@@ -61,6 +64,12 @@ class CfgFunctions {
 			class createWaypoint {};
 			class createSmokeScreen {};
 			class cleanupAI {};
+			class preCreateRewards {};
+			class preRewardBox {};
+			class preRewardVehicle {};
+			class getRandomCity {};
+			class createEdenConvertedCity {};
+			class endMission {};
 		};
 	};
 };

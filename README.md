@@ -1,14 +1,14 @@
 # ZCP-A3-Exile
 
-![Arma 1.62](https://img.shields.io/badge/Arma-1.62-blue.svg) ![Exile 1.0.0 Potato](https://img.shields.io/badge/Exile-1.0.0%20Potato-C72651.svg) ![ZCP](https://img.shields.io/badge/ZCP-3.0-009E71.svg) ![ZCP Build](https://img.shields.io/badge/build-passing-brightgreen.svg) 
+![Arma 1.62](https://img.shields.io/badge/Arma-1.62-blue.svg) ![Exile 1.0.1 Sweet Potato](https://img.shields.io/badge/Exile-1.0.1%20Sweet%20Potato-C72651.svg) ![ZCP](https://img.shields.io/badge/ZCP-3.1-009E71.svg) ![ZCP Build](https://img.shields.io/badge/build-passing-brightgreen.svg)
 
 Topic @ [Exile forums](http://www.exilemod.com/topic/12116-release-official-zcp-zupas-capture-points/)
 
-#ZCP for Exile 
+#ZCP for Exile
 
 ### Zupa's Capture Points
-> Latest version: 3.0  
-> Latest update: 18 - 07 - 2016  
+> Latest version: 3.1  
+> Latest update: x - 09 - 2016  
 > [Changelog](https://github.com/DevZupa/ZCP-A3-Exile/wiki/Changelog)  
 
 ##Table of content
@@ -25,6 +25,7 @@ Topic @ [Exile forums](http://www.exilemod.com/topic/12116-release-official-zcp-
 
 ##Previous releases
 
+* [V3.1](https://github.com/DevZupa/ZCP-A3-Exile/releases/tag/V3.1)
 * [V3.0](https://github.com/DevZupa/ZCP-A3-Exile/releases/tag/V3.0)
 * [V2.1](https://github.com/DevZupa/ZCP-A3-Exile/releases/tag/V2.1)
 * [V2.0](https://github.com/DevZupa/ZCP-A3-Exile/releases/tag/V2.0)
@@ -35,6 +36,8 @@ Topic @ [Exile forums](http://www.exilemod.com/topic/12116-release-official-zcp-
 
 ##Credits
 * Eraser for code and info.
+* canuckbrian for City locations and info.
+* Tobias for finding the main cause of the AI shooting eachother.
 * JamieKG for Testing and XCAM Base.
 * Zombie for AlRayak testing and whining.
 * Ferry for 3 cap bases.

@@ -13,24 +13,22 @@
 	────────╚╝
 */
 
-private["_ZCP_ML_randomMission","_ZCP_ML_maxMissions","_ZCP_ML_players"];
-
-_ZCP_ML_maxMissions = ZCP_MaxMissions;
+private _ZCP_ML_maxMissions = ZCP_MaxMissions;
 
 if (ZCP_MaxMissionsRelativeToPlayers) then {
     _ZCP_ML_maxMissions = 1;
-    _ZCP_ML_players = count allPlayers;
+    private _ZCP_ML_players = count allPlayers;
     {
         if (_x select 0 < _ZCP_ML_players) then {
             _ZCP_ML_maxMissions = _x select 1;
         };
     }forEach ZCP_RelativeMaxMissions ;
-    diag_log format['ZCP:%1 online, will spawn %2 missions in total.', _ZCP_ML_players, _ZCP_ML_maxMissions];
+    diag_log text format['ZCP:%1 online, will spawn %2 missions in total.', _ZCP_ML_players, _ZCP_ML_maxMissions];
 };
 
 while {ZCP_MissionCounter < _ZCP_ML_maxMissions} do
 {
-	_ZCP_ML_randomMission = nil;
+	private _ZCP_ML_randomMission = nil;
 	while{ isNil "_ZCP_ML_randomMission" } do
 	{
 		_ZCP_ML_randomMission = ZCP_CapPoints call BIS_fnc_selectRandom;
