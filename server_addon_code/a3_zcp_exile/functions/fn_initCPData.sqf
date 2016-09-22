@@ -16,6 +16,7 @@ ZCP_Version = "ZCP_Exile_3.0";
 ZCP_Data = [];
 ZCP_MissionTriggerData = [];
 ZCP_MissionCounter = 0;
+ZCP_TotalMissionCounter = 0;
 ZCP_DMS_MagRange = ZCP_DMS_MaximumMagCount - ZCP_DMS_MinimumMagCount;
 
 ZCP_RandomReward = [];

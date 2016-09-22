@@ -42,14 +42,14 @@ private _ZCP_S_cityName = '';
 
 private _ZCP_S_locationFound = true;
 
-if(!((ZCP_Data select _ZCP_S_capPointIndex) select 3)) then
-{
-	uiSleep _ZCP_S_randomTime;
-}
-else
+if( ZCP_TotalMissionCounter <= ZCP_CalculatedMaxMissions ) then
 {
 	private _ZCP_S_firstRandomTime = floor random 60;
 	uiSleep _ZCP_S_firstRandomTime;
+}
+else
+{
+   uiSleep _ZCP_S_randomTime;
 };
 
 diag_log text format ["[ZCP]: Waiting for %1 players to be online.",ZCP_Minimum_Online_Players];
