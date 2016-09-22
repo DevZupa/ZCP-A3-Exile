@@ -140,7 +140,14 @@ while{_ZCP_MM_continueLoop}do{
           if( !(_ZCP_MM_currentGroup == grpNull) &&  _ZCP_stillGroupMembersAlive) then
             {
               _ZCP_MM_currentCapper = _ZCP_newGroupCapper;
-              ['PersonalNotification', ["ZCP",[format[[17] call ZCP_fnc_translate, name _ZCP_MM_currentCapper]],'ZCP_Capping'],  _ZCP_MM_currentCapper] call ZCP_fnc_showNotification;
+              ['PersonalNotification', ["ZCP",[format[[17] call ZCP_fnc_translate]],'ZCP_Capping'],  _ZCP_MM_currentCapper] call ZCP_fnc_showNotification;
+
+                _ZCP_MM_capperName = '';
+                if(ZCP_UseSpecificNamesForCappers) then {
+                  _ZCP_MM_capperName = name _ZCP_MM_currentCapper;
+                } else {
+                  _ZCP_MM_capperName = [2] call ZCP_fnc_translate;
+                };
             }
           else
             {
@@ -154,16 +161,18 @@ while{_ZCP_MM_continueLoop}do{
               _ZCP_MM_contestEndTime = 0;
               _ZCP_MM_contestTotalTime = 0;
 
+               _ZCP_MM_capperName = '';
+                if(ZCP_UseSpecificNamesForCappers) then {
+                  _ZCP_MM_capperName = name _ZCP_MM_currentCapper;
+                } else {
+                  _ZCP_MM_capperName = [2] call ZCP_fnc_translate;
+                };
+
+
               ['Notification', ["ZCP",[format[[1] call ZCP_fnc_translate, _ZCP_MM_name, _ZCP_MM_capperName,(_ZCP_MM_missionCapTime / 60)]],'ZCP_Capping']] call ZCP_fnc_showNotification;
             };
 
           (ZCP_Data select _ZCP_MM_capIndex) set[1,1];
-          _ZCP_MM_capperName = '';
-          if(ZCP_UseSpecificNamesForCappers) then {
-            _ZCP_MM_capperName = name _ZCP_MM_currentCapper;
-          } else {
-            _ZCP_MM_capperName = [2] call ZCP_fnc_translate;
-          };
 
           _ZCP_MM_markers = [_ZCP_MM_originalThis, _ZCP_MM_baseRadius, _ZCP_MM_markers, _ZCP_MM_capturePosition, _ZCP_MM_city_sizeX, _ZCP_MM_city_sizeY, _ZCP_MM_cityName] call ZCP_fnc_createMarker;
           [_ZCP_MM_circle, 'capping'] call ZCP_fnc_changeCircleColor;
