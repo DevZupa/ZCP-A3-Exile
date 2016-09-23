@@ -28,7 +28,7 @@ private _ZCP_CDG_groupAI = createGroup _ZCP_CDG_side;
 sleep 0.2;
 
 // An AI will definitely spawn with a launcher if you define type
-if (_ZCP_CDG_minLaunchers > 0) then
+if (_ZCP_CDG_minLaunchers >= 0 && _ZCP_CDG_maxLaunchers > 0 && _ZCP_CDG_maxLaunchers >= _ZCP_CDG_minLaunchers) then
 {
     private _ZCP_CDG_launcherType = "AT";
 
@@ -42,15 +42,15 @@ if (_ZCP_CDG_minLaunchers > 0) then
 
 			private _ZCP_CDG_launcher = (selectRandom (missionNamespace getVariable [format ["DMS_AI_wep_launchers_%1",_ZCP_CDG_launcherType],["launch_NLAW_F"]]));
 
-      if(!isNil '_ZCP_CDG_unit') then {
-  			removeBackpackGlobal _ZCP_CDG_unit;
-  			_ZCP_CDG_unit addBackpack "B_Carryall_mcamo";
-  			private _ZCP_CDG_rocket = _ZCP_CDG_launcher call DMS_fnc_selectMagazine;
+              if(!isNil '_ZCP_CDG_unit') then {
+                    removeBackpackGlobal _ZCP_CDG_unit;
+                    _ZCP_CDG_unit addBackpack "B_Carryall_mcamo";
+                    private _ZCP_CDG_rocket = _ZCP_CDG_launcher call DMS_fnc_selectMagazine;
 
-  			[_ZCP_CDG_unit, _ZCP_CDG_launcher, DMS_AI_launcher_ammo_count,_ZCP_CDG_rocket] call BIS_fnc_addWeapon;
+                    [_ZCP_CDG_unit, _ZCP_CDG_launcher, DMS_AI_launcher_ammo_count,_ZCP_CDG_rocket] call BIS_fnc_addWeapon;
 
-  			_ZCP_CDG_unit setVariable ["DMS_AI_Launcher",_ZCP_CDG_launcher];
-      };
+                    _ZCP_CDG_unit setVariable ["DMS_AI_Launcher",_ZCP_CDG_launcher];
+              };
 
 			//(format["SpawnAIGroup :: Giving %1 a %2 launcher with %3 %4 rockets",_ZCP_CDG_unit,_ZCP_CDG_launcher,DMS_AI_launcher_ammo_count,_ZCP_CDG_rocket]) call DMS_fnc_DebugLog;
 		};
