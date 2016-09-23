@@ -1,6 +1,6 @@
 # ZCP-A3-Exile
 
-![Arma 1.62](https://img.shields.io/badge/Arma-1.62-blue.svg) ![Exile 1.0.1 Sweet Potato](https://img.shields.io/badge/Exile-1.0.1%20Sweet%20Potato-C72651.svg) ![ZCP](https://img.shields.io/badge/ZCP-3.1-009E71.svg) ![ZCP Build](https://img.shields.io/badge/build-passing-brightgreen.svg)
+![Arma 1.62](https://img.shields.io/badge/Arma-1.62-blue.svg) ![Exile 1.0.2 Kohlrabi](https://img.shields.io/badge/Exile-1.0.1%20Kohlrabi-C72651.svg) ![ZCP](https://img.shields.io/badge/ZCP-3.1-009E71.svg) ![ZCP Build](https://img.shields.io/badge/build-passing-brightgreen.svg)
 
 Topic @ [Exile forums](http://www.exilemod.com/topic/12116-release-official-zcp-zupas-capture-points/)
 
@@ -8,7 +8,7 @@ Topic @ [Exile forums](http://www.exilemod.com/topic/12116-release-official-zcp-
 
 ### Zupa's Capture Points
 > Latest version: 3.1  
-> Latest update: x - 09 - 2016  
+> Latest update: 23 - 09 - 2016  
 > [Changelog](https://github.com/DevZupa/ZCP-A3-Exile/wiki/Changelog)  
 
 ##Table of content
