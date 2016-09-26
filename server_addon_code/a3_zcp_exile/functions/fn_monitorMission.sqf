@@ -18,6 +18,7 @@ _ZCP_MM_mission = ZCP_MissionTriggerData select _ZCP_MM_missionIndex;
 _ZCP_MM_originalThis = _ZCP_MM_mission select 0;
 _ZCP_MM_name = _ZCP_MM_originalThis select 0;
 _ZCP_MM_capIndex = _ZCP_MM_originalThis select 4;
+_ZCP_MM_cleanupBaseWithAIBomber = _ZCP_MM_originalThis select 28;
 
 _ZCP_MM_baseObjects = _ZCP_MM_mission select 1;
 _ZCP_MM_capturePosition = _ZCP_MM_mission select 2;
@@ -291,7 +292,7 @@ if(_ZCP_MM_recreateTrigger) then {
   _ZCP_MM_finishText = '';
 
   if(ZCP_CleanupBase)then{
-        if(ZCP_CleanupBaseWithAIBomber)then{
+        if(_ZCP_MM_cleanupBaseWithAIBomber)then{
           _ZCP_MM_finishText = format [[6] call ZCP_fnc_translate,ZCP_BaseCleanupDelay];
         }else{
           _ZCP_MM_finishText = format [[7] call ZCP_fnc_translate,ZCP_BaseCleanupDelay];
@@ -320,7 +321,7 @@ if(_ZCP_MM_recreateTrigger) then {
   };
   if (ZCP_CleanupBase) then {
         uiSleep ZCP_BaseCleanupDelay;
-        if (ZCP_CleanupBaseWithAIBomber) then {
+        if (_ZCP_MM_cleanupBaseWithAIBomber) then {
             [_ZCP_MM_baseObjects, _ZCP_MM_capturePosition, _ZCP_MM_baseRadius] call ZCP_fnc_airstrike;
         } else {
             _ZCP_MM_baseObjects call ZCP_fnc_cleanupBase;
