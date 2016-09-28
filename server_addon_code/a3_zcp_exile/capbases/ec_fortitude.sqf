@@ -1,8 +1,5 @@
-private["_objs"];
-
-
  // For ZCP use as type "EdenConverted"
-_objs = [
+private _objs = [
 ["Mast_F",202212.3125,680.520996,0,-0,-0,1,4.999924],
 ["Wreck_T72_hull_F",202199.390625,670.536011,281.822,-0,-0,1,5.0],
 ["HBarrier_Big_F",202193.015625,668.910889,269.27,-0,-0,1,5.0],
