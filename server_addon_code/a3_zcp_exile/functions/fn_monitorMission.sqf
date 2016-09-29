@@ -7,7 +7,7 @@ private['_ZCP_MM_mission','_ZCP_MM_recreateTrigger','_ZCP_MM_AI_Groups',
 "_ZCP_MM_currentCapper","_ZCP_MM_previousCapper","_ZCP_MM_currentGroup","_ZCP_MM_wasContested","_ZCP_MM_finishText","_ZCP_MM_markers",
 "_ZCP_MM_contestStartTime","_ZCP_MM_capIndex","_ZCP_MM_capturePosition","_ZCP_MM_Halfway","_ZCP_MM_oneMin","_ZCP_MM_capStartTime",
 "_ZCP_MM_baseRadius","_ZCP_MM_circle","_ZCP_MM_totalWaves",'_ZCP_MM_useWaves','_ZCP_MM_waveData','_ZCP_MM_nextWave','_ZCP_MM_AI_NewGroups',
-'_ZCP_MM_rewardObjects','_ZCP_MM_city_sizeX','_ZCP_MM_city_sizeY','_ZCP_MM_isCity','_ZCP_MM_city','_ZCP_MM_cityName'
+'_ZCP_MM_rewardObjects','_ZCP_MM_city_sizeX','_ZCP_MM_city_sizeY','_ZCP_MM_isCity','_ZCP_MM_city','_ZCP_MM_cityName','_ZCP_MM_cleanupBaseWithAIBomber','_ZCP_MM_canAIContest'
 ];
 
 params[
@@ -19,6 +19,7 @@ _ZCP_MM_originalThis = _ZCP_MM_mission select 0;
 _ZCP_MM_name = _ZCP_MM_originalThis select 0;
 _ZCP_MM_capIndex = _ZCP_MM_originalThis select 4;
 _ZCP_MM_cleanupBaseWithAIBomber = _ZCP_MM_originalThis select 28;
+_ZCP_MM_canAIContest = _ZCP_MM_originalThis select 29;
 
 _ZCP_MM_baseObjects = _ZCP_MM_mission select 1;
 _ZCP_MM_capturePosition = _ZCP_MM_mission select 2;
@@ -90,10 +91,14 @@ _ZCP_MM_proximityMessageList = [];
 
 while{_ZCP_MM_continueLoop}do{
     _ZCP_MM_proximityList = [];
+    _ZCP_MM_proximityListNoAi = [];
     _ZCP_MM_proximityMessageList = [];
     {
-      if(isPlayer _x && alive _x && (_x distance2D _ZCP_MM_capturePosition) <= _ZCP_MM_baseRadius)then{
+      if( (isPlayer _x || _ZCP_MM_canAIContest) && alive _x && (_x distance2D _ZCP_MM_capturePosition) <= _ZCP_MM_baseRadius)then{
         _nil =  _ZCP_MM_proximityList pushBack _x;
+        if(isPlayer _x) then {
+            _nil = _ZCP_MM_proximityListNoAi pushBack _x;
+        };
       };
     }count (_ZCP_MM_capturePosition nearEntities["CAManBase", _ZCP_MM_baseRadius * 2]);
 
@@ -103,7 +108,7 @@ while{_ZCP_MM_continueLoop}do{
           };
       }count (_ZCP_MM_capturePosition nearEntities["CAManBase", _ZCP_MM_baseRadius * 4]);
 
-    if(count(_ZCP_MM_proximityList) == 0) then {
+    if(count(_ZCP_MM_proximityListNoAi) == 0) then {
 
         (ZCP_Data select _ZCP_MM_capIndex) set[1,0];
 
@@ -156,11 +161,12 @@ while{_ZCP_MM_continueLoop}do{
               _ZCP_MM_isContested = false;
               _ZCP_MM_Halfway = false;
               _ZCP_MM_oneMin = false;
-              _ZCP_MM_currentCapper = _ZCP_MM_proximityList select 0;
               _ZCP_MM_capStartTime = diag_tickTime;
               _ZCP_MM_contestStartTime = 0;
               _ZCP_MM_contestEndTime = 0;
               _ZCP_MM_contestTotalTime = 0;
+
+               _ZCP_MM_currentCapper = _ZCP_MM_proximityListNoAi select 0;
 
                _ZCP_MM_capperName = '';
                 if(ZCP_UseSpecificNamesForCappers) then {
