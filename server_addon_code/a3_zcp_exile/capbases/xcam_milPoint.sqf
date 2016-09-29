@@ -1,6 +1,4 @@
-private['_objs'];
-
-_objs = [];
+private _objs = [];
 
 _objs pushBack ["FlagPole_F","[14777.291992,16667.951172,0]",0,-100,1,0,[],[0,0],1];
 _objs pushBack ["Land_HBarrierBig_F","[14727.439453,16658.828125,0]",81.6945,-100,1,0,[],[0,0],1];
