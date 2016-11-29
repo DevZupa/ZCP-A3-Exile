@@ -37,12 +37,15 @@ _ZCP_AS_unitGroup	= createGroup west;
 _ZCP_AS_unitGroup setBehaviour "SAFE";
 _ZCP_AS_unitGroup setCombatMode "BLUE";
 _ZCP_AS_unitGroup allowFleeing 0;
+_ZCP_AS_unitGroup allowDamage false;
+
 
 _ZCP_AS_planeType = ZCP_CleanupAIVehicleClasses call BIS_fnc_selectRandom;
 
 _ZCP_AS_plane = createVehicle [_ZCP_AS_planeType, _ZCP_AS_positionOrigin, [], 0, "FLY"];
 _ZCP_AS_plane setVariable ["ExileIsPersistent", false];
 _ZCP_AS_plane setFuel 1;
+_ZCP_AS_plane allowDamage false;
 _ZCP_AS_plane call ExileServer_system_simulationMonitor_addVehicle;
 
 _ZCP_AS_plane setPosASL [getPosATL _ZCP_AS_plane select 0, getPosATL _ZCP_AS_plane select 1, ZCP_FlyHeight + 300];
