@@ -1,3 +1,9 @@
+V3.2 Not released yet.
+- Bomber is now godmoded.
+- Option per mission to spawn bomber or not.
+- Option per mission to let AI Contest the capture process.
+
+V3.1
 - Capping is transferred to a group member in the cappoint when killed. Nothing will be reset.
 - Can now set extra AI options for Waves and Defenders.
 - More tries to prevent AI from shooting eachother. Thx Tobias for pointing the AI model out.

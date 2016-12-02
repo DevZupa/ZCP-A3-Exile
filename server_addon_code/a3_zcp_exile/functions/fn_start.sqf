@@ -53,7 +53,7 @@ else
 };
 
 diag_log text format ["[ZCP]: Waiting for %1 players to be online.",ZCP_Minimum_Online_Players];
-waitUntil { uiSleep 60; count( playableUnits ) > ( ZCP_Minimum_Online_Players - 1 ) };
+waitUntil { uiSleep 60; count( allPlayers ) > ( ZCP_Minimum_Online_Players - 1 ) };
 diag_log text format ["[ZCP]: %1 players reached, starting %2.",ZCP_Minimum_Online_Players, _ZCP_S_capPointName];
 
 // Location if
