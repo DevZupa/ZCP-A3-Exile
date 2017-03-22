@@ -81,10 +81,12 @@ call ZCP_fnc_initCPData;
 diag_log text format ["[ZCP]: World: %1 | Center: %2 | Radius: %3", worldName, ZCP_MapCenterPos, ZCP_MapRadius];
 diag_log text format ["[ZCP]: Capture Points is fully running."];
 diag_log text format ["[ZCP]: Waiting %1s for first mission.", ZCP_ServerStartWaitTime];
-uiSleep ZCP_ServerStartWaitTime;
-[] spawn ZCP_fnc_missionLooper;
+[] spawn {
+	uiSleep ZCP_ServerStartWaitTime;
+	[] spawn ZCP_fnc_missionLooper;
 
-if(ZCP_MaxMissionsRelativeToPlayers) then {
-    // exile will execute every 10 or x minuts the missionlooper ( to spawn more cappoints when there are more players ( or less cappoints ))
-    [ZCP_SecondsCheckPlayers, {[] spawn ZCP_fnc_missionLooper;}, true, true] call ExileServer_system_thread_addTask;
-};
+	if(ZCP_MaxMissionsRelativeToPlayers) then {
+	    // exile will execute every 10 or x minuts the missionlooper ( to spawn more cappoints when there are more players ( or less cappoints ))
+	    [ZCP_SecondsCheckPlayers, {[] spawn ZCP_fnc_missionLooper;}, true, true] call ExileServer_system_thread_addTask;
+	};
+}
