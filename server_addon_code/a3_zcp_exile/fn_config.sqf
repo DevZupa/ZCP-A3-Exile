@@ -385,8 +385,13 @@ ZCP_DMS_DEBUG = false;
 
 ZCP_CurrentMod = "Exile"; // Exile, ( Epoch coming soon again)
 
+/** If you want to change the language of the addon
+Go to server_addon_code/a3_zcp_exile/fn_translations.sqf and edit the Strings however you like
+You can also use one of the pre-defined languages which are currently English (default) and German
+Just uncomment the language you prefer and comment out the other one you don't need */
+
 /* Do not change this*/
 ZCP_CapPoints = call ZCP_fnc_missions;
-ZCP_Translations = call ZCP_fnc_translations;
+ZCP_Translations = call ZCP_fnc_translations; //currently available pre-defined languages are English (default) and German
 diag_log text format["[ZCP]: Config loaded succesfull"];
 ZCP_ConfigLoaded = true;
