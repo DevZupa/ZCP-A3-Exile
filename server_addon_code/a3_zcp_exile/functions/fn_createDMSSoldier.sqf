@@ -104,12 +104,7 @@ if !(_ZCP_CDS_soldierClass in DMS_ai_SupportedClasses) exitWith
 			_ZCP_CDS_unitAI linkItem _x;
 		};
 	} forEach (missionNamespace getVariable [format ["DMS_%1_equipment",_ZCP_CDS_soldierClass],[]]);
-
-
-	// Items (Loot stuff that goes in uniform/vest/backpack)
-	{_ZCP_CDS_unitAI addItem _x;} forEach (missionNamespace getVariable [format ["DMS_%1_items",_ZCP_CDS_soldierClass],[]]);
-
-
+	
 	// Clothes
 	_ZCP_CDS_unitAI addHeadgear 		((missionNamespace getVariable [format ["DMS_%1_helmets",_ZCP_CDS_soldierClass],DMS_assault_helmets]) call BIS_fnc_selectRandom);
 	_ZCP_CDS_unitAI forceAddUniform 	((missionNamespace getVariable [format ["DMS_%1_clothes",_ZCP_CDS_soldierClass],DMS_assault_clothes]) call BIS_fnc_selectRandom);
@@ -122,6 +117,9 @@ if !(_ZCP_CDS_soldierClass in DMS_ai_SupportedClasses) exitWith
 	{
 		_ZCP_CDS_unitAI linkItem "NVGoggles";
 	};
+	
+	// Items (Loot stuff that goes in uniform/vest/backpack)
+	{_ZCP_CDS_unitAI addItem _x;} forEach (missionNamespace getVariable [format ["DMS_%1_items",_ZCP_CDS_soldierClass],[]]);
 
 	if (!_ZCP_CDS_unarmed) then
 	{
