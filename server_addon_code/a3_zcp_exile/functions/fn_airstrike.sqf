@@ -37,6 +37,7 @@ _ZCP_AS_unitGroup	= createGroup west;
 _ZCP_AS_unitGroup setBehaviour "SAFE";
 _ZCP_AS_unitGroup setCombatMode "BLUE";
 _ZCP_AS_unitGroup allowFleeing 0;
+_ZCP_AS_unitGroup setVariable ["DMS_AllowFreezing", false];
 
 _ZCP_AS_planeType = ZCP_CleanupAIVehicleClasses call BIS_fnc_selectRandom;
 
