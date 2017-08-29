@@ -33,7 +33,7 @@ _ZCP_AS_positionTarget set [2, ZCP_FlyHeight];
 
 _ZCP_AS_ang = [_ZCP_AS_positionOrigin,_ZCP_AS_positionTarget] call BIS_fnc_dirTo;
 
-_ZCP_AS_unitGroup	= createGroup west;
+_ZCP_AS_unitGroup	= createGroup independent;
 _ZCP_AS_unitGroup setBehaviour "SAFE";
 _ZCP_AS_unitGroup setCombatMode "BLUE";
 _ZCP_AS_unitGroup allowFleeing 0;
@@ -50,7 +50,7 @@ _ZCP_AS_plane setPosASL [getPosATL _ZCP_AS_plane select 0, getPosATL _ZCP_AS_pla
 _ZCP_AS_plane setDir _ZCP_AS_ang;
 [_ZCP_AS_plane,_ZCP_AS_ang] call ZCP_fnc_fly;
 
-_ZCP_AS_unitPilot = _ZCP_AS_unitGroup createUnit ["i_g_soldier_unarmed_f",[(_ZCP_AS_positionOrigin select 0) + 30,(_ZCP_AS_positionOrigin select 1)+30,0],[],1, "Form"];
+_ZCP_AS_unitPilot = _ZCP_AS_unitGroup createUnit ["I_pilot_F",[(_ZCP_AS_positionOrigin select 0) + 30,(_ZCP_AS_positionOrigin select 1)+30,0],[],1, "Form"];
 _ZCP_AS_unitPilot setRank "Private";
 {
 	_ZCP_AS_unitPilot enableAI _x;
