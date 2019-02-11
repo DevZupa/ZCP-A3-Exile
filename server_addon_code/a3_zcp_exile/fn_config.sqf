@@ -377,7 +377,7 @@ ZCP_DMS_TransportHelis =				[							// List of transport helis that can spawn
 										"Exile_Chopper_Taru_Transport_Black"
 									];
 
-ZCP_VehicleReward = ZCP_DMS_TransportTrucks;
+ZCP_VehicleReward = ZCP_DMS_ArmedVehicles+ZCP_DMS_MilitaryVehicles+ZCP_DMS_TransportTrucks+ZCP_DMS_RefuelTrucks+ZCP_DMS_CivilianVehicles+ZCP_DMS_TransportHelis;//Will choose from all above categories, edit as required
 ZCP_DMS_DEBUG = false;
 
 
