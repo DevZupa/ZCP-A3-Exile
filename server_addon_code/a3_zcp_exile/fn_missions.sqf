@@ -56,7 +56,9 @@
         ["moderate","random","AWARE", "YELLOW"], // Wave AI difficulty (24)
         true, // spawn rewards on the ground or in the air after the mission, true -> prespawn them on the ground empty and fill them on completion. / false -> airspawn with parachute.
         false, // City mode. -> Takes a city/village from the map as cappoint and places a flag in the center ( No base file needed ). This ignores the position configs. (26)
-        true // Allow spawning of extra objects in the town if sqf file(s) is/are provided. (27)
+        true, // Allow spawning of extra objects in the town if sqf file(s) is/are provided. (27)
+        true, // Bombing mode. true = bombing run for this missions, false = delete buildings ( they just dissapear ) (28)
+        true // Let AI Contest the capping process ( THey can't cap themselves. Only contest) (29)
     ]
 	,
     [
@@ -103,7 +105,9 @@
         ["moderate","random","AWARE", "YELLOW"], // Wave AI difficulty (24)
         false, // spawn rewards on the ground or in the air after the mission, true -> prespawn them on the ground empty and fill them on completion. / false -> airspawn with parachute. (25)
         false, // City mode. -> Takes a city/village from the map as cappoint and places a flag in the center ( No base file needed ). This ignores the position configs. (26)
-        true // Allow spawning of extra objects in the town if sqf file(s) is/are provided. (27)
+        true, // Allow spawning of extra objects in the town if sqf file(s) is/are provided. (27)
+        true, // Bombing mode. true = bombing run for this missions, false = delete buildings ( they just dissapear ) (28)
+        true // Let AI Contest the capping process ( THey can't cap themselves. Only contest) (29)
       ]
 	,
 			[
@@ -158,7 +162,9 @@
 		        ["moderate","random","AWARE", "YELLOW"], // Wave AI difficulty (24)
 		        true, // spawn rewards on the ground or in the air after the mission, true -> prespawn them on the ground empty and fill them on completion. / false -> airspawn with parachute.
 		        true, // City mode. -> Takes a city/village from the map as cappoint and places a flag in the center ( No base file needed ). This ignores the position configs. (26)
-		        true // Allow spawning of extra objects in the town if sqf file(s) is/are provided. (27)
+		        true, // Allow spawning of extra objects in the town if sqf file(s) is/are provided. (27)
+		        false, // Bombing mode. true = bombing run for this missions, false = delete buildings ( they just dissapear ) (28)
+		        true // Let AI Contest the capping process ( THey can't cap themselves. Only contest) (29)
 		    ]
 			,
 		    [
@@ -205,6 +211,8 @@
 		        ["moderate","random","AWARE", "YELLOW"], // Wave AI difficulty (24)
 		        false, // spawn rewards on the ground or in the air after the mission, true -> prespawn them on the ground empty and fill them on completion. / false -> airspawn with parachute.
 		        true, // City mode. -> Takes a city/village from the map as cappoint and places a flag in the center ( No base file needed ). This ignores the position configs. (26)
-		        true // Allow spawning of extra objects in the town if sqf file(s) is/are provided. (27)
+		        true, // Allow spawning of extra objects in the town if sqf file(s) is/are provided. (27)
+		        false, // Bombing mode. true = bombing run for this missions, false = delete buildings ( they just dissapear ) (28)
+		        true // Let AI Contest the capping process ( THey can't cap themselves. Only contest) (29)
 		      ]
 ]
