@@ -7,7 +7,7 @@ _ZCP_RR_playerScore = _ZCP_RR_currentCapper getVariable ["ExileScore", 0];
 _ZCP_RR_playerScore = _ZCP_RR_playerScore + _ZCP_RR_awardToGive;
 
 _ZCP_RR_currentCapper setVariable ["ExileScore",_ZCP_RR_playerScore];
-_ZCP_RR_currentCapper setVariable['PLAYER_STATS_VAR', [_ZCP_RR_currentCapper getVariable ['ExileMoney', 0], _ZCP_RR_playerScore],true];
+_ZCP_RR_currentCapper setVariable['PLAYER_STATS_VAR', [_ZCP_RR_currentCapper getVariable ['ExileScore', 0], _ZCP_RR_playerScore],true];
 
 format["setAccountScore:%1:%2", _ZCP_RR_playerScore,getPlayerUID _ZCP_RR_currentCapper] call ExileServer_system_database_query_fireAndForget;
 
@@ -27,7 +27,7 @@ if( ZCP_ReputationRewardForGroup > 0 ) then {
       if (_x != _ZCP_RR_currentCapper && _x distance2D _ZCP_RR_currentCapper < ZCP_CONFIG_GroupDistanceForRespect ) then {
         _ZCP_RR_newScore = (_x getVariable ["ExileScore", 0]) + ZCP_ReputationRewardForGroup;
         _x setVariable ["ExileScore", _ZCP_RR_newScore ];
-        _x setVariable['PLAYER_STATS_VAR', [_x getVariable ['ExileMoney', 0], _ZCP_RR_newScore],true];
+        _x setVariable['PLAYER_STATS_VAR', [_x getVariable ['ExileScore', 0], _ZCP_RR_newScore],true];
         format["setAccountScore:%1:%2", _ZCP_RR_newScore, getPlayerUID _x] call ExileServer_system_database_query_fireAndForget;
         _x call ExileServer_object_player_database_update;
 
